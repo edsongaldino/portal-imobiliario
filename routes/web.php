@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('sistema.dashboard');
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/cadastro', function () {
+    return view('cadastro');
+});
+
+Route::get('/lembrar-senha', function () {
+    return view('lembrar_senha');
+});
+
+Route::get('/resetar-senha', function () {
+    return view('resetar_senha');
+});
+
+Route::get('/login-duas-etapas', function () {
+    return view('duas_etapas');
+});
+
+?>
