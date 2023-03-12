@@ -16,10 +16,10 @@
 				<!--begin::Heading-->
 				<div class="text-center mb-10">
 					<!--begin::Title-->
-					<h1 class="text-dark mb-3">Two Step Verification</h1>
+					<h1 class="text-dark mb-3">Verificação em 2 etapas</h1>
 					<!--end::Title-->
 					<!--begin::Sub-title-->
-					<div class="text-muted fw-bold fs-5 mb-5">Enter the verification code we sent to</div>
+					<div class="text-muted fw-bold fs-5 mb-5">Insira o código que enviamos no seu celular</div>
 					<!--end::Sub-title-->
 					<!--begin::Mobile no-->
 					<div class="fw-bolder text-dark fs-3">******7859</div>
@@ -29,7 +29,7 @@
 				<!--begin::Section-->
 				<div class="mb-10 px-md-10">
 					<!--begin::Label-->
-					<div class="fw-bolder text-start text-dark fs-6 mb-1 ms-1">Type your 6 digit security code</div>
+					<div class="fw-bolder text-start text-dark fs-6 mb-1 ms-1">Digite seu código de 6 dígitos</div>
 					<!--end::Label-->
 					<!--begin::Input group-->
 					<div class="d-flex flex-wrap flex-stack">

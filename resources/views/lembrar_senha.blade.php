@@ -11,10 +11,10 @@
 				<!--begin::Heading-->
 				<div class="text-center mb-10">
 					<!--begin::Title-->
-					<h1 class="text-dark mb-3">Forgot Password ?</h1>
+					<h1 class="text-dark mb-3">Esqueceu sua senha?</h1>
 					<!--end::Title-->
 					<!--begin::Link-->
-					<div class="text-gray-400 fw-bold fs-4">Enter your email to reset your password.</div>
+					<div class="text-gray-400 fw-bold fs-4">Informe seu e-mail de cadastro para receber o link de redefinição.</div>
 					<!--end::Link-->
 				</div>
 				<!--begin::Heading-->
@@ -27,11 +27,11 @@
 				<!--begin::Actions-->
 				<div class="d-flex flex-wrap justify-content-center pb-lg-0">
 					<button type="button" id="kt_password_reset_submit" class="btn btn-lg btn-primary fw-bolder me-4">
-						<span class="indicator-label">Submit</span>
-						<span class="indicator-progress">Please wait...
+						<span class="indicator-label">Redefinir senha</span>
+						<span class="indicator-progress">Por favor, aguarde...
 						<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 					</button>
-					<a href="{{ url('login') }}" class="btn btn-lg btn-light-primary fw-bolder">Cancel</a>
+					<a href="{{ url('login') }}" class="btn btn-lg btn-light-primary fw-bolder">Cancelar</a>
 				</div>
 				<!--end::Actions-->
 			</form>
