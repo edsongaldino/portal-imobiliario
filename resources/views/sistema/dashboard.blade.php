@@ -77,7 +77,7 @@
 									<!--end::Wrapper-->
 									<!--begin::Illustration-->
 									<div class="text-center px-4">
-										<img class="mw-100 mh-300px" alt="" src="assets/media/illustrations/sketchy-1/2.png" />
+										<img class="mw-100 mh-300px" alt="" src="{{ asset('assets/media/illustrations/sketchy-1/2.png') }}" />
 									</div>
 									<!--end::Illustration-->
 								</div>
@@ -103,18 +103,15 @@
 		<!--begin::Scrolltop-->
 		@include('includes/sistema/global/scroll')
 		<!--end::Scrolltop-->
-		<!--end::Main-->
-		<script>var hostUrl = "assets/";</script>
-		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		@include('includes/sistema/global/js')
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="assets/js/custom/apps/customers/add.js"></script>
-		<script src="assets/js/custom/widgets.js"></script>
-		<script src="assets/js/custom/apps/chat/chat.js"></script>
-		<script src="assets/js/custom/modals/create-app.js"></script>
-		<script src="assets/js/custom/modals/upgrade-plan.js"></script>
+		<script src="{{ asset('assets/js/custom/apps/customers/add.js') }}"></script>
+		<script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
+		<script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
+		<script src="{{ asset('assets/js/custom/modals/create-app.js') }}"></script>
+		<script src="{{ asset('assets/js/custom/modals/upgrade-plan.js') }}"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

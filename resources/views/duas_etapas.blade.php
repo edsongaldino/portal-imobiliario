@@ -10,7 +10,7 @@
 			<form class="form w-100 mb-10" novalidate="novalidate" id="kt_sing_in_two_steps_form">
 				<!--begin::Icon-->
 				<div class="text-center mb-10">
-					<img alt="Logo" class="mh-125px" src="assets/media/svg/misc/smartphone.svg" />
+					<img alt="Logo" class="mh-125px" src="{{ asset('assets/media/svg/misc/smartphone.svg') }}" />
 				</div>
 				<!--end::Icon-->
 				<!--begin::Heading-->
@@ -73,14 +73,13 @@
 <!--end::Authentication - Two-stes-->
 </div>
 <!--end::Main-->
-<script>var hostUrl = "assets/";</script>
 <!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(used by all pages)-->
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
+<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Page Custom Javascript(used by this page)-->
-<script src="assets/js/custom/authentication/sign-in/two-steps.js"></script>
+<script src="{{ asset('assets/js/custom/authentication/sign-in/two-steps.js') }}"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 </body>
