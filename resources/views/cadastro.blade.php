@@ -18,8 +18,8 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->
@@ -36,8 +36,8 @@
 						<!--begin::Header-->
 						<div class="d-flex flex-row-fluid flex-column flex-center p-10 pt-lg-20">
 							<!--begin::Logo-->
-							<a href="../../demo6/dist/index.html" class="mb-10 mb-lg-20">
-								<img alt="Logo" src="assets/media/logos/logo-secovi.fw.png" class="h-40px" />
+							<a href="#" class="mb-10 mb-lg-20">
+								<img alt="Logo" src="{{ asset('assets/media/logos/logo-secovi.fw.png') }}" class="h-40px" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Nav-->
@@ -562,14 +562,13 @@
 			<!--end::Authentication - Multi-steps-->
 		</div>
 		<!--end::Main-->
-		<script>var hostUrl = "assets/";</script>
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
+		<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="assets/js/custom/modals/create-account.js"></script>
+		<script src="{{ asset('assets/js/custom/modals/create-account.js') }}"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

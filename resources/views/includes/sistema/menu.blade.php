@@ -3,7 +3,7 @@
     <div class="aside-logo py-8" id="kt_aside_logo">
         <!--begin::Logo-->
         <a href="{{url('/')}}" class="d-flex align-items-center">
-            <img alt="Logo" src="assets/media/logos/logo.fw.png" class="h-45px logo" />
+            <img alt="Logo" src="{{ asset('assets/media/logos/logo.fw.png') }}" class="h-45px logo" />
         </a>
         <!--end::Logo-->
     </div>
