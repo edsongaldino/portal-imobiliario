@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\transacao;
+use App\Models\Cidade;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TransacaoController extends Controller
+class CidadeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class TransacaoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\transacao  $transacao
+     * @param  \App\Models\Cidade  $cidade
      * @return \Illuminate\Http\Response
      */
-    public function show(transacao $transacao)
+    public function show(Cidade $cidade)
     {
         //
     }
@@ -53,10 +53,10 @@ class TransacaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\transacao  $transacao
+     * @param  \App\Models\Cidade  $cidade
      * @return \Illuminate\Http\Response
      */
-    public function edit(transacao $transacao)
+    public function edit(Cidade $cidade)
     {
         //
     }
@@ -65,10 +65,10 @@ class TransacaoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\transacao  $transacao
+     * @param  \App\Models\Cidade  $cidade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, transacao $transacao)
+    public function update(Request $request, Cidade $cidade)
     {
         //
     }
@@ -76,10 +76,10 @@ class TransacaoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\transacao  $transacao
+     * @param  \App\Models\Cidade  $cidade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(transacao $transacao)
+    public function destroy(Cidade $cidade)
     {
         //
     }

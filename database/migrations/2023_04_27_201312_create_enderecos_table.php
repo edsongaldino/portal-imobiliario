@@ -14,8 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('enderecos', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
+            $table->foreignId('cidade_id')->constrained('cidades');
+            $table->string('cep_endereco', 10);
+            $table->string('logradouro_endereco', 100);
+            $table->string('numero_endereco', 10);
+            $table->string('complemento_endereco', 100);
+            $table->string('bairro_endereco', 50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

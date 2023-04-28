@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('empreendimento_id')->constrained('empreendimentos');
+            $table->string('nome')->nullable();
+            $table->string('telefone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('mensagem')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

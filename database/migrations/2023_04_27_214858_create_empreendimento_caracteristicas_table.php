@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('empreendimento_caracteristica', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('empreendimento_id')->constrained('empreendimentos');
+            $table->foreignId('caracteristica_id')->constrained('caracteristicas');
+            $table->string('valor', 50);
         });
     }
 

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('tipos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('finalidade_id')->constrained('finalidades');
+            $table->string('nome', 100);
             $table->timestamps();
         });
     }

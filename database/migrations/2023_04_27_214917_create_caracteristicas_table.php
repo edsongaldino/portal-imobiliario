@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('caracteristicas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('caracteristica_tipo_id')->constrained('caracteristicas_tipos');
+            $table->string('nome', 100);
             $table->timestamps();
         });
     }

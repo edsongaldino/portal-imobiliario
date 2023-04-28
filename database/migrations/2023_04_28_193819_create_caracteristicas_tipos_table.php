@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('log_integracoes', function (Blueprint $table) {
+        Schema::create('caracteristicas_tipos', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo', ['Sucesso', 'Erro', 'Alerta']);
+            $table->string('nome', 100);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_integracoes');
+        Schema::dropIfExists('caracteristicas_tipos');
     }
 };

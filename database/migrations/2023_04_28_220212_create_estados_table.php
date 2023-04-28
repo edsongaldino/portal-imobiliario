@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('log_integracoes', function (Blueprint $table) {
-            $table->id();
-            $table->enum('tipo', ['Sucesso', 'Erro', 'Alerta']);
+        Schema::create('estados', function (Blueprint $table) {
+            $table->id()->unsigned();
+            $table->string('uf_estado',2);
+            $table->string('nome_estado', 50);
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_integracoes');
+        Schema::dropIfExists('estados');
     }
 };

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('imobiliarias', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('endereco_id')->constrained('enderecos');
             $table->timestamps();
         });
     }
