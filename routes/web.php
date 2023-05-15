@@ -38,4 +38,8 @@ Route::get('/login-duas-etapas', function () {
     return view('duas_etapas');
 });
 
+Route::get('/portal-imobiliario', function () {
+    return view('portal.index');
+});
+
 ?>
