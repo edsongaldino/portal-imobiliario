@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="advanced custom search, agency, agent, business, clean, corporate, directory, google maps, homes, idx agent, listing properties, membership packages, property, real broker, real estate, real estate agent, real estate agency, realtor">
-<meta name="description" content="FindHouse - Real Estate HTML Template">
+<meta name="description" content="Rede Imóveis - Encontre aqui o imóvel dos seus sonhos">
 <meta name="CreativeLayers" content="ATFN">
 <!-- css file -->
 <link rel="stylesheet" href="{{ asset('assets/portal/css/bootstrap.min.css') }}">
@@ -13,7 +13,7 @@
 <!-- Responsive stylesheet -->
 <link rel="stylesheet" href="{{ asset('assets/portal/css/responsive.css') }}">
 <!-- Title -->
-<title>FindHouse - Real Estate HTML Template</title>
+<title>Rede Imóveis - Encontre aqui o imóvel dos seus sonhos</title>
 <!-- Favicon -->
 <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/portal/images/favicon.ico') }}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
@@ -33,7 +33,7 @@
 				<div class="col-lg-12">
 					<div class="home_content">
 						<div class="home-text text-center">
-							<h2 class="fz55">Portal SECOVI</h2>
+							<h2 class="fz55">Rede Imóveis</h2>
 							<p class="fz18 color-white">Encontre aqui o imóvel dos seus sonhos</p>
 						</div>
 						<div class="home_adv_srch_opt">
@@ -57,21 +57,21 @@
 											<li class="list-inline-item">
 												<div class="search_option_two">
 													<div class="candidate_revew_select">
-														<select class="selectpicker w100 show-tick">
-															<option>Property Type</option>
-															<option>Apartment</option>
-															<option>Bungalow</option>
-															<option>Condo</option>
-															<option>House</option>
-															<option>Land</option>
-															<option>Single Family</option>
+														<select class="selectpicker w100 show-tick" multiple>
+															<option>Tipo do Imóvel</option>
+															<option>Apartmento</option>
+															<option>Casa</option>
+															<option>Condomínio</option>
+															<option>Lote</option>
+															<option>Sala Comercial</option>
+															<option>Flat</option>
 														</select>
 													</div>
 												</div>
 											</li>
 											<li class="list-inline-item">
 											    <div class="form-group">
-											    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Location">
+											    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Localização">
 											    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 											    </div>
 											</li>
@@ -119,8 +119,8 @@
 					<a href="#feature-property">
 			    	<div class="mouse_scroll">
 	        		<div class="icon">
-			    		<h4>Scroll Down</h4>
-			    		<p>to discover more</p>
+			    		<h4>Role para baixo</h4>
+			    		<p>para descobrir muito mais</p>
 	        		</div>
 	        		<div class="thumb">
 	        			<img src="{{ asset('assets/portal/images/resource/mouse.png') }}" alt="mouse.png">
@@ -134,12 +134,13 @@
 			<div class="row">
 				<div class="col-lg-6 offset-lg-3">
 					<div class="main-title text-center mb40">
-						<h2>Featured Properties</h2>
-						<p>Handpicked properties by our team.</p>
+						<h2>Imóveis Destacados</h2>
+						<p>Conheça os imóveis mais procurados do portal</p>
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="feature_property_slider">
+
 						<div class="item">
 							<a href="page-listing-single-v1.html">
 								<div class="feat_property">
@@ -147,459 +148,272 @@
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Rent</span></li>
-												<li class="list-inline-item"><span>Featured</span></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
 											</ul>
 											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
 												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
 											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
+											<span class="fp_price">R$ 187.000<small>,00</small></span>
 										</div>
 									</div>
 									<div class="details">
 										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
+											<p class="text-thm">Apartmento</p>
+											<h4>Cittá Splendore</h4>
+											<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
 											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 											</ul>
 										</div>
+
 										<div class="fp_footer">
 											<ul class="fp_meta float-left mb0">
 												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
+												<li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
 											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="item">
-							<a href="page-listing-single-v2.html">
-								<div class="feat_property">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp2.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Rent</span></li>
-											</ul>
-											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
-												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
-											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
-										</div>
-									</div>
-									<div class="details">
-										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
-											</ul>
-										</div>
-										<div class="fp_footer">
-											<ul class="fp_meta float-left mb0">
-												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
-											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="item">
-							<a href="page-listing-single-v3.html">
-								<div class="feat_property">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp3.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Sale</span></li>
-											</ul>
-											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
-												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
-											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
-										</div>
-									</div>
-									<div class="details">
-										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
-											</ul>
-										</div>
-										<div class="fp_footer">
-											<ul class="fp_meta float-left mb0">
-												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
-											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="item">
+
+                        <div class="item">
 							<a href="page-listing-single-v1.html">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Rent</span></li>
-												<li class="list-inline-item"><span>Featured</span></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
 											</ul>
 											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
 												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
 											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
+											<span class="fp_price">R$ 187.000<small>,00</small></span>
 										</div>
 									</div>
 									<div class="details">
 										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
+											<p class="text-thm">Apartmento</p>
+											<h4>Cittá Splendore</h4>
+											<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
 											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 											</ul>
 										</div>
+
 										<div class="fp_footer">
 											<ul class="fp_meta float-left mb0">
 												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
+												<li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
 											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="item">
-							<a href="page-listing-single-v2.html">
-								<div class="feat_property">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp2.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Rent</span></li>
-											</ul>
-											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
-												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
-											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
-										</div>
-									</div>
-									<div class="details">
-										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
-											</ul>
-										</div>
-										<div class="fp_footer">
-											<ul class="fp_meta float-left mb0">
-												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
-											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="item">
-							<a href="page-listing-single-v3.html">
-								<div class="feat_property">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp3.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Sale</span></li>
-											</ul>
-											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
-												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
-											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
-										</div>
-									</div>
-									<div class="details">
-										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
-											</ul>
-										</div>
-										<div class="fp_footer">
-											<ul class="fp_meta float-left mb0">
-												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
-											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="item">
+
+                        <div class="item">
 							<a href="page-listing-single-v1.html">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Rent</span></li>
-												<li class="list-inline-item"><span>Featured</span></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
 											</ul>
 											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
 												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
 											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
+											<span class="fp_price">R$ 187.000<small>,00</small></span>
 										</div>
 									</div>
 									<div class="details">
 										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
+											<p class="text-thm">Apartmento</p>
+											<h4>Cittá Splendore</h4>
+											<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
 											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 											</ul>
 										</div>
+
 										<div class="fp_footer">
 											<ul class="fp_meta float-left mb0">
 												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
+												<li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
 											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="item">
-							<a href="page-listing-single-v2.html">
-								<div class="feat_property">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp2.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Rent</span></li>
-											</ul>
-											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
-												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
-											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
-										</div>
-									</div>
-									<div class="details">
-										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
-											</ul>
-										</div>
-										<div class="fp_footer">
-											<ul class="fp_meta float-left mb0">
-												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
-											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="item">
-							<a href="page-listing-single-v3.html">
-								<div class="feat_property">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp3.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Sale</span></li>
-											</ul>
-											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
-												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
-											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
-										</div>
-									</div>
-									<div class="details">
-										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
-											</ul>
-										</div>
-										<div class="fp_footer">
-											<ul class="fp_meta float-left mb0">
-												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
-											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="item">
+
+                        <div class="item">
 							<a href="page-listing-single-v1.html">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Rent</span></li>
-												<li class="list-inline-item"><span>Featured</span></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
 											</ul>
 											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
 												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
 											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
+											<span class="fp_price">R$ 187.000<small>,00</small></span>
 										</div>
 									</div>
 									<div class="details">
 										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
+											<p class="text-thm">Apartmento</p>
+											<h4>Cittá Splendore</h4>
+											<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
 											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 											</ul>
 										</div>
+
 										<div class="fp_footer">
 											<ul class="fp_meta float-left mb0">
 												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
+												<li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
 											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="item">
-							<a href="page-listing-single-v2.html">
+
+                        <div class="item">
+							<a href="page-listing-single-v1.html">
 								<div class="feat_property">
 									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp2.jpg">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Rent</span></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
 											</ul>
 											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
 												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
 											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
+											<span class="fp_price">R$ 187.000<small>,00</small></span>
 										</div>
 									</div>
 									<div class="details">
 										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
+											<p class="text-thm">Apartmento</p>
+											<h4>Cittá Splendore</h4>
+											<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
 											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 											</ul>
 										</div>
+
 										<div class="fp_footer">
 											<ul class="fp_meta float-left mb0">
 												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
+												<li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
 											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="item">
-							<a href="page-listing-single-v3.html">
+
+                        <div class="item">
+							<a href="page-listing-single-v1.html">
 								<div class="feat_property">
 									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp3.jpg">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><span>For Sale</span></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
 											</ul>
 											<ul class="icon mb0">
-												<li class="list-inline-item"><span class="flaticon-transfer-1 text-white"></span></li>
 												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
 											</ul>
-											<span class="fp_price">$13,000<small>/mo</small></span>
+											<span class="fp_price">R$ 187.000<small>,00</small></span>
 										</div>
 									</div>
 									<div class="details">
 										<div class="tc_content">
-											<p class="text-thm">Apartment</p>
-											<h4>Renovated Apartment</h4>
-											<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
+											<p class="text-thm">Apartmento</p>
+											<h4>Cittá Splendore</h4>
+											<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
 											<ul class="prop_details mb0">
-												<li class="list-inline-item"><span>Beds: 4</span></li>
-												<li class="list-inline-item"><span>Baths: 2</span></li>
-												<li class="list-inline-item"><span>Sq Ft: 5280</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 											</ul>
 										</div>
+
 										<div class="fp_footer">
 											<ul class="fp_meta float-left mb0">
 												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-												<li class="list-inline-item"><span href="#">Ali Tufan</span></li>
+												<li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
 											</ul>
-											<div class="fp_pdate float-right">4 years ago</div>
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
+
+                        <div class="item">
+							<a href="page-listing-single-v1.html">
+								<div class="feat_property">
+									<div class="thumb">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+										<div class="thmb_cntnt">
+											<ul class="tag mb0">
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
+											</ul>
+											<ul class="icon mb0">
+												<li class="list-inline-item"><span class="flaticon-heart text-white"></span></li>
+											</ul>
+											<span class="fp_price">R$ 187.000<small>,00</small></span>
+										</div>
+									</div>
+									<div class="details">
+										<div class="tc_content">
+											<p class="text-thm">Apartmento</p>
+											<h4>Cittá Splendore</h4>
+											<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
+											<ul class="prop_details mb0">
+												<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
+												<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
+											</ul>
+										</div>
+
+										<div class="fp_footer">
+											<ul class="fp_meta float-left mb0">
+												<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
+												<li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -612,8 +426,8 @@
 			<div class="row">
 				<div class="col-lg-6 offset-lg-3">
 					<div class="main-title text-center">
-						<h2>Why Choose Us</h2>
-						<p>We provide full service at every step.</p>
+						<h2>Categorias</h2>
+						<p>A gente te ajuda a transformar grandes sonhos em realidade</p>
 					</div>
 				</div>
 			</div>
@@ -621,22 +435,22 @@
 				<div class="col-md-6 col-lg-4 col-xl-4">
 					<div class="why_chose_us">
 						<div class="icon">
-							<span class="flaticon-high-five"></span>
+							<span class="flaticon-home-1"></span>
 						</div>
 						<div class="details">
-							<h4>Trusted By Thousands</h4>
-							<p>Aliquam dictum elit vitae mauris facilisis at dictum urna dignissim donec vel lectus vel felis.</p>
+							<h4>Aceita Pets </h4>
+							<p>Sabemos que cada dia mais os pets estão presentes nos lares</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-4 col-xl-4">
 					<div class="why_chose_us">
 						<div class="icon">
-							<span class="flaticon-home-1"></span>
+							<span class="flaticon-high-five"></span>
 						</div>
 						<div class="details">
-							<h4>Wide Renge Of Properties</h4>
-							<p>Aliquam dictum elit vitae mauris facilisis at dictum urna dignissim donec vel lectus vel felis.</p>
+							<h4>Famílias pequenas</h4>
+							<p>Imóveis práticos e adaptados à realidade de cada família</p>
 						</div>
 					</div>
 				</div>
@@ -646,8 +460,8 @@
 							<span class="flaticon-profit"></span>
 						</div>
 						<div class="details">
-							<h4>Financing Made Easy</h4>
-							<p>Aliquam dictum elit vitae mauris facilisis at dictum urna dignissim donec vel lectus vel felis.</p>
+							<h4>Menor valor</h4>
+							<p>A busca pelo imóvel perfeito para você não precisa ser difícil</p>
 						</div>
 					</div>
 				</div>
@@ -655,14 +469,13 @@
 		</div>
 	</section>
 
-
-	<!-- Our Partners -->
+    <!--
 	<section id="our-partners" class="our-partners">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 offset-lg-3">
 					<div class="main-title text-center">
-						<h2>Our Partners</h2>
+						<h2>Nossos Parceiros</h2>
 						<p>We only work with the best companies around the globe</p>
 					</div>
 				</div>
@@ -696,6 +509,7 @@
 			</div>
 		</div>
 	</section>
+    -->
 
 	<!-- Start Partners -->
 	<section class="start-partners bgc-thm pt50 pb50">
@@ -703,13 +517,13 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="start_partner tac-smd">
-						<h2>Become a Real Estate Agent</h2>
-						<p>We only work with the best companies around the globe</p>
+						<h2>Seja Parceiro</h2>
+						<p>Receba mais contatos divulgando os seus imóveis na Rede</p>
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="parner_reg_btn text-right tac-smd">
-						<a class="btn btn-thm2" href="#">Register Now</a>
+						<a class="btn btn-thm2" href="#">Quero me Cadastrar</a>
 					</div>
 				</div>
 			</div>
@@ -720,39 +534,38 @@
 	<section class="footer_one">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 pr0 pl0">
-					<div class="footer_about_widget">
-						<h4>About Site</h4>
-						<p>We’re reimagining how you buy, sell and rent. It’s now easier to get into a place you love. So let’s do this, together.</p>
+                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
+					<div class="footer_qlink_widget">
+						<h4>Institucional</h4>
+						<ul class="list-unstyled">
+							<li><a href="#">A Rede</a></li>
+							<li><a href="#">Como anunciar</a></li>
+						</ul>
 					</div>
 				</div>
 				<div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
 					<div class="footer_qlink_widget">
-						<h4>Quick Links</h4>
+						<h4>Busca Rápida</h4>
 						<ul class="list-unstyled">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Terms & Conditions</a></li>
-							<li><a href="#">User’s Guide</a></li>
-							<li><a href="#">Support Center</a></li>
-							<li><a href="#">Press Info</a></li>
+							<li><a href="#">Comprar</a></li>
+							<li><a href="#">Alugar</a></li>
+							<li><a href="#">Imóveis novos</a></li>
+							<li><a href="#">Mapa do site</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
 					<div class="footer_contact_widget">
-						<h4>Contact Us</h4>
+						<h4>Ferramentas</h4>
 						<ul class="list-unstyled">
-							<li><a href="#">info@findhouse.com</a></li>
-							<li><a href="#">Collins Street West, Victoria</a></li>
-							<li><a href="#">8007, Australia.</a></li>
-							<li><a href="#">+1 246-345-0699</a></li>
-							<li><a href="#">+1 246-345-0695</a></li>
+							<li><a href="#">Simulador de Financiamento</a></li>
+							<li><a href="#">Imóveis favoritos</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
 					<div class="footer_social_widget">
-						<h4>Follow us</h4>
+						<h4>Acompanhe nossas redes</h4>
 						<ul class="mb30">
 							<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -761,7 +574,7 @@
 							<li class="list-inline-item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
 						</ul>
-						<h4>Subscribe</h4>
+						<h4>Inscreva-se</h4>
 						<form class="footer_mailchimp_form">
 						 	<div class="form-row align-items-center">
 							    <div class="col-auto">
@@ -786,17 +599,17 @@
 					<div class="footer_menu_widget">
 						<ul>
 							<li class="list-inline-item"><a href="#">Home</a></li>
-							<li class="list-inline-item"><a href="#">Listing</a></li>
-							<li class="list-inline-item"><a href="#">Property</a></li>
-							<li class="list-inline-item"><a href="#">Pages</a></li>
-							<li class="list-inline-item"><a href="#">Blog</a></li>
-							<li class="list-inline-item"><a href="#">Contact</a></li>
+							<li class="list-inline-item"><a href="#">Comprar</a></li>
+							<li class="list-inline-item"><a href="#">Alugar</a></li>
+							<li class="list-inline-item"><a href="#">Lançamentos</a></li>
+							<li class="list-inline-item"><a href="#">Financiamento</a></li>
+							<li class="list-inline-item"><a href="#">Anunciar</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-6">
 					<div class="copyright-widget text-right">
-						<p>© 2020 Find House. Made with love.</p>
+						<p>© 2023 Rede Imóveis - Encontre aqui o imóvel dos seus sonhos</p>
 					</div>
 				</div>
 			</div>
@@ -826,6 +639,7 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/pricing-slider.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <!-- Custom script for all pages -->
+<script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
 </body>
 </html>
