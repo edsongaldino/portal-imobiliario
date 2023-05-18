@@ -42,4 +42,12 @@ Route::get('/portal-imobiliario', function () {
     return view('portal.index');
 });
 
+Route::get('detalhes-imovel', function () {
+    return view('portal.detalhes');
+});
+
+Route::post('imoveis-buscar', function () {
+    return view('portal.lista');
+});
+
 ?>

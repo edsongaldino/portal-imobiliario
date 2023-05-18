@@ -2,39 +2,38 @@
 <section class="footer_one">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 pr0 pl0">
-                <div class="footer_about_widget">
-                    <h4>About Site</h4>
-                    <p>We’re reimagining how you buy, sell and rent. It’s now easier to get into a place you love. So let’s do this, together.</p>
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                <div class="footer_qlink_widget">
+                    <h4>Institucional</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">A Rede</a></li>
+                        <li><a href="#">Como anunciar</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                 <div class="footer_qlink_widget">
-                    <h4>Quick Links</h4>
+                    <h4>Busca Rápida</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">User’s Guide</a></li>
-                        <li><a href="#">Support Center</a></li>
-                        <li><a href="#">Press Info</a></li>
+                        <li><a href="#">Comprar</a></li>
+                        <li><a href="#">Alugar</a></li>
+                        <li><a href="#">Imóveis novos</a></li>
+                        <li><a href="#">Mapa do site</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                 <div class="footer_contact_widget">
-                    <h4>Contact Us</h4>
+                    <h4>Ferramentas</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#">info@findhouse.com</a></li>
-                        <li><a href="#">Collins Street West, Victoria</a></li>
-                        <li><a href="#">8007, Australia.</a></li>
-                        <li><a href="#">+1 246-345-0699</a></li>
-                        <li><a href="#">+1 246-345-0695</a></li>
+                        <li><a href="#">Simulador de Financiamento</a></li>
+                        <li><a href="#">Imóveis favoritos</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                 <div class="footer_social_widget">
-                    <h4>Follow us</h4>
+                    <h4>Acompanhe nossas redes</h4>
                     <ul class="mb30">
                         <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -43,7 +42,7 @@
                         <li class="list-inline-item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
                     </ul>
-                    <h4>Subscribe</h4>
+                    <h4>Inscreva-se</h4>
                     <form class="footer_mailchimp_form">
                          <div class="form-row align-items-center">
                             <div class="col-auto">
@@ -68,17 +67,17 @@
                 <div class="footer_menu_widget">
                     <ul>
                         <li class="list-inline-item"><a href="#">Home</a></li>
-                        <li class="list-inline-item"><a href="#">Listing</a></li>
-                        <li class="list-inline-item"><a href="#">Property</a></li>
-                        <li class="list-inline-item"><a href="#">Pages</a></li>
-                        <li class="list-inline-item"><a href="#">Blog</a></li>
-                        <li class="list-inline-item"><a href="#">Contact</a></li>
+                        <li class="list-inline-item"><a href="#">Comprar</a></li>
+                        <li class="list-inline-item"><a href="#">Alugar</a></li>
+                        <li class="list-inline-item"><a href="#">Lançamentos</a></li>
+                        <li class="list-inline-item"><a href="#">Financiamento</a></li>
+                        <li class="list-inline-item"><a href="#">Anunciar</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-6 col-xl-6">
                 <div class="copyright-widget text-right">
-                    <p>© 2020 Find House. Made with love.</p>
+                    <p>© 2023 Rede Imóveis - Encontre aqui o imóvel dos seus sonhos</p>
                 </div>
             </div>
         </div>
