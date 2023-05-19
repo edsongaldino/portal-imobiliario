@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('sistema.dashboard');
+    return view('portal.index');
 });
 
 Route::get('/login', function () {

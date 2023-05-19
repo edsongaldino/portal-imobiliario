@@ -167,7 +167,7 @@
 						</div>
 
                         <div class="item">
-							<a href="page-listing-single-v1.html">
+							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
@@ -206,7 +206,7 @@
 						</div>
 
                         <div class="item">
-							<a href="page-listing-single-v1.html">
+							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
@@ -245,7 +245,7 @@
 						</div>
 
                         <div class="item">
-							<a href="page-listing-single-v1.html">
+							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
@@ -284,7 +284,7 @@
 						</div>
 
                         <div class="item">
-							<a href="page-listing-single-v1.html">
+							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
@@ -323,7 +323,7 @@
 						</div>
 
                         <div class="item">
-							<a href="page-listing-single-v1.html">
+							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
@@ -362,7 +362,7 @@
 						</div>
 
                         <div class="item">
-							<a href="page-listing-single-v1.html">
+							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">

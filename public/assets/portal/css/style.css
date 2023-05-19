@@ -4410,7 +4410,8 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   height: 25px;
   line-height: 25px;
   text-align: center;
-  width: 75px;
+  width: auto;
+  padding: 0 15px;
 }
 .feat_property.home8 ul.tag{
   margin-bottom: 10px;
@@ -10214,7 +10215,7 @@ a.btn.btn_error{
   font-family: "Nunito";
   color: #484848;
   font-weight: bold;
-  line-height: 1.2;
+  line-height: 0.5;
 }
 .sidebar_recent_product .media .media-body a,
 .sidebar_feature_listing .media .media-body a{
@@ -10222,13 +10223,13 @@ a.btn.btn_error{
   font-family: "Nunito";
   color: rgb(255, 90, 95);
   font-weight: bold;
-  line-height: 1.2;
+  line-height: 0.5;
 }
 .sidebar_feature_listing .media .media-body ul li{
   font-size: 14px;
   font-family: "Nunito";
   color: #484848;
-  line-height: 1.2;
+  line-height: 0.5;
   margin-right: 0;
 }
 .blog_search_widget button.btn{
@@ -11365,7 +11366,7 @@ a.btn.btn_error{
   margin-top: 6px;
 }
 .grid_list_search_result .right_area ul li:first-child{
-  margin-right: 40px;
+  margin-right: 0px;
   position: relative;
 }
 .grid_list_search_result .right_area.style2 ul li:first-child{
@@ -11381,7 +11382,7 @@ a.btn.btn_error{
   position: absolute;
   right: -22px;
   top: 8px;
-  width: 1px;
+  width: 0px;
 }
 .grid_list_search_result .right_area ul li:first-child .dropdown.bootstrap-select.show-tick,
 .grid_list_search_result .right_area ul li:first-child button.btn.dropdown-toggle{

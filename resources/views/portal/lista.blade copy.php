@@ -57,24 +57,16 @@
 												</div>
 											</div>
 										</li>
-										<li>
-											<div class="small_dropdown2">
-											    <div id="prncgs" class="btn dd_btn">
-											    	<span>Preço</span>
-											    	<label for="exampleInputEmail2"><span class="fa fa-angle-down"></span></label>
-											    </div>
-											  	<div class="dd_content2">
-												    <div class="pricing_acontent">
-												    	<span id="slider-range-value1"></span>
-														<span class="mt0" id="slider-range-value2"></span>
-													    <div id="slider"></div>
-														<!-- <input type="text" class="amount" placeholder="$52,239">
-														<input type="text" class="amount2" placeholder="$985,14">
-														<div class="slider-range"></div> -->
-												    </div>
-											  	</div>
-											</div>
-										</li>
+										<li class="min_area list-inline-item">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="exampleInputName2" placeholder="Valor Min">
+                                            </div>
+                                        </li>
+                                        <li class="max_area list-inline-item">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="exampleInputName3" placeholder="Valor Max">
+                                            </div>
+                                        </li>
 										<li>
 											<div class="search_option_two">
 												<div class="candidate_revew_select">
@@ -239,7 +231,7 @@
 										</li>
 										<li>
 											<div class="search_option_button">
-											    <button type="submit" class="btn btn-block btn-thm">Search</button>
+											    <button type="submit" class="btn btn-block btn-thm">Filtrar</button>
 											</div>
 										</li>
 									</ul>
@@ -250,7 +242,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-6">
+				<div class="col-lg-8">
 					<div class="breadcrumb_content style2 mb0-991">
 						<ol class="breadcrumb">
 						    <li class="breadcrumb-item"><a href="#">Início</a></li>
@@ -259,13 +251,7 @@
 						<h2 class="breadcrumb_title">19.931 Imóveis à venda em Cuiabá - MT</h2>
 					</div>
 				</div>
-				<div class="col-lg-6">
-					<div class="listing_list_style mb20-xsd tal-991">
-						<ul class="mb0">
-							<li class="list-inline-item"><a href="#"><span class="fa fa-th-large"></span></a></li>
-							<li class="list-inline-item"><a href="#"><span class="fa fa-th-list"></span></a></li>
-						</ul>
-					</div>
+				<div class="col-lg-4">
 					<div class="dn db-991 mt30 mb0">
 						<div id="main2">
 							<span id="open2" class="flaticon-filter-results-button filter_open_btn style2"> Mostrar filtro</span>
@@ -279,122 +265,83 @@
 						<div class="sidebar_listing_list">
 							<div class="sidebar_advanced_search_widget">
 								<ul class="sasw_list mb0">
+
 									<li class="search_area">
 									    <div class="form-group">
-									    	<input type="text" class="form-control" id="exampleInputName1" placeholder="keyword">
-									    	<label for="exampleInputEmail"><span class="flaticon-magnifying-glass"></span></label>
-									    </div>
-									</li>
-									<li class="search_area">
-									    <div class="form-group">
-									    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Location">
+									    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Localização">
 									    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 									    </div>
 									</li>
 									<li>
-										<div class="search_option_two">
-											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick">
-													<option>Status</option>
-													<option>Apartment</option>
-													<option>Bungalow</option>
-													<option>Condo</option>
-													<option>House</option>
-													<option>Land</option>
-													<option>Single Family</option>
-												</select>
-											</div>
-										</div>
+                                        <div class="search_option_two">
+                                            <div class="candidate_revew_select">
+                                                <select class="selectpicker w100 show-tick">
+                                                    <option>Tipo do Imóvel</option>
+                                                    <option>Apartment</option>
+                                                    <option>Bungalow</option>
+                                                    <option>Condo</option>
+                                                    <option>House</option>
+                                                    <option>Land</option>
+                                                    <option>Single Family</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="min_area list-inline-item">
+									    <div class="form-group">
+									    	<input type="text" class="form-control" id="exampleInputName2" placeholder="Valor Min">
+									    </div>
 									</li>
-									<li>
-										<div class="search_option_two">
-											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick">
-													<option>Property Type</option>
-													<option>Apartment</option>
-													<option>Bungalow</option>
-													<option>Condo</option>
-													<option>House</option>
-													<option>Land</option>
-													<option>Single Family</option>
-												</select>
-											</div>
-										</div>
+									<li class="max_area list-inline-item">
+									    <div class="form-group">
+									    	<input type="text" class="form-control" id="exampleInputName3" placeholder="Valor Max">
+									    </div>
 									</li>
-									<li>
-										<div class="small_dropdown2">
-										    <div id="prncgs2" class="btn dd_btn">
-										    	<span>Price</span>
-										    	<label for="exampleInputEmail2"><span class="fa fa-angle-down"></span></label>
-										    </div>
-										  	<div class="dd_content2">
-											    <div class="pricing_acontent">
-													<input type="text" class="amount" placeholder="$52,239">
-													<input type="text" class="amount2" placeholder="$985,14">
-													<div class="slider-range"></div>
-											    </div>
-										  	</div>
-										</div>
-									</li>
-									<li>
-										<div class="search_option_two">
-											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick">
-													<option>Bathrooms</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
-													<option>6</option>
-												</select>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="search_option_two">
-											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick">
-													<option>Bedrooms</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
-													<option>6</option>
-												</select>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="search_option_two">
-											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick">
-													<option>Garages</option>
-													<option>Yes</option>
-													<option>No</option>
-													<option>Others</option>
-												</select>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="search_option_two">
-											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick">
-													<option>Year built</option>
-													<option>2013</option>
-													<option>2014</option>
-													<option>2015</option>
-													<option>2016</option>
-													<option>2017</option>
-													<option>2018</option>
-													<option>2019</option>
-													<option>2020</option>
-												</select>
-											</div>
-										</div>
-									</li>
+                                    <li>
+                                        <div class="search_option_two">
+                                            <div class="candidate_revew_select">
+                                                <select class="selectpicker w100 show-tick">
+                                                    <option>Quartos</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="search_option_two">
+                                            <div class="candidate_revew_select">
+                                                <select class="selectpicker w100 show-tick">
+                                                    <option>Banheiros</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="search_option_two">
+                                            <div class="candidate_revew_select">
+                                                <select class="selectpicker w100 show-tick">
+                                                    <option>Garagens (Vagas)</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
 									<li class="min_area list-inline-item">
 									    <div class="form-group">
 									    	<input type="text" class="form-control" id="exampleInputName2" placeholder="Min Area">
