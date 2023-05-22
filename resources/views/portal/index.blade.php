@@ -170,7 +170,7 @@
 							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
 												<li class="list-inline-item"><span>Aluguel</span></li>
@@ -209,7 +209,7 @@
 							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
 												<li class="list-inline-item"><span>Aluguel</span></li>
@@ -248,7 +248,7 @@
 							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp4.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
 												<li class="list-inline-item"><span>Aluguel</span></li>
@@ -287,7 +287,7 @@
 							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp5.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
 												<li class="list-inline-item"><span>Aluguel</span></li>
@@ -326,7 +326,7 @@
 							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp6.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
 												<li class="list-inline-item"><span>Aluguel</span></li>
@@ -365,7 +365,7 @@
 							<a href="{{ url('/detalhes-imovel') }}">
 								<div class="feat_property">
 									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
 												<li class="list-inline-item"><span>Aluguel</span></li>

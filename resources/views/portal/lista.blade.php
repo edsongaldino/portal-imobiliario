@@ -523,6 +523,7 @@
 							<h4 class="title">Imóveis destacados</h4>
 							<div class="sidebar_feature_property_slider">
 								<div class="item">
+									<a href="{{ url('/detalhes-imovel') }}">
 									<div class="feat_property home7">
 										<div class="thumb">
 											<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
@@ -536,6 +537,7 @@
 											</div>
 										</div>
 									</div>
+									</a>
 								</div>
 								<div class="item">
 									<div class="feat_property home7">
@@ -576,7 +578,7 @@
 								<img class="align-self-start mr-3" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" width="100" alt="fls1.jpg">
 								<div class="media-body">
 							    	<h5 class="mt-0 post_title">Cittá Splendore</h5>
-							    	<a href="#">R$ 3.000<small>,00</small></a>
+							    	<a href="{{ url('/detalhes-imovel') }}">R$ 3.000<small>,00</small></a>
 							    	<ul class="mb0">
 							    		<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
@@ -588,7 +590,7 @@
 								<img class="align-self-start mr-3" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" width="100" alt="fls2.jpg">
 								<div class="media-body">
 							    	<h5 class="mt-0 post_title">Villa Gramado</h5>
-							    	<a href="#">R$350.000<small>/mo</small></a>
+							    	<a href="{{ url('/detalhes-imovel') }}">R$350.000<small>/mo</small></a>
 							    	<ul class="mb0">
 							    		<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
@@ -597,10 +599,10 @@
 								</div>
 							</div>
 							<div class="media">
-								<img class="align-self-start mr-3" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" width="100" alt="fls3.jpg">
+								<a href="{{ url('/detalhes-imovel') }}"><img class="align-self-start mr-3" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" width="100" alt="fls3.jpg"></a>
 								<div class="media-body">
 							    	<h5 class="mt-0 post_title">Sunset Studio</h5>
-							    	<a href="#">R$13.000<small>,00</small></a>
+							    	<a href="{{ url('/detalhes-imovel') }}">R$13.000<small>,00</small></a>
 							    	<ul class="mb0">
 							    		<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
@@ -637,7 +639,7 @@
 						<div class="col-lg-12">
 							<div class="feat_property list">
 								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg"></a>
 									<div class="thmb_cntnt">
 										<ul class="icon mb0">
 											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
@@ -675,7 +677,7 @@
 						<div class="col-lg-12">
 							<div class="feat_property list">
 								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp1.jpg">
+									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp1.jpg"></a>
 									<div class="thmb_cntnt">
 										<ul class="icon mb0">
 											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
@@ -714,7 +716,7 @@
                         <div class="col-lg-12">
 							<div class="feat_property list">
 								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp1.jpg">
+									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp1.jpg"></a>
 									<div class="thmb_cntnt">
 										<ul class="icon mb0">
 											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
@@ -753,7 +755,7 @@
                         <div class="col-lg-12">
 							<div class="feat_property list">
 								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp4.jpg') }}" alt="fp1.jpg">
+									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp4.jpg') }}" alt="fp1.jpg"></a>
 									<div class="thmb_cntnt">
 										<ul class="icon mb0">
 											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>

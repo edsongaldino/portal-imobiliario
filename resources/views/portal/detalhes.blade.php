@@ -223,7 +223,7 @@
 						</div>
 					</div>
 
-					<div class="sidebar_listing_list">
+					<div class="sidebar_listing_list form-contato">
 						<div class="sidebar_advanced_search_widget">
 							<div class="sl_creator">
 								<h4 class="mb25">Anunciante</h4>
