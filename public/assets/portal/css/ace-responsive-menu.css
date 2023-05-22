@@ -22,6 +22,8 @@ ul {
   padding: 0;
   background-color: transparent;
   width:100%;
+  height: 84px !important;
+  line-height: 84px;
 }
 .ace-responsive-menu li{
   list-style: none;

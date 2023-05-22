@@ -13,29 +13,41 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/dashboard', function () {
+    return view('painel.dashboard');
+});
+
+Route::get('/painel/anuncios', function () {
+    return view('painel.anuncios.lista');
+});
+
+Route::get('/painel/anuncios/incluir', function () {
+    return view('painel.anuncios.incluir');
+});
+
 
 Route::get('/', function () {
     return view('portal.index');
 });
 
 Route::get('/login', function () {
-    return view('login');
+    return view('painel.login');
 });
 
 Route::get('/cadastro', function () {
-    return view('cadastro');
+    return view('painel.cadastro');
 });
 
 Route::get('/lembrar-senha', function () {
-    return view('lembrar_senha');
+    return view('painel.lembrar_senha');
 });
 
 Route::get('/resetar-senha', function () {
-    return view('resetar_senha');
+    return view('painel.resetar_senha');
 });
 
 Route::get('/login-duas-etapas', function () {
-    return view('duas_etapas');
+    return view('painel.duas_etapas');
 });
 
 Route::get('/portal-imobiliario', function () {

@@ -3,12 +3,12 @@ function createConfig() {
     return {
         type: 'line',
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
             datasets: [{
-                label: 'Dataset',
+                label: 'Total',
                 borderColor: window.chartColors.red,
                 backgroundColor: window.chartColors.red,
-                data: [10, 30, 46, 2, 8, 50, 0],
+                data: [25, 30, 46, 35, 20, 50, 20],
                 fill: false,
             }]
         },
@@ -16,7 +16,7 @@ function createConfig() {
             responsive: true,
             title: {
                 display: true,
-                text: 'Sample tooltip with border'
+                text: 'Relatório Combinado (Views, leads, Favoritos)'
             },
             tooltips: {
                 position: 'nearest',
@@ -85,7 +85,7 @@ var chart = new Chart(ctx, {
         labels: ["Jun 2019", "Jul 2019", "Aug 2019", "Sep 2019", "Oct 2019", "Nov 2019", "Dec 2019", "Jan 2020", "Feb 2020", "Mar 2020", "Apr 2020", "May 2020"],
         // Information about the dataset
     datasets: [{
-            label: "Dataset",
+            label: "Total",
             backgroundColor: 'lightblue',
             borderColor: 'blue',
             data: [26.4, 39.8, 66.8, 66.4, 40.6, 55.2, 77.4, 69.8, 57.8, 76, 110.8, 142.6],

@@ -30,10 +30,10 @@
                 </li>
 
                 <li class="last">
-                    <a href="page-contact.html"><span class="title">Financiamento</span></a>
+                    <a href="#"><span class="title">Financiamento</span></a>
                 </li>
                 <li class="list-inline-item list_s"><a href="#" class="btn flaticon-user" data-toggle="modal" data-target=".bd-example-modal-lg"> <span class="dn-lg">Login/Cadastro</span></a></li>
-                <li class="list-inline-item add_listing"><a href="page-add-new-property.html"><span class="flaticon-plus"></span><span class="dn-lg"> Anunciar</span></a></li>
+                <li class="list-inline-item add_listing"><a href="{{url("/login")}}"><span class="flaticon-plus"></span><span class="dn-lg"> Anunciar</span></a></li>
             </ul>
         </nav>
     </div>
@@ -45,7 +45,7 @@
         <div class="header stylehome1">
             <div class="d-flex justify-content-between">
                 <a class="mobile-menu-trigger" href="#menu"><img src="{{ asset('assets/portal/images/icon-menu.png') }}" alt=""></a>
-                <a class="nav_logo_img" href="index.html"><img class="img-fluid mt20" src="{{ asset('assets/portal/images/header-logo2.png') }}" alt="header-logo2.png"></a>
+                <a class="nav_logo_img" href="{{url("/")}}"><img class="img-fluid mt20" src="{{ asset('assets/portal/images/header-logo2.png') }}" alt="header-logo2.png"></a>
                 <a class="mobile-menu-reg-link" href="page-register.html"><span class="flaticon-user"></span></a>
             </div>
         </div>
@@ -63,10 +63,10 @@
             </li>
 
             <li class="last">
-                <a href="page-contact.html"><span class="title">Financiamento</span></a>
+                <a href="#"><span class="title">Financiamento</span></a>
             </li>
             <li><a href="page-login.html"><span class="flaticon-user"></span> Login/Cadastro</a></li>
-            <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="#"><span class="flaticon-plus"></span> Anunciar</a></li>
+            <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="{{ url("/login") }}"><span class="flaticon-plus"></span> Anunciar</a></li>
         </ul>
     </nav>
 </div>

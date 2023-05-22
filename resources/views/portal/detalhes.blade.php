@@ -9,33 +9,6 @@
     @php $menu = "style2"; $logo = "logo2"; @endphp
 	@include('includes.portal.menu')
 
-    <!-- Listing Single Property -->
-	<section class="listing-title-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-7 col-xl-8">
-					<div class="single_property_title mt30-767">
-						<h2>Cittá Splendore</h2>
-						<p>Rua D, 155 - Despraiado, Cuiabá - MT</p>
-					</div>
-				</div>
-				<div class="col-lg-5 col-xl-4">
-					<div class="single_property_social_share mt20">
-						<div class="spss float-left fn-400">
-							<ul class="mb0">
-								<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-								<li class="list-inline-item"><a href="#"><span class="flaticon-share"></span></a></li>
-							</ul>
-						</div>
-						<div class="price text-right tal-400">
-							<h2>R$587.000<small>,00</small></h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
 	<!-- Listing Single Property -->
 	<section class="listing-title-area p0">
 		<div class="container-fluid">
@@ -43,19 +16,19 @@
 				<div class="col-lg-12 p0">
 					<div class="listing_single_property_slider">
 						<div class="item">
-							<img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider1.jpg') }}" alt="lsslider1.jpg">
+							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider1gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider1.jpg') }}" alt="lsslider1.jpg"></a>
 						</div>
 						<div class="item">
-							<img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider2.jpg') }}" alt="lsslider2.jpg">
+							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider2gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider2.jpg') }}" alt="lsslider2.jpg"></a>
 						</div>
 						<div class="item">
-							<img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider3.jpg') }}" alt="lsslider3.jpg">
+							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider3gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider3.jpg') }}" alt="lsslider3.jpg"></a>
 						</div>
 						<div class="item">
-							<img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider1.jpg') }}" alt="lsslider1.jpg">
+							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider4gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider4.jpg') }}" alt="lsslider1.jpg"></a>
 						</div>
 						<div class="item">
-							<img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider2.jpg') }}" alt="lsslider2.jpg">
+							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider5gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider5.jpg') }}" alt="lsslider2.jpg"></a>
 						</div>
 					</div>
 				</div>
@@ -71,26 +44,38 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="listing_single_description">
+
+								<div class="single_property_title mt30-767">
+									<h2>Cittá Splendore</h2>
+									<p>Rua D, 155 - Despraiado, Cuiabá - MT</p>
+								</div>
+
+								<div class="spss float-right fn-400">
+									<ul class="mb0">
+										<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
+										<li class="list-inline-item"><a href="#"><span class="flaticon-share"></span></a></li>
+									</ul>
+								</div>
+								
 								<div class="lsd_list">
 									<ul class="mb0">
-										<li class="list-inline-item"><a href="#">Apartment</a></li>
+										<li class="list-inline-item"><span><i class="fa-solid fa-building"></i> Apartamento</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 									</ul>
 								</div>
-								<h4 class="mb30">Description</h4>
-						    	<p class="mb25">Evans Tower very high demand corner junior one bedroom plus a large balcony boasting full open NYC views. You need to see the views to believe them. Mint condition with new hardwood floors. Lots of closets plus washer and dryer.</p>
-						    	<p class="gpara second_para white_goverlay mt10 mb10">Fully furnished. Elegantly appointed condominium unit situated on premier location. PS6. The wide entry hall leads to a large living room with dining area. This expansive 2 bedroom and 2 renovated marble bathroom apartment has great windows. Despite the interior views, the apartments Southern and Eastern exposures allow for lovely natural light to fill every room. The master suite is surrounded by handcrafted milkwork and features incredible walk-in closet and storage space.</p>
+								<h4 class="mb30">Descrição</h4>
+						    	<p class="mb25">A oportunidade para você conquistar e transformar a qualidade de vida que sempre sonhou para a sua família está aqui com a MRV. Os apartamentos em Cuiabá foram projetados para oferecer tudo o que você sempre quis em um só lugar, o Città dei Fiori.</p>
 								<div class="collapse" id="collapseExample">
 								  	<div class="card card-body">
-								    	<p class="mt10 mb10">Fully furnished. Elegantly appointed condominium unit situated on premier location. PS6. The wide entry hall leads to a large living room with dining area. This expansive 2 bedroom and 2 renovated marble bathroom apartment has great windows. Despite the interior views, the apartments Southern and Eastern exposures allow for lovely natural light to fill every room. The master suite is surrounded by handcrafted milkwork and features incredible walk-in closet and storage space.</p>
-								    	<p class="mt10 mb10">Fully furnished. Elegantly appointed condominium unit situated on premier location. PS6. The wide entry hall leads to a large living room with dining area. This expansive 2 bedroom and 2 renovated marble bathroom apartment has great windows. Despite the interior views, the apartments Southern and Eastern exposures allow for lovely natural light to fill every room. The master suite is surrounded by handcrafted milkwork and features incredible walk-in closet and storage space.</p>
+								    	<p class="mt10 mb10">Mais que um apartamento, o novo jeito MRV de viver. O Città dei Fiori oferece: lazer equipado, coleta seletiva, sistema de segurança, energia solar, laminado na sala e quartos e muito mais.</p>
+								    	<p class="mt10 mb10">E para personalizar ainda mais o seu apartamento, ao se tornar um cliente MRV, você pode adquirir serviços como Kit Acabamentos em nossa plataforma Mundo da Casa, o marketplace da MRV. Para saber mais sobre, acesse nosso WhatsApp e conheça todas as possibilidades de como transformar o seu novo mundo!</p>
 								  	</div>
 								</div>
 								<p class="overlay_close">
 									<a class="text-thm fz14" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-								   	 Show More <span class="flaticon-download-1 fz12"></span>
+								   	 + Ver mais <span class="flaticon-download-1 fz12"></span>
 								  	</a>
 								</p>
 							</div>
@@ -99,7 +84,7 @@
 							<div class="additional_details">
 								<div class="row">
 									<div class="col-lg-12">
-										<h4 class="mb15">Property Details</h4>
+										<h4 class="mb15">Informações do Anúncio</h4>
 									</div>
 									<div class="col-md-6 col-lg-6 col-xl-4">
 										<ul class="list-inline-item">
@@ -142,89 +127,38 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12">
-							<div class="additional_details">
-								<div class="row">
-									<div class="col-lg-12">
-										<h4 class="mb15">Additional details</h4>
-									</div>
-									<div class="col-md-6 col-lg-6">
-										<ul class="list-inline-item">
-											<li><p>Deposit :</p></li>
-											<li><p>Pool Size :</p></li>
-											<li><p>Additional Rooms :</p></li>
-										</ul>
-										<ul class="list-inline-item">
-											<li><p><span>20%</span></p></li>
-											<li><p><span>300 Sqft</span></p></li>
-											<li><p><span>Guest Bath</span></p></li>
-										</ul>
-									</div>
-									<div class="col-md-6 col-lg-6">
-										<ul class="list-inline-item">
-											<li><p>Last remodel year :</p></li>
-											<li><p>Amenities :</p></li>
-											<li><p>Equipment :</p></li>
-										</ul>
-										<ul class="list-inline-item">
-											<li><p><span>1987</span></p></li>
-											<li><p><span>Clubhouse</span></p></li>
-											<li><p><span>Grill - Gas</span></p></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="property_attachment_area">
-								<h4 class="mb30">Property Attachments</h4>
-								<div class="iba_container style2">
-									<div class="icon_box_area style2">
-										<div class="score"><span class="flaticon-document text-thm fz30"></span></div>
-										<div class="details">
-											<h5><span class="flaticon-download text-thm pr10"></span> Demo Word Document</h5>
-										</div>
-									</div>
-									<div class="icon_box_area style2">
-										<div class="score"><span class="flaticon-pdf text-thm fz30"></span></div>
-										<div class="details">
-											<h5><span class="flaticon-download text-thm pr10"></span> Demo pdf Document</h5>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+
 						<div class="col-lg-12">
 							<div class="application_statics mt30">
 								<div class="row">
 									<div class="col-lg-12">
-										<h4 class="mb10">Features</h4>
+										<h4 class="mb10">Características</h4>
 									</div>
 									<div class="col-sm-6 col-md-6 col-lg-4">
 										<ul class="order_list list-inline-item">
-											<li><a href="#"><span class="flaticon-tick"></span>Air Conditioning</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Barbeque</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Dryer</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Gym</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Laundry</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Academia</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Quadra de Tênis</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Piscina</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Pista de Caminhada</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Salão de Festas</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-6 col-md-6 col-lg-4">
 										<ul class="order_list list-inline-item">
-											<li><a href="#"><span class="flaticon-tick"></span>Lawn</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Microwave</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Outdoor Shower</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Refrigerator</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Sauna</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Aceita Pets</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Chuveiro</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Churrasqueira</a></li>
 											<li><a href="#"><span class="flaticon-tick"></span>Sauna</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-6 col-md-6 col-lg-4">
 										<ul class="order_list list-inline-item">
-											<li><a href="#"><span class="flaticon-tick"></span>Swimming Pool</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>TV Cable</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Washer</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>WiFi</a></li>
-											<li><a href="#"><span class="flaticon-tick"></span>Window Coverings</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Academia</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Quadra de Tênis</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Piscina</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Pista de Caminhada</a></li>
+											<li><a href="#"><span class="flaticon-tick"></span>Salão de Festas</a></li>
 										</ul>
 									</div>
 								</div>
@@ -243,57 +177,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12">
-							<div class="application_statics mt30">
-								<h4 class="mb30">Floor plans</h4>
-								<div class="faq_according style2">
-									<div class="accordion" id="accordionExample">
-									  	<div class="card floor_plan">
-										    <div class="card-header" id="headingOne">
-										    	<h2 class="mb-0">
-										        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										        		<ul class="mb0">
-										        			<li class="list-inline-item">First Floor</li>
-										        			<li class="list-inline-item"><p>Size:</p> <span>1267 Sqft</span></li>
-										        			<li class="list-inline-item"><p>Rooms:</p> <span>670 Sqft</span></li>
-										        			<li class="list-inline-item"><p>Baths:</p> <span>530 Sqft</span></li>
-										        			<li class="list-inline-item"><p>Price:</p> <span>$1489</span></li>
-										        		</ul>
-										        	</button>
-										   		</h2>
-										    </div>
-										    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
-											    <div class="card-body text-center">
-											    	<img class="img-fluid" src="{{ asset('assets/portal/images/resource/floor_plan.png') }}" alt="floor_plan.png">
-									        		<p>Plan description. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
-											    </div>
-										    </div>
-									    </div>
-									    <div class="card floor_plan">
-									    	<div class="card-header active" id="headingTwo">
-									    		<h2 class="mb-0">
-									        		<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-										        		<ul class="mb0">
-										        			<li class="list-inline-item">First Floor</li>
-										        			<li class="list-inline-item"><p>Size:</p> <span>1267 Sqft</span></li>
-										        			<li class="list-inline-item"><p>Rooms:</p> <span>670 Sqft</span></li>
-										        			<li class="list-inline-item"><p>Baths:</p> <span>530 Sqft</span></li>
-										        			<li class="list-inline-item"><p>Price:</p> <span>$1489</span></li>
-										        		</ul>
-										        	</button>
-									    		</h2>
-									    	</div>
-									    	<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-									      		<div class="card-body text-center">
-											    	<img class="img-fluid" src="{{ asset('assets/portal/images/resource/floor_plan.png') }}" alt="floor_plan.png">
-									        		<p>Plan description. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
-									     		 </div>
-									    	</div>
-									    </div>
-									</div>
-								</div>
-							</div>
-						</div>
+
 						<div class="col-lg-12">
 							<div class="shop_single_tab_content style2 bdr1 mt30">
 								<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -328,376 +212,43 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12">
-							<div class="walkscore_area mt30">
-								<h4 class="mb30">Walkscore <span class="float-right"><img src="{{ asset('assets/portal/images/resource/wscore.png') }}" alt="wscore.png"></span></h4>
-								<div class="iba_container">
-									<div class="icon_box_area">
-										<div class="score"><span>70</span></div>
-										<div class="details">
-											<h5>Walk Score</h5>
-											<p>Somewhat Walkable</p>
-										</div>
-									</div>
-									<div class="icon_box_area">
-										<div class="score"><span>40</span></div>
-										<div class="details">
-											<h5>Bike Score</h5>
-											<p>Bikeable</p>
-										</div>
-									</div>
-								</div>
-								<a class="more_info" href="#">More Details Here</a>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="whats_nearby mt30">
-								<h4 class="mb10">What's Nearby</h4>
-								<div class="education_distance mb15">
-									<h5><span class="flaticon-college-graduation"></span> Education</h5>
-									<div class="single_line">
-										<p class="para">Eladia's Kids <span>(3.13 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">8895 reviews</span></li>
-										</ul>
-									</div>
-									<div class="single_line">
-										<p class="para">Gear Up With ACLS <span>(4.66 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">7475 reviews</span></li>
-										</ul>
-									</div>
-									<div class="single_line">
-										<p class="para">Brooklyn Brainery <span>(3.31 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">3579 reviews</span></li>
-										</ul>
-									</div>
-								</div>
-								<div class="education_distance mb15 style2">
-									<h5><span class="flaticon-heartbeat"></span> Health & Medical</h5>
-									<div class="single_line">
-										<p class="para">Eladia's Kids <span>(3.13 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">8895 reviews</span></li>
-										</ul>
-									</div>
-									<div class="single_line">
-										<p class="para">Gear Up With ACLS <span>(4.66 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">7475 reviews</span></li>
-										</ul>
-									</div>
-									<div class="single_line">
-										<p class="para">Brooklyn Brainery <span>(3.31 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">3579 reviews</span></li>
-										</ul>
-									</div>
-								</div>
-								<div class="education_distance style3">
-									<h5><span class="flaticon-front-of-bus"></span> Transportation</h5>
-									<div class="single_line">
-										<p class="para">Eladia's Kids <span>(3.13 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">8895 reviews</span></li>
-										</ul>
-									</div>
-									<div class="single_line">
-										<p class="para">Gear Up With ACLS <span>(4.66 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">7475 reviews</span></li>
-										</ul>
-									</div>
-									<div class="single_line">
-										<p class="para">Brooklyn Brainery <span>(3.31 miles)</span></p>
-										<ul class="review">
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-											<li class="list-inline-item"><span class="total_rive_count">3579 reviews</span></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="application_statics">
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="chart_circle_doughnut mt30">
-											<h4>Payment Calculator</h4>
-											<canvas class="mt50 mb50" id="myChart"></canvas>
-										</div>
-									</div>
-									<div class="col-lg-6 col-xl-6">
-										<div class="my_profile_setting_input ui_kit_select_search form-group">
-											<select class="selectpicker" data-live-search="true" data-width="100%">
-												<option data-tokens="Terms">Terms</option>
-												<option data-tokens="Terms2">Terms2</option>
-												<option data-tokens="Terms3">Terms3</option>
-												<option data-tokens="Terms4">Terms4</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-lg-6 col-xl-6">
-										<div class="my_profile_setting_input form-group">
-									    	<input type="text" class="form-control" id="formGroupExampleWebsite" placeholder="Interest">
-										</div>
-									</div>
-									<div class="col-lg-6 col-xl-6">
-										<div class="my_profile_setting_input form-group">
-									    	<input type="text" class="form-control" id="formGroupExampleFaceBook" placeholder="Home Price">
-										</div>
-									</div>
-									<div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input form-group">
-									    	<input type="text" class="form-control" id="formGroupExampleTwitter" placeholder="Down Payment">
-										</div>
-									</div>
-									<div class="col-lg-6 col-xl-2">
-										<div class="my_profile_setting_input form-group">
-									    	<input type="text" class="form-control" id="formGroupExampleLinkedin" placeholder="10%">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="application_statics shop_single_tab_content style3 mt30">
-								<ul class="nav nav-tabs float-right fn-414" id="myTab" role="tablist">
-									<li class="nav-item">
-									    <a class="nav-link active" id="hourly-tab" data-toggle="tab" href="#hourly" role="tab" aria-controls="hourly" aria-selected="true">Hours</a>
-									</li>
-									<li class="nav-item">
-									    <a class="nav-link" id="weekly-tab" data-toggle="tab" href="#weekly" role="tab" aria-controls="weekly" aria-selected="false">Weekly</a>
-									</li>
-									<li class="nav-item">
-									    <a class="nav-link" id="monthly-tab" data-toggle="tab" href="#monthly" role="tab" aria-controls="monthly" aria-selected="false">Monthly</a>
-									</li>
-								</ul>
-								<div class="tab-content" id="myTabContent2">
-									<div class="tab-pane fade show active" id="hourly" role="tabpanel" aria-labelledby="hourly-tab">
-										<h4 class="mt10-414">Property Views</h4>
-										<canvas id="myChartweave" width="100%" height="50"></canvas>
-									</div>
-									<div class="tab-pane fade" id="weekly" role="tabpanel" aria-labelledby="weekly-tab">
-										<h4 class="mt10-414">Property Views</h4>
-										<div class="c_container w100"></div>
-									</div>
-									<div class="tab-pane fade" id="monthly" role="tabpanel" aria-labelledby="monthly-tab">
-										<h4 class="mt10-414">Property Views</h4>
-										<canvas class="ls_barchart" id="chart"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-12">
-							<h4 class="mt30 mb30">Similar Properties</h4>
-						</div>
-						<div class="col-lg-6">
-							<div class="feat_property">
-								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
-									<div class="thmb_cntnt">
-										<ul class="tag mb0">
-											<li class="list-inline-item"><a href="#">For Rent</a></li>
-											<li class="list-inline-item"><a href="#">Featured</a></li>
-										</ul>
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li>
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-										<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<p class="text-thm">Apartment</p>
-										<h4>Renovated Apartment</h4>
-										<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><a href="#">Beds: 4</a></li>
-											<li class="list-inline-item"><a href="#">Baths: 2</a></li>
-											<li class="list-inline-item"><a href="#">Sq Ft: 5280</a></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><a href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></a></li>
-											<li class="list-inline-item"><a href="#">Ali Tufan</a></li>
-										</ul>
-										<div class="fp_pdate float-right">4 years ago</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="feat_property">
-								<div class="thumb">
-									<img class="img-whp" src="images/property/fp2.jpg" alt="fp2.jpg">
-									<div class="thmb_cntnt">
-										<ul class="tag mb0">
-											<li class="list-inline-item"><a href="#">For Rent</a></li>
-										</ul>
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li>
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-										<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<p class="text-thm">Apartment</p>
-										<h4>Renovated Apartment</h4>
-										<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><a href="#">Beds: 4</a></li>
-											<li class="list-inline-item"><a href="#">Baths: 2</a></li>
-											<li class="list-inline-item"><a href="#">Sq Ft: 5280</a></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><a href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></a></li>
-											<li class="list-inline-item"><a href="#">Ali Tufan</a></li>
-										</ul>
-										<div class="fp_pdate float-right">4 years ago</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="feat_property">
-								<div class="thumb">
-									<img class="img-whp" src="images/property/fp3.jpg" alt="fp3.jpg">
-									<div class="thmb_cntnt">
-										<ul class="tag mb0">
-											<li class="list-inline-item"><a href="#">For Sale</a></li>
-										</ul>
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li>
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-										<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<p class="text-thm">Apartment</p>
-										<h4>Renovated Apartment</h4>
-										<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><a href="#">Beds: 4</a></li>
-											<li class="list-inline-item"><a href="#">Baths: 2</a></li>
-											<li class="list-inline-item"><a href="#">Sq Ft: 5280</a></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><a href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></a></li>
-											<li class="list-inline-item"><a href="#">Ali Tufan</a></li>
-										</ul>
-										<div class="fp_pdate float-right">4 years ago</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="feat_property">
-								<div class="thumb">
-									<img class="img-whp" src="images/property/fp1.jpg" alt="fp1.jpg">
-									<div class="thmb_cntnt">
-										<ul class="tag mb0">
-											<li class="list-inline-item"><a href="#">For Rent</a></li>
-											<li class="list-inline-item"><a href="#">Featured</a></li>
-										</ul>
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li>
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-										<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<p class="text-thm">Apartment</p>
-										<h4>Renovated Apartment</h4>
-										<p><span class="flaticon-placeholder"></span> 1421 San Pedro St, Los Angeles, CA 90015</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><a href="#">Beds: 4</a></li>
-											<li class="list-inline-item"><a href="#">Baths: 2</a></li>
-											<li class="list-inline-item"><a href="#">Sq Ft: 5280</a></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><a href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></a></li>
-											<li class="list-inline-item"><a href="#">Ali Tufan</a></li>
-										</ul>
-										<div class="fp_pdate float-right">4 years ago</div>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-xl-4">
+
+
+					<div class="sidebar_listing_list detalhes-valor">
+						<div class="item-valor">
+							<div class="label-price">Aluguel (R$):</div>
+							<div class="price text-right">
+								4.350<span class="small">,00</span>
+							</div>
+						</div>
+
+						<div class="item-valor cond">
+							<div class="label-condominio">Condomínio (R$):</div>
+							<div class="text-right condominio">
+								548<span class="small">,00</span>
+							</div>
+						</div>
+
+						<div class="item-valor cond">
+							<div class="label-condominio">IPTU (R$):</div>
+							<div class="text-right condominio">
+								1.450<span class="small">,00</span>
+							</div>
+						</div>
+					</div>
+
 					<div class="sidebar_listing_list">
 						<div class="sidebar_advanced_search_widget">
 							<div class="sl_creator">
-								<h4 class="mb25">Listed By</h4>
+								<h4 class="mb25">Anunciante</h4>
 								<div class="media">
-									<img class="mr-3" src="{{ asset('assets/portal/images/team/lc1.png') }}" alt="lc1.png">
+									<img class="mr-3" src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="lc1.png">
 									<div class="media-body">
-								    	<h5 class="mt-0 mb0">Samul Williams</h5>
-								    	<p class="mb0">(123)456-7890</p>
-								    	<p class="mb0">info@findhouse.com</p>
-								    	<a class="text-thm" href="#">View My Listing</a>
+								    	<h5 class="mt-0 mb0">Rosa Imóveis</h5>
+								    	<a class="text-thm" href="#">(65) 3314-4500</a>
 								  	</div>
 								</div>
 							</div>
@@ -730,386 +281,55 @@
 							</ul>
 						</div>
 					</div>
-					<div class="sidebar_listing_list">
-						<div class="sidebar_advanced_search_widget">
-							<ul class="sasw_list mb0">
-								<li class="search_area">
-								    <div class="form-group">
-								    	<input type="text" class="form-control" id="exampleInputName1" placeholder="keyword">
-								    	<label for="exampleInputEmail"><span class="flaticon-magnifying-glass"></span></label>
-								    </div>
-								</li>
-								<li class="search_area">
-								    <div class="form-group">
-								    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Location">
-								    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
-								    </div>
-								</li>
-								<li>
-									<div class="search_option_two">
-										<div class="candidate_revew_select">
-											<select class="selectpicker w100 show-tick">
-												<option>Status</option>
-												<option>Apartment</option>
-												<option>Bungalow</option>
-												<option>Condo</option>
-												<option>House</option>
-												<option>Land</option>
-												<option>Single Family</option>
-											</select>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="search_option_two">
-										<div class="candidate_revew_select">
-											<select class="selectpicker w100 show-tick">
-												<option>Property Type</option>
-												<option>Apartment</option>
-												<option>Bungalow</option>
-												<option>Condo</option>
-												<option>House</option>
-												<option>Land</option>
-												<option>Single Family</option>
-											</select>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="small_dropdown2">
-									    <div id="prncgs2" class="btn dd_btn">
-									    	<span>Price</span>
-									    	<label for="exampleInputEmail2"><span class="fa fa-angle-down"></span></label>
-									    </div>
-									  	<div class="dd_content2">
-										    <div class="pricing_acontent">
-										    	<span id="slider-range-value1"></span>
-												<span class="mt0" id="slider-range-value2"></span>
-											    <div id="slider"></div>
-												<!-- <input type="text" class="amount" placeholder="$52,239">
-												<input type="text" class="amount2" placeholder="$985,14">
-												<div class="slider-range"></div> -->
-										    </div>
-									  	</div>
-									</div>
-								</li>
-								<li>
-									<div class="search_option_two">
-										<div class="candidate_revew_select">
-											<select class="selectpicker w100 show-tick">
-												<option>Bathrooms</option>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-											</select>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="search_option_two">
-										<div class="candidate_revew_select">
-											<select class="selectpicker w100 show-tick">
-												<option>Bedrooms</option>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-											</select>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="search_option_two">
-										<div class="candidate_revew_select">
-											<select class="selectpicker w100 show-tick">
-												<option>Garages</option>
-												<option>Yes</option>
-												<option>No</option>
-												<option>Others</option>
-											</select>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="search_option_two">
-										<div class="candidate_revew_select">
-											<select class="selectpicker w100 show-tick">
-												<option>Year built</option>
-												<option>2013</option>
-												<option>2014</option>
-												<option>2015</option>
-												<option>2016</option>
-												<option>2017</option>
-												<option>2018</option>
-												<option>2019</option>
-												<option>2020</option>
-											</select>
-										</div>
-									</div>
-								</li>
-								<li class="min_area list-inline-item">
-								    <div class="form-group">
-								    	<input type="text" class="form-control" id="exampleInputName2" placeholder="Min Area">
-								    </div>
-								</li>
-								<li class="max_area list-inline-item">
-								    <div class="form-group">
-								    	<input type="text" class="form-control" id="exampleInputName3" placeholder="Max Area">
-								    </div>
-								</li>
-								<li>
-								  	<div id="accordion" class="panel-group">
-									    <div class="panel">
-									      	<div class="panel-heading">
-										      	<h4 class="panel-title">
-										        	<a href="#panelBodyRating" class="accordion-toggle link" data-toggle="collapse" data-parent="#accordion"><i class="flaticon-more"></i> Advanced features</a>
-										        </h4>
-									      	</div>
-										    <div id="panelBodyRating" class="panel-collapse collapse">
-										        <div class="panel-body row">
-										      		<div class="col-lg-12">
-										                <ul class="ui_kit_checkbox selectable-list float-left fn-400">
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck16">
-																	<label class="custom-control-label" for="customCheck16">Air Conditioning</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck17">
-																	<label class="custom-control-label" for="customCheck17">Barbeque</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck18">
-																	<label class="custom-control-label" for="customCheck18">Gym</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck19">
-																	<label class="custom-control-label" for="customCheck19">Microwave</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck20">
-																	<label class="custom-control-label" for="customCheck20">TV Cable</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck21">
-																	<label class="custom-control-label" for="customCheck21">Lawn</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck22">
-																	<label class="custom-control-label" for="customCheck22">Refrigerator</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck23">
-																	<label class="custom-control-label" for="customCheck23">Swimming Pool</label>
-																</div>
-										                	</li>
-										                </ul>
-										                <ul class="ui_kit_checkbox selectable-list float-right fn-400">
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck24">
-																	<label class="custom-control-label" for="customCheck24">WiFi</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck25">
-																	<label class="custom-control-label" for="customCheck25">Sauna</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck26">
-																	<label class="custom-control-label" for="customCheck26">Dryer</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck27">
-																	<label class="custom-control-label" for="customCheck27">Washer</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck28">
-																	<label class="custom-control-label" for="customCheck28">Laundry</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck29">
-																	<label class="custom-control-label" for="customCheck29">Outdoor Shower</label>
-																</div>
-										                	</li>
-										                	<li>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="customCheck30">
-																	<label class="custom-control-label" for="customCheck30">Window Coverings</label>
-																</div>
-										                	</li>
-										                </ul>
-											        </div>
-										        </div>
-										    </div>
-									    </div>
-									</div>
-								</li>
-								<li>
-									<div class="search_option_button">
-									    <button type="submit" class="btn btn-block btn-thm">Search</button>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
+
 					<div class="terms_condition_widget">
-						<h4 class="title">Featured Properties</h4>
+					<h4 class="title">Imóveis destacados</h4>
 						<div class="sidebar_feature_property_slider">
 							<div class="item">
-								<div class="feat_property home7 agent">
+								<div class="feat_property home7">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><a href="#">For Rent</a></li>
-												<li class="list-inline-item"><a href="#">Featured</a></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
 											</ul>
-											<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-											<h4 class="posr color-white">Renovated Apartment</h4>
+											<a class="fp_price" href="#">R$ 187.000<small>,00</small></a>
+											<h4 class="posr color-white">Apartmento</h4>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="item">
-								<div class="feat_property home7 agent">
+								<div class="feat_property home7">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp2.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><a href="#">For Rent</a></li>
-												<li class="list-inline-item"><a href="#">Featured</a></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
+												<li class="list-inline-item"><span>Venda</span></li>
 											</ul>
-											<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-											<h4 class="posr color-white">Renovated Apartment</h4>
+											<a class="fp_price" href="#">R$ 187.000<small>,00</small></a>
+											<h4 class="posr color-white">Apartmento</h4>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="item">
-								<div class="feat_property home7 agent">
+								<div class="feat_property home7">
 									<div class="thumb">
 										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp3.jpg">
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item"><a href="#">For Rent</a></li>
-												<li class="list-inline-item"><a href="#">Featured</a></li>
+												<li class="list-inline-item"><span>Aluguel</span></li>
 											</ul>
-											<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-											<h4 class="posr color-white">Renovated Apartment</h4>
+											<a class="fp_price" href="#">R$ 3.000<small>,00</small></a>
+											<h4 class="posr color-white">Apartmento</h4>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="item">
-								<div class="feat_property home7 agent">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp4.jpg') }}" alt="fp4.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><a href="#">For Rent</a></li>
-												<li class="list-inline-item"><a href="#">Featured</a></li>
-											</ul>
-											<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-											<h4 class="posr color-white">Renovated Apartment</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="feat_property home7 agent">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp5.jpg') }}" alt="fp5.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><a href="#">For Rent</a></li>
-												<li class="list-inline-item"><a href="#">Featured</a></li>
-											</ul>
-											<a class="fp_price" href="#">$13,000<small>/mo</small></a>
-											<h4 class="posr color-white">Renovated Apartment</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="terms_condition_widget">
-						<h4 class="title">Categories Property</h4>
-						<div class="widget_list">
-							<ul class="list_details">
-								<li><a href="#"><i class="fa fa-caret-right mr10"></i>Apartment <span class="float-right">6 properties</span></a></li>
-								<li><a href="#"><i class="fa fa-caret-right mr10"></i>Condo <span class="float-right">12 properties</span></a></li>
-								<li><a href="#"><i class="fa fa-caret-right mr10"></i>Family House <span class="float-right">8 properties</span></a></li>
-								<li><a href="#"><i class="fa fa-caret-right mr10"></i>Modern Villa <span class="float-right">26 properties</span></a></li>
-								<li><a href="#"><i class="fa fa-caret-right mr10"></i>Town House <span class="float-right">89 properties</span></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="sidebar_feature_listing">
-						<h4 class="title">Recently Viewed</h4>
-						<div class="media">
-							<img class="align-self-start mr-3" src="{{ asset('assets/portal/images/blog/fls1.jpg') }}" alt="fls1.jpg">
-							<div class="media-body">
-						    	<h5 class="mt-0 post_title">Nice Room With View</h5>
-						    	<a href="#">$13,000/<small>/mo</small></a>
-						    	<ul class="mb0">
-						    		<li class="list-inline-item">Beds: 4</li>
-						    		<li class="list-inline-item">Baths: 2</li>
-						    		<li class="list-inline-item">Sq Ft: 5280</li>
-						    	</ul>
-							</div>
-						</div>
-						<div class="media">
-							<img class="align-self-start mr-3" src="{{ asset('assets/portal/images/blog/fls2.jpg') }}" alt="fls2.jpg">
-							<div class="media-body">
-						    	<h5 class="mt-0 post_title">Villa called Archangel</h5>
-						    	<a href="#">$13,000<small>/mo</small></a>
-						    	<ul class="mb0">
-						    		<li class="list-inline-item">Beds: 4</li>
-						    		<li class="list-inline-item">Baths: 2</li>
-						    		<li class="list-inline-item">Sq Ft: 5280</li>
-						    	</ul>
-							</div>
-						</div>
-						<div class="media">
-							<img class="align-self-start mr-3" src="{{ asset('assets/portal/images/blog/fls3.jpg') }}" alt="fls3.jpg">
-							<div class="media-body">
-						    	<h5 class="mt-0 post_title">Sunset Studio</h5>
-						    	<a href="#">$13,000<small>/mo</small></a>
-						    	<ul class="mb0">
-						    		<li class="list-inline-item">Beds: 4</li>
-						    		<li class="list-inline-item">Baths: 2</li>
-						    		<li class="list-inline-item">Sq Ft: 5280</li>
-						    	</ul>
-							</div>
+
 						</div>
 					</div>
 				</div>

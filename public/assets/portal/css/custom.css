@@ -1,3 +1,59 @@
 .menu-interno{
     background-color: blue !important;
 }
+
+/*Detalhes*/
+
+.detalhes-valor{
+    background-color: #f9f9f9 !important;
+    display: block;
+    height: auto;
+}
+
+.detalhes-valor .item-valor{
+    width: 100%;
+    display: inline-flex;
+    line-height: 30px;
+}
+
+.detalhes-valor .item-valor .cond{
+    color: #8d8d8d !important;
+}
+
+.detalhes-valor .item-valor .label-price{
+    width: 40%;
+    display: inline-flex;
+    font-size: 14px;
+}
+
+.detalhes-valor .item-valor .label-condominio{
+    width: 50%;
+    display: inline-flex;
+    font-size: 14px;
+}
+
+.detalhes-valor .item-valor .price{
+    width: 60%;
+    text-align: right;
+    font-family: 'Nunito', sans-serif;
+    color: #ff5a5f;
+    font-size: 40px !important;
+    font-weight: bold;
+}
+
+.detalhes-valor .item-valor .price .small{
+    font-size: 18px !important;
+}
+
+.detalhes-valor .item-valor .condominio{
+    width: 50%;
+    font-size: 20px !important;
+    text-align: right;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.2;
+}
+
+.detalhes-valor .item-valor .condominio .small{
+    font-size: 12px !important;
+}
+

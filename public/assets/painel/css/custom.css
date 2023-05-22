@@ -1,0 +1,42 @@
+.mm-panels {
+    overflow: hidden;
+    font-size: 18px;
+    text-align: center;
+}
+
+.grid.success ul li:first-child {
+    background-color: rgb(163, 245, 194) !important;
+}
+
+.grid.success ul li:first-child .icon {
+    color: #029b23 !important;
+}
+
+.grid.warning ul li:first-child {
+    background-color: rgb(240, 220, 134) !important;
+}
+
+.grid.warning ul li:first-child .icon {
+    color: #ff9100 !important;
+}
+
+.grid.error ul li:first-child {
+    background-color: rgb(247, 176, 176) !important;
+}
+
+.grid.error ul li:first-child .icon {
+    color: #a70505 !important;
+}
+
+.recent_job_activity .btn-ver-resumo{
+    width: 100px;
+    height: 20px;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
+.recent_job_activity .btn-ver-resumo:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
