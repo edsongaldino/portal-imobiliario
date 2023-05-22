@@ -189,8 +189,8 @@
 														<!--end::Svg Icon-->
 														<!--begin::Info-->
 														<span class="d-block fw-bold text-start">
-															<span class="text-dark fw-bolder d-block fs-4 mb-2">Corretor Autônomo</span>
-															<span class="text-muted fw-bold fs-6">Somente para corretores com Creci Ativo</span>
+															<span class="text-dark fw-bolder d-block fs-4 mb-2">Construtora</span>
+															<span class="text-muted fw-bold fs-6">Somente para empresas do estado de Mato Grosso</span>
 														</span>
 														<!--end::Info-->
 													</label>
@@ -213,7 +213,7 @@
 														<!--begin::Info-->
 														<span class="d-block fw-bold text-start">
 															<span class="text-dark fw-bolder d-block fs-4 mb-2">Imobiliária</span>
-															<span class="text-muted fw-bold fs-6">Somente para empresas do estado de Mato Grosso</span>
+															<span class="text-muted fw-bold fs-6">Somente para imobiliárias com CRECI ativo</span>
 														</span>
 														<!--end::Info-->
 													</label>
