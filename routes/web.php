@@ -58,7 +58,7 @@ Route::get('detalhes-imovel', function () {
     return view('portal.detalhes');
 });
 
-Route::post('imoveis-buscar', function () {
+Route::match(['get', 'post'],'imoveis-buscar', function () {
     return view('portal.lista');
 });
 
