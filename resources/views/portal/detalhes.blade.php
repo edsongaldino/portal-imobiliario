@@ -56,7 +56,7 @@
 										<li class="list-inline-item"><a href="#"><span class="flaticon-share"></span></a></li>
 									</ul>
 								</div>
-								
+
 								<div class="lsd_list">
 									<ul class="mb0">
 										<li class="list-inline-item"><span><i class="fa-solid fa-building"></i> Apartamento</span></li>
@@ -88,40 +88,40 @@
 									</div>
 									<div class="col-md-6 col-lg-6 col-xl-4">
 										<ul class="list-inline-item">
-											<li><p>Property ID :</p></li>
-											<li><p>Price :</p></li>
-											<li><p>Property Size :</p></li>
-											<li><p>Year Built :</p></li>
+											<li><p>ID Imóvel :</p></li>
+											<li><p>Valor :</p></li>
+											<li><p>Condomínio :</p></li>
+											<li><p>IPTU :</p></li>
 										</ul>
 										<ul class="list-inline-item">
 											<li><p><span>HZ27</span></p></li>
-											<li><p><span>$130,000</span></p></li>
-											<li><p><span>1560 Sq Ft</span></p></li>
-											<li><p><span>2016-01-09</span></p></li>
+											<li><p><span>R$ 358.000,00</span></p></li>
+											<li><p><span>R$ 350,00</span></p></li>
+											<li><p><span>R$ 850,00</span></p></li>
 										</ul>
 									</div>
 									<div class="col-md-6 col-lg-6 col-xl-4">
 										<ul class="list-inline-item">
-											<li><p>Bedrooms :</p></li>
-											<li><p>Bathrooms :</p></li>
-											<li><p>Garage :</p></li>
-											<li><p>Garage Size :</p></li>
+											<li><p>Quartos :</p></li>
+											<li><p>Banheiros :</p></li>
+											<li><p>Suítes :</p></li>
+											<li><p>Vagas de Garagem :</p></li>
 										</ul>
 										<ul class="list-inline-item">
-											<li><p><span>8</span></p></li>
-											<li><p><span>4</span></p></li>
+											<li><p><span>3</span></p></li>
+											<li><p><span>3</span></p></li>
 											<li><p><span>2</span></p></li>
-											<li><p><span>200 SqFt</span></p></li>
+											<li><p><span>3</span></p></li>
 										</ul>
 									</div>
 									<div class="col-md-6 col-lg-6 col-xl-4">
 										<ul class="list-inline-item">
-											<li><p>Property Type :</p></li>
-											<li><p>Property Status :</p></li>
+											<li><p>Tipo :</p></li>
+											<li><p>Transação :</p></li>
 										</ul>
 										<ul class="list-inline-item">
-											<li><p><span>Apartment</span></p></li>
-											<li><p><span>For Sale</span></p></li>
+											<li><p><span>Apartmento</span></p></li>
+											<li><p><span>Venda</span></p></li>
 										</ul>
 									</div>
 								</div>
@@ -166,13 +166,10 @@
 						</div>
 						<div class="col-lg-12">
 							<div class="application_statics mt30">
-								<h4 class="mb30">Location <small class="float-right">1421 San Pedro St, Los Angeles, CA 90015</small></h4>
+								<h4 class="mb30">Localização <small class="float-right">1421 San Pedro St, Los Angeles, CA 90015</small></h4>
 								<div class="property_video p0">
 									<div class="thumb">
 										<div class="h400" id="map-canvas"></div>
-										<div class="overlay_icon">
-											<a href="#"><img class="map_img_icon" src="{{ asset('assets/portal/images/header-logo.png') }}" alt="header-logo.png"></a>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -182,30 +179,16 @@
 							<div class="shop_single_tab_content style2 bdr1 mt30">
 								<ul class="nav nav-tabs" id="myTab" role="tablist">
 									<li class="nav-item">
-									    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Property video</a>
-									</li>
-									<li class="nav-item">
-									    <a class="nav-link" id="listing-tab" data-toggle="tab" href="#listing" role="tab" aria-controls="listing" aria-selected="false">Virtual Tour</a>
+									    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Vídeo do Imóvel</a>
 									</li>
 								</ul>
 								<div class="tab-content" id="myTabContent2">
 									<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
 										<div class="property_video">
 											<div class="thumb">
-												<img class="pro_img img-fluid w100" src="{{ asset('assets/portal/images/background/7.jpg') }}" alt="7.jpg">
-												<div class="overlay_icon">
-													<a class="video_popup_btn red popup-youtube popup-img" href="https://www.youtube.com/watch?v=oqNZOOWF8qM"><span class="flaticon-play"></span></a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="tab-pane fade row pl15 pl0-1199 pr15 pr0-1199" id="listing" role="tabpanel" aria-labelledby="listing-tab">
-										<div class="property_video">
-											<div class="thumb">
-												<img class="pro_img img-fluid w100" src="{{ asset('assets/portal/images/background/7.jpg') }}" alt="7.jpg">
-												<div class="overlay_icon">
-													<a class="video_popup_btn red popup-youtube popup-img" href="https://www.youtube.com/watch?v=Jrs5yji5bb0"><span class="flaticon-play"></span></a>
-												</div>
+												<div class="embed-responsive embed-responsive-16by9">
+                                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/2akHQqfGNMI" allowfullscreen></iframe>
+                                                </div>
 											</div>
 										</div>
 									</div>
@@ -252,15 +235,19 @@
 								  	</div>
 								</div>
 							</div>
+
+                            <div class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
+                            <div class="btn-visita"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
+
 							<ul class="sasw_list mb0">
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="text" class="form-control" id="exampleInputName1" placeholder="Your Name">
+								    	<input type="text" class="form-control" id="exampleInputName1" placeholder="Seu nome completo">
 								    </div>
 								</li>
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="number" class="form-control" id="exampleInputName2" placeholder="Phone">
+								    	<input type="number" class="form-control" id="exampleInputName2" placeholder="Telefone">
 								    </div>
 								</li>
 								<li class="search_area">
@@ -270,12 +257,12 @@
 								</li>
 								<li class="search_area">
 		                            <div class="form-group">
-		                                <textarea id="form_message" name="form_message" class="form-control required" rows="5" required="required" placeholder="I'm interest in [ Listing Single ]"></textarea>
+		                                <textarea id="form_message" name="form_message" class="form-control required" rows="5" required="required" placeholder="">Olá, tenho interesse neste imóvel: Apartamento, 76m², 2 quartos, Rua dos Xavantes, 457 - Santa Helena, Cuiabá - MT, Aluguel, R$ 1900/Mês. Aguardo o contato. Obrigado.</textarea>
 		                            </div>
 								</li>
 								<li>
 									<div class="search_option_button">
-									    <button type="submit" class="btn btn-block btn-thm">Search</button>
+									    <button type="submit" class="btn btn-block btn-thm btn-enviar">Enviar</button>
 									</div>
 								</li>
 							</ul>
@@ -363,8 +350,13 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/slider.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/pricing-slider.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLZYFMbNKXu2gyC_yxbdEDGxA6G0LSNu8&callback=initMap"type="text/javascript"></script>
+<script type="text/javascript" src="{{ asset('assets/portal/js/googlemaps1.js') }}"></script>
 <!-- Custom script for all pages -->
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
+
+
+
 </body>
 </html>

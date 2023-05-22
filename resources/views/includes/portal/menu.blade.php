@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="#" class="navbar_brand float-left dn-smd">
+            <a href="{{url("/")}}" class="navbar_brand float-left dn-smd">
                 <img class="logo1 img-fluid" src="{{ asset('assets/portal/images/header-'.$logo.'.png') }}" alt="header-logo.png">
                 <img class="logo2 img-fluid" src="{{ asset('assets/portal/images/header-logo2.png') }}" alt="header-logo2.png">
             </a>
@@ -20,13 +20,13 @@
             <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
             <ul id="respMenu" class="ace-responsive-menu text-right" data-menu-style="horizontal">
                 <li>
-                    <a href="#"><span class="title">Comprar</span></a>
+                    <a href="{{url("/imoveis-buscar")}}"><span class="title">Comprar</span></a>
                 </li>
                 <li>
-                    <a href="#"><span class="title">Alugar</span></a>
+                    <a href="{{url("/imoveis-buscar")}}"><span class="title">Alugar</span></a>
                 </li>
                 <li>
-                    <a href="#"><span class="title">Lançamentos</span></a>
+                    <a href="{{url("/imoveis-buscar")}}"><span class="title">Lançamentos</span></a>
                 </li>
 
                 <li class="last">
@@ -53,13 +53,13 @@
     <nav id="menu" class="stylehome1">
         <ul>
             <li>
-                <a href="#"><span class="title">Comprar</span></a>
+                <a href="{{url("/imoveis-buscar")}}"><span class="title">Comprar</span></a>
             </li>
             <li>
-                <a href="#"><span class="title">Alugar</span></a>
+                <a href="{{url("/imoveis-buscar")}}"><span class="title">Alugar</span></a>
             </li>
             <li>
-                <a href="#"><span class="title">Lançamentos</span></a>
+                <a href="{{url("/imoveis-buscar")}}"><span class="title">Lançamentos</span></a>
             </li>
 
             <li class="last">

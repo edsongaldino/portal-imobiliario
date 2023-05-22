@@ -6,7 +6,7 @@
 <body>
 <div class="wrapper">
 	<div class="preloader"></div>
-    @php $menu = ""; $logo = "logo"; @endphp
+    @php $menu = ""; $logo = "logo-index"; @endphp
 	@include('includes.portal.menu')
 
 	<!-- Home Design -->

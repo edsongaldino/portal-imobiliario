@@ -2609,7 +2609,7 @@ input.amount4:focus{
   border: 1px solid #ebebeb;
   height: 50px;
   line-height: 35px;
-  width: 350px;
+  width: 580px;
 }
 .home1-advnc-search.home5 .search_option_two .dropdown.bootstrap-select>.dropdown-toggle{
   width: 100%;
@@ -11598,7 +11598,60 @@ a.btn.btn_error{
   background-color: #ffffff;
   margin-bottom: 30px;
   padding: 30px;
+  background: #fffaec;
 }
+
+.sidebar_listing_list .btn-enviar{
+    background: #ff8405 !important;
+    border: 1px solid #fffaec !important;
+}
+
+.sidebar_listing_list .btn-enviar:hover{
+    background: #db7409 !important;
+    color:#FFF !important;
+    cursor: pointer;
+}
+
+
+.sidebar_listing_list .btn-whatsapp{
+    width: 100%;
+    height: 50px;
+    background: #00d15e !important;
+    border: 1px solid #fffaec !important;
+    text-align: center;
+    line-height: 50px;
+    color: #FFF !important;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.sidebar_listing_list .btn-whatsapp:hover{
+    background: #00d15e !important;
+    color:#FFF !important;
+    cursor: pointer;
+}
+
+.sidebar_listing_list .btn-visita{
+    width: 100%;
+    height: 50px;
+    background: #ff9b05 !important;
+    border: 1px solid #ff9b05 !important;
+    text-align: center;
+    line-height: 50px;
+    color: #FFF !important;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.sidebar_listing_list .btn-visita:hover{
+    background: #fd9b08 !important;
+    color:#FFF !important;
+    cursor: pointer;
+}
+
+
 .sidebar_listing_list.style2{
   border: none;
   max-height: 960px;

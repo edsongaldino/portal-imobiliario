@@ -91,8 +91,8 @@ function initialize() {
         ]
     }
 ];
-  var myGent = new google.maps.LatLng(40.6946703,-73.9280182);
-  var Kine = new google.maps.LatLng(40.6946703,-73.9280182);
+  var myGent = new google.maps.LatLng(-15.5660121,-56.0911011);
+  var Kine = new google.maps.LatLng(-15.5660121,-56.0911011);
   var mapOptions = {
     zoom: 11,
     mapTypeControl: true,
@@ -107,18 +107,18 @@ function initialize() {
     streetViewControl: false,
     center: myGent
   }
-  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);  
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   var styledMapOptions = {
     name: 'style_KINESB'
   };
 
-var image = 'images/resource/mapmarker.png';
+var image = 'assets/portal/images/resource/mapmarker.png';
   var marker = new google.maps.Marker({
-      position: Kine,
-      map: map,
-animation: google.maps.Animation.DROP,
-      title: 'B4318, Gumfreston SA70 8RA, United Kingdom',
-icon: image
+        position: Kine,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        title: 'Rua D, 155 - Despraiado, Cuiabá - MT',
+        icon: image
   });
 
   var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
