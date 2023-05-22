@@ -7,8 +7,8 @@ var KTSigninGeneral = (function () {
                 (e = document.querySelector("#kt_sign_in_submit")),
                 (i = FormValidation.formValidation(t, {
                     fields: {
-                        email: { validators: { notEmpty: { message: "Email address is required" }, emailAddress: { message: "The value is not a valid email address" } } },
-                        password: { validators: { notEmpty: { message: "The password is required" } } },
+                        email: { validators: { notEmpty: { message: "É necessário um endereço de e-mail" }, emailAddress: { message: "O valor não é um endereço de e-mail válido" } } },
+                        password: { validators: { notEmpty: { message: "A senha é necessária" } } },
                     },
                     plugins: { trigger: new FormValidation.plugins.Trigger(), bootstrap: new FormValidation.plugins.Bootstrap5({ rowSelector: ".fv-row" }) },
                 })),
@@ -21,15 +21,13 @@ var KTSigninGeneral = (function () {
                                   setTimeout(function () {
                                       e.removeAttribute("data-kt-indicator"),
                                           (e.disabled = !1),
-                                          Swal.fire({ text: "You have successfully logged in!", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } }).then(function (e) {
-                                            document.getElementById("kt_sign_in_form").submit();
-                                          });
+                                          document.getElementById("kt_sign_in_form").submit();
                                   }, 2e3))
                                 : Swal.fire({
-                                      text: "Sorry, looks like there are some errors detected, please try again.",
+                                      text: "Desculpe, parece que alguns erros foram detectados, tente novamente.",
                                       icon: "error",
                                       buttonsStyling: !1,
-                                      confirmButtonText: "Ok, got it!",
+                                      confirmButtonText: "OK, entendi!",
                                       customClass: { confirmButton: "btn btn-primary" },
                                   });
                         });
