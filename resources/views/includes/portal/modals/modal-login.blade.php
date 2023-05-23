@@ -41,13 +41,13 @@
                                     </div>
                                     <hr>
                                     <div class="input-group mb-2 mr-sm-2">
-                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="User Name Or Email">
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="E-mail">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-user"></i></div>
                                         </div>
                                     </div>
                                     <div class="input-group form-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-password"></i></div>
                                         </div>
@@ -85,7 +85,7 @@
                                     </div>
                                     <hr>
                                     <div class="form-group input-group">
-                                        <input type="text" class="form-control" id="exampleInputName" placeholder="User Name">
+                                        <input type="text" class="form-control" id="exampleInputName" placeholder="Nome completo">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-user"></i></div>
                                         </div>
@@ -97,30 +97,23 @@
                                         </div>
                                     </div>
                                     <div class="form-group input-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Senha">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-password"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group input-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Re-enter password">
+                                        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Repita a senha">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-password"></i></div>
                                         </div>
                                     </div>
-                                    <div class="form-group ui_kit_select_search mb0">
-                                        <select class="selectpicker" data-live-search="true" data-width="100%">
-                                            <option data-tokens="SelectRole">Single User</option>
-                                            <option data-tokens="Agent/Agency">Agent</option>
-                                            <option data-tokens="SingleUser">Multi User</option>
-                                        </select>
-                                    </div>
                                     <div class="form-group custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="exampleCheck2">
-                                        <label class="custom-control-label" for="exampleCheck2">I have read and accept the Terms and Privacy Policy?</label>
+                                        <label class="custom-control-label" for="exampleCheck2">Eu li e aceito os Termos e Política de Privacidade</label>
                                     </div>
-                                    <button type="submit" class="btn btn-log btn-block btn-thm">Sign Up</button>
-                                    <p class="text-center">Already have an account? <a class="text-thm" href="#">Log In</a></p>
+                                    <button type="submit" class="btn btn-log btn-block btn-thm">Cadastrar</button>
+                                    <p class="text-center">Já possui uma conta? <a class="text-thm" href="#">Login</a></p>
                                 </form>
                             </div>
                           </div>
