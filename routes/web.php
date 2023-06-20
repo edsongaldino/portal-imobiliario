@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IntegracaoController;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/integracao-xml', [IntegracaoController::class, 'LerXML']);
+
 Route::get('/dashboard', function () {
     return view('painel.dashboard');
 });
