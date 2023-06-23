@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('empreendimento_caracteristica', function (Blueprint $table) {
+        Schema::create('anuncio_caracteristica', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('empreendimento_id')->constrained('empreendimentos');
+            $table->foreignId('anuncio_id')->constrained('anuncios');
             $table->foreignId('caracteristica_id')->constrained('caracteristicas');
             $table->string('valor', 50);
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empreendimento_caracteristica');
+        Schema::dropIfExists('anuncio_caracteristica');
     }
 };

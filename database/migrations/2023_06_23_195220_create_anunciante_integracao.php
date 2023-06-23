@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('leads', function (Blueprint $table) {
+        Schema::create('anunciante_integracao', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anuncio_id')->constrained('anuncios');
-            $table->string('nome')->nullable();
-            $table->string('telefone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('mensagem')->nullable();
+            $table->foreignId('anunciante_id')->constrained('anunciantes');
+            $table->foreignId('integracao_id')->constrained('integracoes');
+            $table->string('arquivo', 255);
+            $table->string('url', 255);
+            $table->enum('tipo', ['Ativa', 'Bloqueada'])->default('Ativa');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leads');
+        Schema::dropIfExists('anunciante_integracao');
     }
 };

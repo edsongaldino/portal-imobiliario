@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Empreendimento;
+use App\Models\Anunciante;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmpreendimentoController extends Controller
+class AnuncianteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class EmpreendimentoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Empreendimento  $empreendimento
+     * @param  \App\Models\Anunciante  $Anunciante
      * @return \Illuminate\Http\Response
      */
-    public function show(Empreendimento $empreendimento)
+    public function show(Anunciante $Anunciante)
     {
         //
     }
@@ -53,10 +53,10 @@ class EmpreendimentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Empreendimento  $empreendimento
+     * @param  \App\Models\Anunciante  $Anunciante
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empreendimento $empreendimento)
+    public function edit(Anunciante $Anunciante)
     {
         //
     }
@@ -65,10 +65,10 @@ class EmpreendimentoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Empreendimento  $empreendimento
+     * @param  \App\Models\Anunciante  $Anunciante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empreendimento $empreendimento)
+    public function update(Request $request, Anunciante $Anunciante)
     {
         //
     }
@@ -76,10 +76,10 @@ class EmpreendimentoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Empreendimento  $empreendimento
+     * @param  \App\Models\Anunciante  $Anunciante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empreendimento $empreendimento)
+    public function destroy(Anunciante $Anunciante)
     {
         //
     }

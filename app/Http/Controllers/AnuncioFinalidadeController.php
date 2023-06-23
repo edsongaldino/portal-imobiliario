@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EmpreendimentoTipo;
+use App\Models\AnuncioFinalidade;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmpreendimentoTipoController extends Controller
+class AnuncioFinalidadeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class EmpreendimentoTipoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EmpreendimentoTipo  $empreendimentoTipo
+     * @param  \App\Models\AnuncioFinalidade  $AnuncioFinalidade
      * @return \Illuminate\Http\Response
      */
-    public function show(EmpreendimentoTipo $empreendimentoTipo)
+    public function show(AnuncioFinalidade $AnuncioFinalidade)
     {
         //
     }
@@ -53,10 +53,10 @@ class EmpreendimentoTipoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EmpreendimentoTipo  $empreendimentoTipo
+     * @param  \App\Models\AnuncioFinalidade  $AnuncioFinalidade
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmpreendimentoTipo $empreendimentoTipo)
+    public function edit(AnuncioFinalidade $AnuncioFinalidade)
     {
         //
     }
@@ -65,10 +65,10 @@ class EmpreendimentoTipoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EmpreendimentoTipo  $empreendimentoTipo
+     * @param  \App\Models\AnuncioFinalidade  $AnuncioFinalidade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmpreendimentoTipo $empreendimentoTipo)
+    public function update(Request $request, AnuncioFinalidade $AnuncioFinalidade)
     {
         //
     }
@@ -76,10 +76,10 @@ class EmpreendimentoTipoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EmpreendimentoTipo  $empreendimentoTipo
+     * @param  \App\Models\AnuncioFinalidade  $AnuncioFinalidade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmpreendimentoTipo $empreendimentoTipo)
+    public function destroy(AnuncioFinalidade $AnuncioFinalidade)
     {
         //
     }

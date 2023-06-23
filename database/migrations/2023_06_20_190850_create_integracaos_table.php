@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('integracaos', function (Blueprint $table) {
+        Schema::create('integracoes', function (Blueprint $table) {
             $table->id();
+            $table->enum('tipo', ['XML', 'Json', 'API']);
+            $table->string('arquivo_exemplo', 100);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('integracaos');
+        Schema::dropIfExists('integracoes');
     }
 };

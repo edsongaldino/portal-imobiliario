@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('log_integracoes', function (Blueprint $table) {
             $table->id();
             $table->enum('tipo', ['Sucesso', 'Erro', 'Alerta']);
+            $table->string('id_externo', 20);
+            $table->string('titulo', 100);
+            $table->longText('descricao_log');
             $table->timestamps();
         });
     }

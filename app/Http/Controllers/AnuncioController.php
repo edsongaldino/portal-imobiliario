@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\empreendimento_finalidade;
+use App\Models\Anuncio;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmpreendimentoFinalidadeController extends Controller
+class AnuncioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class EmpreendimentoFinalidadeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\empreendimento_finalidade  $empreendimento_finalidade
+     * @param  \App\Models\Anuncio  $anuncio
      * @return \Illuminate\Http\Response
      */
-    public function show(empreendimento_finalidade $empreendimento_finalidade)
+    public function show(Anuncio $anuncio)
     {
         //
     }
@@ -53,10 +53,10 @@ class EmpreendimentoFinalidadeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\empreendimento_finalidade  $empreendimento_finalidade
+     * @param  \App\Models\Anuncio  $anuncio
      * @return \Illuminate\Http\Response
      */
-    public function edit(empreendimento_finalidade $empreendimento_finalidade)
+    public function edit(Anuncio $anuncio)
     {
         //
     }
@@ -65,10 +65,10 @@ class EmpreendimentoFinalidadeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\empreendimento_finalidade  $empreendimento_finalidade
+     * @param  \App\Models\Anuncio  $anuncio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, empreendimento_finalidade $empreendimento_finalidade)
+    public function update(Request $request, Anuncio $anuncio)
     {
         //
     }
@@ -76,10 +76,10 @@ class EmpreendimentoFinalidadeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\empreendimento_finalidade  $empreendimento_finalidade
+     * @param  \App\Models\Anuncio  $anuncio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(empreendimento_finalidade $empreendimento_finalidade)
+    public function destroy(Anuncio $anuncio)
     {
         //
     }

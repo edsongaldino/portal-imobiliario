@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Imobiliaria;
+use App\Models\AnuncioFotos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ImobiliariaController extends Controller
+class AnuncioFotosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class ImobiliariaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Imobiliaria  $imobiliaria
+     * @param  \App\Models\AnuncioFotos  $anuncioFotos
      * @return \Illuminate\Http\Response
      */
-    public function show(Imobiliaria $imobiliaria)
+    public function show(AnuncioFotos $anuncioFotos)
     {
         //
     }
@@ -53,10 +53,10 @@ class ImobiliariaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Imobiliaria  $imobiliaria
+     * @param  \App\Models\AnuncioFotos  $anuncioFotos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Imobiliaria $imobiliaria)
+    public function edit(AnuncioFotos $anuncioFotos)
     {
         //
     }
@@ -65,10 +65,10 @@ class ImobiliariaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Imobiliaria  $imobiliaria
+     * @param  \App\Models\AnuncioFotos  $anuncioFotos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Imobiliaria $imobiliaria)
+    public function update(Request $request, AnuncioFotos $anuncioFotos)
     {
         //
     }
@@ -76,10 +76,10 @@ class ImobiliariaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Imobiliaria  $imobiliaria
+     * @param  \App\Models\AnuncioFotos  $anuncioFotos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Imobiliaria $imobiliaria)
+    public function destroy(AnuncioFotos $anuncioFotos)
     {
         //
     }

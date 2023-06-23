@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('empreendimentos', function (Blueprint $table) {
+        Schema::create('anuncios', function (Blueprint $table) {
             $table->id();
             $table->foreignId('finalidade_id')->constrained('finalidades');
             $table->foreignId('tipo_id')->constrained('tipos');
-            $table->foreignId('imobiliaria_id')->constrained('imobiliarias');
+            $table->foreignId('anunciante_id')->constrained('anunciantes');
             $table->foreignId('endereco_id')->constrained('enderecos');
             $table->enum('transacao', ['Locação', 'Venda', 'Locação/Venda']);
+            $table->string('id_externo', 20);
             $table->string('titulo', 100);
             $table->longText('descricao');
             $table->decimal('valor_venda', 10,2)->nullable();
@@ -38,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empreendimentos');
+        Schema::dropIfExists('anuncios');
     }
 };

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\empreendimento_caracteristica;
+use App\Models\anuncio_caracteristica;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmpreendimentoCaracteristicaController extends Controller
+class AnuncioCaracteristicaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class EmpreendimentoCaracteristicaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\empreendimento_caracteristica  $empreendimento_caracteristica
+     * @param  \App\Models\anuncio_caracteristica  $anuncio_caracteristica
      * @return \Illuminate\Http\Response
      */
-    public function show(empreendimento_caracteristica $empreendimento_caracteristica)
+    public function show(anuncio_caracteristica $anuncio_caracteristica)
     {
         //
     }
@@ -53,10 +53,10 @@ class EmpreendimentoCaracteristicaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\empreendimento_caracteristica  $empreendimento_caracteristica
+     * @param  \App\Models\anuncio_caracteristica  $anuncio_caracteristica
      * @return \Illuminate\Http\Response
      */
-    public function edit(empreendimento_caracteristica $empreendimento_caracteristica)
+    public function edit(anuncio_caracteristica $anuncio_caracteristica)
     {
         //
     }
@@ -65,10 +65,10 @@ class EmpreendimentoCaracteristicaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\empreendimento_caracteristica  $empreendimento_caracteristica
+     * @param  \App\Models\anuncio_caracteristica  $anuncio_caracteristica
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, empreendimento_caracteristica $empreendimento_caracteristica)
+    public function update(Request $request, anuncio_caracteristica $anuncio_caracteristica)
     {
         //
     }
@@ -76,10 +76,10 @@ class EmpreendimentoCaracteristicaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\empreendimento_caracteristica  $empreendimento_caracteristica
+     * @param  \App\Models\anuncio_caracteristica  $anuncio_caracteristica
      * @return \Illuminate\Http\Response
      */
-    public function destroy(empreendimento_caracteristica $empreendimento_caracteristica)
+    public function destroy(anuncio_caracteristica $anuncio_caracteristica)
     {
         //
     }
