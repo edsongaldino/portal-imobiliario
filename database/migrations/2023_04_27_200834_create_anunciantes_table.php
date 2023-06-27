@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('razao_social', 100);
             $table->string('nome_fantasia', 100);
             $table->string('inscricao_estadual', 20);
-            $table->string('inscricao_estadual', 20);
             $table->string('inscricao_municipal', 20);
             $table->timestamps();
             $table->softDeletes();
