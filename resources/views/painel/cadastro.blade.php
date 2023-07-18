@@ -138,7 +138,7 @@
 									<!--end::Label-->
 								</div>
 								<!--end::Step 5-->
-								
+
 							</div>
 							<!--end::Nav-->
 						</div>
@@ -157,7 +157,8 @@
 						<!--begin::Wrapper-->
 						<div class="w-lg-700px p-10 p-lg-15 mx-auto">
 							<!--begin::Form-->
-							<form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
+							<form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" method="POST" action="{{ route('finalizar-cadastro') }}">
+                                @csrf
 								<!--begin::Step 1-->
 								<div class="current" data-kt-stepper-element="content">
 									<!--begin::Wrapper-->
@@ -177,7 +178,7 @@
 												<!--begin::Col-->
 												<div class="col-lg-6">
 													<!--begin::Option-->
-													<input type="radio" class="btn-check" name="account_type" value="personal" checked="checked" id="kt_create_account_form_account_type_personal" />
+													<input type="radio" class="btn-check" name="tipo_anunciante" value="Construtora" checked="checked" id="kt_create_account_form_account_type_personal" />
 													<label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
 														<!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
 														<span class="svg-icon svg-icon-3x me-5">
@@ -200,7 +201,7 @@
 												<!--begin::Col-->
 												<div class="col-lg-6">
 													<!--begin::Option-->
-													<input type="radio" class="btn-check" name="account_type" value="corporate" id="kt_create_account_form_account_type_corporate" />
+													<input type="radio" class="btn-check" name="tipo_anunciante" value="Imobiliária" id="kt_create_account_form_account_type_corporate" />
 													<label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
 														<!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
 														<span class="svg-icon svg-icon-3x me-5">
@@ -255,7 +256,7 @@
 												<div class="col">
 													<!--begin::Option-->
 													<label class="btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4">
-														<input type="radio" class="btn-check" name="account_team_size" value="1-1" />
+														<input type="radio" class="btn-check" name="qtd_anuncios" value="1-1" />
 														<span class="fw-bolder fs-3">1-10</span>
 													</label>
 													<!--end::Option-->
@@ -265,7 +266,7 @@
 												<div class="col">
 													<!--begin::Option-->
 													<label class="btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4 active">
-														<input type="radio" class="btn-check" name="account_team_size" checked="checked" value="2-10" />
+														<input type="radio" class="btn-check" name="qtd_anuncios" checked="checked" value="2-10" />
 														<span class="fw-bolder fs-3">10-50</span>
 													</label>
 													<!--end::Option-->
@@ -275,7 +276,7 @@
 												<div class="col">
 													<!--begin::Option-->
 													<label class="btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4">
-														<input type="radio" class="btn-check" name="account_team_size" value="10-50" />
+														<input type="radio" class="btn-check" name="qtd_anuncios" value="10-50" />
 														<span class="fw-bolder fs-3">50-100</span>
 													</label>
 													<!--end::Option-->
@@ -285,7 +286,7 @@
 												<div class="col">
 													<!--begin::Option-->
 													<label class="btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4">
-														<input type="radio" class="btn-check" name="account_team_size" value="50+" />
+														<input type="radio" class="btn-check" name="qtd_anuncios" value="50+" />
 														<span class="fw-bolder fs-3">100+</span>
 													</label>
 													<!--end::Option-->
@@ -304,7 +305,7 @@
 											<label class="form-label mb-3">Nome da sua Imobiliária</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="text" class="form-control form-control-lg form-control-solid" name="nome_empresa" placeholder="" value="" />
+											<input type="text" class="form-control form-control-lg form-control-solid" name="nome" placeholder="" value="" />
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
@@ -350,11 +351,11 @@
 											<label class="form-label required">Site</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input name="business_name" class="form-control form-control-lg form-control-solid" value="https://www." />
+											<input name="site" class="form-control form-control-lg form-control-solid" value="https://www." />
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
-										
+
 										<div class="row fv-row">
 											<!--begin::Input group-->
 											<div class="fv-row col-6">
@@ -362,7 +363,7 @@
 												<label class="form-label">Telefone comercial</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input name="business_email" class="form-control form-control-lg form-control-solid" value="" />
+												<input name="telefone_comercial" class="form-control form-control-lg form-control-solid" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -372,7 +373,7 @@
 												<label class="fs-6 fw-bold form-label required">Whatsapp</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input name="business_email" class="form-control form-control-lg form-control-solid" value="" />
+												<input name="whatsapp" class="form-control form-control-lg form-control-solid" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -383,7 +384,7 @@
 											<label class="fs-6 fw-bold form-label required">Email</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input name="business_email" class="form-control form-control-lg form-control-solid" value="" />
+											<input name="email" class="form-control form-control-lg form-control-solid" value="" />
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
@@ -523,7 +524,7 @@
 									</div>
 									<div>
 										<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
-											<span class="indicator-label">Submit
+											<span class="indicator-label">Finalizar Cadastro
 											<!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
 											<span class="svg-icon svg-icon-4 ms-2">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -532,7 +533,7 @@
 												</svg>
 											</span>
 											<!--end::Svg Icon--></span>
-											<span class="indicator-progress">Please wait...
+											<span class="indicator-progress">Por favor, aguarde...
 											<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 										</button>
 										<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
@@ -555,7 +556,7 @@
 					<!--end::Content-->
 
                     @include('includes/login/footer')
-                    
+
 				</div>
 				<!--end::Body-->
 			</div>
