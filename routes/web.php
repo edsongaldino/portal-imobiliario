@@ -67,6 +67,6 @@ Route::match(['get', 'post'],'imoveis-buscar', function () {
 
 
 
-Route::post('/finalizar-cadastro', 'App\Http\Controllers\AuthController@Login')->name('login.do');
+Route::post('finalizar-cadastro', 'App\Http\Controllers\AuthController@Login')->name('finalizar-cadastro');
 
 ?>

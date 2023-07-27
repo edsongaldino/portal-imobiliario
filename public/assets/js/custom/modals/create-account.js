@@ -201,6 +201,8 @@ var KTCreateAccount = function() {
                 a[3].revalidateField("card_expiry_year")
             })), $(i.querySelector('[name="business_type"]')).on("change", (function() {
                 a[2].revalidateField("business_type")
+            })), $(i.querySelector('[id="EnviarFormulario"]')).on("click", (function() {
+                document.getElementById("kt_create_account_form").submit();
             }))
         }
     }

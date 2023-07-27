@@ -150,6 +150,8 @@
 					<!--end::Wrapper-->
 				</div>
 				<!--begin::Aside-->
+                <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" method="POST" action="{{ route('finalizar-cadastro') }}">
+                @csrf
 				<!--begin::Body-->
 				<div class="d-flex flex-column flex-lg-row-fluid py-10">
 					<!--begin::Content-->
@@ -157,8 +159,6 @@
 						<!--begin::Wrapper-->
 						<div class="w-lg-700px p-10 p-lg-15 mx-auto">
 							<!--begin::Form-->
-							<form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" method="POST" action="{{ route('finalizar-cadastro') }}">
-                                @csrf
 								<!--begin::Step 1-->
 								<div class="current" data-kt-stepper-element="content">
 									<!--begin::Wrapper-->
@@ -523,7 +523,7 @@
 										<!--end::Svg Icon-->Voltar</button>
 									</div>
 									<div>
-										<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
+										<button type="submit" id="EnviarFormulario" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
 											<span class="indicator-label">Finalizar Cadastro
 											<!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
 											<span class="svg-icon svg-icon-4 ms-2">
@@ -548,7 +548,6 @@
 									</div>
 								</div>
 								<!--end::Actions-->
-							</form>
 							<!--end::Form-->
 						</div>
 						<!--end::Wrapper-->
@@ -559,6 +558,7 @@
 
 				</div>
 				<!--end::Body-->
+            </form>
 			</div>
 			<!--end::Authentication - Multi-steps-->
 		</div>
