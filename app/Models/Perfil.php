@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Endereco extends Model
+class Perfil extends Model
 {
     use HasFactory;
 
-    public function cidade()
+    protected $table = 'perfis';
+
+    public function users()
     {
-        return $this->hasOne(Cidade::class, 'id', 'cidade_id');
+        return $this->belongsTo(User::class, 'perfil_id', 'id');
     }
 }

@@ -65,8 +65,7 @@ Route::match(['get', 'post'],'imoveis-buscar', function () {
     return view('portal.lista');
 });
 
-
-
-Route::post('finalizar-cadastro', 'App\Http\Controllers\AuthController@Login')->name('finalizar-cadastro');
+//Rotas Admin / Painel
+Route::post('finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@CadastrarAnunciante')->name('finalizar-cadastro');
 
 ?>

@@ -10,4 +10,9 @@ class Cidade extends Model
     use HasFactory;
 
     protected $table = 'cidades';
+
+	public function estado()
+    {
+        return $this->hasOne(Estado::class, 'id', 'estado_id');
+    }
 }

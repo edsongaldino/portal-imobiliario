@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Anuncio;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -36,7 +37,32 @@ class AnuncioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if((New Anuncio())->verificaDuplicidade('id_externo', $request->id_externo)){
+            return redirect()->back()->with('warning', 'Este anúncio já consta em nosso banco de dados! Verifique.');
+        }
+
+        $endereco = (new EnderecoController())->salvarEndereco($request);
+
+        $anuncio = new Anuncio();
+        $anuncio->finalidade_id = $request->finalidade_id;
+        $anuncio->tipo_id = $request->tipo_id;
+        $anuncio->anunciante_id = $request->anunciante_id;
+        $anuncio->endereco_id = $endereco->id;
+        $anuncio->transacao = $request->transacao;
+        $anuncio->id_externo = $request->id_externo;
+        $anuncio->titulo = $request->titulo;
+        $anuncio->descricao = $request->descricao;
+        $anuncio->valor_venda = Helper::converte_reais_to_mysql($request->valor_venda);
+        $anuncio->valor_locacao = Helper::converte_reais_to_mysql($request->valor_locacao);
+        $anuncio->valor_condominio = Helper::converte_reais_to_mysql($request->valor_condominio);
+        $anuncio->situacao = $request->situacao;
+
+        if($anuncio->save()){
+            //Envia e-mail de confirmação Ao clicar no link do e-mail o anunciante cria o login
+            return redirect()->route('sistema.anuncios')->with('success', 'Dados Cadastrados!');
+        }else{
+            return redirect()->route('sistema.anuncios')->with('error', 'Ops!');
+        }
     }
 
     /**
@@ -68,9 +94,28 @@ class AnuncioController extends Controller
      * @param  \App\Models\Anuncio  $anuncio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anuncio $anuncio)
+    public function update(Request $request)
     {
-        //
+        $anuncio = Anuncio::findOrFail($request->id);
+        $anuncio->finalidade_id = $request->finalidade_id;
+        $anuncio->tipo_id = $request->tipo_id;
+        $anuncio->transacao = $request->transacao;
+        $anuncio->id_externo = $request->id_externo;
+        $anuncio->titulo = $request->titulo;
+        $anuncio->descricao = $request->descricao;
+        $anuncio->valor_venda = Helper::converte_reais_to_mysql($request->valor_venda);
+        $anuncio->valor_locacao = Helper::converte_reais_to_mysql($request->valor_locacao);
+        $anuncio->valor_condominio = Helper::converte_reais_to_mysql($request->valor_condominio);
+        $anuncio->situacao = $request->situacao;
+
+        (new EnderecoController())->updateEndereco($request, $request->endereco_id);
+
+        if($anuncio->save()){
+            //Envia e-mail de confirmação Ao clicar no link do e-mail o anunciante cria o login
+            return redirect()->route('sistema.anuncios')->with('success', 'Dados Atualizados!');
+        }else{
+            return redirect()->route('sistema.anuncios')->with('error', 'Ops!');
+        }
     }
 
     /**

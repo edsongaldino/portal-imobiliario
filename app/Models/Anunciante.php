@@ -9,4 +9,25 @@ class Anunciante extends Model
 {
     use HasFactory;
     protected $table = 'anunciantes';
+
+    public function endereco()
+    {
+        return $this->hasOne(Endereco::class, 'id', 'endereco_id');
+    }
+
+    public function verificaDuplicidade($campo, $valor){
+
+        $dup = $this::where($campo, $valor)->first();
+
+        if(isset($dup)){
+            return $dup;
+        }else{
+            return false;
+        }
+    }
+
+    public function anuncios()
+   	{
+   		return $this->hasMany('App\Models\Anuncio', 'anunciante_id');
+   	}
 }
