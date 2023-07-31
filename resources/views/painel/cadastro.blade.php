@@ -20,6 +20,7 @@
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
 		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('vendor/sweetalert/dist/sweetalert.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->
@@ -112,7 +113,7 @@
 									<!--end::Icon-->
 									<!--begin::Label-->
 									<div class="stepper-label">
-										<h3 class="stepper-title">Políticas</h3>
+										<h3 class="stepper-title">Dados de Acesso / Políticas</h3>
 										<div class="stepper-desc fw-bold">Confirmação das políticas de uso do sistema</div>
 									</div>
 									<!--end::Label-->
@@ -394,8 +395,49 @@
 								<!--end::Step 3-->
 								<!--begin::Step 4-->
 								<div class="" data-kt-stepper-element="content">
+
 									<!--begin::Wrapper-->
 									<div class="w-100">
+
+                                        <!--begin::Label-->
+                                        <div class="me-5 mb-10">
+                                            <label class="fs-6 fw-bold form-label">Preencha abaixo os dados de acesso</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <div class="row fv-row mb-10">
+                                            <!--begin::Input group-->
+                                            <div class="fv-row col-12">
+                                                <!--end::Label-->
+                                                <label class="form-label">Seu Login</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input name="login" type="text" class="form-control form-control-lg form-control-solid" value="admin@gmail.com" readonly />
+                                                <!--end::Input-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="fv-row col-6">
+                                                <!--end::Label-->
+                                                <label class="form-label">Senha</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input name="password" type="password" class="form-control form-control-lg form-control-solid" value="" />
+                                                <!--end::Input-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="fv-row col-6">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 fw-bold form-label required">Confirmar Senha</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input name="cpassword" type="password" class="form-control form-control-lg form-control-solid" value="" />
+                                                <!--end::Input-->
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+
 										<!--begin::Heading-->
 										<div class="mb-0">
 											<!--begin::Title-->
@@ -438,7 +480,7 @@
 
 										<!--begin::Input group-->
 										<div class="d-flex flex-stack">
-											<!--begin::Label-->
+                                            <!--begin::Label-->
 											<div class="me-5">
 												<label class="fs-6 fw-bold form-label">Termos de uso e políticas de privacidade</label>
 											</div>
@@ -572,6 +614,7 @@
 		<script src="{{ asset('assets/js/custom/modals/create-account.js') }}"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
+        @include('sweetalert::alert')
 	</body>
 	<!--end::Body-->
 </html>

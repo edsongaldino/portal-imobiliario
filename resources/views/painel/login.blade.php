@@ -79,8 +79,10 @@
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="{{ asset('assets/js/custom/authentication/sign-in/general.js') }}"></script>
 <!--end::Page Custom Javascript-->
+<script type="text/javascript" src="{{ asset('vendor/sweetalert/dist/sweetalert.min.js') }}" ></script>
+@include('sweetalert::alert')
 <!--end::Javascript-->
 </body>
 <!--end::Body-->
 </html>
-@endsection	
+@endsection

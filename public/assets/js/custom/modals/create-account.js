@@ -43,7 +43,7 @@ var KTCreateAccount = function() {
                 }
             })), a.push(FormValidation.formValidation(i, {
                 fields: {
-                    nome_empresa: {
+                    nome: {
                         validators: {
                             notEmpty: {
                                 message: "O nome da imobiliária é obrigatório"
@@ -64,6 +64,7 @@ var KTCreateAccount = function() {
                             }
                         }
                     }
+
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger,
@@ -75,41 +76,31 @@ var KTCreateAccount = function() {
                 }
             })), a.push(FormValidation.formValidation(i, {
                 fields: {
-                    business_name: {
+                    site: {
                         validators: {
                             notEmpty: {
-                                message: "Busines name is required"
+                                message: "Site inválido!"
                             }
                         }
                     },
-                    business_descriptor: {
+                    telefone_comercial: {
                         validators: {
                             notEmpty: {
-                                message: "Busines descriptor is required"
+                                message: "Preencha o telefone!"
                             }
                         }
                     },
-                    business_type: {
+                    whatsapp: {
                         validators: {
                             notEmpty: {
-                                message: "Busines type is required"
+                                message: "Whatsapp inválido!"
                             }
                         }
                     },
-                    business_description: {
+                    email: {
                         validators: {
                             notEmpty: {
-                                message: "Busines description is required"
-                            }
-                        }
-                    },
-                    business_email: {
-                        validators: {
-                            notEmpty: {
-                                message: "Busines email is required"
-                            },
-                            emailAddress: {
-                                message: "The value is not a valid email address"
+                                message: "E-mail inválido!"
                             }
                         }
                     }
@@ -202,7 +193,16 @@ var KTCreateAccount = function() {
             })), $(i.querySelector('[name="business_type"]')).on("change", (function() {
                 a[2].revalidateField("business_type")
             })), $(i.querySelector('[id="EnviarFormulario"]')).on("click", (function() {
-                document.getElementById("kt_create_account_form").submit();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $('#addComment').attr('action'),
+                    data: $('kt_create_account_form').serialize(),
+                    success: function(response) {
+
+                    },
+                });
+
             }))
         }
     }

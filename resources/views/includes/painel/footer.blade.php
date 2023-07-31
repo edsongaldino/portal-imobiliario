@@ -24,5 +24,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAz77U5XQuEME6TpftaMdX0bBelQxXRlM&callback=initMap" type="text/javascript"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/googlemaps1.js') }}"></script>
 
-<!-- Custom script for all pages --> 
+<!-- Custom script for all pages -->
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/sweetalert/dist/sweetalert.min.js') }}" ></script>
+@include('sweetalert::alert')

@@ -59,10 +59,9 @@ class AnuncianteController extends Controller
         $anunciante->email = $request->email;
 
         if($anunciante->save()){
-            //Envia e-mail de confirmação Ao clicar no link do e-mail o anunciante cria o login
-            return redirect()->route('sistema.empresas')->with('success', 'Dados Cadastrados!');
+            return true;
         }else{
-            return redirect()->route('sistema.empresas')->with('error', 'Ops!');
+            return redirect()->back()->with('warning', 'Ocorreram erros no seu cadastro! Verifique.');
         }
 
     }
