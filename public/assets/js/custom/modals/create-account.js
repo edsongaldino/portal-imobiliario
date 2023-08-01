@@ -194,13 +194,20 @@ var KTCreateAccount = function() {
                 a[2].revalidateField("business_type")
             })), $(i.querySelector('[id="EnviarFormulario"]')).on("click", (function() {
 
+                var datastring = $("#kt_create_account_form").serialize();
                 $.ajax({
-                    type: 'POST',
-                    url: $('#addComment').attr('action'),
-                    data: $('kt_create_account_form').serialize(),
-                    success: function(response) {
-
+                    type: "POST",
+                    url: "/finalizar-cadastro",
+                    data: datastring,
+                    dataType: "json",
+                    success: function(data) {
+                        alert('OK');
+                        //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
+                        // do what ever you want with the server response
                     },
+                    error: function() {
+                        alert('error handling here');
+                    }
                 });
 
             }))
