@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Perfil;
-use App\User;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
-use App\Polo;
+use App\Models\User;
+use App\Models\Perfil;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 

@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Anunciante;
 use App\Http\Controllers\Controller;
+use App\Mail\SendMailUser;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AnuncianteController extends Controller
 {
@@ -47,10 +52,10 @@ class AnuncianteController extends Controller
         $anunciante->endereco_id = $endereco->id;
         $anunciante->tipo_anunciante = $request->tipo_anunciante;
         $anunciante->nome = $request->nome;
-        $anunciante->descricao = $request->descricao;
+        $anunciante->descricao = $request->descricao ?? $request->nome;
         $anunciante->creci = $request->creci;
         $anunciante->cnpj = Helper::limpa_campo($request->cnpj);
-        $anunciante->razao_social = $request->razao_social;
+        $anunciante->razao_social = $request->razao_social ?? $request->nome;
         $anunciante->inscricao_estadual = $request->inscricao_estadual;
         $anunciante->inscricao_municipal = $request->inscricao_municipal;
         $anunciante->site = $request->site;
@@ -59,7 +64,25 @@ class AnuncianteController extends Controller
         $anunciante->email = $request->email;
 
         if($anunciante->save()){
-            return true;
+
+            $User = new User();
+            if($request->tipo_anunciante == 'Imobiliária'){
+                $User->perfil_id = 2;
+            }else{
+                $User->perfil_id = 3;
+            }
+            $User->anunciante_id = $anunciante->id;
+            $User->name = $request->nome;
+            $User->email = $request->email;
+            $User->password = Hash::make($request->password);
+
+            if($User->save()){
+                Mail::to($request->email)->send(new SendMailUser($anunciante))->cc('contato@redeimoveismt.com.br');
+                //return true;
+            }else{
+                return false;
+            }
+
         }else{
             return redirect()->back()->with('warning', 'Ocorreram erros no seu cadastro! Verifique.');
         }

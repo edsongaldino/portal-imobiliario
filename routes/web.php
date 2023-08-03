@@ -16,19 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/integracao-xml', [IntegracaoController::class, 'LerXML']);
 
-Route::get('/dashboard', function () {
-    return view('painel.dashboard');
-});
-
-Route::get('/painel/anuncios', function () {
-    return view('painel.anuncios.lista');
-});
-
-Route::get('/painel/anuncios/incluir', function () {
-    return view('painel.anuncios.incluir');
-});
-
-
 Route::get('/', function () {
     return view('portal.index');
 });
@@ -66,6 +53,10 @@ Route::match(['get', 'post'],'imoveis-buscar', function () {
 });
 
 //Rotas Admin / Painel
-Route::post('finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@CadastrarAnunciante')->name('finalizar-cadastro');
+Route::get('/dashboard', 'App\Http\Controllers\AppController@index')->name('dashboard')->middleware('auth');
+Route::post('/finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@CadastrarAnunciante')->name('finalizar-cadastro');
+Route::post('/login-painel', 'App\Http\Controllers\AuthController@Login')->name('login-painel');
+Route::get('/painel/anuncios', 'App\Http\Controllers\AnuncioController@index')->name('painel.anuncios')->middleware('auth');
+Route::get('/painel/anuncios/incluir', 'App\Http\Controllers\AnuncioController@create')->name('painel.anuncios.incluir')->middleware('auth');
 
 ?>

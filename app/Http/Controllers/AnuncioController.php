@@ -5,7 +5,13 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Anuncio;
 use App\Http\Controllers\Controller;
+use App\Models\AnuncioFinalidade;
+use App\Models\AnuncioTipo;
+use App\Models\Caracteristica;
+use App\Models\Cidade;
+use App\Models\Estado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnuncioController extends Controller
 {
@@ -16,7 +22,9 @@ class AnuncioController extends Controller
      */
     public function index()
     {
-        //
+        $anuncios = Anuncio::where('anunciante_id', Auth::user()->anunciante->id)->paginate(20);
+        $tipos = AnuncioTipo::all();
+        return view('painel.anuncios.lista', compact('anuncios', 'tipos'));
     }
 
     /**
@@ -26,7 +34,12 @@ class AnuncioController extends Controller
      */
     public function create()
     {
-        //
+        $estados = Estado::all();
+        $cidades = Cidade::all();
+        $tipos = AnuncioTipo::all();
+        $finalidades = AnuncioFinalidade::all();
+        $caracteristicas = Caracteristica::all();
+        return view('painel.anuncios.incluir', compact('estados', 'cidades', 'tipos', 'finalidades', 'caracteristicas'));
     }
 
     /**
