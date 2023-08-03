@@ -115,7 +115,7 @@ var KTCreateAccount = function() {
                 }
             })), a.push(FormValidation.formValidation(i, {
                 fields: {
-                    card_name: {
+                    cpassword: {
                         validators: {
                             notEmpty: {
                                 message: "Name on card is required"
@@ -201,12 +201,28 @@ var KTCreateAccount = function() {
                     data: datastring,
                     dataType: "json",
                     success: function(data) {
-                        alert('OK');
+                        Swal.fire({
+                            text: "Ótimo, seu cadastro foi realizado.",
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok!",
+                            customClass: {
+                                confirmButton: "btn btn-light"
+                            }
+                        })
                         //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
                         // do what ever you want with the server response
                     },
                     error: function() {
-                        alert('error handling here');
+                        Swal.fire({
+                            text: "Ops, ocorreu algum erro, contacte o administrador do sistema.",
+                            icon: "error",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok!",
+                            customClass: {
+                                confirmButton: "btn btn-light"
+                            }
+                        })
                     }
                 });
 
