@@ -1,4 +1,7 @@
 "use strict";
+
+const { differenceWith } = require("lodash");
+
 var KTCreateAccount = function() {
     var e, t, i, o, s, r, a = [];
     return {
@@ -115,49 +118,17 @@ var KTCreateAccount = function() {
                 }
             })), a.push(FormValidation.formValidation(i, {
                 fields: {
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: "A senha é obrigatória"
+                            }
+                        }
+                    },
                     cpassword: {
                         validators: {
-                            notEmpty: {
-                                message: "Name on card is required"
-                            }
-                        }
-                    },
-                    card_number: {
-                        validators: {
-                            notEmpty: {
-                                message: "Card member is required"
-                            },
-                            creditCard: {
-                                message: "Card number is not valid"
-                            }
-                        }
-                    },
-                    card_expiry_month: {
-                        validators: {
-                            notEmpty: {
-                                message: "Month is required"
-                            }
-                        }
-                    },
-                    card_expiry_year: {
-                        validators: {
-                            notEmpty: {
-                                message: "Year is required"
-                            }
-                        }
-                    },
-                    card_cvv: {
-                        validators: {
-                            notEmpty: {
-                                message: "CVV is required"
-                            },
-                            digits: {
-                                message: "CVV must contain only digits"
-                            },
-                            stringLength: {
-                                min: 3,
-                                max: 4,
-                                message: "CVV must contain 3 to 4 digits only"
+                            cpassword: {
+                                message: "A confirmação de senha não pode ser nula"
                             }
                         }
                     }
@@ -175,10 +146,10 @@ var KTCreateAccount = function() {
                     console.log("validated!"), "Valid" == t ? (e.preventDefault(), o.disabled = !0, o.setAttribute("data-kt-indicator", "on"), setTimeout((function() {
                         o.removeAttribute("data-kt-indicator"), o.disabled = !1, r.goNext()
                     }), 2e3)) : Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        text: "Desculpe, erros ocorreram em seu envio, tente novamente.",
                         icon: "error",
                         buttonsStyling: !1,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok, fechar!",
                         customClass: {
                             confirmButton: "btn btn-light"
                         }
