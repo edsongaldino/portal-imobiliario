@@ -15,10 +15,10 @@ class AuthController extends Controller
     public function dashboard(){
 
         if(Auth::check() === true){
-            return view('sistema.home');
+            return view('painel.dashboard');
         }
 
-        return redirect()->route('app.login')->with('warning', 'Efetue Login para acessar');
+        return redirect()->route('login-painel')->with('warning', 'Efetue Login para acessar');
     }
 
     public function LembrarSenha(){
@@ -49,7 +49,7 @@ class AuthController extends Controller
     public function Logout(){
 
         Auth::logout();
-        return redirect()->route('login')->with('success', 'Logof Efetuado');
+        return redirect()->route('login-painel')->with('success', 'Logof Efetuado');
     }
 
     public function ReenviarSenha(Request $request){

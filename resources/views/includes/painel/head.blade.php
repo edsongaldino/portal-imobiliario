@@ -18,3 +18,6 @@
 <link href="{{ asset('assets/portal/images/favicon.ico') }}" sizes="128x128" rel="shortcut icon" />
 
 <link href="{{ asset('vendor/sweetalert/dist/sweetalert.css') }}" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="{{ asset('assets/portal/js/jquery-3.3.1.js') }}"></script>
+<script src="{{ asset('assets/painel/js/jquery.maskedinput/jquery.maskedinput.js') }}"></script>

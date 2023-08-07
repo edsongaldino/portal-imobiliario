@@ -52,11 +52,21 @@ Route::match(['get', 'post'],'imoveis-buscar', function () {
     return view('portal.lista');
 });
 
+
 //Rotas Admin / Painel
+Route::get('/login', 'App\Http\Controllers\AppController@login')->name('login');
 Route::get('/dashboard', 'App\Http\Controllers\AppController@index')->name('dashboard')->middleware('auth');
 Route::post('/finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@CadastrarAnunciante')->name('finalizar-cadastro');
 Route::post('/login-painel', 'App\Http\Controllers\AuthController@Login')->name('login-painel');
+Route::get('/logout-painel', 'App\Http\Controllers\AuthController@Logout')->name('logout-painel')->middleware('auth');
 Route::get('/painel/anuncios', 'App\Http\Controllers\AnuncioController@index')->name('painel.anuncios')->middleware('auth');
 Route::get('/painel/anuncios/incluir', 'App\Http\Controllers\AnuncioController@create')->name('painel.anuncios.incluir')->middleware('auth');
 
+Route::get('/painel/{id}/perfil', 'App\Http\Controllers\UserController@edit')->name('painel.perfil')->middleware('auth');
+Route::post('/painel/perfil-salvar', 'App\Http\Controllers\AnuncianteController@update')->name('painel.perfil.salvar')->middleware('auth');
+Route::post('/painel/dados-acesso-salvar', 'App\Http\Controllers\UserController@update')->name('dados-acesso.salvar')->middleware('auth');
+
+Route::get('/painel/leads', 'App\Http\Controllers\LeadsController@index')->name('painel.leads')->middleware('auth');
+Route::get('/painel/integracoes/configuracao', 'App\Http\Controllers\IntegracaoController@Configuracao')->name('painel.integracoes.configuracao')->middleware('auth');
+Route::get('/painel/integracoes/relatorio', 'App\Http\Controllers\IntegracaoController@Relatorio')->name('painel.integracoes.relatorio')->middleware('auth');
 ?>

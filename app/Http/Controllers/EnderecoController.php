@@ -42,7 +42,7 @@ class EnderecoController extends Controller
     public function updateEndereco(Request $request, $id){
 
         $endereco = Endereco::findOrFail($id);
-        $endereco->cidade_id = $request->cidade_endereco;
+        $endereco->cidade_id = $request->cidade_endereco ?? $request->cidade_old;
         $endereco->cep_endereco = Helper::limpa_campo($request->cep_endereco);
         $endereco->logradouro_endereco = $request->logradouro_endereco;
         $endereco->numero_endereco = $request->numero_endereco;

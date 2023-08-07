@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use App\Models\Anunciante;
+use App\Models\Cidade;
+use App\Models\Estado;
 use App\Models\User;
 use App\Models\Perfil;
 use Illuminate\Support\Facades\Hash;
@@ -78,8 +81,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $usuario = User::find($id);
+        $anunciante = Anunciante::find($usuario->anunciante_id);
         $perfis = Perfil::all();
-        return view('sistema.usuarios.editar', compact('usuario', 'perfis'));
+        $estados = Estado::all();
+        $cidades = Cidade::all();
+        return view('painel.meu_perfil', compact('usuario', 'perfis', 'estados', 'cidades', 'anunciante'));
     }
 
     /**
@@ -100,10 +106,10 @@ class UserController extends Controller
         }
 
         $User->perfil_id = $request->perfil_id;
-        $User->nome = $request->nome;
+        $User->name = $request->nome;
         $User->email = $request->email;
-        $User->data_nascimento = Helper::data_mysql($request->data_nascimento);
-        $User->telefone = Helper::limpa_campo($request->telefone);
+        //$User->data_nascimento = Helper::data_mysql($request->data_nascimento);
+        //$User->telefone = Helper::limpa_campo($request->telefone);
 
         if($request->password){
             if($request->password <> $request->password2){
@@ -113,7 +119,7 @@ class UserController extends Controller
         }
         $User->save();
 
-        return redirect()->route('sistema.usuarios')->with('success', 'Dados atualizados!');
+        return redirect()->route('dashboard')->with('success', 'Dados atualizados!');
     }
 
     /**

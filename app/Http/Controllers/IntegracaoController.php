@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Integracao;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IntegracaoController extends Controller
 {
+    public function Configuracao()
+    {
+        $usuario = Auth::user();
+        return view('painel.integracao.configuracao', compact('usuario'));
+    }
+
+    public function Relatorio()
+    {
+        $usuario = Auth::user();
+        return view('painel.integracao.relatorio', compact('usuario'));
+    }
 
     public function LerXML(){
         //se o caminho esteja hospedado noutro servidor

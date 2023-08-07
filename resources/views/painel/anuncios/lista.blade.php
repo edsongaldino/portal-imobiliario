@@ -16,7 +16,7 @@
 				<div class="col-lg-3 col-xl-2 dn-992 pl0"></div>
 				<div class="col-sm-12 col-lg-8 col-xl-10 maxw100flex-992">
 					<div class="row">
-						
+
 						<div class="col-lg-4 col-xl-4 mb10">
 							<div class="breadcrumb_content style2 mb30-991">
 								<h2 class="breadcrumb_title">Meus anúncios</h2>
@@ -67,6 +67,9 @@
 										    	</tr>
 											</thead>
 											<tbody>
+
+                                                @foreach ($anuncios as $anuncio)
+
 										    	<tr>
 										    		<th scope="row">
 														<div class="feat_property list favorite_page style2">
@@ -99,105 +102,15 @@
 										    			</ul>
 										    		</td>
 										    	</tr>
-										    	<tr>
-										    		<th scope="row">
-														<div class="feat_property list favorite_page style2">
-															<div class="thumb">
-																<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp2.jpg">
-																<div class="thmb_cntnt">
-																	<ul class="tag mb0">
-																		<li class="list-inline-item dn"></li>
-																		<li class="list-inline-item"><a href="#">Venda</a></li>
-																	</ul>
-																</div>
-															</div>
-															<div class="details">
-																<div class="tc_content">
-																	<h4>Cittá Splendore</h4>
-																	<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
-																	<a class="fp_price text-thm" href="#">R$ 187.000<small>,00</small></a>
-																</div>
-															</div>
-														</div>
-										    		</th>
-										    		<td>23 Janeiro, 2023</td>
-										    		<td><span class="status_tag badge2">Publicado</span></td>
-										    		<td>2.345</td>
-										    		<td>
-										    			<ul class="view_edit_delete_list mb0">
-                                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar"><a href="#"><span class="flaticon-view"></span></a></li>
-										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="#"><span class="flaticon-edit"></span></a></li>
-										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a href="#"><span class="flaticon-garbage"></span></a></li>
-										    			</ul>
-										    		</td>
-										    	</tr>
-										    	<tr>
-										    		<th class="active" scope="row">
-														<div class="feat_property list favorite_page style2">
-															<div class="thumb">
-																<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp3.jpg">
-																<div class="thmb_cntnt">
-																	<ul class="tag mb0">
-																		<li class="list-inline-item dn"></li>
-																		<li class="list-inline-item"><a href="#">Venda</a></li>
-																	</ul>
-																</div>
-															</div>
-															<div class="details">
-																<div class="tc_content">
-																	<h4>Cittá Splendore</h4>
-																	<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
-																	<a class="fp_price text-thm" href="#">R$ 187.000<small>,00</small></a>
-																</div>
-															</div>
-														</div>
-										    		</th>
-										    		<td>30 Agosto, 2022</td>
-										    		<td><span class="status_tag badge2">Publicado</span></td>
-										    		<td>2.345</td>
-										    		<td>
-										    			<ul class="view_edit_delete_list mb0">
-                                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar"><a href="#"><span class="flaticon-view"></span></a></li>
-										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="#"><span class="flaticon-edit"></span></a></li>
-										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a href="#"><span class="flaticon-garbage"></span></a></li>
-										    			</ul>
-										    		</td>
-										    	</tr>
-										    	<tr>
-										    		<th scope="row">
-														<div class="feat_property list favorite_page style2">
-															<div class="thumb">
-																<img class="img-whp" src="{{ asset('assets/portal/images/property/fp5.jpg') }}" alt="fp4.jpg">
-																<div class="thmb_cntnt">
-																	<ul class="tag mb0">
-																		<li class="list-inline-item dn"></li>
-																		<li class="list-inline-item"><a href="#">Venda</a></li>
-																	</ul>
-																</div>
-															</div>
-															<div class="details">
-																<div class="tc_content">
-																	<h4>Cittá Splendore</h4>
-																	<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
-																	<a class="fp_price text-thm" href="#">R$ 187.000<small>,00</small></a>
-																</div>
-															</div>
-														</div>
-										    		</th>
-										    		<td>14 maio, 2023</td>
-										    		<td><span class="status_tag badge">Bloqueado</span></td>
-										    		<td>2.345</td>
-										    		<td>
-										    			<ul class="view_edit_delete_list mb0">
-                                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar"><a href="#"><span class="flaticon-view"></span></a></li>
-										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="#"><span class="flaticon-edit"></span></a></li>
-										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a href="#"><span class="flaticon-garbage"></span></a></li>
-										    			</ul>
-										    		</td>
-										    	</tr>
+
+										    	@endforeach
 											</tbody>
 										</table>
 									</div>
+
+                                    {{ $anuncios->links() }}
+
+                                    <!--
 									<div class="mbp_pagination">
 										<ul class="page_navigation">
 										    <li class="page-item disabled">
@@ -215,6 +128,7 @@
 										    </li>
 										</ul>
 									</div>
+                                    -->
 								</div>
 							</div>
 						</div>
@@ -256,7 +170,7 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/wow.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/dashboard-script.js') }}"></script>
-<!-- Custom script for all pages --> 
+<!-- Custom script for all pages -->
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
 </body>
 </html>

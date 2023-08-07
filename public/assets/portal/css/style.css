@@ -1049,8 +1049,13 @@ header.header-nav.menu_style_home_eight.navbar-scrolltofixed.stricky.animated{
   animation-delay: 500ms;
 }
 header.header-nav.menu_style_home_one  a.navbar_brand{
-  margin-top: 25px;
+  margin-top: 25px !important;
 }
+
+header.header-nav.menu_style_home_one  .add_listing.painel{
+    margin-top: 25px !important;
+  }
+
 header.header-nav.menu_style_home_one.stricky-fixed a.navbar_brand .logo1,
 header.header-nav.menu_style_home_four.stricky-fixed a.navbar_brand .logo1{
   display: none;
@@ -12541,6 +12546,18 @@ a.btn.btn_error{
   transition: transform 0.4s;
   transition: transform 0.4s, -webkit-transform 0.4s;
 }
+
+.logo-atual{
+    width: 260px;
+    height: 251px;
+    float: left;
+    background-color: #007BB6;
+}
+
+.logo-atual img{
+    width: 100%;
+}
+
 .wrap-custom-file label span {
   border-radius: 8px;
   background-color: #ffffff;

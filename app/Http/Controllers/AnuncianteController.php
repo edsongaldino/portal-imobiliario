@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\File;
 
 class AnuncianteController extends Controller
 {
@@ -118,9 +120,50 @@ class AnuncianteController extends Controller
      * @param  \App\Models\Anunciante  $Anunciante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anunciante $Anunciante)
+    public function update(Request $request)
     {
-        //
+
+        if($request->hasFile('logo')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('logo')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $fileNameBD = $request->file('logo')->storeAs('public/uploads/anunciantes/'.$request->anunciante_id.'/logo', $fileNameToStore);
+
+        } else {
+            $fileNameBD = $request->foto_old;
+        }
+
+        $anunciante = Anunciante::findOrFail($request->id);
+        $anunciante->nome = $request->nome;
+        $anunciante->descricao = $request->descricao ?? $request->nome;
+        $anunciante->creci = $request->creci;
+        $anunciante->cnpj = Helper::limpa_campo($request->cnpj);
+        $anunciante->razao_social = $request->razao_social ?? $request->nome;
+        $anunciante->inscricao_estadual = $request->inscricao_estadual;
+        $anunciante->inscricao_municipal = $request->inscricao_municipal;
+        $anunciante->site = $request->site;
+        $anunciante->whatsapp = Helper::limpa_campo($request->whatsapp);
+        $anunciante->telefone_comercial = Helper::limpa_campo($request->telefone_comercial);
+        $anunciante->email = $request->email;
+        $anunciante->logo = $fileNameBD;
+
+
+        (new EnderecoController())->updateEndereco($request, $request->endereco_id);
+        //(new UserController())->updateUsuario($request, $request->user_id);
+
+
+
+        if($anunciante->save()){
+            return redirect()->back()->with('success', 'Perfil Atualizado!');
+        }else{
+            return redirect()->back()->with('error', 'Ops, tente novamente!');
+        }
     }
 
     /**
