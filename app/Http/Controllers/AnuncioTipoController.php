@@ -83,4 +83,14 @@ class AnuncioTipoController extends Controller
     {
         //
     }
+
+
+    public function GetIDTipoByNome($nome){
+        $tipo = AnuncioTipo::where('nome', $nome)->get()->first();
+        if(isset($tipo->id)){
+            return $tipo->id;
+        }else{
+            return 1;
+        }
+    }
 }

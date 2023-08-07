@@ -52,4 +52,11 @@ class EnderecoController extends Controller
 
         return $endereco;
     }
+
+    public function getIDCidadeByNome($nomeCidade)
+    {
+        $cidade = Cidade::where('nome_cidade','LIKE', '%' . $nomeCidade . '%')->first();
+        return $cidade->id;
+
+    }
 }
