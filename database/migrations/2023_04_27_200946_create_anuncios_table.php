@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('anuncios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('finalidade_id')->constrained('finalidades');
             $table->foreignId('tipo_id')->constrained('tipos');
             $table->foreignId('anunciante_id')->constrained('anunciantes');
             $table->foreignId('endereco_id')->constrained('enderecos');
             $table->enum('transacao', ['Locação', 'Venda', 'Locação/Venda']);
+            $table->enum('finalidade', ['Comercial', 'Residencial', 'Comercial/Residencial'])->default('Residencial');
             $table->string('id_externo', 20);
             $table->string('titulo', 100);
             $table->longText('descricao');

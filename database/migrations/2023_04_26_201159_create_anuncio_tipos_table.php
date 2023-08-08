@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tipos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('finalidade_id')->constrained('finalidades');
+            $table->enum('finalidade', ['Comercial', 'Residencial', 'Comercial/Residencial'])->default('Residencial');
             $table->string('nome', 100);
             $table->timestamps();
         });

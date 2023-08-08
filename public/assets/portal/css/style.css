@@ -12192,6 +12192,8 @@ a.btn.btn_error{
   text-align: center;
   width: 100px;
 }
+
+
 .ff_one .icon span{
   color: #1d293e;
   font-size: 36px;
@@ -12202,9 +12204,31 @@ a.btn.btn_error{
 .ff_one.style3 .icon span{
   color: #ff5a5f;
 }
+.ff_one.style3 .icon span{
+    color: #ff5a5f;
+  }
 .ff_one.style4 .icon span{
   color: #ffbc7d;
 }
+
+.resumo-relatorio .ff_one .icon{
+    line-height: 120px;
+  }
+
+.resumo-relatorio .ff_one .icon i{
+    color: #1d293e61;
+    font-size: 36px;
+  }
+  .resumo-relatorio .ff_one.style2 .icon i{
+    color: #9499da69;
+  }
+  .resumo-relatorio .ff_one.style3 .icon i{
+    color: rgba(255, 90, 95, 0.3);
+  }
+  .resumo-relatorio .ff_one.style4 .icon i{
+    color: #ffbc7d8c;
+  }
+
 .ff_one .detais{
   padding-top: 25px;
 }

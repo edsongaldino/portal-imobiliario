@@ -56,7 +56,11 @@ class EnderecoController extends Controller
     public function getIDCidadeByNome($nomeCidade)
     {
         $cidade = Cidade::where('nome_cidade','LIKE', '%' . $nomeCidade . '%')->first();
-        return $cidade->id;
+        if(isset($cidade->id)){
+            return $cidade->id;
+        }else{
+            return 5103403;
+        }
 
     }
 }

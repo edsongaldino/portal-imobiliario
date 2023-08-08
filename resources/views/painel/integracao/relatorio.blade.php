@@ -26,13 +26,53 @@
     <div class="col-lg-12">
         <div class="my_dashboard_review mb40">
             <div class="col-lg-12">
+
+                <div class="row resumo-relatorio">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                        <div class="ff_one">
+                            <div class="icon"><i class="fa fa-home"></i></div>
+                            <div class="detais">
+                                <div class="timer">37</div>
+                                <p>Imóveis Importados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                        <div class="ff_one style2">
+                            <div class="icon"><i class="fa fa-check"></i></div>
+                            <div class="detais">
+                                <div class="timer">13</div>
+                                <p>Com sucesso</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                        <div class="ff_one style3">
+                            <div class="icon"><i class="fa fa-close"></i></div>
+                            <div class="detais">
+                                <div class="timer">4</div>
+                                <p>Com erro</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                        <div class="ff_one style4">
+                            <div class="icon"><i class="fa fa-warning"></i></div>
+                            <div class="detais">
+                                <div class="timer">3</div>
+                                <p>Com alertas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="savesearched_table">
                     <div class="table-responsive mt0">
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
+                                    <th class="dn-lg" scope="col">Código</th>
                                     <th scope="col">Anúncio</th>
-                                    <th class="dn-lg" scope="col"></th>
                                     <th class="dn-lg" scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col">Situação</th>
@@ -41,13 +81,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @foreach ($logs as $log)
                                 <tr>
-                                    <th class="title" scope="row">List London</th>
-                                    <td class="dn-lg"></td>
+                                    <td class="dn-lg">{{ $log->id_externo }}</td>
+                                    <th class="title" scope="row">{{ $log->tituloAnuncio }}</th>
                                     <td class="dn-lg"></td>
                                     <td></td>
-                                    <td>Erro</td>
-                                    <td class="para">December 30, 2019</td>
+                                    <td>{{ $log->tipo }}</td>
+                                    <td class="para">{{ $log->created_at }}</td>
                                     <td>
                                         <ul class="view_edit_delete_list mb0">
                                             <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="View"><a href="#"><span class="flaticon-view"></span></a></li>
@@ -56,24 +98,14 @@
                                         </ul>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th class="title" scope="row">Property List New York</th>
-                                    <td class="dn-lg"></td>
-                                    <td class="dn-lg"></td>
-                                    <td></td>
-                                    <td>Sucesso</td>
-                                    <td class="para">December 30, 2019</td>
-                                    <td>
-                                        <ul class="view_edit_delete_list mb0">
-                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar "><a href="#"><span class="flaticon-view"></span></a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+
+                {{ $logs->links() }}
+
             </div>
         </div>
     </div>
