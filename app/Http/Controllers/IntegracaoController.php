@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Integracao;
 use App\Http\Controllers\Controller;
+use App\Models\AnuncianteIntegracao;
 use App\Models\Anuncio;
 use App\Models\AnuncioFotos;
 use App\Models\Endereco;
@@ -19,7 +20,27 @@ class IntegracaoController extends Controller
     public function Configuracao()
     {
         $usuario = Auth::user();
-        return view('painel.integracao.configuracao', compact('usuario'));
+        $integracao = AnuncianteIntegracao::where('anunciante_id',$usuario->anunciante_id)->first();
+        return view('painel.integracao.configuracao', compact('usuario','integracao'));
+    }
+
+    public function salvarDados(Request $request){
+
+        if($request->id <> ''){
+            $anunciante_integracao = AnuncianteIntegracao::find($request->id);
+        }else{
+            $anunciante_integracao = new AnuncianteIntegracao();
+        }
+
+        $anunciante_integracao->anunciante_id = Auth::user()->anunciante_id;
+        $anunciante_integracao->integracao_id = 1; //XML
+        $anunciante_integracao->arquivo = $request->url;
+        $anunciante_integracao->url = $request->url;
+        $anunciante_integracao->periodicidade_atualizacao = $request->periodicidade_atualizacao;
+        $anunciante_integracao->notificar = $request->notificar;
+        $anunciante_integracao->save();
+
+        return redirect()->back()->with('success', 'Dados Gravados!');
     }
 
     public function Relatorio()
@@ -44,10 +65,16 @@ class IntegracaoController extends Controller
 
         $data = file_get_contents($url);
         $xml = simplexml_load_string($data);
+        $anunciante_id = 1;
+
+        $total_alertas = 0;
+        $total_incluidos = 0;
+        $total_alterados = 0;
+        $total_removidos = 0;
+
+        $LogIntegracao = (New LogIntegracaoController())->gravaLog($anunciante_id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
 
         foreach($xml->Listings->Listing as $imovel){
-
-            $anunciante_id = 1;
 
             if((New Anuncio())->verificaDuplicidade('id_externo', $imovel->ListingID)){
 
@@ -112,35 +139,40 @@ class IntegracaoController extends Controller
 
                     foreach($imovel->Media as $foto){
 
-                        if(isset($foto->Item->attributes()->primary)){
-                            $destaque = 'S';
-                        }else{
-                            $destaque = 'N';
-                        }
-
                         $fotos = new AnuncioFotos();
                         $fotos->anuncio_id = $anuncio->id;
                         $fotos->titulo = $foto->Item->attributes()->caption ?? $imovel->Title;
                         $fotos->arquivo = $foto->Item;
-                        $fotos->destaque = $destaque;
+
+                        if(isset($foto->Item->attributes()->primary)){
+                            $fotos->destaque = 'S';
+                        }else{
+                            $fotos->destaque = 'N';
+                        }
+
                         $fotos->save();
                     }
 
                     $tipo_log = "Sucesso";
+                    $subtipo_log = "Inclusão";
                     $titulo = "Imóvel integrado com sucesso";
                     $descricao_log = "Imóvel integrado com sucesso";
 
                 }else{
                     $tipo_log = "Erro";
+                    $subtipo_log = "Inclusão";
                     $titulo = "O Imóvel não foi integrado totalmente";
                     $descricao_log = "Informações importantes estão ausentes";
                 }
 
-                (New LogIntegracaoController())->gravaLog($imovel->ListingID, $tipo_log, $titulo, $descricao_log);
+                (New LogIntegracaoAnuncioController())->gravaLogAnuncio($LogIntegracao->id, $imovel->ListingID, $tipo_log, $subtipo_log, $titulo, $descricao_log);
 
+                $total_incluidos++;
             }
 
         }
+
+        (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
 
     }
 }
