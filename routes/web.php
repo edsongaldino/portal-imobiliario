@@ -48,10 +48,6 @@ Route::get('detalhes-imovel', function () {
     return view('portal.detalhes');
 });
 
-Route::match(['get', 'post'],'imoveis-buscar', function () {
-    return view('portal.lista');
-});
-
 
 //Rotas Admin / Painel
 Route::get('/login', 'App\Http\Controllers\AppController@login')->name('login');
@@ -70,5 +66,9 @@ Route::get('/painel/leads', 'App\Http\Controllers\LeadsController@index')->name(
 Route::get('/painel/integracoes/configuracao', 'App\Http\Controllers\IntegracaoController@Configuracao')->name('painel.integracoes.configuracao')->middleware('auth');
 Route::get('/painel/integracoes/relatorio', 'App\Http\Controllers\IntegracaoController@Relatorio')->name('painel.integracoes.relatorio')->middleware('auth');
 Route::post('/painel/integracao-salvar', 'App\Http\Controllers\IntegracaoController@salvarDados')->name('integracao.salvar')->middleware('auth');
+
+
+//Rotas Portal
+Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('imoveis.buscar');
 
 ?>

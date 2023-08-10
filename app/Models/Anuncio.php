@@ -30,4 +30,9 @@ class Anuncio extends Model
             return false;
         }
     }
+
+    public function fotos()
+    {
+        return $this->hasMany(AnuncioFotos::class, 'anuncio_id', 'id');
+    }
 }

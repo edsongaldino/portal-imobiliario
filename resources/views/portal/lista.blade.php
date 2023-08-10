@@ -239,9 +239,9 @@
 					<div class="breadcrumb_content style2 mb0-991">
 						<ol class="breadcrumb">
 						    <li class="breadcrumb-item"><a href="#">Início</a></li>
-						    <li class="breadcrumb-item active text-thm" aria-current="page">Venda</li>
+						    <li class="breadcrumb-item active text-thm" aria-current="page">Lista</li>
 						</ol>
-						<h2 class="breadcrumb_title">19.931 Imóveis à venda em Cuiabá - MT</h2>
+						<h2 class="breadcrumb_title">{{ $total }} imóveis encontrados em sua busca</h2>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -340,7 +340,7 @@
 											</div>
 										</div>
 									</li>
-									
+
 									<li class="min_area list-inline-item">
 									    <div class="form-group">
 									    	<input type="text" class="form-control" id="exampleInputName2" placeholder="Min Area">
@@ -564,7 +564,7 @@
 						<div class="grid_list_search_result">
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-5">
 								<div class="left_area tac-xsd">
-									<p>Mostrando <strong>20</strong> de <strong>19.321</strong> resultados</p>
+									<p>Mostrando <strong>{{ $anuncios->count() }}</strong> de <strong>{{ $total }}</strong> resultados</p>
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-8 col-lg-8 col-xl-7">
@@ -582,10 +582,11 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-12">
+                        @foreach ($anuncios as $anuncio)
+                        <div class="col-lg-12">
 							<div class="feat_property list">
 								<div class="thumb">
-									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg"></a>
+									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ $anuncio->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg"></a>
 									<div class="thmb_cntnt">
 										<ul class="icon mb0">
 											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
@@ -596,10 +597,10 @@
 									<div class="tc_content">
 										<div class="dtls_headr">
 											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
+												<li class="list-inline-item"><a href="#">{{ $anuncio->transacao }}</a></li>
 												<li class="list-inline-item"><a href="#">Lançamento</a></li>
 											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
+											<a class="fp_price" href="#">R${{ $anuncio->valor_venda }}</a>
 										</div>
 										<p class="text-thm">Apartmento</p>
 										<h4>Cittá Splendore</h4>
@@ -620,454 +621,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp1.jpg"></a>
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
-									</div>
-								</div>
-							</div>
-						</div>
+                        @endforeach
 
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp1.jpg"></a>
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
-									</div>
-								</div>
-							</div>
-						</div>
+                        {{ $anuncios->links() }}
 
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp4.jpg') }}" alt="fp1.jpg"></a>
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp5.jpg') }}" alt="fp1.jpg">
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp6.jpg') }}" alt="fp1.jpg">
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg"></a>
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <div class="fp_pdate float-right btn-detalhes">+ Detalhes</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp1.jpg"></a>
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <div class="fp_pdate float-right btn-detalhes">+ Detalhes</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp1.jpg"></a>
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <div class="fp_pdate float-right btn-detalhes">+ Detalhes</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp4.jpg') }}" alt="fp1.jpg">
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <div class="fp_pdate float-right btn-detalhes">+ Detalhes</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp5.jpg') }}" alt="fp1.jpg">
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <div class="fp_pdate float-right btn-detalhes">+ Detalhes</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-                        <div class="col-lg-12">
-							<div class="feat_property list">
-								<div class="thumb">
-									<img class="img-whp" src="{{ asset('assets/portal/images/property/fp6.jpg') }}" alt="fp1.jpg">
-									<div class="thmb_cntnt">
-										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="details">
-									<div class="tc_content">
-										<div class="dtls_headr">
-											<ul class="tag">
-												<li class="list-inline-item"><a href="#">Venda</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
-											</ul>
-											<a class="fp_price" href="#">R$587.000<small>,00</small></a>
-										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
-										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-										</ul>
-									</div>
-									<div class="fp_footer">
-										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
-										</ul>
-                                        <div class="fp_pdate float-right btn-detalhes">+ Detalhes</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-12 mt20">
-							<div class="mbp_pagination">
-								<ul class="page_navigation">
-								    <li class="page-item disabled">
-								    	<a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <span class="flaticon-left-arrow"></span> Prev</a>
-								    </li>
-								    <li class="page-item"><a class="page-link" href="#">1</a></li>
-								    <li class="page-item active" aria-current="page">
-								    	<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-								    </li>
-								    <li class="page-item"><a class="page-link" href="#">3</a></li>
-								    <li class="page-item"><a class="page-link" href="#">...</a></li>
-								    <li class="page-item"><a class="page-link" href="#">29</a></li>
-								    <li class="page-item">
-								    	<a class="page-link" href="#"><span class="flaticon-right-arrow"></span></a>
-								    </li>
-								</ul>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
