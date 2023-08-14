@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('log_integracoes', function (Blueprint $table) {
-            $table->dropColumn('tipo');
-            $table->dropColumn('id_externo');
-            $table->dropColumn('titulo');
-            $table->dropColumn('descricao_log');
-            $table->integer('total_incluidos')->nullable()->after('id');
-            $table->integer('total_alterados')->nullable()->after('id');
-            $table->integer('total_removidos')->nullable()->after('id');
-            $table->integer('total_alertas')->nullable()->after('id');
-            $table->foreignId('anunciante_id')->constrained('anunciantes')->after('id');
+        Schema::create('log_integracoes', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('anunciante_id')->constrained('anunciantes');
+            $table->integer('total_incluidos')->nullable();
+            $table->integer('total_alterados')->nullable();
+            $table->integer('total_removidos')->nullable();
+            $table->integer('total_alertas')->nullable();
+            $table->timestamps();
         });
     }
 

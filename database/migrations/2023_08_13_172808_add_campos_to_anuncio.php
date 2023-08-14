@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('anuncio_caracteristica', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('anuncio_id')->constrained('anuncios');
-            $table->foreignId('caracteristica_id')->constrained('caracteristicas');
-            $table->string('valor', 50);
+        Schema::table('anuncios', function (Blueprint $table) {
+            $table->string('descricao_resumida', 250)->after('situacao');
+            $table->char('lancamento', 1)->default('N')->after('situacao');
+            $table->char('destaque', 1)->default('N')->after('situacao');
         });
     }
 
@@ -28,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anuncio_caracteristica');
+        Schema::table('anuncios', function (Blueprint $table) {
+
+        });
     }
 };

@@ -35,6 +35,7 @@ class ComposerStaticInitca68208423f08222d4800aadfe7017e8
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '6b34c85f7b1ad6faa15aa12109e030f2' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        'ef157334f1067da991ff8953983afdb3' => __DIR__ . '/../..' . '/app/Helpers/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -534,6 +535,7 @@ class ComposerStaticInitca68208423f08222d4800aadfe7017e8
         'App\\Http\\Controllers\\AnuncioFinalidadeController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnuncioFinalidadeController.php',
         'App\\Http\\Controllers\\AnuncioFotosController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnuncioFotosController.php',
         'App\\Http\\Controllers\\AnuncioTipoController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnuncioTipoController.php',
+        'App\\Http\\Controllers\\AppController' => __DIR__ . '/../..' . '/app/Http/Controllers/AppController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\CaracteristicaController' => __DIR__ . '/../..' . '/app/Http/Controllers/CaracteristicaController.php',
         'App\\Http\\Controllers\\CaracteristicasTiposController' => __DIR__ . '/../..' . '/app/Http/Controllers/CaracteristicasTiposController.php',
@@ -543,7 +545,10 @@ class ComposerStaticInitca68208423f08222d4800aadfe7017e8
         'App\\Http\\Controllers\\EstadoController' => __DIR__ . '/../..' . '/app/Http/Controllers/EstadoController.php',
         'App\\Http\\Controllers\\IntegracaoController' => __DIR__ . '/../..' . '/app/Http/Controllers/IntegracaoController.php',
         'App\\Http\\Controllers\\LeadsController' => __DIR__ . '/../..' . '/app/Http/Controllers/LeadsController.php',
+        'App\\Http\\Controllers\\LogIntegracaoAnuncioController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogIntegracaoAnuncioController.php',
         'App\\Http\\Controllers\\LogIntegracaoController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogIntegracaoController.php',
+        'App\\Http\\Controllers\\PerfilController' => __DIR__ . '/../..' . '/app/Http/Controllers/PerfilController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -569,6 +574,8 @@ class ComposerStaticInitca68208423f08222d4800aadfe7017e8
         'App\\Models\\Integracao' => __DIR__ . '/../..' . '/app/Models/Integracao.php',
         'App\\Models\\Leads' => __DIR__ . '/../..' . '/app/Models/Leads.php',
         'App\\Models\\LogIntegracao' => __DIR__ . '/../..' . '/app/Models/LogIntegracao.php',
+        'App\\Models\\LogIntegracaoAnuncio' => __DIR__ . '/../..' . '/app/Models/LogIntegracaoAnuncio.php',
+        'App\\Models\\Perfil' => __DIR__ . '/../..' . '/app/Models/Perfil.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

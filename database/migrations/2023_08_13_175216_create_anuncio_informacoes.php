@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('caracteristicas', function (Blueprint $table) {
+        Schema::create('anuncio_informacoes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('caracteristica_tipo_id')->constrained('caracteristicas_tipos');
-            $table->string('nome', 100);
+            $table->foreignId('anuncio_id')->constrained('anuncios')->after('id');
+            $table->string('chave', 20)->index();
+            $table->string('valor', 255);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('caracteristicas');
+        Schema::dropIfExists('anuncio_informacoes');
     }
 };

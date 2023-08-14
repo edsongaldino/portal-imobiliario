@@ -263,6 +263,8 @@
 					<div class="sidebar_listing_grid1 dn-991">
 						<div class="sidebar_listing_list">
 							<div class="sidebar_advanced_search_widget">
+                                <form action="{{ url('imoveis-buscar') }}" method="POST" name="FormBusca" id="FormBusca">
+                                @csrf
 								<ul class="sasw_list mb0">
 									<li class="search_area">
 									    <div class="form-group">
@@ -463,100 +465,36 @@
 										</div>
 									</li>
 								</ul>
+                                </form>
 							</div>
 						</div>
 						<div class="terms_condition_widget">
 							<h4 class="title">Imóveis destacados</h4>
 							<div class="sidebar_feature_property_slider">
-								<div class="item">
-									<a href="{{ url('/detalhes-imovel') }}">
+
+                                @foreach ($destaques as $destaque)
+                                <div class="item">
 									<div class="feat_property home7">
+                                        <a href="imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}">
 										<div class="thumb">
-											<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+											<img class="img-whp" src="{{ $destaque->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
 											<div class="thmb_cntnt">
 												<ul class="tag mb0">
-													<li class="list-inline-item"><span>Aluguel</span></li>
-												    <li class="list-inline-item"><span>Venda</span></li>
+												    <li class="list-inline-item"><span>{{ $destaque->transacao }}</span></li>
 												</ul>
-												<a class="fp_price" href="#">R$ 187.000<small>,00</small></a>
-												<h4 class="posr color-white">Apartmento</h4>
+												<span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_venda) }}</span>
+												<h4 class="posr color-white">{{ $destaque->tipo->nome }}</h4>
 											</div>
 										</div>
-									</div>
-									</a>
-								</div>
-								<div class="item">
-									<div class="feat_property home7">
-										<div class="thumb">
-											<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp2.jpg">
-											<div class="thmb_cntnt">
-												<ul class="tag mb0">
-													<li class="list-inline-item"><span>Aluguel</span></li>
-												    <li class="list-inline-item"><span>Venda</span></li>
-												</ul>
-												<a class="fp_price" href="#">R$ 187.000<small>,00</small></a>
-												<h4 class="posr color-white">Apartmento</h4>
-											</div>
-										</div>
+                                        </a>
 									</div>
 								</div>
-								<div class="item">
-									<div class="feat_property home7">
-										<div class="thumb">
-											<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp3.jpg">
-											<div class="thmb_cntnt">
-												<ul class="tag mb0">
-													<li class="list-inline-item"><span>Aluguel</span></li>
-												</ul>
-												<a class="fp_price" href="#">R$ 3.000<small>,00</small></a>
-												<h4 class="posr color-white">Apartmento</h4>
-											</div>
-										</div>
-									</div>
-								</div>
+                                @endforeach
 
 							</div>
 						</div>
 
-						<div class="sidebar_feature_listing">
-							<h4 class="title">Visitados recentemente</h4>
-							<div class="media">
-								<img class="align-self-start mr-3" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" width="100" alt="fls1.jpg">
-								<div class="media-body">
-							    	<h5 class="mt-0 post_title">Cittá Splendore</h5>
-							    	<a href="{{ url('/detalhes-imovel') }}">R$ 3.000<small>,00</small></a>
-							    	<ul class="mb0">
-							    		<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-							    	</ul>
-								</div>
-							</div>
-							<div class="media">
-								<img class="align-self-start mr-3" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" width="100" alt="fls2.jpg">
-								<div class="media-body">
-							    	<h5 class="mt-0 post_title">Villa Gramado</h5>
-							    	<a href="{{ url('/detalhes-imovel') }}">R$350.000<small>/mo</small></a>
-							    	<ul class="mb0">
-							    		<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-							    	</ul>
-								</div>
-							</div>
-							<div class="media">
-								<a href="{{ url('/detalhes-imovel') }}"><img class="align-self-start mr-3" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" width="100" alt="fls3.jpg"></a>
-								<div class="media-body">
-							    	<h5 class="mt-0 post_title">Sunset Studio</h5>
-							    	<a href="{{ url('/detalhes-imovel') }}">R$13.000<small>,00</small></a>
-							    	<ul class="mb0">
-							    		<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
-							    	</ul>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-8">
@@ -581,17 +519,20 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="row">
                         @foreach ($anuncios as $anuncio)
                         <div class="col-lg-12">
 							<div class="feat_property list">
 								<div class="thumb">
-									<a href="{{ url('/detalhes-imovel') }}"><img class="img-whp" src="{{ $anuncio->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg"></a>
+									<img class="img-whp" src="{{ $anuncio->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
+                                    <a href="imoveis/{{ $anuncio->id }}/{{ Helper::url_amigavel($anuncio->tipo->nome .'-'. $anuncio->transacao) }}/{{ Helper::url_amigavel($anuncio->endereco->cidade->nome_cidade .'-'. $anuncio->endereco->cidade->estado->uf_estado)}}">
 									<div class="thmb_cntnt">
 										<ul class="icon mb0">
-											<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
+											<!--<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>-->
 										</ul>
 									</div>
+                                    </a>
 								</div>
 								<div class="details">
 									<div class="tc_content">
@@ -600,11 +541,11 @@
 												<li class="list-inline-item"><a href="#">{{ $anuncio->transacao }}</a></li>
 												<li class="list-inline-item"><a href="#">Lançamento</a></li>
 											</ul>
-											<a class="fp_price" href="#">R${{ $anuncio->valor_venda }}</a>
+											<a class="fp_price" href="#">R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</a>
 										</div>
-										<p class="text-thm">Apartmento</p>
-										<h4>Cittá Splendore</h4>
-										<p><span class="flaticon-placeholder"></span>Rua D, 155 - Despraiado, Cuiabá - MT<</p>
+										<p class="text-thm">{{ $anuncio->tipo->nome }}</p>
+										<h4>{{ $anuncio->titulo }}</h4>
+										<p><span class="flaticon-placeholder"></span>{{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}</p>
 										<ul class="prop_details mb0">
 											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
 										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
@@ -614,7 +555,7 @@
 									<div class="fp_footer">
 										<ul class="fp_meta float-left mb0">
 											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
-										    <li class="list-inline-item"><span href="#">Rosa Imóveis</span></li>
+										    <li class="list-inline-item"><span href="#">{{ $anuncio->anunciante->nome }}</span></li>
 										</ul>
                                         <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
 									</div>

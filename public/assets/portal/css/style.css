@@ -11833,6 +11833,11 @@ a.btn.btn_error{
   bottom: 50px;
   left: 10px;
 }
+
+.sidebar_feature_property_slider .feat_property .thumb .thmb_cntnt span.fp_price {
+    bottom: 50px;
+    left: 10px;
+}
 .sidebar_feature_property_slider .feat_property .thumb .thmb_cntnt h4{
   bottom: 10px;
   left: 10px;

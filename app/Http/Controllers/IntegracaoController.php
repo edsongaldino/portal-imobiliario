@@ -56,6 +56,9 @@ class IntegracaoController extends Controller
     }
 
     public function LerXML(){
+
+        ini_set('max_execution_time', 240);
+
         //se o caminho esteja hospedado noutro servidor
         $url = "https://locare-xml.s3.amazonaws.com/locare_xml/imoveis_rosa_zapp.xml";
 
@@ -92,6 +95,9 @@ class IntegracaoController extends Controller
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
                 $anuncio->valor_condominio = Helper::converte_reais_to_mysql(0.00);
                 $anuncio->situacao = 'Liberado';
+                $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
+                $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
+
 
                 $endereco = Endereco::find($dadosAnuncio->endereco_id);
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
@@ -104,14 +110,14 @@ class IntegracaoController extends Controller
 
                 if($anuncio->save()){
 
-                    foreach($imovel->Media as $foto){
+                    foreach($imovel->Media->Item as $foto){
 
                         $fotos = new AnuncioFotos();
                         $fotos->anuncio_id = $anuncio->id;
-                        $fotos->titulo = $foto->Item->attributes()->caption ?? $imovel->Title;
-                        $fotos->arquivo = $foto->Item;
+                        $fotos->titulo = $foto->attributes()->caption ?? $imovel->Title;
+                        $fotos->arquivo = $foto;
 
-                        if(isset($foto->Item->attributes()->primary)){
+                        if(isset($foto->attributes()->primary)){
                             $fotos->destaque = 'S';
                         }else{
                             $fotos->destaque = 'N';
@@ -121,13 +127,13 @@ class IntegracaoController extends Controller
                     }
 
                     $tipo_log = "Sucesso";
-                    $subtipo_log = "Alteração";
+                    $subtipo_log = "Atualização";
                     $titulo = "Imóvel atualizado com sucesso";
                     $descricao_log = "Imóvel atualizado com sucesso";
 
                 }else{
                     $tipo_log = "Erro";
-                    $subtipo_log = "Alteração";
+                    $subtipo_log = "Atualização";
                     $titulo = "O Imóvel não foi atualizado totalmente";
                     $descricao_log = "Informações importantes estão ausentes";
                 }
@@ -209,10 +215,10 @@ class IntegracaoController extends Controller
             case 'Sale/Rent':
                 $transacao = 'Locação/Venda';
                 break;
-            case 'Sale':
+            case 'For Sale':
                 $transacao = 'Venda';
                 break;
-            case 'Rent':
+            case 'For Rent':
                 $transacao = 'Locação';
                 break;
             default:
@@ -222,7 +228,7 @@ class IntegracaoController extends Controller
         return $transacao;
     }
 
-    public function GetTransacaoByPublicationType($PublicationType){
+    public function GetTipoByPublicationType($PublicationType){
         switch($PublicationType){
             case 'STANDARD':
                 $tipo_publicacao = 'STANDARD';

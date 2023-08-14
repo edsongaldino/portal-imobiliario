@@ -70,5 +70,5 @@ Route::post('/painel/integracao-salvar', 'App\Http\Controllers\IntegracaoControl
 
 //Rotas Portal
 Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('imoveis.buscar');
-
+Route::get('/imoveis/{id}/{cidade}/{titulo}', 'App\Http\Controllers\AnuncioController@DetalhesAnuncio')->name('imoveis.detalhes');
 ?>

@@ -151,9 +151,14 @@ class AnuncioController extends Controller
         $total =  $anuncios->count();
         $anuncios = $anuncios->paginate(20);
         $tipos = AnuncioTipo::all();
-        return view('portal.lista', compact('anuncios', 'tipos', 'total'));
+        $destaques = Anuncio::where('deleted_at', null)->limit(3)->get();
+        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));
     }
 
+    public function DetalhesAnuncio($id){
+        $anuncio = Anuncio::find($id);
+        return view('portal.detalhes', compact('anuncio'));
+    }
 
     #ENDCONTROLLERSPORTAL
 }

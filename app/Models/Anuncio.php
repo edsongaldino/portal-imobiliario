@@ -20,6 +20,11 @@ class Anuncio extends Model
         return $this->hasOne(Anunciante::class, 'id', 'anunciante_id');
     }
 
+    public function tipo()
+    {
+        return $this->hasOne(AnuncioTipo::class, 'id', 'tipo_id');
+    }
+
     public function verificaDuplicidade($campo, $valor){
 
         $dup = $this::where($campo, $valor)->first();
@@ -34,5 +39,10 @@ class Anuncio extends Model
     public function fotos()
     {
         return $this->hasMany(AnuncioFotos::class, 'anuncio_id', 'id');
+    }
+
+    public function informacoes()
+    {
+        return $this->hasMany(AnuncioInformacoes::class, 'anuncio_id', 'id');
     }
 }

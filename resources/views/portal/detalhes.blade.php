@@ -15,21 +15,11 @@
 			<div class="row">
 				<div class="col-lg-12 p0">
 					<div class="listing_single_property_slider">
-						<div class="item">
-							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider1gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider1.jpg') }}" alt="lsslider1.jpg"></a>
+                        @foreach ($anuncio->fotos as $foto)
+                        <div class="item">
+							<a class="popup-img" href="{{ $foto->arquivo }}"><img class="img-fluid" src="{{ $foto->arquivo }}" alt="{{ $foto->titulo }}"></a>
 						</div>
-						<div class="item">
-							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider2gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider2.jpg') }}" alt="lsslider2.jpg"></a>
-						</div>
-						<div class="item">
-							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider3gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider3.jpg') }}" alt="lsslider3.jpg"></a>
-						</div>
-						<div class="item">
-							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider4gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider4.jpg') }}" alt="lsslider1.jpg"></a>
-						</div>
-						<div class="item">
-							<a class="popup-img" href="{{ asset('assets/portal/images/property/lsslider5gd.jpg') }}"><img class="img-fluid" src="{{ asset('assets/portal/images/property/lsslider5.jpg') }}" alt="lsslider2.jpg"></a>
-						</div>
+                        @endforeach
 					</div>
 				</div>
 			</div>
@@ -46,8 +36,8 @@
 							<div class="listing_single_description">
 
 								<div class="single_property_title mt30-767">
-									<h2>Cittá Splendore</h2>
-									<p>Rua D, 155 - Despraiado, Cuiabá - MT</p>
+									<h2>{{ $anuncio->titulo }}</h2>
+									<p>{{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}</p>
 								</div>
 
 								<div class="spss float-right fn-400">
@@ -59,18 +49,17 @@
 
 								<div class="lsd_list">
 									<ul class="mb0">
-										<li class="list-inline-item"><span><i class="fa-solid fa-building"></i> Apartamento</span></li>
+										<li class="list-inline-item"><span><i class="fa-solid fa-building"></i> {{ $anuncio->tipo->nome }}</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
 										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 									</ul>
 								</div>
 								<h4 class="mb30">Descrição</h4>
-						    	<p class="mb25">A oportunidade para você conquistar e transformar a qualidade de vida que sempre sonhou para a sua família está aqui com a MRV. Os apartamentos em Cuiabá foram projetados para oferecer tudo o que você sempre quis em um só lugar, o Città dei Fiori.</p>
+						    	<p class="mb25">{{ $anuncio->descricao_resumida ?? '' }}</p>
 								<div class="collapse" id="collapseExample">
 								  	<div class="card card-body">
-								    	<p class="mt10 mb10">Mais que um apartamento, o novo jeito MRV de viver. O Città dei Fiori oferece: lazer equipado, coleta seletiva, sistema de segurança, energia solar, laminado na sala e quartos e muito mais.</p>
-								    	<p class="mt10 mb10">E para personalizar ainda mais o seu apartamento, ao se tornar um cliente MRV, você pode adquirir serviços como Kit Acabamentos em nossa plataforma Mundo da Casa, o marketplace da MRV. Para saber mais sobre, acesse nosso WhatsApp e conheça todas as possibilidades de como transformar o seu novo mundo!</p>
+								    	<p class="mt10 mb10">{{ $anuncio->descricao }}</p>
 								  	</div>
 								</div>
 								<p class="overlay_close">
@@ -94,7 +83,7 @@
 											<li><p>IPTU :</p></li>
 										</ul>
 										<ul class="list-inline-item">
-											<li><p><span>HZ27</span></p></li>
+											<li><p><span>{{ $anuncio->id_externo }}</span></p></li>
 											<li><p><span>R$ 358.000,00</span></p></li>
 											<li><p><span>R$ 350,00</span></p></li>
 											<li><p><span>R$ 850,00</span></p></li>
