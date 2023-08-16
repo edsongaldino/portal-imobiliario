@@ -43,16 +43,25 @@ class IntegracaoController extends Controller
         return redirect()->back()->with('success', 'Dados Gravados!');
     }
 
-    public function Relatorio()
+    public function RelatorioGeral()
     {
         $usuario = Auth::user();
-        $logs = DB::table('log_integracoes')
-                ->join('anuncios', 'anuncios.id_externo', '=', 'log_integracoes.id_externo')
-                ->where('anuncios.anunciante_id',Auth::user()->anunciante->id)
-                ->select('log_integracoes.*', 'anuncios.titulo as tituloAnuncio')
+        $logs = LogIntegracao::where('anunciante_id',Auth::user()->anunciante->id)->paginate(15);
+
+        return view('painel.integracao.relatorio_geral', compact('usuario', 'logs'));
+    }
+
+    public function RelatorioIndividual($id)
+    {
+        $usuario = Auth::user();
+        $RelatorioGeral = LogIntegracao::find($id);
+        $logs = DB::table('log_integracao_anuncios')
+                ->join('anuncios', 'anuncios.id_externo', '=', 'log_integracao_anuncios.id_externo')
+                ->where('log_integracao_anuncios.id', $id)
+                ->select('log_integracao_anuncios.*', 'anuncios.titulo as tituloAnuncio')
                 ->paginate(15);
 
-        return view('painel.integracao.relatorio', compact('usuario', 'logs'));
+        return view('painel.integracao.relatorio_individual', compact('usuario', 'logs', 'RelatorioGeral'));
     }
 
     public function LerXML(){

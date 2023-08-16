@@ -9,4 +9,9 @@ class LogIntegracao extends Model
 {
     use HasFactory;
     protected $table = 'log_integracoes';
+
+    public function anunciante()
+    {
+        return $this->hasOne(Anunciante::class, 'id', 'anunciante_id');
+    }
 }

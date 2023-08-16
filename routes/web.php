@@ -64,9 +64,9 @@ Route::post('/painel/dados-acesso-salvar', 'App\Http\Controllers\UserController@
 
 Route::get('/painel/leads', 'App\Http\Controllers\LeadsController@index')->name('painel.leads')->middleware('auth');
 Route::get('/painel/integracoes/configuracao', 'App\Http\Controllers\IntegracaoController@Configuracao')->name('painel.integracoes.configuracao')->middleware('auth');
-Route::get('/painel/integracoes/relatorio', 'App\Http\Controllers\IntegracaoController@Relatorio')->name('painel.integracoes.relatorio')->middleware('auth');
 Route::post('/painel/integracao-salvar', 'App\Http\Controllers\IntegracaoController@salvarDados')->name('integracao.salvar')->middleware('auth');
-
+Route::get('/painel/integracoes/relatorio-geral', 'App\Http\Controllers\IntegracaoController@RelatorioGeral')->name('painel.integracoes.relatorio-geral')->middleware('auth');
+Route::get('/painel/integracoes/{id}/relatorio-importacao', 'App\Http\Controllers\IntegracaoController@RelatorioIndividual')->name('painel.integracoes.relatorio-importacao')->middleware('auth');
 
 //Rotas Portal
 Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('imoveis.buscar');

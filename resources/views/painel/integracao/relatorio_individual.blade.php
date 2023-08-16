@@ -32,8 +32,8 @@
                         <div class="ff_one">
                             <div class="icon"><i class="fa fa-home"></i></div>
                             <div class="detais">
-                                <div class="timer">37</div>
-                                <p>Imóveis Importados</p>
+                                <div class="timer">{{ $RelatorioGeral->total_incluidos }}</div>
+                                <p>Total de Imóveis Incluídos</p>
                             </div>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                         <div class="ff_one style2">
                             <div class="icon"><i class="fa fa-check"></i></div>
                             <div class="detais">
-                                <div class="timer">13</div>
-                                <p>Com sucesso</p>
+                                <div class="timer">{{ $RelatorioGeral->total_alterados }}</div>
+                                <p>Total Alterados</p>
                             </div>
                         </div>
                     </div>
@@ -50,8 +50,8 @@
                         <div class="ff_one style3">
                             <div class="icon"><i class="fa fa-close"></i></div>
                             <div class="detais">
-                                <div class="timer">4</div>
-                                <p>Com erro</p>
+                                <div class="timer">{{ $RelatorioGeral->total_removidos }}</div>
+                                <p>Toral Removidos</p>
                             </div>
                         </div>
                     </div>
@@ -59,8 +59,8 @@
                         <div class="ff_one style4">
                             <div class="icon"><i class="fa fa-warning"></i></div>
                             <div class="detais">
-                                <div class="timer">3</div>
-                                <p>Com alertas</p>
+                                <div class="timer">{{ $RelatorioGeral->total_alertas }}</div>
+                                <p>Total de Alertas</p>
                             </div>
                         </div>
                     </div>
