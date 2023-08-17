@@ -8,14 +8,14 @@
 			<p>Configure as integrações disponíveis no portal</p>
 		</div>
 	</div>
+    <form class="form" id="FormIntegracao" name="FormIntegracao" method="POST" action="/painel/integracao-salvar" enctype="multipart/form-data">
+    @csrf
 	<div class="col-lg-12">
 		<div class="my_dashboard_review">
 			<div class="row">
 				<div class="col-lg-12">
 					<h4 class="mb30">Captação dos empreendimentos</h4>
 				</div>
-                <form class="form" id="FormIntegracao" name="FormIntegracao" method="POST" action="/painel/integracao-salvar" enctype="multipart/form-data">
-                @csrf
                 <input type="hidden" name="id" id="id" value="{{ $integracao->id ?? ''}}">
                 <div class="col-lg-6 col-xl-6">
 					<div class="my_profile_setting_input ui_kit_select_search form-group">
@@ -63,10 +63,10 @@
                         <button type="submit" class="btn btn2">Salvar Configurações</button>
                     </div>
                 </div>
-                </form>
+
 			</div>
 		</div>
-
 	</div>
+    </form>
 </div>
 @endsection
