@@ -13,10 +13,10 @@
 	<section class="our-dashbord dashbord bgc-f7 pb50">
 		<div class="container-fluid">
 			<div class="row">
-				
+
 				<div class="col-lg-3 col-xl-2 dn-992 pl0"></div>
 				<div class="col-sm-12 col-lg-8 col-xl-10 maxw100flex-992">
-					
+
                     @yield('conteudo')
 
 
@@ -56,7 +56,9 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/wow.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/dashboard-script.js') }}"></script>
-<!-- Custom script for all pages --> 
+<!-- Custom script for all pages -->
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('assets/painel/js/index.js') }}"></script>
 </body>
 </html>
