@@ -12,29 +12,29 @@ $(document).on('click', '#ProcessarAtualizacaoXML', function (e) {
             showCancelButton: true,
         },
         function() {
-          $.ajax({
-            url: '/sistema/aluno/excluir',
-            method: 'POST',
-            data: {
-              id: id,
-              "_token": token
+            $.ajax({
+              url: '/painel/integracao/processar-xml',
+              method: 'POST',
+              data: {
+                id: id,
+                "_token": token
+              },
+
+            success: function() {
+              swal({title: "OK", text: "Anúncios Atualizados!", type: "success"},
+                function(){
+                    location.reload();
+                }
+              );
             },
 
-          success: function() {
-            swal({title: "OK", text: "Registro removido!", type: "success"},
-              function(){
-                  location.reload();
-              }
-            );
-          },
-
-          error: function() {
-            swal({title: "OPS", text: "Erro ao remover registro!", type: "warning"},
-              function(){
-                  location.reload();
-              }
-            );
-          }
+            error: function() {
+              swal({title: "OPS", text: "Erro ao atualizar anúncios!", type: "warning"},
+                function(){
+                    location.reload();
+                }
+              );
+            }
 
           });
     });
