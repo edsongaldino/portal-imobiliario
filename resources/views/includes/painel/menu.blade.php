@@ -68,7 +68,7 @@
             <a href="#"><i class="flaticon-share"></i><span> Integrações</span><i class="fa fa-angle-down pull-right"></i></a>
             <ul class="treeview-menu">
                 <li><a href="{{ url("/painel/integracoes/configuracao") }}"><i class="fa fa-cog"></i> Configuração</a></li>
-                <li><a href="{{ url("/painel/integracoes/relatorio") }}"><i class="fa fa-circle"></i> Relatório Geral</a></li>
+                <li><a href="{{ url("/painel/integracoes/relatorio-geral") }}"><i class="fa fa-circle"></i> Relatório Geral</a></li>
             </ul>
         </li>
         <li class="title"><span>Gerenciar Conta</span></li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Integracao;
 use App\Http\Controllers\Controller;
+use App\Models\Anunciante;
 use App\Models\AnuncianteIntegracao;
 use App\Models\Anuncio;
 use App\Models\AnuncioFotos;
@@ -64,12 +65,16 @@ class IntegracaoController extends Controller
         return view('painel.integracao.relatorio_individual', compact('usuario', 'logs', 'RelatorioGeral'));
     }
 
-    public function LerXML(){
+
+    public function ProcessarXML(Request $request){
 
         ini_set('max_execution_time', 240);
 
+        $anunciante = Anunciante::find($request->id);
+        $xml = $anunciante->integracao->first()->url;
+
         //se o caminho esteja hospedado noutro servidor
-        $url = "https://locare-xml.s3.amazonaws.com/locare_xml/imoveis_rosa_zapp.xml";
+        $url = $xml;
 
         //caso o caminho esteja hospedado no próprio servidor
         //coloque o ficheiro no caminho: 'public/assets/xml/file.xml'
@@ -77,7 +82,7 @@ class IntegracaoController extends Controller
 
         $data = file_get_contents($url);
         $xml = simplexml_load_string($data);
-        $anunciante_id = 1;
+        $anunciante_id = $anunciante->id;
 
         $total_alertas = 0;
         $total_incluidos = 0;

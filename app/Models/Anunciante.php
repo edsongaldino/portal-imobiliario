@@ -30,4 +30,9 @@ class Anunciante extends Model
    	{
    		return $this->hasMany('App\Models\Anuncio', 'anunciante_id');
    	}
+
+    public function integracao()
+    {
+        return $this->hasMany(AnuncianteIntegracao::class, 'anunciante_id', 'id');
+    }
 }

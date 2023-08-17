@@ -11,7 +11,7 @@
     </div>
 
     <div class="col-lg-8 col-xl-8">
-        <div class="btn-processar-atualizacao"><i class="fa fa-refresh"></i> Processar Atualização Manual</div>
+        <div class="btn-processar-atualizacao" id="ProcessarAtualizacaoXML" data-id="{{ $usuario->anunciante->id }}" data-token="{{ csrf_token() }}"><i class="fa fa-refresh"></i> Processar Atualização Manual</div>
     </div>
 
     <div class="col-lg-12">
@@ -43,7 +43,7 @@
                                     <td class="para">{{ $log->created_at }}</td>
                                     <td>
                                         <ul class="view_edit_delete_list mb0">
-                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="View"><a href="{{ url('painel/integracoes/'{{ $lod->id }}'/relatorio-importacao') }}"><span class="flaticon-view"></span></a></li>
+                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="View"><a href="{{ url('painel/integracoes/'.$lod->id.'/relatorio-importacao') }}"><span class="flaticon-view"></span></a></li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -59,4 +59,5 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('assets/painel/js/integracao/index.js') }}"></script>
 @endsection
