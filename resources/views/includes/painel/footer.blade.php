@@ -27,4 +27,6 @@
 <!-- Custom script for all pages -->
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/sweetalert/dist/sweetalert.min.js') }}" ></script>
+
+<script src="{{ asset('assets/painel/js/index.js') }}"></script>
 @include('sweetalert::alert')

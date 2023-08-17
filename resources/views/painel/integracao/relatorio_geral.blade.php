@@ -59,5 +59,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('assets/painel/js/integracao/index.js') }}"></script>
 @endsection
