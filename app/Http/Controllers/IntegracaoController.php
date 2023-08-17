@@ -105,6 +105,7 @@ class IntegracaoController extends Controller
                 $anuncio->id_externo = $imovel->ListingID;
                 $anuncio->titulo = $imovel->Title;
                 $anuncio->descricao = $imovel->Details->Description;
+                $anuncio->descricao_resumida = substr($imovel->Details->Description, 0, 250);
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
                 $anuncio->valor_condominio = Helper::converte_reais_to_mysql(0.00);
