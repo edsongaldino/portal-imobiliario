@@ -71,4 +71,7 @@ Route::post('/painel/integracao/processar-xml', 'App\Http\Controllers\Integracao
 //Rotas Portal
 Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('imoveis.buscar');
 Route::get('/imoveis/{id}/{cidade}/{titulo}', 'App\Http\Controllers\AnuncioController@DetalhesAnuncio')->name('imoveis.detalhes');
+
+
+Route::get('/painel/integracao/ler-xml', 'App\Http\Controllers\IntegracaoController@LerXML')->name('integracao.ler-xml');
 ?>

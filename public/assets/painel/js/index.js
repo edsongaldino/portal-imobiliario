@@ -5,8 +5,8 @@ $(document).on('click', '#ProcessarAtualizacaoXML', function (e) {
 
         swal({
             title: "Deseja processar a atualização dos anúncios?",
-            type: "error",
-            confirmButtonClass: "btn-danger",
+            type: "info",
+            confirmButtonClass: "btn-info",
             confirmButtonText: "Sim!",
             cancelButtonText: "Não",
             showCancelButton: true,

@@ -40,3 +40,20 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.btn-processar-atualizacao{
+    width: auto;
+    height: 60px;
+    float: right;
+    background-color: #14c5cb;
+    line-height: 60px;
+    text-align: center;
+    padding: 0 30px;
+    border-radius: 50px;
+    color: #FFF;
+}
+
+.btn-processar-atualizacao:hover{
+    background-color: #06696d;
+    cursor: pointer;
+}

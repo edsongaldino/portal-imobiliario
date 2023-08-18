@@ -3,12 +3,3 @@
     height: 32px !important;
     margin-top: 15px !important;
 }
-
-.btn-processar-atualizacao{
-    width: 200px;
-    height: 60px;
-    float: right;
-    background-color: #336699;
-    line-height: 60px;
-    text-align: center;
-}

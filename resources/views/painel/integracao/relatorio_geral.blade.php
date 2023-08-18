@@ -35,12 +35,11 @@
 
                                 @foreach ($logs as $log)
                                 <tr>
-                                    <td class="dn-lg">{{ $log->id_externo }}</td>
-                                    <th class="title" scope="row">{{ $log->tituloAnuncio }}</th>
-                                    <td class="dn-lg"></td>
-                                    <td></td>
-                                    <td>{{ $log->tipo }}</td>
-                                    <td class="para">{{ $log->created_at }}</td>
+                                    <td class="dn-lg">{{ $log->id }}</td>
+                                    <td class="title" scope="row">{{ $log->created_at }}</td>
+                                    <td class="dn-lg">{{ $log->created_at }}</td>
+                                    <td>{{ $log->total_incluidos }}</td>
+                                    <td class="para">{{ $log->total_alertas }}</td>
                                     <td>
                                         <ul class="view_edit_delete_list mb0">
                                             <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="View"><a href="{{ url('painel/integracoes/'.$log->id.'/relatorio-importacao') }}"><span class="flaticon-view"></span></a></li>
