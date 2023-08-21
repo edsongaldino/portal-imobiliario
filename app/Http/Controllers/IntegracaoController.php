@@ -12,6 +12,7 @@ use App\Models\AnuncioFotos;
 use App\Models\Endereco;
 use App\Models\LogIntegracao;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as FacadesRequest;
@@ -103,7 +104,7 @@ class IntegracaoController extends Controller
                 $anuncio->anunciante_id = $anunciante_id;
                 $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
                 $anuncio->id_externo = $imovel->ListingID;
-                $anuncio->titulo = $imovel->Title;
+                $anuncio->titulo = substr($imovel->Title, 0, 100);
                 $anuncio->descricao = $imovel->Details->Description;
                 $anuncio->descricao_resumida = substr($imovel->Details->Description, 0, 250);
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
@@ -118,7 +119,7 @@ class IntegracaoController extends Controller
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
                 $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
                 $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
-                $endereco->numero_endereco = $imovel->Location->StreetNumber ?? '100';
+                $endereco->numero_endereco = substr($imovel->Location->StreetNumber ?? '100', 0, 10);
                 $endereco->complemento_endereco = 'Complemento';
                 $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
                 $endereco->save();
@@ -129,7 +130,7 @@ class IntegracaoController extends Controller
 
                         $fotos = new AnuncioFotos();
                         $fotos->anuncio_id = $anuncio->id;
-                        $fotos->titulo = $foto->attributes()->caption ?? $imovel->Title;
+                        $fotos->titulo = substr($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50);
                         $fotos->arquivo = $foto;
 
                         if(isset($foto->attributes()->primary)){
@@ -163,7 +164,7 @@ class IntegracaoController extends Controller
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
                 $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
                 $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
-                $endereco->numero_endereco = $imovel->Location->StreetNumber ?? '100';
+                $endereco->numero_endereco = substr($imovel->Location->StreetNumber ?? '100', 0, 10);
                 $endereco->complemento_endereco = 'Complemento';
                 $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
 
@@ -177,7 +178,7 @@ class IntegracaoController extends Controller
                 $anuncio->endereco_id = $endereco->id;
                 $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
                 $anuncio->id_externo = $imovel->ListingID;
-                $anuncio->titulo = $imovel->Title;
+                $anuncio->titulo = substr($imovel->Title, 0, 100);
                 $anuncio->descricao = $imovel->Details->Description;
                 $anuncio->descricao_resumida = substr($imovel->Details->Description, 0, 250);
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
@@ -191,7 +192,7 @@ class IntegracaoController extends Controller
 
                         $fotos = new AnuncioFotos();
                         $fotos->anuncio_id = $anuncio->id;
-                        $fotos->titulo = $foto->Item->attributes()->caption ?? $imovel->Title;
+                        $fotos->titulo = substr($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50);
                         $fotos->arquivo = $foto->Item;
 
                         if(isset($foto->Item->attributes()->primary)){
@@ -224,13 +225,14 @@ class IntegracaoController extends Controller
 
         $logoUpdate = (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
 
-        if($logoUpdate):
-            $response_array['status'] = 'success';
-            echo json_encode($response_array);
-        else:
-            $response_array['status'] = 'error';
-            echo json_encode($response_array);
-        endif;
+        $messages['message'] = 'Erro';
+
+        if($logoUpdate){
+            Response::json($messages, 200);
+        }else{
+            Response::json($messages, 300);
+        }
+
     }
 
     public function GetTransacaoByTransactionType($TransactionType){
@@ -275,13 +277,13 @@ class IntegracaoController extends Controller
 
     public function LerXML(){
 
-        ini_set('max_execution_time', 240);
+        ini_set('max_execution_time', 920);
 
         $anunciante = Anunciante::find(1);
         $xml = $anunciante->integracao->first()->url;
 
         //se o caminho esteja hospedado noutro servidor
-        $url = "https://locare-xml.s3.amazonaws.com/locare_xml/imoveis_rosa_zapp.xml";
+        $url = "https://rosaimoveis.com.br/index.php?option=com_widesys&task=Integrations.getData&source=Portalgrupozap4&format=xml&token=c472d3a24399206626cae864eab8c4fb";
 
         //caso o caminho esteja hospedado no próprio servidor
         //coloque o ficheiro no caminho: 'public/assets/xml/file.xml'
@@ -325,43 +327,103 @@ class IntegracaoController extends Controller
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
                 $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
                 $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
-                $endereco->numero_endereco = $imovel->Location->StreetNumber ?? '100';
+                $endereco->numero_endereco = substr($imovel->Location->StreetNumber ?? '100', 0, 10);
                 $endereco->complemento_endereco = 'Complemento';
                 $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
-                $endereco->save();
+
+                if($endereco->save()){
+                    echo "Endereço Salvo";
+                }else{
+                    echo "Erro Salvar Endereço";
+                }
 
                 if($anuncio->save()){
 
-                    foreach($imovel->Media->Item as $foto){
+                    echo "Anuncio Salvo".$anuncio->id;
 
-                        $fotos = new AnuncioFotos();
-                        $fotos->anuncio_id = $anuncio->id;
-                        $fotos->titulo = $foto->attributes()->caption ?? $imovel->Title;
-                        $fotos->arquivo = $foto;
+                    $fotos_anuncio = AnuncioFotos::where('anuncio_id', $anuncio->id)->get();
+                    if($fotos_anuncio->count() > 0){
+                        AnuncioFotos::where('anuncio_id', $anuncio->id)->delete();
+                    }else{
+                        echo "Mão encontrei imagem";
+                    }
 
-                        if(isset($foto->attributes()->primary)){
-                            $fotos->destaque = 'S';
+
+                    if($imovel->Media->Item->count() > 0){
+
+                        if($imovel->ListingID == 'CA5075'){
+                            foreach($imovel->Media->Item as $foto){
+
+                                $fotos = new AnuncioFotos();
+                                $fotos->anuncio_id = $anuncio->id;
+                                $fotos->titulo = "Teste";
+                                $fotos->arquivo = $foto;
+
+                                if(isset($foto->attributes()->primary)){
+                                    $fotos->destaque = 'S';
+                                }else{
+                                    $fotos->destaque = 'N';
+                                }
+
+                                if($fotos->save()){
+                                    echo "Fotos Salva ID".$fotos->id;
+                                }else{
+                                    echo "Errro ao salvar foto";
+                                }
+                            }
                         }else{
-                            $fotos->destaque = 'N';
+                            foreach($imovel->Media->Item as $foto){
+
+                                $fotos = new AnuncioFotos();
+                                $fotos->anuncio_id = $anuncio->id;
+                                $fotos->titulo = substr($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50);
+                                $fotos->arquivo = $foto;
+
+                                if(isset($foto->attributes()->primary)){
+                                    $fotos->destaque = 'S';
+                                }else{
+                                    $fotos->destaque = 'N';
+                                }
+
+                                if($fotos->save()){
+                                    echo "Fotos Salva ID".$fotos->id;
+                                }else{
+                                    echo "Errro ao salvar foto";
+                                }
+                            }
                         }
 
-                        $fotos->save();
+
+                    }else{
+                        echo "Mão existe imagem";
                     }
+
+
 
                     $tipo_log = "Sucesso";
                     $subtipo_log = "Atualização";
                     $titulo = "Imóvel atualizado com sucesso";
                     $descricao_log = "Imóvel atualizado com sucesso";
 
+                    echo "Anuncio Salvo";
+
                 }else{
                     $tipo_log = "Erro";
                     $subtipo_log = "Atualização";
                     $titulo = "O Imóvel não foi atualizado totalmente";
                     $descricao_log = "Informações importantes estão ausentes";
+
+                    echo "Erro ao Salvar Anúncio";
                 }
 
                 $log = (New LogIntegracaoAnuncioController())->gravaLogAnuncio($LogIntegracao->id, $imovel->ListingID, $tipo_log, $subtipo_log, $titulo, $descricao_log);
                 $total_alterados++;
+
+                if($log){
+                    echo "LOG Salva".$log->id;
+                }else{
+                    echo "Errro ao salvar LOG";
+                }
 
             }else{
 
@@ -369,7 +431,7 @@ class IntegracaoController extends Controller
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
                 $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
                 $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
-                $endereco->numero_endereco = $imovel->Location->StreetNumber ?? '100';
+                $endereco->numero_endereco = substr($imovel->Location->StreetNumber ?? '100', 0, 10);
                 $endereco->complemento_endereco = 'Complemento';
                 $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
 
@@ -397,7 +459,7 @@ class IntegracaoController extends Controller
 
                         $fotos = new AnuncioFotos();
                         $fotos->anuncio_id = $anuncio->id;
-                        $fotos->titulo = $foto->Item->attributes()->caption ?? $imovel->Title;
+                        $fotos->titulo = substr($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50);
                         $fotos->arquivo = $foto->Item;
 
                         if(isset($foto->Item->attributes()->primary)){
@@ -430,7 +492,6 @@ class IntegracaoController extends Controller
 
         $logUpdate = (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
 
-        dd($logUpdate);
         if($logUpdate):
             echo "OK";
         else:

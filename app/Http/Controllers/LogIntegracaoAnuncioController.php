@@ -17,8 +17,12 @@ class LogIntegracaoAnuncioController extends Controller
         $logIntegracaoAnuncio->id_externo = $anuncio_id;
         $logIntegracaoAnuncio->titulo = $titulo;
         $logIntegracaoAnuncio->descricao_log = $descricao_log;
-        $logIntegracaoAnuncio->save();
 
-        return $logIntegracaoAnuncio;
+        if($logIntegracaoAnuncio->save()){
+            return $logIntegracaoAnuncio;
+        }else{
+            dd($logIntegracaoAnuncio);
+        }
+
     }
 }
