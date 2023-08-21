@@ -12,6 +12,9 @@ $(document).on('click', '#ProcessarAtualizacaoXML', function (e) {
             showCancelButton: true,
         },
         function() {
+
+            $("#carregando").show();
+
             $.ajax({
               url: '/painel/integracao/processar-xml',
               method: 'POST',
@@ -35,6 +38,7 @@ $(document).on('click', '#ProcessarAtualizacaoXML', function (e) {
                 }
               );
             }
+
 
           });
     });
