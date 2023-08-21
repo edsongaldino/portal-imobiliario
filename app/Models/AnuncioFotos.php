@@ -9,4 +9,10 @@ class AnuncioFotos extends Model
 {
     use HasFactory;
     protected $table = 'fotos';
+
+    public function DeletaFotos($anuncio_id){
+
+
+
+    }
 }
