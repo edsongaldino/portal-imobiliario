@@ -41,7 +41,7 @@ class AuthController extends Controller
         if(Auth::attempt($credencials)){
             $usuario = Auth::user();
             Session::put('usuario', $usuario);
-            return redirect()->route('dashboard')->with('success', 'Login Efetuado!');
+            return true;
         }
         return false;
     }

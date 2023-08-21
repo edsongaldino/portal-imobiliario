@@ -25,6 +25,9 @@ var KTSigninGeneral = (function () {
                                                 url: $('#kt_sign_in_form').attr('action'),
                                                 type: 'POST',
                                                 data : $('#kt_sign_in_form').serialize(),
+                                                success: function(result) {
+                                                    window.location='/dashboard'
+                                                },
                                                 error: function(){
                                                   alert("Erro");
                                                 }
