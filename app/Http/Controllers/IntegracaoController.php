@@ -312,7 +312,7 @@ class IntegracaoController extends Controller
                 $anuncio->anunciante_id = $anunciante_id;
                 $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
                 $anuncio->id_externo = $imovel->ListingID;
-                $anuncio->titulo = $imovel->Title;
+                $anuncio->titulo = mb_strcut($imovel->Title, 0, 250,"UTF-8");
                 $anuncio->descricao = $imovel->Details->Description;
                 $anuncio->descricao_resumida = mb_strcut($imovel->Details->Description, 0, 250,"UTF-8");
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
@@ -445,7 +445,7 @@ class IntegracaoController extends Controller
                 $anuncio->endereco_id = $endereco->id;
                 $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
                 $anuncio->id_externo = $imovel->ListingID;
-                $anuncio->titulo = $imovel->Title;
+                $anuncio->titulo = mb_strcut($imovel->Title, 0, 250,"UTF-8");
                 $anuncio->descricao = $imovel->Details->Description;
                 $anuncio->descricao_resumida = mb_strcut($imovel->Details->Description, 0, 250, "UTF-8");
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
