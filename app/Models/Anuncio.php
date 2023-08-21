@@ -41,6 +41,11 @@ class Anuncio extends Model
         return $this->hasMany(AnuncioFotos::class, 'anuncio_id', 'id');
     }
 
+    public function leads()
+    {
+        return $this->hasMany(Leads::class, 'anuncio_id', 'id');
+    }
+
     public function informacoes()
     {
         return $this->hasMany(AnuncioInformacoes::class, 'anuncio_id', 'id');

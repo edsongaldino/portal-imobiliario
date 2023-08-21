@@ -21,7 +21,14 @@ var KTSigninGeneral = (function () {
                                   setTimeout(function () {
                                       e.removeAttribute("data-kt-indicator"),
                                           (e.disabled = !1),
-                                          document.getElementById("kt_sign_in_form").submit();
+                                            $.ajax({
+                                                url: $('#kt_sign_in_form').attr('action'),
+                                                type: 'POST',
+                                                data : $('#kt_sign_in_form').serialize(),
+                                                error: function(){
+                                                  alert("Erro");
+                                                }
+                                              });
                                   }, 2e3))
                                 : Swal.fire({
                                       text: "Desculpe, parece que alguns erros foram detectados, tente novamente.",

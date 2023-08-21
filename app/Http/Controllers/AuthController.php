@@ -43,7 +43,7 @@ class AuthController extends Controller
             Session::put('usuario', $usuario);
             return redirect()->route('dashboard')->with('success', 'Login Efetuado!');
         }
-        return redirect()->back()->with('warning', 'Os dados informados estão incorretos!');
+        return false;
     }
 
     public function Logout(){

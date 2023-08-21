@@ -104,9 +104,9 @@ class IntegracaoController extends Controller
                 $anuncio->anunciante_id = $anunciante_id;
                 $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
                 $anuncio->id_externo = $imovel->ListingID;
-                $anuncio->titulo = substr($imovel->Title, 0, 100);
-                $anuncio->descricao = $imovel->Details->Description;
-                $anuncio->descricao_resumida = substr($imovel->Details->Description, 0, 250);
+                $anuncio->titulo = mb_strcut(addslashes($imovel->Title), 0, 100,"UTF-8");
+                $anuncio->descricao = addslashes($imovel->Details->Description);
+                $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
                 $anuncio->valor_condominio = Helper::converte_reais_to_mysql(0.00);
@@ -119,12 +119,17 @@ class IntegracaoController extends Controller
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
                 $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
                 $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
-                $endereco->numero_endereco = substr($imovel->Location->StreetNumber ?? '100', 0, 10);
+                $endereco->numero_endereco = mb_strcut($imovel->Location->StreetNumber ?? '100', 0, 10,"UTF-8");
                 $endereco->complemento_endereco = 'Complemento';
                 $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
                 $endereco->save();
 
                 if($anuncio->save()){
+
+                    $fotos_anuncio = AnuncioFotos::where('anuncio_id', $anuncio->id)->get();
+                    if($fotos_anuncio->count() > 0){
+                        AnuncioFotos::where('anuncio_id', $anuncio->id)->delete();
+                    }
 
                     foreach($imovel->Media->Item as $foto){
 
@@ -164,7 +169,7 @@ class IntegracaoController extends Controller
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
                 $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
                 $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
-                $endereco->numero_endereco = substr($imovel->Location->StreetNumber ?? '100', 0, 10);
+                $endereco->numero_endereco = mb_strcut($imovel->Location->StreetNumber ?? '100', 0, 10,"UTF-8");
                 $endereco->complemento_endereco = 'Complemento';
                 $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
 
@@ -178,9 +183,9 @@ class IntegracaoController extends Controller
                 $anuncio->endereco_id = $endereco->id;
                 $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
                 $anuncio->id_externo = $imovel->ListingID;
-                $anuncio->titulo = substr($imovel->Title, 0, 100);
-                $anuncio->descricao = $imovel->Details->Description;
-                $anuncio->descricao_resumida = substr($imovel->Details->Description, 0, 250);
+                $anuncio->titulo = mb_strcut(addslashes($imovel->Title), 0, 100,"UTF-8");
+                $anuncio->descricao = addslashes($imovel->Details->Description);
+                $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
                 $anuncio->valor_condominio = Helper::converte_reais_to_mysql(0.00);
@@ -192,7 +197,7 @@ class IntegracaoController extends Controller
 
                         $fotos = new AnuncioFotos();
                         $fotos->anuncio_id = $anuncio->id;
-                        $fotos->titulo = substr($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50);
+                        $fotos->titulo = mb_strcut($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
                         $fotos->arquivo = $foto->Item;
 
                         if(isset($foto->Item->attributes()->primary)){
@@ -225,12 +230,10 @@ class IntegracaoController extends Controller
 
         $logoUpdate = (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
 
-        $messages['message'] = 'Erro';
-
         if($logoUpdate){
-            Response::json($messages, 200);
+            return true;
         }else{
-            Response::json($messages, 300);
+            return false;
         }
 
     }

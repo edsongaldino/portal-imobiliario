@@ -18,7 +18,7 @@
 					<div class="row">
 						<div class="col-lg-12 mb10">
 							<div class="breadcrumb_content style2">
-								<h2 class="breadcrumb_title">Olá, Edson!</h2>
+								<h2 class="breadcrumb_title">Olá, {{ $usuario->name }}!</h2>
 								<p>Que bom ver você por aqui novamente!</p>
 							</div>
 						</div>
@@ -26,7 +26,7 @@
 							<div class="ff_one">
 								<div class="icon"><span class="flaticon-home"></span></div>
 								<div class="detais">
-									<div class="timer">37</div>
+									<div class="timer">{{ $usuario->anunciante->anuncios->count() }}</div>
 									<p>Anúncios</p>
 								</div>
 							</div>
@@ -44,7 +44,7 @@
 							<div class="ff_one style3">
 								<div class="icon"><span class="flaticon-chat"></span></div>
 								<div class="detais">
-									<div class="timer">35</div>
+									<div class="timer">{{ Helper::GetTotalLeadsAnunciante($usuario->anunciante->id) }}</div>
 									<p>Leads</p>
 								</div>
 							</div>
@@ -60,7 +60,7 @@
 						</div>
 						<div class="col-xl-7">
 							<div class="application_statics">
-								<h4>Estatíisticas de Acesso</h4>
+								<h4>Estatísticas de Acesso</h4>
 								<div class="c_container"></div>
 							</div>
 						</div>
@@ -68,42 +68,19 @@
 							<div class="recent_job_activity">
 								<h4 class="title">Resumo (Últimas importações) </h4>
 								<a href="#"><div class="btn-ver-resumo"><span class="flaticon-view"></span> Ver Todos</div></a>
-								<div class="grid success">
-									<ul>
-										<li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
-										<li class="list-inline-item"><p><strong>45825 - Apartamento 3 quartos Goiabeiras</strong> foi aprovado!.</p></li>
-									</ul>
-								</div>
-								<div class="grid error">
-									<ul>
-										<li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
-										<li class="list-inline-item"><p><strong>45825 - Casa Mobiliada JD Cuiabá</strong> foi aprovado!.</p></li>
-									</ul>
-								</div>
-								<div class="grid warning">
-									<ul>
-										<li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
-										<li class="list-inline-item"><p><strong>45825 - Città DeiFiori</strong> foi aprovado, mas com observações.</p></li>
-									</ul>
-								</div>
-								<div class="grid warning">
-									<ul>
-										<li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
-										<li class="list-inline-item"><p><strong>45825 - Reserva Di Bonifácia</strong> foi aprovado, mas com observações.</p></li>
-									</ul>
-								</div>
-								<div class="grid success">
-									<ul>
-										<li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
-										<li class="list-inline-item"><p><strong>45825 - Città DeiFiori</strong> foi aprovado!.</p></li>
-									</ul>
-								</div>
-								<div class="grid success mb0">
-									<ul class="pb0 mb0 bb_none">
-										<li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
-										<li class="list-inline-item"><p><strong>45825 - Città DeiFiori</strong> foi aprovado!.</p></li>
-									</ul>
-								</div>
+                                @if (isset($loganuncios))
+                                @foreach ($loganuncios as $log)
+                                    <div class="grid {{ $log->tipo }}">
+                                        <ul>
+                                            <li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
+                                            <li class="list-inline-item"><p><strong>{{ $log->id_externo }} - {{ $log->titulo }}</strong></p></li>
+                                        </ul>
+                                    </div>
+                                @endforeach
+                                @endif
+
+
+
 							</div>
 						</div>
 					</div>
@@ -144,7 +121,7 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/wow.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/dashboard-script.js') }}"></script>
-<!-- Custom script for all pages --> 
+<!-- Custom script for all pages -->
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
 </body>
 </html>
