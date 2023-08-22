@@ -85,7 +85,7 @@
                                 @foreach ($logs as $log)
                                 <tr>
                                     <td class="dn-lg">{{ $log->id_externo }}</td>
-                                    <th class="title" scope="row">{{ $log->tituloAnuncio }}</th>
+                                    <th class="title" scope="row">{{ $log->tituloAnuncio ?? '' }}</th>
                                     <td class="dn-lg"></td>
                                     <td></td>
                                     <td>{{ $log->tipo }}</td>

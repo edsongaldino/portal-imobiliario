@@ -39,11 +39,11 @@
                                     <td class="dn-lg">{{ $log->id }}</td>
                                     <td class="title" scope="row">{{ $log->created_at }}</td>
                                     <td class="dn-lg">{{ $log->created_at }}</td>
-                                    <td>{{ $log->total_incluidos }}</td>
+                                    <td>{{ $log->total_incluidos + $log->total_alterados }}</td>
                                     <td class="para">{{ $log->total_alertas }}</td>
                                     <td>
                                         <ul class="view_edit_delete_list mb0">
-                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="View"><a href="{{ url('painel/integracoes/'.$log->id.'/relatorio-importacao') }}"><span class="flaticon-view"></span></a></li>
+                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Relatório Completo"><a href="{{ url('painel/integracoes/'.$log->id.'/relatorio-importacao') }}"><span class="flaticon-view"></span></a></li>
                                         </ul>
                                     </td>
                                 </tr>

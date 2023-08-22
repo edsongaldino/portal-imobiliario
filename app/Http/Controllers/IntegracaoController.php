@@ -48,7 +48,7 @@ class IntegracaoController extends Controller
     public function RelatorioGeral()
     {
         $usuario = Auth::user();
-        $logs = LogIntegracao::where('anunciante_id',Auth::user()->anunciante->id)->paginate(15);
+        $logs = LogIntegracao::where('anunciante_id',Auth::user()->anunciante->id)->orderBy('id', 'DESC')->paginate(15);
 
         return view('painel.integracao.relatorio_geral', compact('usuario', 'logs'));
     }
@@ -59,9 +59,9 @@ class IntegracaoController extends Controller
         $RelatorioGeral = LogIntegracao::find($id);
         $logs = DB::table('log_integracao_anuncios')
                 ->join('anuncios', 'anuncios.id_externo', '=', 'log_integracao_anuncios.id_externo')
-                ->where('log_integracao_anuncios.id', $id)
+                ->where('log_integracao_anuncios.log_integracao_id', $id)
                 ->select('log_integracao_anuncios.*', 'anuncios.titulo as tituloAnuncio')
-                ->paginate(15);
+                ->orderBy('log_integracao_anuncios.id', 'DESC')->paginate(15);
 
         return view('painel.integracao.relatorio_individual', compact('usuario', 'logs', 'RelatorioGeral'));
     }
@@ -135,7 +135,7 @@ class IntegracaoController extends Controller
 
                         $fotos = new AnuncioFotos();
                         $fotos->anuncio_id = $anuncio->id;
-                        $fotos->titulo = substr($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50);
+                        $fotos->titulo = mb_strcut($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
                         $fotos->arquivo = $foto;
 
                         if(isset($foto->attributes()->primary)){
