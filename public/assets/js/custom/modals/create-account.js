@@ -164,6 +164,7 @@ var KTCreateAccount = function() {
             })), $(i.querySelector('[id="EnviarFormulario"]')).on("click", (function() {
 
                 var datastring = $("#kt_create_account_form").serialize();
+
                 $.ajax({
                     type: "POST",
                     url: "/finalizar-cadastro",

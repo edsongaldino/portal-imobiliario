@@ -39,24 +39,16 @@
 												</div>
 											</div>
 										</li>
-										<li>
-											<div class="small_dropdown2">
-											    <div id="prncgs" class="btn dd_btn">
-											    	<span>Preço</span>
-											    	<label for="exampleInputEmail2"><span class="fa fa-angle-down"></span></label>
-											    </div>
-											  	<div class="dd_content2">
-												    <div class="pricing_acontent">
-												    	<span id="slider-range-value1"></span>
-														<span class="mt0" id="slider-range-value2"></span>
-													    <div id="slider"></div>
-														<!-- <input type="text" class="amount" placeholder="$52,239">
-														<input type="text" class="amount2" placeholder="$985,14">
-														<div class="slider-range"></div> -->
-												    </div>
-											  	</div>
-											</div>
-										</li>
+										<li class="min_area style2 list-inline-item">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
+                                            </div>
+                                        </li>
+                                        <li class="max_area list-inline-item">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
+                                            </div>
+                                        </li>
 										<li>
 											<div class="search_option_two">
 												<div class="candidate_revew_select">
@@ -105,12 +97,12 @@
 
 										<li class="min_area style2 list-inline-item">
 										    <div class="form-group">
-										    	<input type="text" class="form-control" id="exampleInputName2" placeholder="Área Min">
+										    	<input type="text" class="form-control moeda" id="exampleInputName2" placeholder="Área Min">
 										    </div>
 										</li>
 										<li class="max_area list-inline-item">
 										    <div class="form-group">
-										    	<input type="text" class="form-control" id="exampleInputName3" placeholder="Área Max">
+										    	<input type="text" class="form-control moeda" id="exampleInputName3" placeholder="Área Max">
 										    </div>
 										</li>
 										<li>
@@ -283,12 +275,12 @@
 									</li>
 									<li class="min_area style2 list-inline-item">
 										<div class="form-group">
-											<input type="text" class="form-control" id="exampleInputName2" placeholder="Valor Min">
+											<input type="text" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
 										</div>
 									</li>
 									<li class="max_area list-inline-item">
 										<div class="form-group">
-											<input type="text" class="form-control" id="exampleInputName3" placeholder="Valor Max">
+											<input type="text" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
 										</div>
 									</li>
 									<li>
@@ -339,12 +331,12 @@
 
 									<li class="min_area list-inline-item">
 									    <div class="form-group">
-									    	<input type="text" class="form-control" id="exampleInputName2" placeholder="Min Area">
+									    	<input type="text" class="form-control moeda" id="exampleInputName2" placeholder="Min Area">
 									    </div>
 									</li>
 									<li class="max_area list-inline-item">
 									    <div class="form-group">
-									    	<input type="text" class="form-control" id="exampleInputName3" placeholder="Max Area">
+									    	<input type="text" class="form-control moeda" id="exampleInputName3" placeholder="Max Area">
 									    </div>
 									</li>
 									<li>
@@ -533,7 +525,9 @@
 										<div class="dtls_headr">
 											<ul class="tag">
 												<li class="list-inline-item"><a href="#">{{ $anuncio->transacao }}</a></li>
-												<li class="list-inline-item"><a href="#">Lançamento</a></li>
+                                                @if ($anuncio->lancamento == 'S')
+                                                <li class="list-inline-item"><a href="#">Lançamento</a></li>
+                                                @endif
 											</ul>
 											<a class="fp_price" href="#">R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</a>
 										</div>

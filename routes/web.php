@@ -69,6 +69,8 @@ Route::post('/painel/integracao/processar-xml', 'App\Http\Controllers\Integracao
 Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('imoveis.buscar');
 Route::get('/imoveis/{id}/{cidade}/{titulo}', 'App\Http\Controllers\AnuncioController@DetalhesAnuncio')->name('imoveis.detalhes');
 Route::get('/', 'App\Http\Controllers\AppController@PaginaInicial')->name('pagina-inicial');
+Route::match(['get', 'post'],'/lista-imoveis/{transacao}', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('lista-imoveis');
+
 
 Route::get('/painel/integracao/ler-xml', 'App\Http\Controllers\IntegracaoController@LerXML')->name('integracao.ler-xml');
 ?>

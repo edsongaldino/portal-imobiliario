@@ -8,7 +8,7 @@ var KTSigninGeneral = (function () {
                 (i = FormValidation.formValidation(t, {
                     fields: {
                         email: { validators: { notEmpty: { message: "É necessário um endereço de e-mail" }, emailAddress: { message: "O valor não é um endereço de e-mail válido" } } },
-                        password: { validators: { notEmpty: { message: "A senha é necessária" } } },
+                        password: { validators: { notEmpty: { message: "A senha é necessária" } } }
                     },
                     plugins: { trigger: new FormValidation.plugins.Trigger(), bootstrap: new FormValidation.plugins.Bootstrap5({ rowSelector: ".fv-row" }) },
                 })),

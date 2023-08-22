@@ -20,13 +20,13 @@
             <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
             <ul id="respMenu" class="ace-responsive-menu text-right" data-menu-style="horizontal">
                 <li>
-                    <a href="{{url("/imoveis-buscar")}}"><span class="title">Comprar</span></a>
+                    <a href="{{url("/lista-imoveis/venda")}}"><span class="title">Comprar</span></a>
                 </li>
                 <li>
-                    <a href="{{url("/imoveis-buscar")}}"><span class="title">Alugar</span></a>
+                    <a href="{{url("/lista-imoveis/locacao")}}"><span class="title">Alugar</span></a>
                 </li>
                 <li>
-                    <a href="{{url("/imoveis-buscar")}}"><span class="title">Lançamentos</span></a>
+                    <a href="{{url("/lista-imoveis/novos")}}"><span class="title">Lançamentos</span></a>
                 </li>
 
                 <li class="last">

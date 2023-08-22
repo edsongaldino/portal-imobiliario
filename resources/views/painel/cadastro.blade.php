@@ -327,7 +327,7 @@
 												<label class="form-label mb-3">CNPJ</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input type="text" class="form-control form-control-lg form-control-solid" name="cnpj" placeholder="" value="" />
+												<input type="text" class="form-control form-control-lg form-control-solid cnpj" name="cnpj" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 										</div>
@@ -364,7 +364,7 @@
 												<label class="form-label">Telefone comercial</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input name="telefone_comercial" class="form-control form-control-lg form-control-solid" value="" />
+												<input name="telefone_comercial" class="form-control form-control-lg form-control-solid telefone" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -374,7 +374,7 @@
 												<label class="fs-6 fw-bold form-label required">Whatsapp</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input name="whatsapp" class="form-control form-control-lg form-control-solid" value="" />
+												<input name="whatsapp" class="form-control form-control-lg form-control-solid telefone" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -385,7 +385,7 @@
 											<label class="fs-6 fw-bold form-label required">Email</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input name="email" class="form-control form-control-lg form-control-solid" value="" />
+											<input name="email" type="email" class="form-control form-control-lg form-control-solid" value="" />
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
@@ -401,7 +401,7 @@
 
                                         <!--begin::Label-->
                                         <div class="me-5 mb-10">
-                                            <label class="fs-6 fw-bold form-label">Preencha abaixo os dados de acesso</label>
+                                            <label class="fs-6 fw-bold form-label">Preencha abaixo seus dados de acesso</label>
                                         </div>
                                         <!--end::Label-->
 
@@ -409,10 +409,10 @@
                                             <!--begin::Input group-->
                                             <div class="fv-row col-12">
                                                 <!--end::Label-->
-                                                <label class="form-label">Seu Login</label>
+                                                <label class="form-label">Seu Login/E-mail</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input name="login" type="text" class="form-control form-control-lg form-control-solid" value="admin@gmail.com" readonly />
+                                                <input name="login" type="email" class="form-control form-control-lg form-control-solid" value="" />
                                                 <!--end::Input-->
                                             </div>
                                             <!--end::Input group-->
@@ -609,6 +609,9 @@
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+        <script src="{{ asset('assets/painel/js/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+        <script src="{{ asset('assets/global/js/jquery.maskMoney.js') }}"></script>
+        <script src="{{ asset('assets/global/js/mascaras.js') }}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="{{ asset('assets/js/custom/modals/create-account.js') }}"></script>
