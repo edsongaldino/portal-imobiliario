@@ -12,12 +12,22 @@ class AnuncioInformacoes extends Model
 
     public function GravaInformacao($anuncio_id, $chave, $valor){
 
-        $endereco = new AnuncioInformacoes();
-        $endereco->cidade_id = $request->cidade_endereco;
-        $endereco->cep_endereco = $request->cep_endereco;
-        $endereco->bairro_endereco = $request->bairro_endereco;
-        $endereco->save();
+        $anuncioInfo = new AnuncioInformacoes();
+        $anuncioInfo->anuncio_id = $anuncio_id;
+        $anuncioInfo->chave = $chave;
+        $anuncioInfo->valor = $valor;
+        $anuncioInfo->save();
 
-        return $endereco;
+        return $anuncioInfo;
+    }
+
+    public function DeletaInformacao($anuncio_id, $chave){
+        $anuncioInformacao = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->get();
+        if($anuncioInformacao->count() > 0){
+            if($anuncioInformacao->delete()){
+                return true;
+            }
+        }
+        return false;
     }
 }

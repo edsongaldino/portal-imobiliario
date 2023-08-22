@@ -109,7 +109,7 @@ class IntegracaoController extends Controller
                 $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
-                $anuncio->valor_condominio = Helper::converte_reais_to_mysql(0.00);
+                $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
                 $anuncio->situacao = 'Liberado';
                 $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
                 $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
@@ -188,7 +188,7 @@ class IntegracaoController extends Controller
                 $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
-                $anuncio->valor_condominio = Helper::converte_reais_to_mysql(0.00);
+                $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
                 $anuncio->situacao = 'Liberado';
 
                 if($anuncio->save()){
@@ -274,9 +274,56 @@ class IntegracaoController extends Controller
         return $tipo_publicacao;
     }
 
-
-
-
+    public function GetInformacaoByFeature($Feature){
+        switch($Feature){
+            case 'Gym':
+                $chave = 'Academia';
+                break;
+            case 'BBQ':
+                $chave = 'Churrasqueira';
+                break;
+            case 'Elevator':
+                $chave = 'Elevador';
+                break;
+            case 'Pool':
+                $chave = 'Piscina';
+                break;
+            case 'Playground':
+                $chave = 'Playground';
+                break;
+            case 'Party Room':
+                $chave = 'Salão de festas';
+                break;
+            case 'Kitchen':
+                $chave = 'Cozinha';
+                break;
+            case 'Edicule':
+                $chave = 'Edícula';
+                break;
+            case 'Parking Garage':
+                $chave = 'Estacionamento';
+                break;
+            case 'Dinner Room':
+                $chave = 'Sala de jantar';
+                break;
+            case 'Internet Connection':
+                $chave = 'Internet';
+                break;
+            case 'Sports Court':
+                $chave = 'Quadra de esportes';
+                break;
+            case 'Garden':
+                $chave = 'Jardim';
+                break;
+            case 'Dinner Room':
+                $chave = 'Sala de jantar';
+                break;
+            default:
+                $chave = '';
+                break;
+        }
+        return $chave;
+    }
 
     public function LerXML(){
 
