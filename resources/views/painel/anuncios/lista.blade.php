@@ -74,25 +74,25 @@
 										    		<th scope="row">
 														<div class="feat_property list favorite_page style2">
 															<div class="thumb">
-																<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
+																<img class="img-whp" src="{{ $anuncio->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
 																<div class="thmb_cntnt">
 																	<ul class="tag mb0">
-																		<li class="list-inline-item dn">Locação</li>
-																		<li class="list-inline-item"><a href="#">Venda</a></li>
+																		<li class="list-inline-item dn">{{ $anuncio->tipo->nome }}</li>
+																		<li class="list-inline-item"><a href="#">{{ $anuncio->transacao }}</a></li>
 																	</ul>
 																</div>
 															</div>
 															<div class="details">
 																<div class="tc_content">
-																	<h4>Cittá Splendore</h4>
-																	<p><span class="flaticon-placeholder"></span> Rua D, 155 - Despraiado, Cuiabá - MT</p>
-																	<a class="fp_price text-thm" href="#">R$ 187.000<small>,00</small></a>
+																	<h4>{{ $anuncio->titulo }}</h4>
+																	<p><span class="flaticon-placeholder"></span> {{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}</p>
+																	<a class="fp_price text-thm" href="#">R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</a>
 																</div>
 															</div>
 														</div>
 										    		</th>
-										    		<td>30 Dezembro, 2020</td>
-										    		<td><span class="status_tag badge">Bloqueado</span></td>
+										    		<td>{{ $anuncio->updated_at }}</td>
+										    		<td><span class="status_tag badge">{{ $anuncio->situacao }}</span></td>
 										    		<td>2.345</td>
 										    		<td>
 										    			<ul class="view_edit_delete_list mb0">

@@ -41,9 +41,9 @@ class AuthController extends Controller
         if(Auth::attempt($credencials)){
             $usuario = Auth::user();
             Session::put('usuario', $usuario);
-            return redirect()->route('dashboard')->with('success', 'Login Efetuado!');
+            return true;
         }
-        return redirect()->back()->with('warning', 'Os dados informados estão incorretos!');
+        return false;
     }
 
     public function Logout(){

@@ -7,6 +7,7 @@ use App\CalendarioAluno;
 use App\Contrato;
 use App\Faturamento;
 use App\FaturamentoContrato;
+use App\Models\Leads;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Carbon;
 
@@ -392,6 +393,15 @@ class Helper{
         // retorna a string
         return $string;
     }
+
+    public static function GetTotalLeadsAnunciante($anunciante_id) {
+
+        $leads = Leads::where('deleted_at','<>',null)->count();
+
+        return $leads;
+
+    }
+
 
 
 }

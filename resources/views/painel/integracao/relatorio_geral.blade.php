@@ -1,5 +1,6 @@
 @extends('layouts.painel')
 @section('conteudo')
+<div id="carregando"></div>
 <div class="row">
 
 
