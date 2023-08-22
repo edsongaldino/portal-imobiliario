@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/integracao-xml', [IntegracaoController::class, 'LerXML']);
 
-Route::get('/', function () {
-    return view('portal.index');
-});
-
 Route::get('/login', function () {
     return view('painel.login');
 });
@@ -68,10 +64,11 @@ Route::post('/painel/integracao-salvar', 'App\Http\Controllers\IntegracaoControl
 Route::get('/painel/integracoes/relatorio-geral', 'App\Http\Controllers\IntegracaoController@RelatorioGeral')->name('painel.integracoes.relatorio-geral')->middleware('auth');
 Route::get('/painel/integracoes/{id}/relatorio-importacao', 'App\Http\Controllers\IntegracaoController@RelatorioIndividual')->name('painel.integracoes.relatorio-importacao')->middleware('auth');
 Route::post('/painel/integracao/processar-xml', 'App\Http\Controllers\IntegracaoController@ProcessarXML')->name('integracao.processar-xml')->middleware('auth');
+
 //Rotas Portal
 Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('imoveis.buscar');
 Route::get('/imoveis/{id}/{cidade}/{titulo}', 'App\Http\Controllers\AnuncioController@DetalhesAnuncio')->name('imoveis.detalhes');
-
+Route::get('/', 'App\Http\Controllers\AppController@PaginaInicial')->name('pagina-inicial');
 
 Route::get('/painel/integracao/ler-xml', 'App\Http\Controllers\IntegracaoController@LerXML')->name('integracao.ler-xml');
 ?>

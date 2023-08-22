@@ -44,12 +44,10 @@
 													<div class="candidate_revew_select">
 														<select class="selectpicker w100 show-tick" multiple>
 															<option>Tipo do Imóvel</option>
-															<option>Apartmento</option>
-															<option>Casa</option>
-															<option>Condomínio</option>
-															<option>Lote</option>
-															<option>Sala Comercial</option>
-															<option>Flat</option>
+                                                            @foreach ($tipos as $tipo)
+                                                            <option>{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
+                                                            @endforeach
+
 														</select>
 													</div>
 												</div>

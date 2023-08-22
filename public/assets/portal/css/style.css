@@ -2686,6 +2686,7 @@ input.amount4:focus{
 .home1-advnc-search ul.dropdown-menu.inner.show li{
   font-size: 14px;
   margin-right: 0 !important;
+  width: 95%;
 }
 .home1-advnc-search .search_option_two .dropdown-menu{
   top: 50px !important;
@@ -11790,11 +11791,11 @@ a.btn.btn_error{
   margin-bottom: 10px;
 }
 .sasw_list .min_area {
-  margin-right: 20px;
+  margin-right: 0px;
 }
 .sasw_list .min_area,
 .sasw_list .max_area{
-  width: 135px;
+  width: 47%;
 }
 .sasw_list .max_area{
   float: right;
