@@ -191,7 +191,6 @@ class IntegracaoController extends Controller
                 $endereco->numero_endereco = mb_strcut($imovel->Location->StreetNumber ?? '100', 0, 10,"UTF-8");
                 $endereco->complemento_endereco = 'Complemento';
                 $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
-
                 $endereco->save();
 
                 $anuncio = new Anuncio();
@@ -213,20 +212,20 @@ class IntegracaoController extends Controller
                 $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
                 $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
 
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'), $imovel->Details->LivingArea ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'), $imovel->Details->LotArea ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'), $imovel->Details->Buildings ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'), $imovel->Details->Floors ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'), $imovel->Details->UnitFloor ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), $imovel->Details->Bedrooms ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'), $imovel->Details->Bathrooms ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'), $imovel->Details->Suites ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'), $imovel->Details->Garage ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'), $imovel->Details->PropertyAdministrationFee ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'), $imovel->Details->YearlyTax ?? '0');
-                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'), $imovel->Details->YearBuilt ?? '0');
-
                 if($anuncio->save()){
+
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'), $imovel->Details->LivingArea ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'), $imovel->Details->LotArea ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'), $imovel->Details->Buildings ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'), $imovel->Details->Floors ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'), $imovel->Details->UnitFloor ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), $imovel->Details->Bedrooms ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'), $imovel->Details->Bathrooms ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'), $imovel->Details->Suites ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'), $imovel->Details->Garage ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'), $imovel->Details->PropertyAdministrationFee ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'), $imovel->Details->YearlyTax ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'), $imovel->Details->YearBuilt ?? '0');
 
                     foreach($imovel->Features as $Itens){
                         (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Sim');
