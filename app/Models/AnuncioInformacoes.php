@@ -21,6 +21,21 @@ class AnuncioInformacoes extends Model
         return $anuncioInfo;
     }
 
+    public function UpdateInformacao($anuncio_id, $chave, $valor){
+
+        $anuncioInfoUpdate = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->get();
+
+        if($anuncioInfoUpdate->count() > 0){
+            $anuncioInfoUpdate->valor = $valor;
+            $dadosAnuncio = $anuncioInfoUpdate->save();
+        }else{
+            $dadosAnuncio = $this->GravaInformacao($anuncio_id, $chave, $valor);
+        }
+
+        return $dadosAnuncio;
+    }
+
+
     public function DeletaInformacao($anuncio_id, $chave){
         $anuncioInformacao = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->get();
         if($anuncioInformacao->count() > 0){
@@ -30,4 +45,5 @@ class AnuncioInformacoes extends Model
         }
         return false;
     }
+
 }

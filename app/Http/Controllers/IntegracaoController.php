@@ -9,6 +9,7 @@ use App\Models\Anunciante;
 use App\Models\AnuncianteIntegracao;
 use App\Models\Anuncio;
 use App\Models\AnuncioFotos;
+use App\Models\AnuncioInformacoes;
 use App\Models\Endereco;
 use App\Models\LogIntegracao;
 use Illuminate\Http\Request;
@@ -100,6 +101,7 @@ class IntegracaoController extends Controller
                 $anuncio = Anuncio::find($dadosAnuncio->id);
                 $anuncio->finalidade = (New AnuncioFinalidadeController())->GetFinalidadeByTipo($imovel->Details->PropertyType);
                 $anuncio->tipo_publicacao = $this->GetTipoByPublicationType($imovel->PublicationType);
+                $anuncio->origem_publicacao = 'Integracao';
                 $anuncio->tipo_id = (New AnuncioTipoController())->GetIDTipoByNome($imovel->Details->PropertyType);
                 $anuncio->anunciante_id = $anunciante_id;
                 $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
@@ -114,6 +116,18 @@ class IntegracaoController extends Controller
                 $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
                 $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
 
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'), $imovel->Details->LivingArea ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'), $imovel->Details->LotArea ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'), $imovel->Details->Buildings ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'), $imovel->Details->Floors ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'), $imovel->Details->UnitFloor ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), $imovel->Details->Bedrooms ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'), $imovel->Details->Bathrooms ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'), $imovel->Details->Suites ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'), $imovel->Details->Garage ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'), $imovel->Details->PropertyAdministrationFee ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'), $imovel->Details->YearlyTax ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'), $imovel->Details->YearBuilt ?? '0');
 
                 $endereco = Endereco::find($dadosAnuncio->endereco_id);
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
@@ -125,6 +139,11 @@ class IntegracaoController extends Controller
                 $endereco->save();
 
                 if($anuncio->save()){
+
+                    foreach($imovel->Features as $Itens){
+                        (New AnuncioInformacoes())->DeletaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature));
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Sim');
+                    }
 
                     $fotos_anuncio = AnuncioFotos::where('anuncio_id', $anuncio->id)->get();
                     if($fotos_anuncio->count() > 0){
@@ -178,6 +197,7 @@ class IntegracaoController extends Controller
                 $anuncio = new Anuncio();
                 $anuncio->finalidade = (New AnuncioFinalidadeController())->GetFinalidadeByTipo($imovel->Details->PropertyType);
                 $anuncio->tipo_publicacao = $this->GetTipoByPublicationType($imovel->PublicationType);
+                $anuncio->origem_publicacao = 'Integracao';
                 $anuncio->tipo_id = (New AnuncioTipoController())->GetIDTipoByNome($imovel->Details->PropertyType);
                 $anuncio->anunciante_id = $anunciante_id;
                 $anuncio->endereco_id = $endereco->id;
@@ -190,8 +210,27 @@ class IntegracaoController extends Controller
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
                 $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
                 $anuncio->situacao = 'Liberado';
+                $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
+                $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
+
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'), $imovel->Details->LivingArea ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'), $imovel->Details->LotArea ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'), $imovel->Details->Buildings ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'), $imovel->Details->Floors ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'), $imovel->Details->UnitFloor ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), $imovel->Details->Bedrooms ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'), $imovel->Details->Bathrooms ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'), $imovel->Details->Suites ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'), $imovel->Details->Garage ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'), $imovel->Details->PropertyAdministrationFee ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'), $imovel->Details->YearlyTax ?? '0');
+                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'), $imovel->Details->YearBuilt ?? '0');
 
                 if($anuncio->save()){
+
+                    foreach($imovel->Features as $Itens){
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Sim');
+                    }
 
                     foreach($imovel->Media as $foto){
 
@@ -318,8 +357,45 @@ class IntegracaoController extends Controller
             case 'Dinner Room':
                 $chave = 'Sala de jantar';
                 break;
+            case 'LivingArea':
+                $chave = 'Área Útil';
+                break;
+            case 'LotArea':
+                $chave = 'Área de lote';
+                break;
+            case 'Buildings':
+                $chave = 'Torres';
+                break;
+            case 'Andar':
+                $chave = 'Quadra de esportes';
+                break;
+            case 'UnitFloor':
+                $chave = 'Pavimentos';
+                break;
+            case 'Bedrooms':
+                $chave = 'Quartos';
+                break;
+            case 'Bathrooms':
+                $chave = 'Banheiros';
+                break;
+            case 'Suites':
+                $chave = 'Suites';
+                break;
+            case 'Garage':
+                $chave = 'Garagem';
+                break;
+            case 'PropertyAdministrationFee':
+                $chave = 'Condomínio';
+                break;
+            case 'YearlyTax':
+                $chave = 'IPTU';
+                break;
+            case 'YearBuilt':
+                $chave = 'Ano/Construção';
+                break;
+
             default:
-                $chave = '';
+                $chave = '-';
                 break;
         }
         return $chave;
