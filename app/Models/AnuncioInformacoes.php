@@ -23,11 +23,10 @@ class AnuncioInformacoes extends Model
 
     public function UpdateInformacao($anuncio_id, $chave, $valor){
 
-        $anuncioInfoUpdate = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->get();
+        $anuncioInfoUpdate = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave);
 
-        if($anuncioInfoUpdate->count() > 0){
-            $anuncioInfoUpdate->valor = $valor;
-            $dadosAnuncio = $anuncioInfoUpdate->save();
+        if($anuncioInfoUpdate->get()->count() > 0){
+            $anuncioInfoUpdate->update(['valor' => $valor]);
         }else{
             $dadosAnuncio = $this->GravaInformacao($anuncio_id, $chave, $valor);
         }
