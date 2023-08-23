@@ -41,7 +41,7 @@
             <li class="treeview active"><a href="{{ url("/dashboard") }}"><i class="flaticon-layers"></i><span> Dashboard</span></a></li>
             <li class="treeview"><a href="{{ url("/painel/leads") }}"><i class="flaticon-envelope"></i><span> Contatos (Leads)</span></a></li>
             <li class="treeview"><a href="{{ url("/painel/anuncios") }}"><i class="flaticon-home"></i> <span>Gerenciar Anúncios</span></a></li>
-            <li class="treeview"><a href="{{ url("/dashboard") }}"><i class="flaticon-share"></i><span> Integrações</span></a></li>
+            <li class="treeview"><a href="{{ url("/painel/integracoes/relatorio-geral") }}"><i class="flaticon-share"></i><span> Integrações</span></a></li>
             <li><a href="/painel/{{ Auth::user()->id }}/perfil"><i class="flaticon-user"></i> <span>Meu Perfil</span></a></li>
             <li><a href="{{ url("/logout-painel") }}"><i class="flaticon-logout"></i> <span>Sair</span></a></li>
             <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="{{ url("/painel/anuncios/incluir") }}"><span class="flaticon-plus"></span> Incluir Anúncio</a></li>

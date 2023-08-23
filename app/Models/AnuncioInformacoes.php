@@ -26,7 +26,7 @@ class AnuncioInformacoes extends Model
         $anuncioInfoUpdate = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave);
 
         if($anuncioInfoUpdate->get()->count() > 0){
-            $anuncioInfoUpdate->update(['valor' => $valor]);
+            $dadosAnuncio = $anuncioInfoUpdate->update(['valor' => $valor]);
         }else{
             $dadosAnuncio = $this->GravaInformacao($anuncio_id, $chave, $valor);
         }
