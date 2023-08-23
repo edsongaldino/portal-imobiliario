@@ -116,18 +116,18 @@ class IntegracaoController extends Controller
                 $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
                 $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
 
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'), $imovel->Details->LivingArea ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'), $imovel->Details->LotArea ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'), $imovel->Details->Buildings ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'), $imovel->Details->Floors ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'), $imovel->Details->UnitFloor ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), $imovel->Details->Bedrooms ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'), $imovel->Details->Bathrooms ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'), $imovel->Details->Suites ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'), $imovel->Details->Garage ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'), $imovel->Details->PropertyAdministrationFee ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'), $imovel->Details->YearlyTax ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'), $imovel->Details->YearBuilt ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LivingArea'), $imovel->Details->LivingArea ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LotArea'), $imovel->Details->LotArea ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Buildings'), $imovel->Details->Buildings ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Floors'), $imovel->Details->Floors ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('UnitFloor'), $imovel->Details->UnitFloor ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bedrooms'), $imovel->Details->Bedrooms ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bathrooms'), $imovel->Details->Bathrooms ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Suites'), $imovel->Details->Suites ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Garage'), $imovel->Details->Garage ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'), $imovel->Details->PropertyAdministrationFee ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearlyTax'), $imovel->Details->YearlyTax ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearBuilt'), $imovel->Details->YearBuilt ?? '0');
 
                 $endereco = Endereco::find($dadosAnuncio->endereco_id);
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
