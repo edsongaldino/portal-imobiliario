@@ -47,25 +47,4 @@ class AnuncioInformacoes extends Model
     }
 
 
-    public function GetInformacaoByChave($anuncio_id, $chave){
-        $anuncioInformacao = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->get();
-        if($anuncioInformacao){
-            return $anuncioInformacao->valor;
-        }else{
-            return false;
-        }
-
-    }
-
-    public function GetInformacoesByTipo($anuncio_id, $tipo){
-        $anuncioInformacoes = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('tipo', $tipo)->get();
-        if($anuncioInformacoes){
-            return $anuncioInformacoes;
-        }else{
-            return false;
-        }
-
-    }
-
-
 }
