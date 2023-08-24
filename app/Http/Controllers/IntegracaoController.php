@@ -116,18 +116,18 @@ class IntegracaoController extends Controller
                 $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
                 $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
 
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LivingArea'), $imovel->Details->LivingArea ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LotArea'), $imovel->Details->LotArea ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Buildings'), $imovel->Details->Buildings ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Floors'), $imovel->Details->Floors ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('UnitFloor'), $imovel->Details->UnitFloor ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bedrooms'), $imovel->Details->Bedrooms ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bathrooms'), $imovel->Details->Bathrooms ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Suites'), $imovel->Details->Suites ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Garage'), $imovel->Details->Garage ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'), $imovel->Details->PropertyAdministrationFee ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearlyTax'), $imovel->Details->YearlyTax ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearBuilt'), $imovel->Details->YearBuilt ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LivingArea'), 'Detalhes', $imovel->Details->LivingArea ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LotArea'),'Detalhes', $imovel->Details->LotArea ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Buildings'),'Detalhes', $imovel->Details->Buildings ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Floors'),'Detalhes', $imovel->Details->Floors ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('UnitFloor'),'Detalhes', $imovel->Details->UnitFloor ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bedrooms'),'Detalhes', $imovel->Details->Bedrooms ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bathrooms'),'Detalhes', $imovel->Details->Bathrooms ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Suites'),'Detalhes', $imovel->Details->Suites ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Garage'),'Detalhes', $imovel->Details->Garage ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'),'Detalhes', $imovel->Details->PropertyAdministrationFee ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearlyTax'),'Detalhes', $imovel->Details->YearlyTax ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearBuilt'),'Detalhes', $imovel->Details->YearBuilt ?? '0');
 
                 $endereco = Endereco::find($dadosAnuncio->endereco_id);
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
@@ -142,7 +142,7 @@ class IntegracaoController extends Controller
 
                     foreach($imovel->Features as $Itens){
                         (New AnuncioInformacoes())->DeletaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature));
-                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Sim');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
                     }
 
                     $fotos_anuncio = AnuncioFotos::where('anuncio_id', $anuncio->id)->get();
@@ -214,21 +214,21 @@ class IntegracaoController extends Controller
 
                 if($anuncio->save()){
 
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'), $imovel->Details->LivingArea ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'), $imovel->Details->LotArea ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'), $imovel->Details->Buildings ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'), $imovel->Details->Floors ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'), $imovel->Details->UnitFloor ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), $imovel->Details->Bedrooms ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'), $imovel->Details->Bathrooms ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'), $imovel->Details->Suites ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'), $imovel->Details->Garage ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'), $imovel->Details->PropertyAdministrationFee ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'), $imovel->Details->YearlyTax ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'), $imovel->Details->YearBuilt ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'),'Detalhes', $imovel->Details->LivingArea ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'),'Detalhes', $imovel->Details->LotArea ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'),'Detalhes', $imovel->Details->Buildings ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'),'Detalhes', $imovel->Details->Floors ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'),'Detalhes', $imovel->Details->UnitFloor ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), 'Detalhes',$imovel->Details->Bedrooms ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'),'Detalhes', $imovel->Details->Bathrooms ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'),'Detalhes', $imovel->Details->Suites ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'),'Detalhes', $imovel->Details->Garage ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'),'Detalhes', $imovel->Details->PropertyAdministrationFee ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'),'Detalhes', $imovel->Details->YearlyTax ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'),'Detalhes', $imovel->Details->YearBuilt ?? '0');
 
                     foreach($imovel->Features as $Itens){
-                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Sim');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
                     }
 
                     foreach($imovel->Media as $foto){
