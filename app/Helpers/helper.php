@@ -405,7 +405,7 @@ class Helper{
 
     public static function GetInformacaoByChave($anuncio_id, $chave){
 
-        $anuncioInformacao = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->fisrt();
+        $anuncioInformacao = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->first();
         if($anuncioInformacao){
             return $anuncioInformacao->valor;
         }else{
