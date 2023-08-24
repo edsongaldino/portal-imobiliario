@@ -535,7 +535,7 @@
 										<h4>{{ $anuncio->titulo }}</h4>
 										<p><span class="flaticon-placeholder"></span>{{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}</p>
 										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
+											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> {{ AnuncioInformacoes::GetInformacaoByChave($anuncio->id,'Quartos') }}</span></li>
 										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
 										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
 										</ul>
