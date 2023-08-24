@@ -50,9 +50,9 @@
 								<div class="lsd_list">
 									<ul class="mb0">
 										<li class="list-inline-item"><span><i class="fa-solid fa-building"></i> {{ $anuncio->tipo->nome }}</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> 4</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> 2</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> 58m²</span></li>
+										<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Quartos') }}</span></li>
+										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Banheiros') }}</span></li>
+										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Área Útil') }}m²</span></li>
 									</ul>
 								</div>
 								<h4 class="mb30">Descrição</h4>
@@ -84,9 +84,9 @@
 										</ul>
 										<ul class="list-inline-item">
 											<li><p><span>{{ $anuncio->id_externo }}</span></p></li>
-											<li><p><span>R$ 358.000,00</span></p></li>
-											<li><p><span>R$ 350,00</span></p></li>
-											<li><p><span>R$ 850,00</span></p></li>
+											<li><p><span>R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</span></p></li>
+											<li><p><span>R$ {{ Helper::converte_valor_real($anuncio->valor_condominio) }}</span></p></li>
+											<li><p><span>R$ {{ Helper::converte_valor_real(Helper::GetInformacaoByChave($anuncio->id,'IPTU')) }}</span></p></li>
 										</ul>
 									</div>
 									<div class="col-md-6 col-lg-6 col-xl-4">
