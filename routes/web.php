@@ -54,6 +54,7 @@ Route::post('/reenviar-senha', 'App\Http\Controllers\AuthController@ReenviarSenh
 Route::get('/logout-painel', 'App\Http\Controllers\AuthController@Logout')->name('logout-painel')->middleware('auth');
 Route::get('/painel/anuncios', 'App\Http\Controllers\AnuncioController@index')->name('painel.anuncios')->middleware('auth');
 Route::get('/painel/anuncios/incluir', 'App\Http\Controllers\AnuncioController@create')->name('painel.anuncios.incluir')->middleware('auth');
+Route::get('/anunciante/{id}/logo', 'App\Http\Controllers\AnuncioController@getLogo');
 
 Route::get('/painel/{id}/perfil', 'App\Http\Controllers\UserController@edit')->name('painel.perfil')->middleware('auth');
 Route::post('/painel/perfil-salvar', 'App\Http\Controllers\AnuncianteController@update')->name('painel.perfil.salvar')->middleware('auth');
