@@ -97,10 +97,10 @@
 											<li><p>Vagas de Garagem :</p></li>
 										</ul>
 										<ul class="list-inline-item">
-											<li><p><span>3</span></p></li>
-											<li><p><span>3</span></p></li>
-											<li><p><span>2</span></p></li>
-											<li><p><span>3</span></p></li>
+											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio->id,'Quartos') }}</span></p></li>
+											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio->id,'Banheiros') }}</span></p></li>
+											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio->id,'Suites') }}</span></p></li>
+											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio->id,'Vagas') }}</span></p></li>
 										</ul>
 									</div>
 									<div class="col-md-6 col-lg-6 col-xl-4">
@@ -109,8 +109,8 @@
 											<li><p>Transação :</p></li>
 										</ul>
 										<ul class="list-inline-item">
-											<li><p><span>Apartmento</span></p></li>
-											<li><p><span>Venda</span></p></li>
+											<li><p><span>{{ $anuncio->tipo->nome }}</span></p></li>
+											<li><p><span>{{ $anuncio->transacao }}</span></p></li>
 										</ul>
 									</div>
 								</div>
@@ -155,7 +155,7 @@
 						</div>
 						<div class="col-lg-12">
 							<div class="application_statics mt30">
-								<h4 class="mb30">Localização <small class="float-right">1421 San Pedro St, Los Angeles, CA 90015</small></h4>
+								<h4 class="mb30">Localização <small class="float-right">{{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}</small></h4>
 								<div class="property_video p0">
 									<div class="thumb">
 										<div class="h400" id="map-canvas"></div>

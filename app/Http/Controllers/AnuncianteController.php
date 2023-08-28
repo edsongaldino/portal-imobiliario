@@ -80,13 +80,13 @@ class AnuncianteController extends Controller
 
             if($User->save()){
                 Mail::to($request->email)->send(new SendMailUser($anunciante))->cc('contato@redeimoveismt.com.br');
-                //return true;
+                return 'Sucesso';
             }else{
-                return false;
+                return 'Erro';
             }
 
         }else{
-            return redirect()->back()->with('warning', 'Ocorreram erros no seu cadastro! Verifique.');
+            return 'Erro';
         }
 
     }
