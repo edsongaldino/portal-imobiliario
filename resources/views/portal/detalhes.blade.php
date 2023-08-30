@@ -217,10 +217,10 @@
 							<div class="sl_creator">
 								<h4 class="mb25">Anunciante</h4>
 								<div class="media">
-									<img class="mr-3" src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="lc1.png">
+									<img class="mr-3" src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="lc1.png">
 									<div class="media-body">
-								    	<h5 class="mt-0 mb0">Rosa Imóveis</h5>
-								    	<a class="text-thm" href="#">(65) 3314-4500</a>
+								    	<h5 class="mt-0 mb0">{{ $anuncio->anunciante->nome }}</h5>
+								    	<a class="text-thm" href="#">{{ $anuncio->anunciante->telefone_comercial }}</a>
 								  	</div>
 								</div>
 							</div>

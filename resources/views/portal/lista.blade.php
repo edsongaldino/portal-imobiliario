@@ -542,7 +542,7 @@
 									</div>
 									<div class="fp_footer">
 										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ url('uploads/anunciantes/'.$anuncio->anunciante->id.'/logo/'.$anuncio->anunciante->logo) }}" alt="pposter1.png" width="40" height="40"></span></li>
+											<li class="list-inline-item"><span href="#"><img src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="pposter1.png" width="40" height="40"></span></li>
 										    <li class="list-inline-item"><span href="#">{{ $anuncio->anunciante->nome }}</span></li>
 										</ul>
                                         <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
