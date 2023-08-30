@@ -190,24 +190,36 @@
 
 
 					<div class="sidebar_listing_list detalhes-valor">
+
+                        @if($anuncio->transacao == 'Venda' || $anuncio->transacao == 'Locação/Venda')
+						<div class="item-valor">
+							<div class="label-price">Venda (R$):</div>
+							<div class="price text-right">
+								R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}
+							</div>
+						</div>
+                        @endif
+
+                        @if($anuncio->transacao == 'Locação' || $anuncio->transacao == 'Locação/Venda')
 						<div class="item-valor">
 							<div class="label-price">Aluguel (R$):</div>
 							<div class="price text-right">
-								4.350<span class="small">,00</span>
+								R$ {{ Helper::converte_valor_real($anuncio->valor_locacao) }}
 							</div>
 						</div>
+                        @endif
 
 						<div class="item-valor cond">
 							<div class="label-condominio">Condomínio (R$):</div>
 							<div class="text-right condominio">
-								548<span class="small">,00</span>
+								{{ Helper::converte_valor_real($anuncio->valor_condominio) }}
 							</div>
 						</div>
 
 						<div class="item-valor cond">
 							<div class="label-condominio">IPTU (R$):</div>
 							<div class="text-right condominio">
-								1.450<span class="small">,00</span>
+								-
 							</div>
 						</div>
 					</div>
@@ -217,7 +229,7 @@
 							<div class="sl_creator">
 								<h4 class="mb25">Anunciante</h4>
 								<div class="media">
-									<img class="mr-3" src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="lc1.png">
+									<img class="mr-3" src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="lc1.png" width="100">
 									<div class="media-body">
 								    	<h5 class="mt-0 mb0">{{ $anuncio->anunciante->nome }}</h5>
 								    	<a class="text-thm" href="#">{{ $anuncio->anunciante->telefone_comercial }}</a>
@@ -261,50 +273,26 @@
 					<div class="terms_condition_widget">
 					<h4 class="title">Imóveis destacados</h4>
 						<div class="sidebar_feature_property_slider">
-							<div class="item">
-								<div class="feat_property home7">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp1.jpg') }}" alt="fp1.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>Aluguel</span></li>
-												<li class="list-inline-item"><span>Venda</span></li>
-											</ul>
-											<a class="fp_price" href="#">R$ 187.000<small>,00</small></a>
-											<h4 class="posr color-white">Apartmento</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="feat_property home7">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp2.jpg') }}" alt="fp2.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>Aluguel</span></li>
-												<li class="list-inline-item"><span>Venda</span></li>
-											</ul>
-											<a class="fp_price" href="#">R$ 187.000<small>,00</small></a>
-											<h4 class="posr color-white">Apartmento</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="feat_property home7">
-									<div class="thumb">
-										<img class="img-whp" src="{{ asset('assets/portal/images/property/fp3.jpg') }}" alt="fp3.jpg">
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item"><span>Aluguel</span></li>
-											</ul>
-											<a class="fp_price" href="#">R$ 3.000<small>,00</small></a>
-											<h4 class="posr color-white">Apartmento</h4>
-										</div>
-									</div>
-								</div>
-							</div>
+
+
+                            @foreach ($destaques as $destaque)
+                            <div class="item">
+                                <div class="feat_property home7">
+                                    <a href="/imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}">
+                                    <div class="thumb">
+                                        <img class="img-whp" src="{{ $destaque->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
+                                        <div class="thmb_cntnt">
+                                            <ul class="tag mb0">
+                                                <li class="list-inline-item"><span>{{ $destaque->transacao }}</span></li>
+                                            </ul>
+                                            <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_venda) }}</span>
+                                            <h4 class="posr color-white">{{ $destaque->tipo->nome }}</h4>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
 
 						</div>
 					</div>

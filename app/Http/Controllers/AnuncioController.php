@@ -157,7 +157,8 @@ class AnuncioController extends Controller
 
     public function DetalhesAnuncio($id){
         $anuncio = Anuncio::find($id);
-        return view('portal.detalhes', compact('anuncio'));
+        $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
+        return view('portal.detalhes', compact('anuncio', 'destaques'));
     }
 
     #ENDCONTROLLERSPORTAL
