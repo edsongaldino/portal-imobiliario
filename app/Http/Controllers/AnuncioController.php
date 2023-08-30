@@ -149,7 +149,7 @@ class AnuncioController extends Controller
     {
         $anuncios = Anuncio::where('deleted_at', null)->where('transacao',$transacao);
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('valor_venda', 'DESC')->paginate(20);
+        $anuncios = $anuncios->orderBy('valor_venda', 'DESC')->simplePaginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('deleted_at', null)->limit(3)->get();
         return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));
