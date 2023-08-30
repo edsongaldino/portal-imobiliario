@@ -448,12 +448,12 @@ function initialize() {
     name: 'style_KINESB'
   };
 
-var image = 'assets/portal/images/resource/mapmarker.png';
+var image = {{ asset('assets/portal/images/resource/mapmarker.png') }};
   var marker = new google.maps.Marker({
         position: Kine,
         map: map,
         animation: google.maps.Animation.DROP,
-        title: 'Rua D, 155 - Despraiado, Cuiabá - MT',
+        title: {{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }},
         icon: image
   });
 
