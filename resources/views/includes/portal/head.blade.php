@@ -12,6 +12,17 @@
 <link rel="stylesheet" href="{{ asset('assets/portal/css/responsive.css') }}">
 <!-- Title -->
 <title>Rede Imóveis - Encontre aqui o imóvel dos seus sonhos</title>
+
+<meta name="twitter:image" content="https://www.redeimoveismt.com.br/assets/portal/images/logo-portal.jpg">
+<meta property="og:url" content="https://www.redeimoveismt.com.br" />
+<meta property="og:title" content="Rede Imóveis - Encontre aqui o imóvel dos seus sonhos" />
+<meta property="og:description" content="Rede Imóveis - Encontre aqui o imóvel dos seus sonhos" />
+<meta property="og:image" content="https://www.redeimoveismt.com.br/assets/portal/images/logo-portal.jpg" />
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1067">
+<meta property="og:image:height" content="600">
+<meta property="og:type" content="website">
+
 <!-- Favicon -->
 <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/portal/images/favicon.ico') }}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
