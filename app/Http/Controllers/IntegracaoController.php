@@ -264,9 +264,18 @@ class IntegracaoController extends Controller
                 $total_incluidos++;
             }
 
+            $ArrayImportacaoAnuncios[] = $imovel->ListingID;
+
         }
 
         $logoUpdate = (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
+
+        foreach($anunciante->anuncios as $anuncio){
+            if (!in_array($anuncio->id_externo, $ArrayImportacaoAnuncios)) {
+                Anuncio::where('id_externo', $anuncio->id_externo)->update(['situacao' => 'Bloqueado']);
+            }
+        }
+
 
         if($logoUpdate){
             return true;
