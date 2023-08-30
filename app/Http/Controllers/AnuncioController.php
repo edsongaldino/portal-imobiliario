@@ -147,11 +147,11 @@ class AnuncioController extends Controller
 
     public function ListaAnuncios($transacao)
     {
-        $anuncios = Anuncio::where('deleted_at', null)->where('transacao',$transacao);
+        $anuncios = Anuncio::where('situacao', 'Liberado')->where('transacao',$transacao);
         $total =  $anuncios->count();
         $anuncios = $anuncios->orderBy('updated_at', 'DESC')->simplePaginate(20);
         $tipos = AnuncioTipo::all();
-        $destaques = Anuncio::where('deleted_at', null)->limit(3)->get();
+        $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));
     }
 
