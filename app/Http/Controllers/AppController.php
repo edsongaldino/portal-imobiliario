@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anuncio;
 use App\Models\AnuncioTipo;
 use App\Models\LogIntegracao;
 use App\Models\LogIntegracaoAnuncio;
@@ -29,6 +30,7 @@ class AppController extends Controller
 
     public function PaginaInicial(){
         $tipos = AnuncioTipo::all();
-        return view('portal.index', compact('tipos'));
+        $destaques = Anuncio::where('deleted_at', null)->where('destaque', 'S')->limit(12)->random()->get();
+        return view('portal.index', compact('tipos', 'destaques'));
     }
 }
