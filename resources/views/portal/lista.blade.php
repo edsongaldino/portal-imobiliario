@@ -461,7 +461,7 @@
                                 @foreach ($destaques as $destaque)
                                 <div class="item">
 									<div class="feat_property home7">
-                                        <a href="imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}">
+                                        <a href="/imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}">
 										<div class="thumb">
 											<img class="img-whp" src="{{ $destaque->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
 											<div class="thmb_cntnt">
@@ -512,7 +512,7 @@
 							<div class="feat_property list">
 								<div class="thumb">
 									<img class="img-whp" src="{{ $anuncio->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
-                                    <a href="imoveis/{{ $anuncio->id }}/{{ Helper::url_amigavel($anuncio->tipo->nome .'-'. $anuncio->transacao) }}/{{ Helper::url_amigavel($anuncio->endereco->cidade->nome_cidade .'-'. $anuncio->endereco->cidade->estado->uf_estado)}}">
+                                    <a href="/imoveis/{{ $anuncio->id }}/{{ Helper::url_amigavel($anuncio->tipo->nome .'-'. $anuncio->transacao) }}/{{ Helper::url_amigavel($anuncio->endereco->cidade->nome_cidade .'-'. $anuncio->endereco->cidade->estado->uf_estado)}}">
 									<div class="thmb_cntnt">
 										<ul class="icon mb0">
 											<!--<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>-->
@@ -542,7 +542,7 @@
 									</div>
 									<div class="fp_footer">
 										<ul class="fp_meta float-left mb0">
-											<li class="list-inline-item"><span href="#"><img src="{{ asset('assets/portal/images/property/pposter1.png') }}" alt="pposter1.png"></span></li>
+											<li class="list-inline-item"><span href="#"><img src="{{ url('uploads/anunciantes/'.$anuncio->anunciante->id.'/logo/'.$anuncio->anunciante->logo) }}" alt="pposter1.png" width="40" height="40"></span></li>
 										    <li class="list-inline-item"><span href="#">{{ $anuncio->anunciante->nome }}</span></li>
 										</ul>
                                         <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
