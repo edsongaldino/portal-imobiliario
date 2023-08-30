@@ -154,7 +154,7 @@
 
                                     <div class="fp_footer">
                                         <ul class="fp_meta float-left mb0">
-                                            <li class="list-inline-item"><span href="#"><img src="{{ url('anunciante/'.$destaque->anunciante->id.'/logo') }}" alt="pposter1.png" width="40"></span></li>
+                                            <li class="list-inline-item"><span href="#"><img src="{{ url('anunciante/'.$destaque->anunciante->id.'/logo') }}" alt="pposter1.png" width="40" height="40"></span></li>
 										    <li class="list-inline-item"><span href="#">{{ $destaque->anunciante->nome }}</span></li>
                                         </ul>
                                     </div>
