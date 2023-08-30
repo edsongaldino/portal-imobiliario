@@ -145,9 +145,9 @@ class AnuncioController extends Controller
 
     #CONTROLLERSPORTAL
 
-    public function ListaAnuncios()
+    public function ListaAnuncios($transacao)
     {
-        $anuncios = Anuncio::where('deleted_at', null);
+        $anuncios = Anuncio::where('deleted_at', null)->where('transacao',$transacao);
         $total =  $anuncios->count();
         $anuncios = $anuncios->orderBy('valor_venda', 'DESC')->paginate(20);
         $tipos = AnuncioTipo::all();
