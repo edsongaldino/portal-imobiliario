@@ -195,7 +195,7 @@
 						<div class="item-valor">
 							<div class="label-price">Venda (R$):</div>
 							<div class="price text-right">
-								R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}
+								{{ Helper::converte_valor_real($anuncio->valor_venda) }}
 							</div>
 						</div>
                         @endif
@@ -204,7 +204,7 @@
 						<div class="item-valor">
 							<div class="label-price">Aluguel (R$):</div>
 							<div class="price text-right">
-								R$ {{ Helper::converte_valor_real($anuncio->valor_locacao) }}
+								{{ Helper::converte_valor_real($anuncio->valor_locacao) }}
 							</div>
 						</div>
                         @endif
