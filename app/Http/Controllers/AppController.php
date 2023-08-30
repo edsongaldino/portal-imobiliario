@@ -30,7 +30,7 @@ class AppController extends Controller
 
     public function PaginaInicial(){
         $tipos = AnuncioTipo::all();
-        $destaques = Anuncio::where('deleted_at', null)->where('destaque', 'S')->orderByRandom()->limit(12)->get();
+        $destaques = Anuncio::where('deleted_at', null)->where('destaque', 'S')->orderByRaw('RAND()')->limit(12)->get();
         return view('portal.index', compact('tipos', 'destaques'));
     }
 }
