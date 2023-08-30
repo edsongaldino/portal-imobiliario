@@ -424,6 +424,24 @@ class Helper{
 
     }
 
+    // function to get  the address
+    public static function get_lat_long($address) {
+        $array = array();
+        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBLZYFMbNKXu2gyC_yxbdEDGxA6G0LSNu8&address='.urlencode($address).'&sensor=false');
+
+        // We convert the JSON to an array
+        $geo = json_decode($geo, true);
+
+        // If everything is cool
+        if ($geo['status'] = 'OK') {
+        $latitude = $geo['results'][0]['geometry']['location']['lat'];
+        $longitude = $geo['results'][0]['geometry']['location']['lng'];
+        $array = array('lat'=> $latitude ,'lng'=>$longitude);
+        }
+
+        return $array;
+    }
+
 
 
 }
