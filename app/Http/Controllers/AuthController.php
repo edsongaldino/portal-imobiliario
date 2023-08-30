@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReenviarSenha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -41,9 +42,9 @@ class AuthController extends Controller
         if(Auth::attempt($credencials)){
             $usuario = Auth::user();
             Session::put('usuario', $usuario);
-            return true;
+            return "Sucesso";
         }
-        return false;
+        return "Erro";
     }
 
     public function Logout(){
@@ -59,18 +60,18 @@ class AuthController extends Controller
         if($User){
 
             //ENVIA PARA O USUÁRIO
-            $request->template = "layouts.emails.senha";
-            $request->assunto = "Você solicitou uma nova senha! Mocidade Concafras 2022";
+            $request->template = "emails.senha";
+            $request->assunto = "Você solicitou uma nova senha! Rede Imóveis MT";
             $request->destinatario = $User->email;
             $request->name = $User->name;
             $request->link = getenv('APP_URL').'/nova-senha/'.base64_encode($User->email);
 
-            Mail::to($request->destinatario)->send(new SendMailUser($request));
+            Mail::to($request->destinatario)->send(new ReenviarSenha($request));
 
-            return redirect()->route('login')->with('success', 'Sua nova senha foi enviada no email de cadastro! Verifique a caixa de SPAM');
+            return 'Sucesso';
         }
 
-        return redirect()->back()->with('warning', 'Este e-mail não consta em nosso banco de dados! Confira.');
+        return "Erro";
 
     }
 

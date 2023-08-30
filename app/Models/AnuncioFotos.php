@@ -11,8 +11,12 @@ class AnuncioFotos extends Model
     protected $table = 'fotos';
 
     public function DeletaFotos($anuncio_id){
-
-
-
+        $fotos_anuncio = AnuncioFotos::where('anuncio_id', $anuncio_id)->get();
+        if($fotos_anuncio->count() > 0){
+            if($fotos_anuncio->delete()){
+                return true;
+            }
+        }
+        return false;
     }
 }

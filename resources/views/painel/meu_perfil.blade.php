@@ -35,7 +35,7 @@
 										<div class="row">
 											<div class="col-lg-12">
                                                 <div class="logo-atual">
-                                                    <img src="{{ url('uploads/anunciantes/'.$anunciante->id.'/logo/'.$anunciante->logo) }}" alt="">
+                                                    <img src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" alt="">
                                                 </div>
 												<div class="wrap-custom-file" style="background-image: url(/assets/painel/images/logo-anunciante.jpg) !important;">
 												    <input type="file" name="logo" id="logo" accept=".gif, .jpg, .png"/>

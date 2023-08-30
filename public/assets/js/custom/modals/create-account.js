@@ -170,29 +170,31 @@ var KTCreateAccount = function() {
                     url: "/finalizar-cadastro",
                     data: datastring,
                     dataType: "json",
-                    success: function(data) {
-                        Swal.fire({
-                            text: "Ótimo, seu cadastro foi realizado.",
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok!",
-                            customClass: {
-                                confirmButton: "btn btn-light"
-                            }
-                        })
+                    success: function(result) {
+
+                        if(result == 'Sucesso'){
+                            Swal.fire({
+                                text: "Ótimo, seu cadastro foi realizado.",
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "Ok!",
+                                customClass: {
+                                    confirmButton: "btn btn-light"
+                                }
+                            })
+                        }else{
+                            Swal.fire({
+                                text: "Ops, algumas informações não foram salvas, tente novamente!",
+                                icon: "warning",
+                                buttonsStyling: !1,
+                                confirmButtonText: "Ok!",
+                                customClass: {
+                                    confirmButton: "btn btn-light"
+                                }
+                            })
+                        }
                         //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
                         // do what ever you want with the server response
-                    },
-                    error: function() {
-                        Swal.fire({
-                            text: "Ops, ocorreu algum erro, contacte o administrador do sistema.",
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok!",
-                            customClass: {
-                                confirmButton: "btn btn-light"
-                            }
-                        })
                     }
                 });
 

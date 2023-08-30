@@ -26,10 +26,18 @@ var KTSigninGeneral = (function () {
                                                 type: 'POST',
                                                 data : $('#kt_sign_in_form').serialize(),
                                                 success: function(result) {
-                                                    window.location='/dashboard'
-                                                },
-                                                error: function(){
-                                                  alert("Erro");
+                                                    if(result == 'Sucesso'){
+                                                        window.location='/dashboard'
+                                                    }else{
+                                                        Swal.fire({
+                                                            text: "Ops, não foi possível logar com essas informações!",
+                                                            icon: "error",
+                                                            buttonsStyling: !1,
+                                                            confirmButtonText: "OK, entendi!",
+                                                            customClass: { confirmButton: "btn btn-primary" },
+                                                        });
+                                                    }
+
                                                 }
                                               });
                                   }, 2e3))

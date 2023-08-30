@@ -7,6 +7,7 @@ use App\CalendarioAluno;
 use App\Contrato;
 use App\Faturamento;
 use App\FaturamentoContrato;
+use App\Models\AnuncioInformacoes;
 use App\Models\Leads;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Carbon;
@@ -399,6 +400,27 @@ class Helper{
         $leads = Leads::where('deleted_at','<>',null)->count();
 
         return $leads;
+
+    }
+
+    public static function GetInformacaoByChave($anuncio_id, $chave){
+
+        $anuncioInformacao = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->first();
+        if($anuncioInformacao){
+            return $anuncioInformacao->valor;
+        }else{
+            return false;
+        }
+
+    }
+
+    public static function GetInformacoesByTipo($anuncio_id, $tipo){
+        $anuncioInformacoes = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('tipo', $tipo)->get();
+        if($anuncioInformacoes){
+            return $anuncioInformacoes;
+        }else{
+            return false;
+        }
 
     }
 

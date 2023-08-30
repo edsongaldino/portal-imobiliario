@@ -7,7 +7,8 @@
 		<!--begin::Wrapper-->
 		<div class="w-lg-500px p-10 p-lg-15 mx-auto">
 			<!--begin::Form-->
-			<form class="form w-100" novalidate="novalidate" id="kt_password_reset_form">
+			<form class="form w-100" novalidate="novalidate" method="POST" id="kt_password_reset_form" action="{{ url('/reenviar-senha') }}">
+                @csrf
 				<!--begin::Heading-->
 				<div class="text-center mb-10">
 					<!--begin::Title-->
@@ -21,7 +22,7 @@
 				<!--begin::Input group-->
 				<div class="fv-row mb-10">
 					<label class="form-label fw-bolder text-gray-900 fs-6">Email</label>
-					<input class="form-control form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
+					<input class="form-control form-control-solid" type="email" placeholder="" id="email" name="email" autocomplete="off" />
 				</div>
 				<!--end::Input group-->
 				<!--begin::Actions-->
@@ -60,4 +61,4 @@
 </body>
 <!--end::Body-->
 </html>
-@endsection			
+@endsection

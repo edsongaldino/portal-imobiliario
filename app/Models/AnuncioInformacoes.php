@@ -10,14 +10,41 @@ class AnuncioInformacoes extends Model
     use HasFactory;
     protected $table = 'anuncio_informacoes';
 
-    public function GravaInformacao($anuncio_id, $chave, $valor){
+    public function GravaInformacao($anuncio_id, $chave, $tipo, $valor){
 
-        $endereco = new AnuncioInformacoes();
-        $endereco->cidade_id = $request->cidade_endereco;
-        $endereco->cep_endereco = $request->cep_endereco;
-        $endereco->bairro_endereco = $request->bairro_endereco;
-        $endereco->save();
+        $anuncioInfo = new AnuncioInformacoes();
+        $anuncioInfo->anuncio_id = $anuncio_id;
+        $anuncioInfo->chave = $chave;
+        $anuncioInfo->tipo = $tipo;
+        $anuncioInfo->valor = $valor;
+        $anuncioInfo->save();
 
-        return $endereco;
+        return $anuncioInfo;
     }
+
+    public function UpdateInformacao($anuncio_id, $chave, $tipo, $valor){
+
+        $anuncioInfoUpdate = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave);
+
+        if($anuncioInfoUpdate->get()->count() > 0){
+            $dadosAnuncio = $anuncioInfoUpdate->update(['valor' => $valor]);
+        }else{
+            $dadosAnuncio = $this->GravaInformacao($anuncio_id, $chave, $tipo, $valor);
+        }
+
+        return $dadosAnuncio;
+    }
+
+
+    public function DeletaInformacao($anuncio_id, $chave){
+        $anuncioInformacao = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->get();
+        if($anuncioInformacao->count() > 0){
+            if($anuncioInformacao->delete()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

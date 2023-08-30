@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('id_externo', 20);
             $table->string('titulo', 100);
             $table->longText('descricao');
-            $table->decimal('valor_venda', 10,2)->nullable();
-            $table->decimal('valor_locacao', 10,2)->nullable();
-            $table->decimal('valor_condominio', 10,2)->nullable();
+            $table->decimal('valor_venda', 15,2)->nullable();
+            $table->decimal('valor_locacao', 15,2)->nullable();
+            $table->decimal('valor_condominio', 15,2)->nullable();
             $table->enum('situacao', ['Liberado', 'Bloqueado']);
             $table->timestamps();
             $table->softDeletes();

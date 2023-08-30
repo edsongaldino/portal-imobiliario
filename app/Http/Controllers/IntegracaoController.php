@@ -9,6 +9,7 @@ use App\Models\Anunciante;
 use App\Models\AnuncianteIntegracao;
 use App\Models\Anuncio;
 use App\Models\AnuncioFotos;
+use App\Models\AnuncioInformacoes;
 use App\Models\Endereco;
 use App\Models\LogIntegracao;
 use Illuminate\Http\Request;
@@ -100,6 +101,7 @@ class IntegracaoController extends Controller
                 $anuncio = Anuncio::find($dadosAnuncio->id);
                 $anuncio->finalidade = (New AnuncioFinalidadeController())->GetFinalidadeByTipo($imovel->Details->PropertyType);
                 $anuncio->tipo_publicacao = $this->GetTipoByPublicationType($imovel->PublicationType);
+                $anuncio->origem_publicacao = 'Integracao';
                 $anuncio->tipo_id = (New AnuncioTipoController())->GetIDTipoByNome($imovel->Details->PropertyType);
                 $anuncio->anunciante_id = $anunciante_id;
                 $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
@@ -109,11 +111,23 @@ class IntegracaoController extends Controller
                 $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
-                $anuncio->valor_condominio = Helper::converte_reais_to_mysql(0.00);
+                $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
                 $anuncio->situacao = 'Liberado';
                 $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
                 $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
 
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LivingArea'), 'Detalhes', $imovel->Details->LivingArea ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LotArea'),'Detalhes', $imovel->Details->LotArea ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Buildings'),'Detalhes', $imovel->Details->Buildings ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Floors'),'Detalhes', $imovel->Details->Floors ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('UnitFloor'),'Detalhes', $imovel->Details->UnitFloor ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bedrooms'),'Detalhes', $imovel->Details->Bedrooms ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bathrooms'),'Detalhes', $imovel->Details->Bathrooms ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Suites'),'Detalhes', $imovel->Details->Suites ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Garage'),'Detalhes', $imovel->Details->Garage ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'),'Detalhes', $imovel->Details->PropertyAdministrationFee ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearlyTax'),'Detalhes', $imovel->Details->YearlyTax ?? '0');
+                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearBuilt'),'Detalhes', $imovel->Details->YearBuilt ?? '0');
 
                 $endereco = Endereco::find($dadosAnuncio->endereco_id);
                 $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
@@ -125,6 +139,11 @@ class IntegracaoController extends Controller
                 $endereco->save();
 
                 if($anuncio->save()){
+
+                    foreach($imovel->Features as $Itens){
+                        (New AnuncioInformacoes())->DeletaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature));
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
+                    }
 
                     $fotos_anuncio = AnuncioFotos::where('anuncio_id', $anuncio->id)->get();
                     if($fotos_anuncio->count() > 0){
@@ -172,12 +191,12 @@ class IntegracaoController extends Controller
                 $endereco->numero_endereco = mb_strcut($imovel->Location->StreetNumber ?? '100', 0, 10,"UTF-8");
                 $endereco->complemento_endereco = 'Complemento';
                 $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
-
                 $endereco->save();
 
                 $anuncio = new Anuncio();
                 $anuncio->finalidade = (New AnuncioFinalidadeController())->GetFinalidadeByTipo($imovel->Details->PropertyType);
                 $anuncio->tipo_publicacao = $this->GetTipoByPublicationType($imovel->PublicationType);
+                $anuncio->origem_publicacao = 'Integracao';
                 $anuncio->tipo_id = (New AnuncioTipoController())->GetIDTipoByNome($imovel->Details->PropertyType);
                 $anuncio->anunciante_id = $anunciante_id;
                 $anuncio->endereco_id = $endereco->id;
@@ -188,10 +207,29 @@ class IntegracaoController extends Controller
                 $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
                 $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
                 $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
-                $anuncio->valor_condominio = Helper::converte_reais_to_mysql(0.00);
+                $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
                 $anuncio->situacao = 'Liberado';
+                $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
+                $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
 
                 if($anuncio->save()){
+
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'),'Detalhes', $imovel->Details->LivingArea ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'),'Detalhes', $imovel->Details->LotArea ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'),'Detalhes', $imovel->Details->Buildings ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'),'Detalhes', $imovel->Details->Floors ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'),'Detalhes', $imovel->Details->UnitFloor ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), 'Detalhes',$imovel->Details->Bedrooms ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'),'Detalhes', $imovel->Details->Bathrooms ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'),'Detalhes', $imovel->Details->Suites ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'),'Detalhes', $imovel->Details->Garage ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'),'Detalhes', $imovel->Details->PropertyAdministrationFee ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'),'Detalhes', $imovel->Details->YearlyTax ?? '0');
+                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'),'Detalhes', $imovel->Details->YearBuilt ?? '0');
+
+                    foreach($imovel->Features as $Itens){
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
+                    }
 
                     foreach($imovel->Media as $foto){
 
@@ -274,9 +312,93 @@ class IntegracaoController extends Controller
         return $tipo_publicacao;
     }
 
+    public function GetInformacaoByFeature($Feature){
+        switch($Feature){
+            case 'Gym':
+                $chave = 'Academia';
+                break;
+            case 'BBQ':
+                $chave = 'Churrasqueira';
+                break;
+            case 'Elevator':
+                $chave = 'Elevador';
+                break;
+            case 'Pool':
+                $chave = 'Piscina';
+                break;
+            case 'Playground':
+                $chave = 'Playground';
+                break;
+            case 'Party Room':
+                $chave = 'Salão de festas';
+                break;
+            case 'Kitchen':
+                $chave = 'Cozinha';
+                break;
+            case 'Edicule':
+                $chave = 'Edícula';
+                break;
+            case 'Parking Garage':
+                $chave = 'Estacionamento';
+                break;
+            case 'Dinner Room':
+                $chave = 'Sala de jantar';
+                break;
+            case 'Internet Connection':
+                $chave = 'Internet';
+                break;
+            case 'Sports Court':
+                $chave = 'Quadra de esportes';
+                break;
+            case 'Garden':
+                $chave = 'Jardim';
+                break;
+            case 'Dinner Room':
+                $chave = 'Sala de jantar';
+                break;
+            case 'LivingArea':
+                $chave = 'Área Útil';
+                break;
+            case 'LotArea':
+                $chave = 'Área de lote';
+                break;
+            case 'Buildings':
+                $chave = 'Torres';
+                break;
+            case 'Andar':
+                $chave = 'Quadra de esportes';
+                break;
+            case 'UnitFloor':
+                $chave = 'Pavimentos';
+                break;
+            case 'Bedrooms':
+                $chave = 'Quartos';
+                break;
+            case 'Bathrooms':
+                $chave = 'Banheiros';
+                break;
+            case 'Suites':
+                $chave = 'Suites';
+                break;
+            case 'Garage':
+                $chave = 'Garagem';
+                break;
+            case 'PropertyAdministrationFee':
+                $chave = 'Condomínio';
+                break;
+            case 'YearlyTax':
+                $chave = 'IPTU';
+                break;
+            case 'YearBuilt':
+                $chave = 'Ano/Construção';
+                break;
 
-
-
+            default:
+                $chave = '-';
+                break;
+        }
+        return $chave;
+    }
 
     public function LerXML(){
 

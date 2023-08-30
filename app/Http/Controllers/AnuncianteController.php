@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AnuncianteController extends Controller
 {
@@ -80,13 +81,13 @@ class AnuncianteController extends Controller
 
             if($User->save()){
                 Mail::to($request->email)->send(new SendMailUser($anunciante))->cc('contato@redeimoveismt.com.br');
-                //return true;
+                return 'Sucesso';
             }else{
-                return false;
+                return 'Erro';
             }
 
         }else{
-            return redirect()->back()->with('warning', 'Ocorreram erros no seu cadastro! Verifique.');
+            return 'Erro';
         }
 
     }
@@ -175,5 +176,12 @@ class AnuncianteController extends Controller
     public function destroy(Anunciante $Anunciante)
     {
         //
+    }
+
+    public function getLogo($id)
+    {
+        $anunciante = Anunciante::find($id);
+        return Storage::get($anunciante->logo);
+
     }
 }

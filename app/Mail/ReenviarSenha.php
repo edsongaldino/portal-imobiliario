@@ -7,15 +7,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendMailUser extends Mailable
+class ReenviarSenha extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $anunciante;
+    public $usuario;
 
-    public function __construct($anunciante)
+    public function __construct($usuario)
     {
-        $this->anunciante = $anunciante;
+        $this->usuario = $usuario;
     }
 
     /**
@@ -25,12 +25,7 @@ class SendMailUser extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.confirmacao')->from('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->replyTo('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->subject('Confirmação de Cadastro - Rede Imóveis MT');
-    }
-
-
-    public function ReenviarSenha()
-    {
         return $this->view('emails.senha')->from('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->replyTo('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->subject('Confirmação de Cadastro - Rede Imóveis MT');
     }
+
 }
