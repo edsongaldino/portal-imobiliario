@@ -11,12 +11,12 @@
 <!-- Responsive stylesheet -->
 <link rel="stylesheet" href="{{ asset('assets/portal/css/responsive.css') }}">
 <!-- Title -->
-<title>Rede Imóveis - Encontre aqui o imóvel dos seus sonhos</title>
+<title>Rede Imóveis - Rede de Negócios Imobiliários</title>
 
 <meta name="twitter:image" content="https://www.redeimoveismt.com.br/assets/portal/images/logo-portal.jpg">
 <meta property="og:url" content="https://www.redeimoveismt.com.br" />
-<meta property="og:title" content="Rede Imóveis - Encontre aqui o imóvel dos seus sonhos" />
-<meta property="og:description" content="Rede Imóveis - Encontre aqui o imóvel dos seus sonhos" />
+<meta property="og:title" content="Rede Imóveis MT - Rede de Negócios Imobiliários" />
+<meta property="og:description" content="Rede Imóveis - Rede de Negócios Imobiliários" />
 <meta property="og:image" content="https://www.redeimoveismt.com.br/assets/portal/images/logo-portal.jpg" />
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1067">
