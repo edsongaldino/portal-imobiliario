@@ -147,7 +147,20 @@ class AnuncioController extends Controller
 
     public function ListaAnuncios($transacao)
     {
-        $anuncios = Anuncio::where('situacao', 'Liberado')->where('transacao',$transacao);
+        $anuncios = Anuncio::where('situacao', 'Liberado');
+
+        switch($transacao){
+            case 'novos':
+                $anuncios = $anuncios->where('lancamento','S');
+                break;
+            case 'locacao':
+                $anuncios = $anuncios->where('transacao','Locação');
+                break;
+            case 'venda':
+                $anuncios = $anuncios->where('transacao','Venda');
+                break;
+        }
+
         $total =  $anuncios->count();
         $anuncios = $anuncios->orderBy('updated_at', 'DESC')->simplePaginate(20);
         $tipos = AnuncioTipo::all();
