@@ -13106,6 +13106,7 @@ a.btn.btn_error{
 /*== Color Area ==*/
 .img-whp {
   width: 100% !important;
+  height: 300px;
 }
 .text-thm {
   color: #ff5a5f !important;
