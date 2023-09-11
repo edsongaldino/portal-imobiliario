@@ -11,11 +11,11 @@ class ReenviarSenha extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $usuario;
+    public $configuracoes;
 
-    public function __construct($usuario)
+    public function __construct($configuracoes)
     {
-        $this->usuario = $usuario;
+        $this->configuracoes = $configuracoes;
     }
 
     /**
