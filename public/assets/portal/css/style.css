@@ -2233,7 +2233,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   border-bottom: none;
   margin: 0 auto;
   text-align: center;
-  width: 250px;
+  width: 360px;
 }
 .home_adv_srch_opt.home3{
   margin-top: -17px;
@@ -2250,7 +2250,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   margin: 0;
 }
 .home_adv_srch_opt .nav-pills li.nav-item a.nav-link:first-child{
-  margin-right: 15px;
+  margin-right: 10px;
 }
 .home_adv_srch_opt .nav-pills li.nav-item a.nav-link{
   background-color: #ffffff;
@@ -13106,6 +13106,7 @@ a.btn.btn_error{
 /*== Color Area ==*/
 .img-whp {
   width: 100% !important;
+  height: 300px;
 }
 .text-thm {
   color: #ff5a5f !important;

@@ -144,10 +144,45 @@ class AnuncioController extends Controller
 
 
     #CONTROLLERSPORTAL
+    public function BuscaAnuncios(Request $request)
+    {
+        $anuncios = Anuncio::where('situacao', 'Liberado');
+
+        switch($request->transacao){
+            case 'novos':
+                $anuncios = $anuncios->where('lancamento','S');
+                break;
+            case 'locacao':
+                $anuncios = $anuncios->where('transacao','Locação');
+                break;
+            case 'venda':
+                $anuncios = $anuncios->where('transacao','Venda');
+                break;
+        }
+
+        $total =  $anuncios->count();
+        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->simplePaginate(20);
+        $tipos = AnuncioTipo::all();
+        $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
+        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));
+    }
 
     public function ListaAnuncios($transacao)
     {
-        $anuncios = Anuncio::where('situacao', 'Liberado')->where('transacao',$transacao);
+        $anuncios = Anuncio::where('situacao', 'Liberado');
+
+        switch($transacao){
+            case 'novos':
+                $anuncios = $anuncios->where('lancamento','S');
+                break;
+            case 'locacao':
+                $anuncios = $anuncios->where('transacao','Locação');
+                break;
+            case 'venda':
+                $anuncios = $anuncios->where('transacao','Venda');
+                break;
+        }
+
         $total =  $anuncios->count();
         $anuncios = $anuncios->orderBy('updated_at', 'DESC')->simplePaginate(20);
         $tipos = AnuncioTipo::all();

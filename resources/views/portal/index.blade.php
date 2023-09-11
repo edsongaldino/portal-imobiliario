@@ -27,9 +27,12 @@
 								<li class="nav-item">
 									<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Locação</a>
 								</li>
+                                <li class="nav-item">
+									<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Novos</a>
+								</li>
 							</ul>
 							<div class="tab-content home1_adsrchfrm" id="pills-tabContent">
-                                <form action="{{ url('imoveis-buscar') }}" method="POST">
+                                <form action="{{ url('imoveis-buscar') }}" id="BuscaImoveis" name="BuscaImoveis" method="POST">
                                 @csrf
 								<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 									<div class="home1-advnc-search">
@@ -42,7 +45,7 @@
 											<li class="list-inline-item">
 												<div class="search_option_two">
 													<div class="candidate_revew_select">
-														<select class="selectpicker w100 show-tick" multiple>
+														<select name="tipo_imovel" id="tipo_imovel" class="selectpicker w100 show-tick" multiple>
 															<option>Tipo do Imóvel</option>
                                                             @foreach ($tipos as $tipo)
                                                             <option>{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
@@ -54,7 +57,7 @@
 											</li>
 											<li class="list-inline-item">
 											    <div class="form-group">
-											    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Localização">
+											    	<input type="text" class="form-control" name="localizacao" id="localizacao" placeholder="Localização">
 											    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 											    </div>
 											</li>

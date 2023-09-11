@@ -545,7 +545,7 @@
 											<li class="list-inline-item"><span href="#"><img src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="pposter1.png" width="40" height="40"></span></li>
 										    <li class="list-inline-item"><span href="#">{{ $anuncio->anunciante->nome }}</span></li>
 										</ul>
-                                        <a href="{{ url('/detalhes-imovel') }}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
+                                        <a href="/imoveis/{{ $anuncio->id }}/{{ Helper::url_amigavel($anuncio->tipo->nome .'-'. $anuncio->transacao) }}/{{ Helper::url_amigavel($anuncio->endereco->cidade->nome_cidade .'-'. $anuncio->endereco->cidade->estado->uf_estado)}}"><div class="fp_pdate float-right btn-detalhes">+ Detalhes</div></a>
 									</div>
 								</div>
 							</div>
