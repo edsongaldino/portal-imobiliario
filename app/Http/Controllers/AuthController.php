@@ -70,7 +70,7 @@ class AuthController extends Controller
             $configuracoes->name = $User->name;
             $configuracoes->link = getenv('APP_URL').'/nova-senha/'.base64_encode($User->email);
 
-            Mail::to($request->destinatario)->send(new ReenviarSenha($configuracoes));
+            Mail::to($configuracoes->destinatario)->send(new ReenviarSenha($configuracoes));
 
             return 'Sucesso';
         }
