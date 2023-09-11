@@ -10,6 +10,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailUser;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Expr\Cast\Array_;
+use PhpParser\Node\Expr\Cast\Object_;
+use stdClass;
 
 class AuthController extends Controller
 {
@@ -59,14 +62,15 @@ class AuthController extends Controller
 
         if($User){
 
+            $configuracoes = new stdClass;
             //ENVIA PARA O USUÁRIO
-            $request->template = "emails.senha";
-            $request->assunto = "Você solicitou uma nova senha! Rede Imóveis MT";
-            $request->destinatario = $User->email;
-            $request->name = $User->name;
-            $request->link = getenv('APP_URL').'/nova-senha/'.base64_encode($User->email);
+            $configuracoes->template = "emails.senha";
+            $configuracoes->assunto = "Você solicitou uma nova senha! Rede Imóveis MT";
+            $configuracoes->destinatario = $User->email;
+            $configuracoes->name = $User->name;
+            $configuracoes->link = getenv('APP_URL').'/nova-senha/'.base64_encode($User->email);
 
-            Mail::to($request->destinatario)->send(new ReenviarSenha($request));
+            Mail::to($request->destinatario)->send(new ReenviarSenha($configuracoes));
 
             return 'Sucesso';
         }
