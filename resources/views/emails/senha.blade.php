@@ -346,7 +346,7 @@ ul.social li{
 				<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td class="logo" style="text-align: center; margin-top:30px;">
-							<h1><a href="#"><img src="{{ asset('/assets/media/logos/Logo.png') }}" width="120" alt="Logo"></a></h1>
+							<h1><a href="#"><img src="https://redeimoveismt.com.br/assets/portal/images/header-logo2.png" width="120" alt="Logo"></a></h1>
 						</td>
 					</tr>
 				</table>
@@ -409,7 +409,7 @@ ul.social li{
       </tr><!-- end: tr -->
       <tr>
         <td class="bg_light" style="text-align: center;">
-            <p>www.redeimoveismt.ong.br</p>
+            <p>www.redeimoveismt.com.br</p>
         </td>
       </tr>
     </table>
