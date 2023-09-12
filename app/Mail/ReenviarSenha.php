@@ -25,7 +25,7 @@ class ReenviarSenha extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.senha')->from('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->replyTo('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->subject('Confirmação de Cadastro - Rede Imóveis MT');
+        return $this->view('emails.senha')->from('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->replyTo('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->subject('Você solicitou uma nova senha! Rede Imóveis MT');
     }
 
 }
