@@ -81,18 +81,19 @@ class AuthController extends Controller
 
     public function FormAlterarSenha($email){
         $email = base64_decode($email);
-        return view('painel.resetar_senha')->with(compact('email'));
+        $user = User::where('email', $email)->first();
+        return view('painel.resetar_senha')->with(compact('user'));
     }
 
     public function AlterarSenha(Request $request){
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::find(base64_decode($request->id));
 
         if($request->senha == $request->confirmar_senha){
             $user->password = Hash::make($request->senha);
             $user->save();
 
-            return view('home');
+            return view('painel.dashboard');
         }
 
         return redirect()->back()->with('warning', 'As senhas precisam ser idênticas.');

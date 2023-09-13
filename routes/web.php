@@ -52,6 +52,7 @@ Route::post('/finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@Ca
 Route::post('/login-painel', 'App\Http\Controllers\AuthController@Login')->name('login-painel');
 Route::post('/reenviar-senha', 'App\Http\Controllers\AuthController@ReenviarSenha')->name('lembrar-senha');
 Route::get('/nova-senha/{email}', 'App\Http\Controllers\AuthController@FormAlterarSenha')->name('nova.senha');
+Route::post('/senha/alterar', 'App\Http\Controllers\AuthController@AlterarSenha')->name('alterar.senha');
 Route::get('/logout-painel', 'App\Http\Controllers\AuthController@Logout')->name('logout-painel')->middleware('auth');
 Route::get('/painel/anuncios', 'App\Http\Controllers\AnuncioController@index')->name('painel.anuncios')->middleware('auth');
 Route::get('/painel/anuncios/incluir', 'App\Http\Controllers\AnuncioController@create')->name('painel.anuncios.incluir')->middleware('auth');
