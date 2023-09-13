@@ -91,12 +91,14 @@ class AuthController extends Controller
 
         if($request->senha == $request->confirmar_senha){
             $user->password = Hash::make($request->senha);
-            $user->save();
-
-            return view('painel.dashboard');
+            if($user->save()){
+                return 'Sucesso';
+            }else{
+                return "Erro";
+            }
         }
 
-        return redirect()->back()->with('warning', 'As senhas precisam ser idênticas.');
+        return "Erro";
 
 
     }
