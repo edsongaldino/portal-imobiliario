@@ -16,8 +16,9 @@
 					<h1 class="text-dark mb-3">Olá, {{ $user->name }}</h1>
 					<!--end::Title-->
 					<!--begin::Link-->
-					<div class="text-gray-400 fw-bold fs-4">Vamos alterar sua senha?
-					<a href="#" class="link-primary fw-bolder">Insira abaixo sua senha nova</a></div>
+					<div class="text-gray-400 fw-bold fs-4">Lembrou sa sua senha?
+					<a href="/login" class="link-primary fw-bolder">Login</a></div><br/>
+                    <div class="text-gray-400 fw-bold fs-4">Caso contrário, crie uma nova senha</div>
 					<!--end::Link-->
 				</div>
 				<!--begin::Heading-->
