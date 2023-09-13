@@ -240,25 +240,28 @@
                             <div class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
                             <div class="btn-visita"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
 
+                            <form method="POST" id="ContatoAnuncio" action="{{ url('/contato-anuncio') }}">
+                            @csrf
+                            <input type="hidden" id="anuncio_id" name="anuncio_id" value="{{ $anuncio->id }}">
 							<ul class="sasw_list mb0">
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="text" class="form-control" id="exampleInputName1" placeholder="Seu nome completo">
+								    	<input type="text" class="form-control" name="nome" id="nome" placeholder="Seu nome completo">
 								    </div>
 								</li>
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="number" class="form-control" id="exampleInputName2" placeholder="Telefone">
+								    	<input type="number" class="form-control" name="telefone" id="telefone" placeholder="Telefone">
 								    </div>
 								</li>
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+								    	<input type="email" class="form-control" name="email" id="email" placeholder="Email">
 								    </div>
 								</li>
 								<li class="search_area">
 		                            <div class="form-group">
-		                                <textarea id="form_message" name="form_message" class="form-control required" rows="5" required="required" placeholder="">Olá, tenho interesse neste imóvel: Apartamento, 76m², 2 quartos, Rua dos Xavantes, 457 - Santa Helena, Cuiabá - MT, Aluguel, R$ 1900/Mês. Aguardo o contato. Obrigado.</textarea>
+		                                <textarea id="mensagem" name="mensagem" class="form-control required" rows="5" required="required" placeholder="">Olá, tenho interesse neste imóvel: Apartamento, 76m², 2 quartos, Rua dos Xavantes, 457 - Santa Helena, Cuiabá - MT, Aluguel, R$ 1900/Mês. Aguardo o contato. Obrigado.</textarea>
 		                            </div>
 								</li>
 								<li>
@@ -267,6 +270,7 @@
 									</div>
 								</li>
 							</ul>
+                            </form>
 						</div>
 					</div>
 

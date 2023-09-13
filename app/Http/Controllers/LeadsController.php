@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Leads;
 use App\Http\Controllers\Controller;
+use App\Mail\EnviaLead;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LeadsController extends Controller
 {
@@ -37,7 +40,21 @@ class LeadsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lead = new Leads();
+        $lead->anuncio_id = $request->anuncio_id;
+        $lead->nome = $request->nome;
+        $lead->email = $request->email;
+        $lead->telefone = Helper::limpa_campo($request->telefone);
+        $lead->mensagem = $request->mensagem;
+
+        if($lead->save()){
+            $destinatario = 'edsongaldino@outlook.com';
+            Mail::to($destinatario)->send(new EnviaLead($lead));
+            return 'Sucesso';
+        }else{
+            return 'Erro';
+        }
+
     }
 
     /**
