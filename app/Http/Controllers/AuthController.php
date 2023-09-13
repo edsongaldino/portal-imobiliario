@@ -81,7 +81,7 @@ class AuthController extends Controller
 
     public function FormAlterarSenha($email){
         $email = base64_decode($email);
-        return view('nova-senha')->with(compact('email'));
+        return view('painel.resetar_senha')->with(compact('email'));
     }
 
     public function AlterarSenha(Request $request){
