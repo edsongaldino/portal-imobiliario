@@ -22,18 +22,19 @@
 						<div class="home_adv_srch_opt">
 							<ul class="nav nav-pills" id="pills-tab" role="tablist">
 								<li class="nav-item">
-									<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Venda</a>
+									<a class="nav-link btnTransacao active" id="pills-home-tab" data-toggle="pill" data-transacao="Venda" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Venda</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Locação</a>
+									<a class="nav-link btnTransacao" id="pills-profile-tab" data-toggle="pill" data-transacao="Locação" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Locação</a>
 								</li>
                                 <li class="nav-item">
-									<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Novos</a>
+									<a class="nav-link btnTransacao" id="pills-profile-tab" data-toggle="pill" data-transacao="Lançamentos" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Novos</a>
 								</li>
 							</ul>
 							<div class="tab-content home1_adsrchfrm" id="pills-tabContent">
                                 <form action="{{ url('imoveis-buscar') }}" id="BuscaImoveis" name="BuscaImoveis" method="POST">
                                 @csrf
+                                <input type="hidden" name="transacao" id="transacao" value="Venda">
 								<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 									<div class="home1-advnc-search">
 										<ul class="h1ads_1st_list mb0">
@@ -315,5 +316,6 @@
 <!-- Custom script for all pages -->
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/portal/js/custom.js') }}"></script>
 </body>
 </html>

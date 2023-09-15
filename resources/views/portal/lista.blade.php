@@ -589,5 +589,6 @@
 <!-- Custom script for all pages -->
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/portal/js/custom.js') }}"></script>
 </body>
 </html>
