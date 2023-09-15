@@ -237,8 +237,8 @@
 								</div>
 							</div>
 
-                            <div class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
-                            <div class="btn-visita"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
+                            <div class="btn-whatsapp" data-toggle="modal" data-target="#ModalContato"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
+                            <div class="btn-visita" data-toggle="modal" data-target="#ModalAgendar"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
 
                             <form method="POST" id="ContatoAnuncio" action="{{ url('/contato-anuncio') }}">
                             @csrf
@@ -246,17 +246,17 @@
 							<ul class="sasw_list mb0">
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="text" class="form-control" name="nome" id="nome" placeholder="Seu nome completo">
+								    	<input type="text" class="form-control" name="nome" id="nome" placeholder="Seu nome completo" required>
 								    </div>
 								</li>
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="number" class="form-control" name="telefone" id="telefone" placeholder="Telefone">
+								    	<input type="number" class="form-control" name="telefone" id="telefone" placeholder="Telefone" required>
 								    </div>
 								</li>
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+								    	<input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
 								    </div>
 								</li>
 								<li class="search_area">
@@ -308,6 +308,48 @@
 	@include('includes.portal.footer')
 
     @include('includes.portal.modals.modal-login')
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalContato" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Contato Whatsapp</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalAgendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Agendar Visita</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary">Agendar Visita</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
 </div>
 
