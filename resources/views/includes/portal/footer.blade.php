@@ -6,8 +6,8 @@
                 <div class="footer_qlink_widget">
                     <h4>Institucional</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#">A Rede</a></li>
-                        <li><a href="#">Como anunciar</a></li>
+                        <li><a href="{{ url('/rede-imoveis-mt') }}">A Rede</a></li>
+                        <li><a href="{{ url('/rede-imoveis-mt/como-anunciar') }}">Como anunciar</a></li>
                     </ul>
                 </div>
             </div>
@@ -15,10 +15,10 @@
                 <div class="footer_qlink_widget">
                     <h4>Busca Rápida</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#">Comprar</a></li>
-                        <li><a href="#">Alugar</a></li>
-                        <li><a href="#">Imóveis novos</a></li>
-                        <li><a href="#">Mapa do site</a></li>
+                        <li><a href="{{ url('/lista-imoveis/venda') }}">Comprar</a></li>
+                        <li><a href="{{ url('/lista-imoveis/locacao') }}">Alugar</a></li>
+                        <li><a href="{{ url('/lista-imoveis/novos') }}">Imóveis novos</a></li>
+                        <li><a href="{{ url('/mapa-do-site') }}">Mapa do site</a></li>
                     </ul>
                 </div>
             </div>
@@ -26,8 +26,8 @@
                 <div class="footer_contact_widget">
                     <h4>Ferramentas</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#">Simulador de Financiamento</a></li>
-                        <li><a href="#">Imóveis favoritos</a></li>
+                        <li><a href="{{ url('/simular-financiamento-de-imoveis') }}">Simulador de Financiamento</a></li>
+                        <li><a href="{{ url('/imoveis-favoritos') }}">Imóveis favoritos</a></li>
                     </ul>
                 </div>
             </div>
@@ -66,12 +66,12 @@
             <div class="col-lg-6 col-xl-6">
                 <div class="footer_menu_widget">
                     <ul>
-                        <li class="list-inline-item"><a href="#">Home</a></li>
-                        <li class="list-inline-item"><a href="#">Comprar</a></li>
-                        <li class="list-inline-item"><a href="#">Alugar</a></li>
-                        <li class="list-inline-item"><a href="#">Lançamentos</a></li>
-                        <li class="list-inline-item"><a href="#">Financiamento</a></li>
-                        <li class="list-inline-item"><a href="#">Anunciar</a></li>
+                        <li class="list-inline-item"><a href="{{ url('/') }}">Home</a></li>
+                        <li class="list-inline-item"><a href="{{ url('/lista-imoveis/venda') }}">Comprar</a></li>
+                        <li class="list-inline-item"><a href="{{ url('/lista-imoveis/locacao') }}">Alugar</a></li>
+                        <li class="list-inline-item"><a href="{{ url('/lista-imoveis/novos') }}">Lançamentos</a></li>
+                        <li class="list-inline-item"><a href="{{ url('/simular-financiamento-de-imoveis') }}">Financiamento</a></li>
+                        <li class="list-inline-item"><a href="{{ url('/login') }}">Anunciar</a></li>
                     </ul>
                 </div>
             </div>
