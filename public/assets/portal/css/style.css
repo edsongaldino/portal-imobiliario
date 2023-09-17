@@ -2315,6 +2315,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   line-height: 3;
   margin-right: 15px !important;
   vertical-align: text-top;
+  width: 40%;
 }
 .home1-advnc-search.home2{
   padding-left: 8px;
@@ -2418,6 +2419,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
 }
 .home1-advnc-search ul li:nth-child(2){
   margin-right: 0;
+  width: 40% !important;
 }
 .home1-advnc-search ul li:nth-child(3) .form-group{
   position: relative;
@@ -2440,12 +2442,14 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   text-align: center;
   top: 5px;
   width: 40px;
+  z-index: 100;
 }
 .home1-advnc-search ul li:nth-child(3) .form-group label span{
   font-size: 18px;
 }
 .home1-advnc-search ul li:last-child{
   margin-right: 0 !important;
+  width: 15% !important;
 }
 .home1-advnc-search ul li .search_option_button button{
   border-radius: 8px;
@@ -2614,7 +2618,6 @@ input.amount4:focus{
   border: 1px solid #ebebeb;
   height: 50px;
   line-height: 35px;
-  width: 580px;
 }
 .home1-advnc-search.home5 .search_option_two .dropdown.bootstrap-select>.dropdown-toggle{
   width: 100%;
@@ -2648,7 +2651,7 @@ input.amount4:focus{
   height: 50px;
   line-height: 40px;
   font-size: 14px;
-  width: 190px;
+  width: 100%;
 }
 .home1-advnc-search .search_option_two .dropdown.bootstrap-select .dropdown-toggle .filter-option{
   font-size: 14px;
@@ -2686,7 +2689,7 @@ input.amount4:focus{
 .home1-advnc-search ul.dropdown-menu.inner.show li{
   font-size: 14px;
   margin-right: 0 !important;
-  width: 95%;
+  width: 100% !important;
 }
 .home1-advnc-search .search_option_two .dropdown-menu{
   top: 50px !important;
@@ -2724,10 +2727,15 @@ form.home5_advanced_search_form .search_option_two .dropdown-menu{
 }
 .home1-advnc-search .bootstrap-select .dropdown-menu li a{
   color: #484848;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 2;
-  width: 340px;
+  width: 100% !important;
 }
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: rgb(255 90 95 / 10%) !important;
+}
+
 .home1-advnc-search.home5 .form-group.df label{
   font-size: 24px;
   line-height: 2;

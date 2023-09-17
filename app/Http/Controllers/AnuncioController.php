@@ -161,7 +161,7 @@ class AnuncioController extends Controller
         }
 
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->simplePaginate(20);
+        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->paginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));
@@ -184,7 +184,7 @@ class AnuncioController extends Controller
         }
 
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->simplePaginate(20);
+        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->paginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));

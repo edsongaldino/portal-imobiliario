@@ -44,7 +44,7 @@
 											</li>
 											<li class="list-inline-item">
 												<div class="search_option_two">
-													<div class="candidate_revew_select">
+													<div class="ui_kit_select_search">
 														<select name="tipo_imovel" id="tipo_imovel" class="selectpicker w100 show-tick" multiple>
 															<option>Tipo do Imóvel</option>
                                                             @foreach ($tipos as $tipo)
@@ -57,7 +57,13 @@
 											</li>
 											<li class="list-inline-item">
 											    <div class="form-group">
-											    	<input type="text" class="form-control" name="localizacao" id="localizacao" placeholder="Localização">
+											    	<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
+                                                        <option data-tokens="banking">Banking</option>
+                                                        <option data-tokens="digital&creative">Digital&Creative</option>
+                                                        <option data-tokens="retail">Retail</option>
+                                                        <option data-tokens="humanresource">Human Resources</option>
+                                                        <option data-tokens="management">Management</option>
+                                                    </select>
 											    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 											    </div>
 											</li>
@@ -225,14 +231,14 @@
 		</div>
 	</section>
 
-    <!--
+
 	<section id="our-partners" class="our-partners">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 offset-lg-3">
 					<div class="main-title text-center">
 						<h2>Nossos Parceiros</h2>
-						<p>We only work with the best companies around the globe</p>
+						<p>As maiores imobiliárias de Mato Grosso estão aqui!</p>
 					</div>
 				</div>
 			</div>
@@ -265,7 +271,7 @@
 			</div>
 		</div>
 	</section>
-    -->
+
 
 	<!-- Start Partners -->
 	<section class="start-partners bgc-thm pt50 pb50">
@@ -279,7 +285,7 @@
 				</div>
 				<div class="col-lg-4">
 					<div class="parner_reg_btn text-right tac-smd">
-						<a class="btn btn-thm2" href="#">Quero me Cadastrar</a>
+						<a class="btn btn-thm2" href="{{ url('cadastro') }}">Quero me Cadastrar</a>
 					</div>
 				</div>
 			</div>
