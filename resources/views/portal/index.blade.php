@@ -46,10 +46,10 @@
 											<li class="list-inline-item">
 												<div class="search_option_two">
 													<div class="ui_kit_select_search">
-														<select name="tipo_imovel" id="tipo_imovel" class="selectpicker w100 show-tick" multiple>
+														<select name="tipo_imovel[]" id="tipo_imovel" class="selectpicker w100 show-tick" multiple>
 															<option>Tipo do Imóvel</option>
                                                             @foreach ($tipos as $tipo)
-                                                            <option>{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
+                                                            <option value="{{ $tipo->id }}">{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
                                                             @endforeach
 
 														</select>
@@ -59,11 +59,9 @@
 											<li class="list-inline-item">
 											    <div class="form-group">
 											    	<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
-                                                        <option data-tokens="banking">Banking</option>
-                                                        <option data-tokens="digital&creative">Digital&Creative</option>
-                                                        <option data-tokens="retail">Retail</option>
-                                                        <option data-tokens="humanresource">Human Resources</option>
-                                                        <option data-tokens="management">Management</option>
+                                                        @foreach ($cidades as $cidade)
+                                                            <option value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                        @endforeach
                                                     </select>
 											    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 											    </div>
@@ -244,31 +242,13 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 col-md-4 col-lg">
+                @foreach ($anunciantes as $anunciante)
+                <div class="col-sm-6 col-md-4 col-lg">
 					<div class="our_partner">
-						<img class="img-fluid" src="images/partners/1.png" alt="1.png">
+						<img class="img-fluid" src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" width="150" alt="{{ $anunciante->nome }}">
 					</div>
 				</div>
-				<div class="col-sm-6 col-md-4 col-lg">
-					<div class="our_partner">
-						<img class="img-fluid" src="images/partners/2.png" alt="2.png">
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg">
-					<div class="our_partner">
-						<img class="img-fluid" src="images/partners/3.png" alt="3.png">
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg">
-					<div class="our_partner">
-						<img class="img-fluid" src="images/partners/4.png" alt="4.png">
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg">
-					<div class="our_partner">
-						<img class="img-fluid" src="images/partners/5.png" alt="5.png">
-					</div>
-				</div>
+                @endforeach
 			</div>
 		</div>
 	</section>

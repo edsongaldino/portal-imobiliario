@@ -164,26 +164,29 @@
 							</div>
 						</div>
 
-						<div class="col-lg-12">
-							<div class="shop_single_tab_content style2 bdr1 mt30">
-								<ul class="nav nav-tabs" id="myTab" role="tablist">
-									<li class="nav-item">
-									    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Vídeo do Imóvel</a>
-									</li>
-								</ul>
-								<div class="tab-content" id="myTabContent2">
-									<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-										<div class="property_video">
-											<div class="thumb">
-												<div class="embed-responsive embed-responsive-16by9">
-                                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/2akHQqfGNMI" allowfullscreen></iframe>
+                        @if (Helper::GetInformacaoByChave($anuncio->id, 'Vídeo'))
+                            <div class="col-lg-12">
+                                <div class="shop_single_tab_content style2 bdr1 mt30">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Vídeo do Imóvel</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent2">
+                                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                                            <div class="property_video">
+                                                <div class="thumb">
+                                                    <div class="embed-responsive embed-responsive-16by9">
+                                                        <iframe class="embed-responsive-item" src="{{ Helper::GetInformacaoByChave($anuncio->id,'Vídeo') }}" allowfullscreen></iframe>
+                                                    </div>
                                                 </div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
 					</div>
 				</div>
 				<div class="col-lg-4 col-xl-4">

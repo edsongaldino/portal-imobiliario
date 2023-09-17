@@ -23,14 +23,22 @@
 									<ul class="sasw_list style2 mb0">
 										<li class="search_area">
 										    <div class="form-group">
-										    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Localização">
+										    	<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
+                                                    @foreach ($cidades as $cidade)
+                                                        @if($request->localizacao)
+                                                        <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}" @if($request->localizacao == $cidade->id) selected @endif>{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                        @else
+                                                        <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
 										    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 										    </div>
 										</li>
 										<li>
 											<div class="search_option_two">
 												<div class="candidate_revew_select">
-													<select class="selectpicker w100 show-tick" multiple>
+													<select name="tipo_imovel[]" class="selectpicker w100 show-tick" multiple>
 														<option>Tipo do Imóvel</option>
 														@foreach ($tipos as $tipo)
                                                         <option value="{{ $tipo->id }}">{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
@@ -41,18 +49,18 @@
 										</li>
 										<li class="min_area style2 list-inline-item">
                                             <div class="form-group">
-                                                <input type="text" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
+                                                <input type="text" name="valor_minimo" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
                                             </div>
                                         </li>
                                         <li class="max_area list-inline-item">
                                             <div class="form-group">
-                                                <input type="text" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
+                                                <input type="text" name="valor_maximo" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
                                             </div>
                                         </li>
 										<li>
 											<div class="search_option_two">
 												<div class="candidate_revew_select">
-													<select class="selectpicker w100 show-tick" multiple>
+													<select name="quartos[]" class="selectpicker w100 show-tick" multiple>
 														<option>Quartos</option>
 														<option>1</option>
 														<option>2</option>
@@ -67,7 +75,7 @@
 										<li>
 											<div class="search_option_two">
 												<div class="candidate_revew_select">
-													<select class="selectpicker w100 show-tick" multiple>
+													<select name="banheiros[]" class="selectpicker w100 show-tick" multiple>
 														<option>Banheiros</option>
 														<option>1</option>
 														<option>2</option>
@@ -82,7 +90,7 @@
 										<li>
 											<div class="search_option_two">
 												<div class="candidate_revew_select">
-													<select class="selectpicker w100 show-tick" multiple>
+													<select name="garagem[]" class="selectpicker w100 show-tick" multiple>
 														<option>Garagens (Vagas)</option>
 														<option>1</option>
 														<option>2</option>
@@ -97,12 +105,12 @@
 
 										<li class="min_area style2 list-inline-item">
 										    <div class="form-group">
-										    	<input type="text" class="form-control moeda" id="exampleInputName2" placeholder="Área Min">
+										    	<input type="text" name="area_minima" class="form-control moeda" id="exampleInputName2" placeholder="Área Min">
 										    </div>
 										</li>
 										<li class="max_area list-inline-item">
 										    <div class="form-group">
-										    	<input type="text" class="form-control moeda" id="exampleInputName3" placeholder="Área Max">
+										    	<input type="text" name="area_maxima" class="form-control moeda" id="exampleInputName3" placeholder="Área Max">
 										    </div>
 										</li>
 										<li>
@@ -257,14 +265,22 @@
 								<ul class="sasw_list mb0">
 									<li class="search_area">
 									    <div class="form-group">
-									    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Localização">
+									    	<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
+                                                @foreach ($cidades as $cidade)
+                                                    @if($request->localizacao)
+                                                    <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}" @if($request->localizacao == $cidade->id) selected @endif>{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                    @else
+                                                    <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
 									    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 									    </div>
 									</li>
 									<li>
 										<div class="search_option_two">
 											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick" multiple>
+												<select name="tipo_imovel[]" class="selectpicker w100 show-tick" multiple>
 													<option>Tipo do Imóvel</option>
 													@foreach ($tipos as $tipo)
                                                     <option value="{{ $tipo->id }}">{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
@@ -275,18 +291,18 @@
 									</li>
 									<li class="min_area style2 list-inline-item">
 										<div class="form-group">
-											<input type="text" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
+											<input type="text" name="valor_minimo" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
 										</div>
 									</li>
 									<li class="max_area list-inline-item">
 										<div class="form-group">
-											<input type="text" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
+											<input type="text" name="valor_maximo" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
 										</div>
 									</li>
 									<li>
 										<div class="search_option_two">
 											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick" multiple>
+												<select name="quartos[]" class="selectpicker w100 show-tick" multiple>
 													<option>Quartos</option>
 													<option>1</option>
 													<option>2</option>
@@ -301,7 +317,7 @@
 									<li>
 										<div class="search_option_two">
 											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick" multiple>
+												<select name="banheiros[]" class="selectpicker w100 show-tick" multiple>
 													<option>Banheiros</option>
 													<option>1</option>
 													<option>2</option>
@@ -316,7 +332,7 @@
 									<li>
 										<div class="search_option_two">
 											<div class="candidate_revew_select">
-												<select class="selectpicker w100 show-tick" multiple>
+												<select name="garagem[]" class="selectpicker w100 show-tick" multiple>
 													<option>Garagem (Vagas)</option>
 													<option>1</option>
 													<option>2</option>
@@ -331,12 +347,12 @@
 
 									<li class="min_area list-inline-item">
 									    <div class="form-group">
-									    	<input type="text" class="form-control moeda" id="exampleInputName2" placeholder="Min Area">
+									    	<input type="text" name="area_minima" class="form-control moeda" id="exampleInputName2" placeholder="Min Area">
 									    </div>
 									</li>
 									<li class="max_area list-inline-item">
 									    <div class="form-group">
-									    	<input type="text" class="form-control moeda" id="exampleInputName3" placeholder="Max Area">
+									    	<input type="text" name="area_maxima" class="form-control moeda" id="exampleInputName3" placeholder="Max Area">
 									    </div>
 									</li>
 									<li>
@@ -468,7 +484,15 @@
 												<ul class="tag mb0">
 												    <li class="list-inline-item"><span>{{ $destaque->transacao }}</span></li>
 												</ul>
-												<span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_venda) }}</span>
+
+                                                @if($destaque->transacao == 'Venda' || $destaque->transacao == 'Locação/Venda')
+                                                <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_venda) }}</span>
+                                                @endif
+
+                                                @if($destaque->transacao == 'Locação' || $destaque->transacao == 'Locação/Venda')
+                                                <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_locacao) }}</span>
+                                                @endif
+
 												<h4 class="posr color-white">{{ $destaque->tipo->nome }}</h4>
 											</div>
 										</div>
@@ -529,7 +553,13 @@
                                                 <li class="list-inline-item"><a href="#">Lançamento</a></li>
                                                 @endif
 											</ul>
-											<a class="fp_price" href="#">R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</a>
+											@if($anuncio->transacao == 'Venda' || $anuncio->transacao == 'Locação/Venda')
+                                            <a class="fp_price">R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</a>
+                                            @endif
+
+                                            @if($anuncio->transacao == 'Locação' || $anuncio->transacao == 'Locação/Venda')
+                                            <a class="fp_price">R$ {{ Helper::converte_valor_real($anuncio->valor_locacao) }}</a>
+                                            @endif
 										</div>
 										<p class="text-thm">{{ $anuncio->tipo->nome }}</p>
 										<h4>{{ $anuncio->titulo }}</h4>
@@ -589,6 +619,5 @@
 <!-- Custom script for all pages -->
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/portal/js/custom.js') }}"></script>
 </body>
 </html>

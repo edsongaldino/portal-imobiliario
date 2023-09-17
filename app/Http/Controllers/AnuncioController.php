@@ -12,6 +12,7 @@ use App\Models\Cidade;
 use App\Models\Estado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AnuncioController extends Controller
 {
@@ -144,25 +145,40 @@ class AnuncioController extends Controller
     #CONTROLLERSPORTAL
     public function BuscaAnuncios(Request $request)
     {
-        $anuncios = Anuncio::where('situacao', 'Liberado');
+        $anuncios = Anuncio::where('situacao', 'Liberado')->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id');
 
         switch($request->transacao){
-            case 'novos':
+            case 'Lançamentos':
                 $anuncios = $anuncios->where('lancamento','S');
                 break;
-            case 'locacao':
+            case 'Locação':
                 $anuncios = $anuncios->where('transacao','Locação');
                 break;
-            case 'venda':
+            case 'Venda':
                 $anuncios = $anuncios->where('transacao','Venda');
                 break;
         }
 
+        if($request->localizacao){
+            $anuncios = $anuncios->where('enderecos.cidade_id',$request->localizacao);
+        }
+
+        if($request->tipo_imovel){
+            $itens = DB::table('tipos')->select('id')->whereIn('id', $request->tipo_imovel)->get();
+            foreach($itens as $item){
+                $anuncios = $anuncios->where('tipo_id',$item->id);
+            }
+        }
+
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->paginate(20);
+        $anuncios = $anuncios->orderBy('anuncios.updated_at', 'DESC')->simplePaginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
-        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));
+        $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
+                            ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
+                            ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
+                            ->GroupBy('cidades.id')->get();
+        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques', 'cidades', 'request'));
     }
 
     public function ListaAnuncios($transacao)
@@ -180,12 +196,16 @@ class AnuncioController extends Controller
                 $anuncios = $anuncios->where('transacao','Venda');
                 break;
         }
-
+        $request = new Request();
         $total =  $anuncios->count();
         $anuncios = $anuncios->orderBy('updated_at', 'DESC')->paginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
-        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));
+        $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
+                            ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
+                            ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
+                            ->GroupBy('cidades.id')->get();
+        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
     }
 
     public function DetalhesAnuncio($id){
