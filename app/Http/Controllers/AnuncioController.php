@@ -37,9 +37,7 @@ class AnuncioController extends Controller
         $estados = Estado::all();
         $cidades = Cidade::all();
         $tipos = AnuncioTipo::all();
-        $finalidades = AnuncioFinalidade::all();
-        $caracteristicas = Caracteristica::all();
-        return view('painel.anuncios.incluir', compact('estados', 'cidades', 'tipos', 'finalidades', 'caracteristicas'));
+        return view('painel.anuncios.incluir', compact('estados', 'cidades', 'tipos'));
     }
 
     /**

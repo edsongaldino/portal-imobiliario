@@ -178,10 +178,15 @@ class AnuncianteController extends Controller
         //
     }
 
+    public function ValidarCadastro($id, $email){
+        $anunciante = Anunciante::find($id);
+        return view('painel.login', compact('anunciante'));
+    }
+
     public function getLogo($id)
     {
         $anunciante = Anunciante::find($id);
         return Storage::get($anunciante->logo);
-
+        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques'));
     }
 }

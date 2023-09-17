@@ -311,6 +311,16 @@
             color: rgba(0,0,0,1);
         }
 
+        .botao{
+            width: 150px;
+            height: 50px;
+            background-color: #0a9678;
+            color: #ffffff;
+            text-align: center;
+            line-height: 50px;
+            margin: auto;
+        }
+
 
         @media screen and (max-width: 500px) {
 
@@ -336,7 +346,7 @@
 				<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td class="logo" style="text-align: center; margin-top:30px;">
-							<h1><a href="#"><img src="{{ asset('/assets/portal/images/header-logo2.png') }}" width="200" alt="Logo"></a></h1>
+							<h1><a href="#"><img src="https://redeimoveismt.com.br/assets/portal/images/header-logo2.png" width="200" alt="Logo"></a></h1>
 						</td>
 					</tr>
 				</table>
@@ -355,7 +365,9 @@
 
 								<h2>Olá {{ $anunciante->nome ?? '' }}, </h2>
 								<h2>Informamos que recebemos corretamente seus dados.</h2>
-								<h3>Seu cadastro será avaliado e em breve entraremos em contato.</h3>
+								<h3>Para confirmar seu cadastro, clique no link abaixo:</h3>
+
+                                <a href="https://redeimoveismt.com.br/anunciante/{{ $anunciante->id }}/confirmar-cadastro/{{ $anunciante->email }}"><div class="botao">CONFIRMAR CADASTRO</div></a>
 
 							</div>
 						</td>
@@ -399,7 +411,7 @@
         </tr><!-- end: tr -->
         <tr>
           <td class="bg_light" style="text-align: center;">
-          	<p>www.redeimoveismt.ong.br</p>
+          	<p>www.redeimoveismt.com.br</p>
           </td>
         </tr>
       </table>

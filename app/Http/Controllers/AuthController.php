@@ -10,6 +10,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailUser;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Expr\Cast\Array_;
+use PhpParser\Node\Expr\Cast\Object_;
+use stdClass;
 
 class AuthController extends Controller
 {
@@ -59,14 +62,15 @@ class AuthController extends Controller
 
         if($User){
 
+            $configuracoes = new stdClass;
             //ENVIA PARA O USUÁRIO
-            $request->template = "emails.senha";
-            $request->assunto = "Você solicitou uma nova senha! Rede Imóveis MT";
-            $request->destinatario = $User->email;
-            $request->name = $User->name;
-            $request->link = getenv('APP_URL').'/nova-senha/'.base64_encode($User->email);
+            $configuracoes->template = "emails.senha";
+            $configuracoes->assunto = "Você solicitou uma nova senha! Rede Imóveis MT";
+            $configuracoes->destinatario = $User->email;
+            $configuracoes->name = $User->name;
+            $configuracoes->link = getenv('APP_URL').'/nova-senha/'.base64_encode($User->email);
 
-            Mail::to($request->destinatario)->send(new ReenviarSenha($request));
+            Mail::to($configuracoes->destinatario)->send(new ReenviarSenha($configuracoes));
 
             return 'Sucesso';
         }
@@ -77,22 +81,23 @@ class AuthController extends Controller
 
     public function FormAlterarSenha($email){
         $email = base64_decode($email);
-        return view('nova-senha')->with(compact('email'));
+        $user = User::where('email', $email)->first();
+        return view('painel.resetar_senha')->with(compact('user'));
     }
 
     public function AlterarSenha(Request $request){
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::find(base64_decode($request->id));
 
         if($request->senha == $request->confirmar_senha){
             $user->password = Hash::make($request->senha);
-            $user->save();
-
-            return view('home');
+            if($user->save()){
+                return 'Sucesso';
+            }else{
+                return "Erro";
+            }
         }
 
-        return redirect()->back()->with('warning', 'As senhas precisam ser idênticas.');
-
-
+        return "Erro";
     }
 }

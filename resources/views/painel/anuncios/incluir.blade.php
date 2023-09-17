@@ -1,62 +1,29 @@
 @extends('layouts.painel')
 @section('conteudo')
 <div class="row">
-	<div class="col-lg-12">
-		<div class="dashboard_navigationbar dn db-992">
-			<div class="dropdown">
-				<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard Navigation</button>
-				<ul id="myDropdown" class="dropdown-content">
-					<li><a href="page-dashboard.html"><span class="flaticon-layers"></span> Dashboard</a></li>
-					<li><a href="page-message.html"><span class="flaticon-envelope"></span> Message</a></li>
-					<li><a href="page-my-properties.html"><span class="flaticon-home"></span> My Properties</a></li>
-					<li><a href="page-my-favorites.html"><span class="flaticon-heart"></span> My Favorites</a></li>
-					<li><a href="page-my-savesearch.html"><span class="flaticon-magnifying-glass"></span> Saved Search</a></li>
-					<li><a href="page-my-review.html"><span class="flaticon-chat"></span> My Reviews</a></li>
-					<li><a href="page-my-packages.html"><span class="flaticon-box"></span> My Package</a></li>
-					<li><a href="page-my-profile.html"><span class="flaticon-user"></span> My Profile</a></li>
-					<li class="active"><a href="page-add-new-property.html"><span class="flaticon-filter-results-button"></span> Add New Listing</a></li>
-					<li><a href="page-login.html"><span class="flaticon-logout"></span> Logout</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+
 	<div class="col-lg-12 mb10">
 		<div class="breadcrumb_content style2">
-			<h2 class="breadcrumb_title">Add New Property</h2>
-			<p>We are glad to see you again!</p>
+			<h2 class="breadcrumb_title">Incluir novo anúncio</h2>
+			<p>Preencha as informações abaixo:</p>
 		</div>
 	</div>
 	<div class="col-lg-12">
 		<div class="my_dashboard_review">
 			<div class="row">
-				<div class="col-lg-12">
-					<h4 class="mb30">Create Listing</h4>
-					<div class="my_profile_setting_input form-group">
-						<label for="propertyTitle">Property Title</label>
-						<input type="text" class="form-control" id="propertyTitle">
-					</div>
-				</div>
-				<div class="col-lg-12">
-					<div class="my_profile_setting_textarea">
-						<label for="propertyDescription">Description</label>
-						<textarea class="form-control" id="propertyDescription" rows="7"></textarea>
-					</div>
-				</div>
-				<div class="col-lg-6 col-xl-6">
+                <div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input ui_kit_select_search form-group">
-						<label>Type</label>
+						<label>Finalidade</label>
 						<select class="selectpicker" data-live-search="true" data-width="100%">
-							<option data-tokens="type1">Type1</option>
-							<option data-tokens="Type2">Type2</option>
-							<option data-tokens="Type3">Type3</option>
-							<option data-tokens="Type4">Type4</option>
-							<option data-tokens="Type5">Type5</option>
+							<option data-tokens="type1">Residencial</option>
+							<option data-tokens="Type2">Comercial</option>
+							<option data-tokens="Type3">Residencial/Comercial</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-lg-6 col-xl-6">
+				<div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input ui_kit_select_search form-group">
-						<label>Status</label>
+						<label>Tipo</label>
 						<select class="selectpicker" data-live-search="true" data-width="100%">
 							<option data-tokens="Status1">Status1</option>
 							<option data-tokens="Status2">Status2</option>
@@ -66,75 +33,102 @@
 						</select>
 					</div>
 				</div>
+                <div class="col-lg-4 col-xl-4">
+					<div class="my_profile_setting_input ui_kit_select_search form-group">
+						<label>Transação</label>
+						<select class="selectpicker" data-live-search="true" data-width="100%">
+							<option data-tokens="Status1">Venda</option>
+							<option data-tokens="Status2">Locação</option>
+							<option data-tokens="Status3">Venda/Locação</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="my_profile_setting_input form-group">
+						<label for="propertyTitle">Título</label>
+						<input type="text" class="form-control" id="propertyTitle">
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="my_profile_setting_textarea">
+						<label for="propertyDescription">Descrição</label>
+						<textarea class="form-control" id="propertyDescription" rows="7"></textarea>
+					</div>
+				</div>
 				<div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="formGroupExamplePrice">Price</label>
+						<label for="formGroupExamplePrice">Valor (Venda)</label>
+						<input type="text" class="form-control" id="formGroupExamplePrice">
+					</div>
+				</div>
+                <div class="col-lg-4 col-xl-4">
+					<div class="my_profile_setting_input form-group">
+						<label for="formGroupExamplePrice">Valor (Locação)</label>
+						<input type="text" class="form-control" id="formGroupExamplePrice">
+					</div>
+				</div>
+                <div class="col-lg-4 col-xl-4">
+					<div class="my_profile_setting_input form-group">
+						<label for="formGroupExamplePrice">Valor (Condomínio)</label>
+						<input type="text" class="form-control" id="formGroupExamplePrice">
+					</div>
+				</div>
+                <div class="col-lg-4 col-xl-4">
+					<div class="my_profile_setting_input form-group">
+						<label for="formGroupExamplePrice">Valor (IPTU)</label>
 						<input type="text" class="form-control" id="formGroupExamplePrice">
 					</div>
 				</div>
 				<div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="formGroupExampleArea">Area</label>
+						<label for="formGroupExampleArea">Área Útil (M²)</label>
 						<input type="text" class="form-control" id="formGroupExampleArea">
 					</div>
 				</div>
-				<div class="col-lg-4 col-xl-4">
-					<div class="my_profile_setting_input ui_kit_select_search form-group">
-						<label>Rooms</label>
-						<select class="selectpicker" data-live-search="true" data-width="100%">
-							<option data-tokens="Status1">1</option>
-							<option data-tokens="Status2">2</option>
-							<option data-tokens="Status3">3</option>
-							<option data-tokens="Status4">4</option>
-							<option data-tokens="Status5">5</option>
-							<option data-tokens="Status6">Other</option>
-						</select>
+                <div class="col-lg-4 col-xl-4">
+					<div class="my_profile_setting_input form-group">
+						<label for="formGroupExampleArea">Área Total (M²)</label>
+						<input type="text" class="form-control" id="formGroupExampleArea">
 					</div>
 				</div>
-				<div class="col-xl-12">
-					<div class="my_profile_setting_input">
-						<button class="btn btn1 float-left">Back</button>
-						<button class="btn btn2 float-right">Next</button>
-					</div>
-				</div>
+
 			</div>
 		</div>
 		<div class="my_dashboard_review mt30">
 			<div class="row">
-				<div class="col-lg-12">
-					<h4 class="mb30">Location</h4>
+                <div class="col-lg-2 col-xl-2">
 					<div class="my_profile_setting_input form-group">
-						<label for="propertyAddress">Address</label>
+						<label for="zipCode">CEP</label>
+						<input type="text" class="form-control" id="zipCode">
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="my_profile_setting_input form-group">
+						<label for="propertyAddress">Logradouro</label>
 						<input type="text" class="form-control" id="propertyAddress">
 					</div>
 				</div>
-				<div class="col-lg-6 col-xl-6">
+                <div class="col-lg-2 col-xl-2">
 					<div class="my_profile_setting_input form-group">
-						<label for="propertyState">County / State</label>
-						<input type="text" class="form-control" id="propertyState">
+						<label for="neighborHood">Número</label>
+						<input type="text" class="form-control" id="neighborHood">
 					</div>
 				</div>
-				<div class="col-lg-6 col-xl-6">
+                <div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="propertyCity">City</label>
-						<input type="text" class="form-control" id="propertyCity">
-					</div>
-				</div>
-				<div class="col-lg-4 col-xl-4">
-					<div class="my_profile_setting_input form-group">
-						<label for="neighborHood">Neighborhood</label>
+						<label for="neighborHood">Complemento</label>
 						<input type="text" class="form-control" id="neighborHood">
 					</div>
 				</div>
 				<div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="zipCode">Zip</label>
-						<input type="text" class="form-control" id="zipCode">
+						<label for="propertyState">Bairro</label>
+						<input type="text" class="form-control" id="propertyState">
 					</div>
 				</div>
 				<div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input ui_kit_select_search form-group">
-						<label>Country</label>
+						<label>Estado</label>
 						<select class="selectpicker" data-live-search="true" data-width="100%">
 							<option data-tokens="Turkey">Turkey</option>
 							<option data-tokens="Iran">Iran</option>
@@ -145,107 +139,96 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-lg-12">
-					<div class="my_profile_setting_input form-group">
-						<div class="h400 bdrs8" id="map-canvas"></div>
+				<div class="col-lg-4 col-xl-4">
+					<div class="my_profile_setting_input ui_kit_select_search form-group">
+						<label>Cidade</label>
+						<select class="selectpicker" data-live-search="true" data-width="100%">
+							<option data-tokens="Turkey">Turkey</option>
+							<option data-tokens="Iran">Iran</option>
+							<option data-tokens="Iraq">Iraq</option>
+							<option data-tokens="Spain">Spain</option>
+							<option data-tokens="Greece">Greece</option>
+							<option data-tokens="Portugal">Portugal</option>
+						</select>
 					</div>
 				</div>
-				<div class="col-lg-4 col-xl-4">
+                <div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="googleMapLat">Latitude (for Google Maps)</label>
+						<label for="googleMapLat">Latitude (Google Maps)</label>
 						<input type="text" class="form-control" id="googleMapLat">
 					</div>
 				</div>
 				<div class="col-lg-4 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="googleMapLong">Longitude (for Google Maps)</label>
+						<label for="googleMapLong">Longitude (Google Maps)</label>
 						<input type="text" class="form-control" id="googleMapLong">
 					</div>
 				</div>
-				<div class="col-lg-4 col-xl-4">
-					<div class="my_profile_setting_input ui_kit_select_search form-group">
-						<label>Google Map Street View</label>
-						<select class="selectpicker" data-live-search="true" data-width="100%">
-							<option data-tokens="Turkey">Street View v1</option>
-							<option data-tokens="Iran">Street View v2</option>
-							<option data-tokens="Iraq">Street View v3</option>
-							<option data-tokens="Spain">Street View v4</option>
-							<option data-tokens="Greece">Street View v5</option>
-							<option data-tokens="Portugal">Street View v6</option>
-						</select>
+				<div class="col-lg-12">
+					<div class="my_profile_setting_input form-group">
+						<div class="h400 bdrs8" id="map-canvas"></div>
 					</div>
 				</div>
-				<div class="col-xl-12">
-					<div class="my_profile_setting_input">
-						<button class="btn btn1 float-left">Back</button>
-						<button class="btn btn2 float-right">Next</button>
-					</div>
-				</div>
+
 			</div>
 		</div>
 		<div class="my_dashboard_review mt30">
 			<div class="row">
 				<div class="col-lg-12">
-					<h4 class="mb30">Detailed Information</h4>
+					<h4 class="mb30">Detalhes</h4>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="propertyId">Property ID</label>
+						<label for="propertyId">ID Externo</label>
 						<input type="text" class="form-control" id="propertyId">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="propertyASize">Area Size</label>
+						<label for="propertyASize">Quartos</label>
 						<input type="text" class="form-control" id="propertyASize">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="sizePrefix">Size Prefix</label>
+						<label for="sizePrefix">Suítes</label>
 						<input type="text" class="form-control" id="sizePrefix">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="landArea">Land Area</label>
+						<label for="landArea">Banheiros</label>
 						<input type="text" class="form-control" id="landArea">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="LASPostfix">Land Area Size Postfix</label>
+						<label for="LASPostfix">Vagas de Garagem</label>
 						<input type="text" class="form-control" id="LASPostfix">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="bedRooms">Bedrooms</label>
+						<label for="bedRooms">Ano de Construção</label>
 						<input type="text" class="form-control" id="bedRooms">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="bathRooms">Bathrooms</label>
+						<label for="bathRooms">Quantidade de Torres</label>
 						<input type="text" class="form-control" id="bathRooms">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="garages">Garages</label>
+						<label for="garages">Possui Elevador?</label>
 						<input type="text" class="form-control" id="garages">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="garagesSize">Garages Size</label>
+						<label for="garagesSize">Andar</label>
 						<input type="text" class="form-control" id="garagesSize">
-					</div>
-				</div>
-				<div class="col-lg-6 col-xl-4">
-					<div class="my_profile_setting_input form-group">
-						<label for="yearBuild">Year Built</label>
-						<input type="text" class="form-control" id="yearBuild">
 					</div>
 				</div>
 				<div class="col-lg-6 col-xl-4">
@@ -256,12 +239,12 @@
 				</div>
 				<div class="col-lg-6 col-xl-4">
 					<div class="my_profile_setting_input form-group">
-						<label for="virtualTour">360° Virtual Tour</label>
+						<label for="virtualTour">Tour Virtual 360° </label>
 						<input type="text" class="form-control" id="virtualTour">
 					</div>
 				</div>
 				<div class="col-xl-12">
-					<h4>Amenities</h4>
+					<h4>Características</h4>
 				</div>
 				<div class="col-sm-4 col-md-4 col-lg-4 col-xl-2">
 					<ul class="ui_kit_checkbox selectable-list">
@@ -376,7 +359,7 @@
 		<div class="my_dashboard_review mt30">
 			<div class="row">
 				<div class="col-lg-12">
-					<h4 class="mb30">Property media</h4>
+					<h4 class="mb30">Fotos</h4>
 				</div>
 				<div class="col-lg-12">
 					<ul class="mb0">
@@ -427,76 +410,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="my_dashboard_review mt30">
-			<div class="row">
-				<div class="col-lg-12">
-					<h4 class="mb30">Floor Plans</h4>
-					<button class="btn admore_btn mb30">Add More</button>
-				</div>
-				<div class="col-xl-12">
-					<div class="my_profile_setting_input form-group">
-						<label for="planDsecription">Plan Description</label>
-						<input type="text" class="form-control" id="planDsecription">
-					</div>
-				</div>
-				<div class="col-lg-6 col-xl-4">
-					<div class="my_profile_setting_input form-group">
-						<label for="planBedrooms">Plan Bedrooms</label>
-						<input type="text" class="form-control" id="planBedrooms">
-					</div>
-				</div>
-				<div class="col-lg-6 col-xl-4">
-					<div class="my_profile_setting_input form-group">
-						<label for="planBathrooms">Plan Bathrooms</label>
-						<input type="text" class="form-control" id="planBathrooms">
-					</div>
-				</div>
-				<div class="col-lg-6 col-xl-4">
-					<div class="my_profile_setting_input form-group">
-						<label for="planPrice">Plan Price</label>
-						<input type="text" class="form-control" id="planPrice">
-					</div>
-				</div>
-				<div class="col-lg-6 col-xl-4">
-					<div class="my_profile_setting_input form-group">
-						<label for="planPostfix">Price Postfix</label>
-						<input type="text" class="form-control" id="planPostfix">
-					</div>
-				</div>
-				<div class="col-lg-6 col-xl-4">
-					<div class="my_profile_setting_input form-group">
-						<label for="planSize">Plan Size</label>
-						<input type="text" class="form-control" id="planSize">
-					</div>
-				</div>
-				<div class="col-lg-6 col-xl-4">
-					<div class="my_profile_setting_input form-group">
-						<label>Plan Image</label>
-						<div class="avatar-upload">
-							<div class="avatar-edit">
-								<input class="btn btn-thm" type="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-								<label for="imageUpload"></label>
-							</div>
-							<div class="avatar-preview">
-								<div id="imagePreview"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-12">
-					<div class="my_profile_setting_textarea mt30-991">
-						<label for="planDescription">Plan Description</label>
-						<textarea class="form-control" id="planDescription" rows="7"></textarea>
-					</div>
-				</div>
-				<div class="col-xl-12">
-					<div class="my_profile_setting_input">
-						<button class="btn btn1 float-left">Back</button>
-						<button class="btn btn2 float-right">Next</button>
-					</div>
-				</div>
-			</div>
-		</div>
+
 	</div>
 </div>
 @endsection

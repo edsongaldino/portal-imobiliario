@@ -7,15 +7,18 @@
 		<!--begin::Wrapper-->
 		<div class="w-lg-550px p-10 p-lg-15 mx-auto">
 			<!--begin::Form-->
-			<form class="form w-100" novalidate="novalidate" id="kt_new_password_form">
+			<form class="form w-100" novalidate="novalidate" id="kt_new_password_form" method="POST" action="{{ url('/alterar-senha') }}">
+                @csrf
+                <input type="hidden" name="id" id="id" value="{{ base64_encode($user->id) }}">
 				<!--begin::Heading-->
 				<div class="text-center mb-10">
 					<!--begin::Title-->
-					<h1 class="text-dark mb-3">Setup New Password</h1>
+					<h1 class="text-dark mb-3">Olá, {{ $user->name }}</h1>
 					<!--end::Title-->
 					<!--begin::Link-->
-					<div class="text-gray-400 fw-bold fs-4">Already have reset your password ?
-					<a href="#" class="link-primary fw-bolder">Sign in here</a></div>
+					<div class="text-gray-400 fw-bold fs-4">Lembrou sa sua senha?
+					<a href="/login" class="link-primary fw-bolder">Login</a></div><br/>
+                    <div class="text-gray-400 fw-bold fs-4">Caso contrário, crie uma nova senha</div>
 					<!--end::Link-->
 				</div>
 				<!--begin::Heading-->
@@ -24,7 +27,7 @@
 					<!--begin::Wrapper-->
 					<div class="mb-1">
 						<!--begin::Label-->
-						<label class="form-label fw-bolder text-dark fs-6">Password</label>
+						<label class="form-label fw-bolder text-dark fs-6">Senha</label>
 						<!--end::Label-->
 						<!--begin::Input wrapper-->
 						<div class="position-relative mb-3">
@@ -46,30 +49,21 @@
 					</div>
 					<!--end::Wrapper-->
 					<!--begin::Hint-->
-					<div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+					<div class="text-muted">Até 8 caracteres com letras, números &amp; símbolos.</div>
 					<!--end::Hint-->
 				</div>
 				<!--end::Input group=-->
 				<!--begin::Input group=-->
 				<div class="fv-row mb-10">
-					<label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
+					<label class="form-label fw-bolder text-dark fs-6">Confirme sua nova senha</label>
 					<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off" />
-				</div>
-				<!--end::Input group=-->
-				<!--begin::Input group=-->
-				<div class="fv-row mb-10">
-					<div class="form-check form-check-custom form-check-solid form-check-inline">
-						<input class="form-check-input" type="checkbox" name="toc" value="1" />
-						<label class="form-check-label fw-bold text-gray-700 fs-6">I Agree &amp;
-						<a href="#" class="ms-1 link-primary">Terms and conditions</a>.</label>
-					</div>
 				</div>
 				<!--end::Input group=-->
 				<!--begin::Action-->
 				<div class="text-center">
 					<button type="button" id="kt_new_password_submit" class="btn btn-lg btn-primary fw-bolder">
-						<span class="indicator-label">Submit</span>
-						<span class="indicator-progress">Please wait...
+						<span class="indicator-label">Alterar</span>
+						<span class="indicator-progress">Por favor, aguarde...
 						<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 					</button>
 				</div>
@@ -99,4 +93,4 @@
 </body>
 <!--end::Body-->
 </html>
-@endsection			
+@endsection

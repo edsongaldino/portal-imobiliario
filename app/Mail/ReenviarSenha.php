@@ -11,11 +11,11 @@ class ReenviarSenha extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $usuario;
+    public $configuracoes;
 
-    public function __construct($usuario)
+    public function __construct($configuracoes)
     {
-        $this->usuario = $usuario;
+        $this->configuracoes = $configuracoes;
     }
 
     /**
@@ -25,7 +25,7 @@ class ReenviarSenha extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.senha')->from('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->replyTo('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->subject('Confirmação de Cadastro - Rede Imóveis MT');
+        return $this->view('emails.senha')->from('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->replyTo('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->subject('Você solicitou uma nova senha! Rede Imóveis MT');
     }
 
 }

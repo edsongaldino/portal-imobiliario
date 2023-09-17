@@ -237,36 +237,40 @@
 								</div>
 							</div>
 
-                            <div class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
-                            <div class="btn-visita"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
+                            <div class="btn-whatsapp" data-toggle="modal" data-target="#ModalContato"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
+                            <div class="btn-visita" data-toggle="modal" data-target="#ModalAgendar"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
 
+                            <form method="POST" id="ContatoAnuncio" action="{{ url('/contato-anuncio') }}">
+                            @csrf
+                            <input type="hidden" id="anuncio_id" name="anuncio_id" value="{{ $anuncio->id }}">
 							<ul class="sasw_list mb0">
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="text" class="form-control" id="exampleInputName1" placeholder="Seu nome completo">
+								    	<input type="text" class="form-control" name="nome" id="nome" placeholder="Seu nome completo" required>
 								    </div>
 								</li>
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="number" class="form-control" id="exampleInputName2" placeholder="Telefone">
+								    	<input type="number" class="form-control" name="telefone" id="telefone" placeholder="Telefone" required>
 								    </div>
 								</li>
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+								    	<input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
 								    </div>
 								</li>
 								<li class="search_area">
 		                            <div class="form-group">
-		                                <textarea id="form_message" name="form_message" class="form-control required" rows="5" required="required" placeholder="">Olá, tenho interesse neste imóvel: Apartamento, 76m², 2 quartos, Rua dos Xavantes, 457 - Santa Helena, Cuiabá - MT, Aluguel, R$ 1900/Mês. Aguardo o contato. Obrigado.</textarea>
+		                                <textarea id="mensagem" name="mensagem" class="form-control required" rows="5" required="required" placeholder="">Olá, tenho interesse neste imóvel: Apartamento, 76m², 2 quartos, Rua dos Xavantes, 457 - Santa Helena, Cuiabá - MT, Aluguel, R$ 1900/Mês. Aguardo o contato. Obrigado.</textarea>
 		                            </div>
 								</li>
 								<li>
 									<div class="search_option_button">
-									    <button type="submit" class="btn btn-block btn-thm btn-enviar">Enviar</button>
+									    <button type="submit" class="btn btn-block btn-thm btn-enviar enviarContato">Enviar</button>
 									</div>
 								</li>
 							</ul>
+                            </form>
 						</div>
 					</div>
 
@@ -305,6 +309,48 @@
 
     @include('includes.portal.modals.modal-login')
 
+    <!-- Modal -->
+    <div class="modal fade" id="ModalContato" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Contato Whatsapp</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalAgendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Agendar Visita</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary">Agendar Visita</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
 </div>
 
 <link rel="stylesheet" href="{{ asset('assets/portal/css/responsive.css') }}">
@@ -332,6 +378,7 @@
 <!-- Custom script for all pages -->
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/portal/js/custom.js') }}"></script>
 
 <script>
     var MY_MAPTYPE_ID = 'style_KINESB';

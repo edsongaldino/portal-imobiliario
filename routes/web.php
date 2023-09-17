@@ -51,10 +51,13 @@ Route::get('/dashboard', 'App\Http\Controllers\AppController@index')->name('dash
 Route::post('/finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@CadastrarAnunciante')->name('finalizar-cadastro');
 Route::post('/login-painel', 'App\Http\Controllers\AuthController@Login')->name('login-painel');
 Route::post('/reenviar-senha', 'App\Http\Controllers\AuthController@ReenviarSenha')->name('lembrar-senha');
+Route::get('/nova-senha/{email}', 'App\Http\Controllers\AuthController@FormAlterarSenha')->name('nova.senha');
+Route::post('/senha/alterar', 'App\Http\Controllers\AuthController@AlterarSenha')->name('alterar.senha');
 Route::get('/logout-painel', 'App\Http\Controllers\AuthController@Logout')->name('logout-painel')->middleware('auth');
 Route::get('/painel/anuncios', 'App\Http\Controllers\AnuncioController@index')->name('painel.anuncios')->middleware('auth');
 Route::get('/painel/anuncios/incluir', 'App\Http\Controllers\AnuncioController@create')->name('painel.anuncios.incluir')->middleware('auth');
 Route::get('/anunciante/{id}/logo', 'App\Http\Controllers\AnuncianteController@getLogo');
+Route::get('/anunciante/{id}/confirmar-cadastro/{email}', 'App\Http\Controllers\AnuncianteController@ValidarCadastro');
 
 Route::get('/painel/{id}/perfil', 'App\Http\Controllers\UserController@edit')->name('painel.perfil')->middleware('auth');
 Route::post('/painel/perfil-salvar', 'App\Http\Controllers\AnuncianteController@update')->name('painel.perfil.salvar')->middleware('auth');
@@ -72,7 +75,6 @@ Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioCon
 Route::get('/imoveis/{id}/{cidade}/{titulo}', 'App\Http\Controllers\AnuncioController@DetalhesAnuncio')->name('imoveis.detalhes');
 Route::get('/', 'App\Http\Controllers\AppController@PaginaInicial')->name('pagina-inicial');
 Route::match(['get', 'post'],'/lista-imoveis/{transacao}', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('lista-imoveis');
-
-
+Route::post('/contato-anuncio', 'App\Http\Controllers\LeadsController@store')->name('contato.anuncio');
 Route::get('/painel/integracao/ler-xml', 'App\Http\Controllers\IntegracaoController@LerXML')->name('integracao.ler-xml');
 ?>
