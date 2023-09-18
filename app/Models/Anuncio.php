@@ -25,9 +25,9 @@ class Anuncio extends Model
         return $this->hasOne(AnuncioTipo::class, 'id', 'tipo_id');
     }
 
-    public function verificaDuplicidade($campo, $valor){
+    public function verificaDuplicidade($campo, $valor, $anunciante){
 
-        $dup = $this::where($campo, $valor)->first();
+        $dup = $this::where($campo, $valor)->where('anunciante_id', $anunciante)->first();
 
         if(isset($dup)){
             return $dup;

@@ -95,7 +95,7 @@ class IntegracaoController extends Controller
 
         foreach($xml->Listings->Listing as $imovel){
 
-            if((New Anuncio())->verificaDuplicidade('id_externo', $imovel->ListingID)){
+            if((New Anuncio())->verificaDuplicidade('id_externo', $imovel->ListingID, $anunciante_id)){
 
                 $dadosAnuncio = Anuncio::where('id_externo',$imovel->ListingID)->first();
                 $anuncio = Anuncio::find($dadosAnuncio->id);
@@ -450,7 +450,7 @@ class IntegracaoController extends Controller
 
         foreach($xml->Listings->Listing as $imovel){
 
-            if((New Anuncio())->verificaDuplicidade('id_externo', $imovel->ListingID)){
+            if((New Anuncio())->verificaDuplicidade('id_externo', $imovel->ListingID, $anunciante_id)){
 
                 $dadosAnuncio = Anuncio::where('id_externo',$imovel->ListingID)->first();
                 $anuncio = Anuncio::find($dadosAnuncio->id);
