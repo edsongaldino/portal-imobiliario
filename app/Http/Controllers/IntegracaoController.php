@@ -152,8 +152,10 @@ class IntegracaoController extends Controller
 
                     foreach($imovel->Media->Item as $foto){
 
-                        if($foto->Item->attributes()->medium == "video"){
-                            (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto->Item);
+                        if(isset($foto->Item->attributes()->medium)){
+                            if($foto->Item->attributes()->medium == "video"){
+                                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto->Item);
+                            }
                         }else{
                             $fotos = new AnuncioFotos();
                             $fotos->anuncio_id = $anuncio->id;
