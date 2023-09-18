@@ -77,4 +77,11 @@ Route::get('/', 'App\Http\Controllers\AppController@PaginaInicial')->name('pagin
 Route::match(['get', 'post'],'/lista-imoveis/{transacao}', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('lista-imoveis');
 Route::post('/contato-anuncio', 'App\Http\Controllers\LeadsController@store')->name('contato.anuncio');
 Route::get('/painel/integracao/ler-xml', 'App\Http\Controllers\IntegracaoController@LerXML')->name('integracao.ler-xml');
+Route::get('/simular-financiamento-de-imoveis', 'App\Http\Controllers\AppController@Financiamento')->name('simular-financiamento-de-imoveis');
+Route::get('/rede-imoveis-mt', 'App\Http\Controllers\AppController@RedeImoveis')->name('rede-imoveis-mt');
+Route::get('/rede-imoveis-mt/como-anunciar', 'App\Http\Controllers\AppController@ComoAnunciar')->name('rede-imoveis-mt/como-anunciar');
+Route::get('/rede-imoveis-mt/termos-de-uso', 'App\Http\Controllers\AppController@TermosDeUso')->name('rede-imoveis-mt/termos-de-uso');
+Route::get('/mapa-do-site', 'App\Http\Controllers\AppController@MapaDoSite')->name('mapa-do-site');
+Route::get('/imoveis-favoritos', 'App\Http\Controllers\AppController@ImoveisFavoritos')->name('imoveis-favoritos');
+
 ?>

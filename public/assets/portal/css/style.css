@@ -2463,7 +2463,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   font-weight: bold;
   line-height: 1.2;
   height: 50px;
-  width: 170px;
+  width: 100%;
   -webkit-transition: all .3s ease;
   -moz-transition: all .3s ease;
   -o-transition: all .3s ease;
@@ -7393,7 +7393,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
 .inner_page_breadcrumb {
   background-image: url(../images/background/inner-pagebg.jpg);
   background-repeat: no-repeat;
-  height: 410px;
+  height: 250px;
   position: relative;
 }
 .inner_page_breadcrumb:before{
@@ -7406,8 +7406,9 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   right: 0;
   top: 0;
 }
-.inner_page_breadcrumb .breadcrumb_content{
-  margin-top: 120px;
+.inner_page_breadcrumb .breadcrumb_content {
+    margin-top: 10px;
+    margin-left: 20px;
 }
 .inner_page_breadcrumb.csv2 .breadcrumb_content,
 .inner_page_breadcrumb.csv3 .breadcrumb_content{

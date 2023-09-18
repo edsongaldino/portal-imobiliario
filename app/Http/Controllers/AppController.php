@@ -40,4 +40,32 @@ class AppController extends Controller
                             ->GroupBy('cidades.id')->get();
         return view('portal.index', compact('tipos', 'destaques', 'cidades', 'anunciantes'));
     }
+
+    public function Financiamento(){
+        return view('portal.financiamento');
+    }
+
+    public function RedeImoveis(){
+        return view('portal.arede');
+    }
+
+    public function ComoAnunciar(){
+        return view('portal.comoanunciar');
+    }
+
+    public function MapaDoSite(){
+        return view('portal.mapadosite');
+    }
+
+    public function TermosDeUso(){
+        return view('portal.termos');
+    }
+
+    public function ImoveisFavoritos(){
+        return view('portal.favoritos');
+    }
+
+
+
+
 }

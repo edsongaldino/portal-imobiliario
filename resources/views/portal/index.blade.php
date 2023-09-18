@@ -253,26 +253,6 @@
 		</div>
 	</section>
 
-
-	<!-- Start Partners -->
-	<section class="start-partners bgc-thm pt50 pb50">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="start_partner tac-smd">
-						<h2>Seja Parceiro</h2>
-						<p>Receba mais contatos divulgando os seus imóveis na Rede</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="parner_reg_btn text-right tac-smd">
-						<a class="btn btn-thm2" href="{{ url('cadastro') }}">Quero me Cadastrar</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
 	@include('includes.portal.footer')
 
     @include('includes.portal.modals.modal-login')

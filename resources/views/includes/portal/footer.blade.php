@@ -1,3 +1,22 @@
+<!-- Start Partners -->
+<section class="start-partners bgc-thm pt50 pb50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="start_partner tac-smd">
+                    <h2>Seja Parceiro</h2>
+                    <p>Receba mais contatos divulgando os seus imóveis na Rede</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="parner_reg_btn text-right tac-smd">
+                    <a class="btn btn-thm2" href="{{ url('cadastro') }}">Quero me Cadastrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Our Footer -->
 <section class="footer_one">
     <div class="container">
@@ -8,6 +27,7 @@
                     <ul class="list-unstyled">
                         <li><a href="{{ url('/rede-imoveis-mt') }}">A Rede</a></li>
                         <li><a href="{{ url('/rede-imoveis-mt/como-anunciar') }}">Como anunciar</a></li>
+                        <li><a href="{{ url('/rede-imoveis-mt/termos-de-uso') }}">Termos de Uso</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,11 +62,11 @@
                         <li class="list-inline-item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
                     </ul>
-                    <h4>Inscreva-se</h4>
-                    <form class="footer_mailchimp_form">
+                    <h4>Cadastre-se</h4>
+                    <form class="footer_mailchimp_form" method="POST">
                          <div class="form-row align-items-center">
                             <div class="col-auto">
-                                <input type="email" class="form-control mb-2" id="inlineFormInput" placeholder="Your email">
+                                <input type="email" class="form-control mb-2" id="inlineFormInput" placeholder="Seu e-mail">
                             </div>
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-angle-right"></i></button>

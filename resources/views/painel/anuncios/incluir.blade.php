@@ -348,12 +348,6 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-xl-12">
-					<div class="my_profile_setting_input">
-						<button class="btn btn1 float-left">Back</button>
-						<button class="btn btn2 float-right">Next</button>
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class="my_dashboard_review mt30">
@@ -390,22 +384,9 @@
 						<p>Drag and drop images here</p>
 					</div>
 				</div>
-				<div class="col-xl-6">
-					<div class="resume_uploader mb30">
-						<h4>Attachments</h4>
-						<form class="form-inline">
-							<input class="upload-path">
-							<label class="upload">
-								<input type="file">
-								Select Attachment
-							</label>
-						</form>
-					</div>
-				</div>
 				<div class="col-xl-12">
 					<div class="my_profile_setting_input">
-						<button class="btn btn1 float-left">Back</button>
-						<button class="btn btn2 float-right">Next</button>
+						<button class="btn btn2 float-right">SALVAR ANÚNCIO</button>
 					</div>
 				</div>
 			</div>
