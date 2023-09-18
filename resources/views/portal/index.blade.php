@@ -245,7 +245,7 @@
                 @foreach ($anunciantes as $anunciante)
                 <div class="col-sm-6 col-md-4 col-lg">
 					<div class="our_partner">
-						<img class="img-fluid" src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" height="70" alt="{{ $anunciante->nome }}">
+						<img class="logo-parceiro" src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" alt="{{ $anunciante->nome }}">
 					</div>
 				</div>
                 @endforeach
