@@ -7,6 +7,7 @@ use App\CalendarioAluno;
 use App\Contrato;
 use App\Faturamento;
 use App\FaturamentoContrato;
+use App\Models\Anuncio;
 use App\Models\AnuncioInformacoes;
 use App\Models\Leads;
 use Jenssegers\Agent\Agent;
@@ -440,6 +441,17 @@ class Helper{
         }
 
         return $array;
+    }
+
+    public static function GetTotalAnunciosByCidade($CidadeID, $tipoAnuncio){
+        $totalAnuncios = Anuncio::select('anuncios.id')
+                                ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
+                                ->groupBy('anuncios.id')
+                                ->where('anuncios.tipo_id', $tipoAnuncio)
+                                ->where('enderecos.cidade_id', $CidadeID)->get();
+        return $totalAnuncios->count();
+
+
     }
 
 

@@ -4372,7 +4372,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   box-shadow: 0px 0px 30px 0px rgba(19, 19, 28, 0.12);
 }
 .feat_property .thumb{
-  background-color: #1d293e;
+  /*background-color: #1d293e;*/
   border-radius: 8px;
   display: -webkit-flex;
   display: -moz-flex;
@@ -4384,7 +4384,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   position: relative;
 }
 .feat_property .thumb img{
-  opacity: .6;
+  /*opacity: .6;*/
   object-fit: cover;
 }
 .feat_property .thumb .blog_tag{
@@ -4502,14 +4502,16 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   margin-right: 0;
 }
 .feat_property .thumb .thmb_cntnt .fp_price{
-  bottom: 15px;
-  font-size: 22px;
-  font-family: "Nunito";
-  color: #ffffff;
-  font-weight: bold;
-  left: 20px;
-  line-height: 1.2;
-  position: absolute;
+    bottom: 15px;
+    font-size: 22px;
+    font-family: "Nunito";
+    color: #ffffff;
+    font-weight: bold;
+    left: 20px;
+    line-height: 1.2;
+    position: absolute;
+    background-color: #242b31;
+    padding: 10px;
 }
 .feat_property.home8{
   overflow: visible;
@@ -11858,6 +11860,8 @@ a.btn.btn_error{
   bottom: 10px;
   left: 10px;
   position: absolute;
+  background-color: #333;
+  padding: 5px;
 }
 /*== My Resume Page ==*/
 .portfolio_upload{
@@ -16646,4 +16650,43 @@ button.gm-ui-hover-effect:focus {
 }
 [disabled].noUi-origin,[disabled] .noUi-handle {
   cursor: not-allowed;
+}
+
+nav{
+    margin: auto !important;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #ff5a5f;
+    border-color: #dc3545;
+    border-radius: 50%;
+    padding: 10px 15px;
+    margin-left: 5px;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #dc3545;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 50%;
+    padding: 10px 15px;
+    margin-left: 5px;
+}
+
+.page-link:hover {
+    color: #FFF;
+    background-color: #dc3545;
+    cursor: pointer;
+}
+
+.busca-lista .dropdown-menu{
+    min-width: 155px !important;
+    max-width: 360px !important;
 }

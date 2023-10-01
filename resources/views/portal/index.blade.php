@@ -60,7 +60,7 @@
 											    <div class="form-group">
 											    	<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
                                                         @foreach ($cidades as $cidade)
-                                                            <option value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                            <option value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} - {{ $cidade->estado->uf_estado }} ({{ Helper::GetTotalAnunciosByCidade($cidade->id, 1)}})</option>
                                                         @endforeach
                                                     </select>
 											    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
@@ -139,12 +139,25 @@
                             <div class="feat_property">
                                 <a href="/imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}">
                                 <div class="thumb">
-                                    <img class="img-whp" src="{{ $destaque->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
+
+                                    @if (isset($destaque->fotos->first()->arquivo))
+                                    <img class="img-whp" src="{{ $destaque->fotos->first()->arquivo }}" alt="fp1.jpg">
+                                    @else
+                                    <img class="img-whp" src="{{ asset('assets/portal/images/property/sem-foto.jpg') }}" alt="sem-foto.jpg">
+                                    @endif
+
                                     <div class="thmb_cntnt">
                                         <ul class="tag mb0">
                                             <li class="list-inline-item"><span>{{ $destaque->transacao }}</span></li>
                                         </ul>
+
+                                        @if($destaque->transacao == 'Venda' || $destaque->transacao == 'Locação/Venda')
                                         <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_venda) }}</span>
+                                        @endif
+
+                                        @if($destaque->transacao == 'Locação')
+                                        <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_locacao) }}</span>
+                                        @endif
 
                                     </div>
                                 </div>

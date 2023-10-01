@@ -166,8 +166,10 @@ class AnuncioController extends Controller
         if($request->tipo_imovel){
             $itens = DB::table('tipos')->select('id')->whereIn('id', $request->tipo_imovel)->get();
             foreach($itens as $item){
-                $anuncios = $anuncios->where('tipo_id',$item->id);
+                $tiposArray[] = $item->id;
             }
+
+            $anuncios = $anuncios->whereIn('tipo_id',$tiposArray);
         }
 
         $total =  $anuncios->count();

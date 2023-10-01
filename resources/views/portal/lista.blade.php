@@ -10,7 +10,7 @@
 	@include('includes.portal.menu')
 
     <!-- Listing Grid View -->
-	<section class="our-listing bgc-f7 pb30-991">
+	<section class="our-listing bgc-f7 pb30-991 busca-lista">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -268,9 +268,9 @@
 									    	<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
                                                 @foreach ($cidades as $cidade)
                                                     @if($request->localizacao)
-                                                    <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}" @if($request->localizacao == $cidade->id) selected @endif>{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                    <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}" @if($request->localizacao == $cidade->id) selected @endif>{{ $cidade->nome_cidade }} - {{ $cidade->estado->uf_estado }} ({{ Helper::GetTotalAnunciosByCidade($cidade->id, 1)}})</option>
                                                     @else
-                                                    <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                    <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} - {{ $cidade->estado->uf_estado }} ({{ Helper::GetTotalAnunciosByCidade($cidade->id, 1)}})</option>
                                                     @endif
                                                 @endforeach
                                             </select>
@@ -479,7 +479,11 @@
 									<div class="feat_property home7">
                                         <a href="/imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}">
 										<div class="thumb">
-											<img class="img-whp" src="{{ $destaque->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
+											@if (isset($destaque->fotos->first()->arquivo))
+                                            <img class="img-whp" src="{{ $destaque->fotos->first()->arquivo }}" alt="fp1.jpg">
+                                            @else
+                                            <img class="img-whp" src="{{ asset('assets/portal/images/property/sem-foto.jpg') }}" alt="sem-foto.jpg">
+                                            @endif
 											<div class="thmb_cntnt">
 												<ul class="tag mb0">
 												    <li class="list-inline-item"><span>{{ $destaque->transacao }}</span></li>
@@ -489,7 +493,7 @@
                                                 <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_venda) }}</span>
                                                 @endif
 
-                                                @if($destaque->transacao == 'Locação' || $destaque->transacao == 'Locação/Venda')
+                                                @if($destaque->transacao == 'Locação')
                                                 <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_locacao) }}</span>
                                                 @endif
 
@@ -535,7 +539,11 @@
                         <div class="col-lg-12">
 							<div class="feat_property list">
 								<div class="thumb">
-									<img class="img-whp" src="{{ $anuncio->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
+									@if (isset($anuncio->fotos->first()->arquivo))
+                                    <img class="img-whp" src="{{ $anuncio->fotos->first()->arquivo }}" alt="fp1.jpg">
+                                    @else
+                                    <img class="img-whp" src="{{ asset('assets/portal/images/property/sem-foto.jpg') }}" alt="sem-foto.jpg">
+                                    @endif
                                     <a href="/imoveis/{{ $anuncio->id }}/{{ Helper::url_amigavel($anuncio->tipo->nome .'-'. $anuncio->transacao) }}/{{ Helper::url_amigavel($anuncio->endereco->cidade->nome_cidade .'-'. $anuncio->endereco->cidade->estado->uf_estado)}}">
 									<div class="thmb_cntnt">
 										<ul class="icon mb0">
@@ -557,7 +565,7 @@
                                             <a class="fp_price">R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</a>
                                             @endif
 
-                                            @if($anuncio->transacao == 'Locação' || $anuncio->transacao == 'Locação/Venda')
+                                            @if($anuncio->transacao == 'Locação')
                                             <a class="fp_price">R$ {{ Helper::converte_valor_real($anuncio->valor_locacao) }}</a>
                                             @endif
 										</div>
