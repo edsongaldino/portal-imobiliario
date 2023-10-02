@@ -32,7 +32,7 @@ class AppController extends Controller
 
     public function PaginaInicial(){
         $tipos = AnuncioTipo::all();
-        $anunciantes = Anunciante::all();
+        $anunciantes = Anunciante::whereNull('deleted_at')->get();
         $destaques = Anuncio::where('situacao', 'Liberado')->orderByRaw('RAND()')->limit(12)->get();
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
                             ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
