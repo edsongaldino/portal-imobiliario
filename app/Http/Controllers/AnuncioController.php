@@ -210,6 +210,24 @@ class AnuncioController extends Controller
         return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
     }
 
+    public function ListaAnunciosByAnunciante($id)
+    {
+        $anuncios = Anuncio::where('situacao', 'Liberado')->where('anunciante_id',$id);
+
+        $request = new Request();
+        $total =  $anuncios->count();
+        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->paginate(20);
+        $tipos = AnuncioTipo::all();
+        $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
+        $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
+                            ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
+                            ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
+                            ->GroupBy('cidades.id')->get();
+        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
+    }
+
+
+
     public function DetalhesAnuncio($id){
         $anuncio = Anuncio::find($id);
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();

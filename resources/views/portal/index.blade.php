@@ -137,7 +137,7 @@
                         @foreach ($destaques as $destaque)
                         <div class="item">
                             <div class="feat_property">
-                                <a href="/imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}">
+                                <a href="/imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}" target="_blank">
                                 <div class="thumb">
 
                                     @if (isset($destaque->fotos->first()->arquivo))
@@ -258,7 +258,7 @@
                 @foreach ($anunciantes as $anunciante)
                 <div class="col-sm-6 col-md-4 col-lg">
 					<div class="our_partner">
-						<img class="logo-parceiro" src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" alt="{{ $anunciante->nome }}">
+						<a href="/lista-imoveis/{{ $anunciante->id }}/{{ Helper::url_amigavel($anunciante->nome) }}" target="_blank"><img class="logo-parceiro" src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" alt="{{ $anunciante->nome }}"></a>
 					</div>
 				</div>
                 @endforeach

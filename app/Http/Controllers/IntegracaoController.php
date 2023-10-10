@@ -82,7 +82,7 @@ class IntegracaoController extends Controller
         //coloque o ficheiro no caminho: 'public/assets/xml/file.xml'
         //$url = asset('assets/xml/file.xml');
 
-        $data = $this->file_get_contents_curl($url);
+        $data = file_get_contents($url);
         $xml = simplexml_load_string($data);
         $anunciante_id = $anunciante->id;
 
@@ -242,6 +242,7 @@ class IntegracaoController extends Controller
 
                         if(isset($foto->Item->attributes()->medium)){
                             if($foto->Item->attributes()->medium == "video"){
+                                dd($foto->Item->attributes()->medium);
                                 (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto->Item);
                             }
                         }else{
@@ -422,23 +423,6 @@ class IntegracaoController extends Controller
         return $chave;
     }
 
-    public function file_get_contents_curl( $url ) {
-
-        $ch = curl_init();
-
-        curl_setopt( $ch, CURLOPT_AUTOREFERER, TRUE );
-        curl_setopt( $ch, CURLOPT_HEADER, 0 );
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-        curl_setopt( $ch, CURLOPT_URL, $url );
-        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, TRUE );
-
-        $data = curl_exec( $ch );
-        curl_close( $ch );
-
-        return $data;
-
-    }
-
     public function LerXML(){
 
         ini_set('max_execution_time', 920);
@@ -453,7 +437,7 @@ class IntegracaoController extends Controller
         //coloque o ficheiro no caminho: 'public/assets/xml/file.xml'
         //$url = asset('assets/xml/file.xml');
 
-        $data = $this->file_get_contents_curl($url);
+        $data = file_get_contents($url);
         $xml = simplexml_load_string($data);
         $anunciante_id = $anunciante->id;
 

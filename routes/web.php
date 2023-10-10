@@ -84,4 +84,5 @@ Route::get('/rede-imoveis-mt/termos-de-uso', 'App\Http\Controllers\AppController
 Route::get('/mapa-do-site', 'App\Http\Controllers\AppController@MapaDoSite')->name('mapa-do-site');
 Route::get('/imoveis-favoritos', 'App\Http\Controllers\AppController@ImoveisFavoritos')->name('imoveis-favoritos');
 
+Route::match(['get', 'post'],'/lista-imoveis/{id}/{anunciante}', 'App\Http\Controllers\AnuncioController@ListaAnunciosByAnunciante')->name('lista-imoveis-anunciante');
 ?>
