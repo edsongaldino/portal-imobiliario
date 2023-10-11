@@ -150,19 +150,32 @@ class IntegracaoController extends Controller
                         AnuncioFotos::where('anuncio_id', $anuncio->id)->delete();
                     }
 
-                    foreach($imovel->Media->Item as $foto){
+                    foreach($imovel->Media as $foto){
 
                         if(isset($foto->Item->attributes()->medium)){
                             if($foto->Item->attributes()->medium == "video"){
                                 (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto->Item);
+                            }else{
+                                $fotos = new AnuncioFotos();
+                                $fotos->anuncio_id = $anuncio->id;
+                                $fotos->titulo = mb_strcut($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
+                                $fotos->arquivo = $foto->Item;
+
+                                if(isset($foto->Item->attributes()->primary)){
+                                    $fotos->destaque = 'S';
+                                }else{
+                                    $fotos->destaque = 'N';
+                                }
+
+                                $fotos->save();
                             }
                         }else{
                             $fotos = new AnuncioFotos();
                             $fotos->anuncio_id = $anuncio->id;
                             $fotos->titulo = mb_strcut($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
-                            $fotos->arquivo = $foto;
+                            $fotos->arquivo = $foto->Item;
 
-                            if(isset($foto->attributes()->primary)){
+                            if(isset($foto->Item->attributes()->primary)){
                                 $fotos->destaque = 'S';
                             }else{
                                 $fotos->destaque = 'N';
@@ -170,7 +183,6 @@ class IntegracaoController extends Controller
 
                             $fotos->save();
                         }
-
                     }
 
                     $tipo_log = "Sucesso";
@@ -242,7 +254,6 @@ class IntegracaoController extends Controller
 
                         if(isset($foto->Item->attributes()->medium)){
                             if($foto->Item->attributes()->medium == "video"){
-                                dd($foto->Item->attributes()->medium);
                                 (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto->Item);
                             }
                         }else{
