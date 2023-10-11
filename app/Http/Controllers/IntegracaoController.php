@@ -82,7 +82,14 @@ class IntegracaoController extends Controller
         //coloque o ficheiro no caminho: 'public/assets/xml/file.xml'
         //$url = asset('assets/xml/file.xml');
 
-        $data = file_get_contents($url);
+        $arrContextOptions=array(
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+        );
+
+        $data = file_get_contents($url, false, stream_context_create($arrContextOptions));
         $xml = simplexml_load_string($data);
         $anunciante_id = $anunciante->id;
 
