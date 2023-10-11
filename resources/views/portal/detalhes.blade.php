@@ -17,7 +17,7 @@
 					<div class="listing_single_property_slider">
                         @foreach ($anuncio->fotos as $foto)
                         <div class="item">
-							<a class="popup-img" href="{{ $foto->arquivo }}"><img class="img-fluid" src="{{ $foto->arquivo }}" alt="{{ $foto->titulo }}"></a>
+							<a class="popup-img" href="{{ $foto->arquivo }}"><img class="img-fluid foto-imovel" src="{{ $foto->arquivo }}" alt="{{ $foto->titulo }}"></a>
 						</div>
                         @endforeach
 					</div>

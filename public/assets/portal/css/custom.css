@@ -61,7 +61,7 @@
     background: #fffaec !important;
 }
 
-.owl-carousel .owl-item img {
+.owl-carousel .owl-item img.foto-imovel {
     width: auto !important;
     height: 400px !important;
 }
