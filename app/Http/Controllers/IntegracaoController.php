@@ -157,18 +157,18 @@ class IntegracaoController extends Controller
                         AnuncioFotos::where('anuncio_id', $anuncio->id)->delete();
                     }
 
-                    foreach($imovel->Media as $foto){
+                    foreach($imovel->Media->Item as $foto){
 
-                        if(isset($foto->Item->attributes()->medium)){
-                            if($foto->Item->attributes()->medium == "video"){
-                                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto->Item);
+                        if(isset($foto->attributes()->medium)){
+                            if($foto->attributes()->medium == "video"){
+                                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto);
                             }else{
                                 $fotos = new AnuncioFotos();
                                 $fotos->anuncio_id = $anuncio->id;
-                                $fotos->titulo = mb_strcut($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
-                                $fotos->arquivo = $foto->Item;
+                                $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
+                                $fotos->arquivo = $foto;
 
-                                if(isset($foto->Item->attributes()->primary)){
+                                if(isset($foto->attributes()->primary)){
                                     $fotos->destaque = 'S';
                                 }else{
                                     $fotos->destaque = 'N';
@@ -179,10 +179,10 @@ class IntegracaoController extends Controller
                         }else{
                             $fotos = new AnuncioFotos();
                             $fotos->anuncio_id = $anuncio->id;
-                            $fotos->titulo = mb_strcut($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
-                            $fotos->arquivo = $foto->Item;
+                            $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
+                            $fotos->arquivo = $foto;
 
-                            if(isset($foto->Item->attributes()->primary)){
+                            if(isset($foto->attributes()->primary)){
                                 $fotos->destaque = 'S';
                             }else{
                                 $fotos->destaque = 'N';
@@ -257,19 +257,32 @@ class IntegracaoController extends Controller
                         (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
                     }
 
-                    foreach($imovel->Media as $foto){
+                    foreach($imovel->Media->Item as $foto){
 
-                        if(isset($foto->Item->attributes()->medium)){
-                            if($foto->Item->attributes()->medium == "video"){
-                                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto->Item);
+                        if(isset($foto->attributes()->medium)){
+                            if($foto->attributes()->medium == "video"){
+                                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto);
+                            }else{
+                                $fotos = new AnuncioFotos();
+                                $fotos->anuncio_id = $anuncio->id;
+                                $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
+                                $fotos->arquivo = $foto;
+
+                                if(isset($foto->attributes()->primary)){
+                                    $fotos->destaque = 'S';
+                                }else{
+                                    $fotos->destaque = 'N';
+                                }
+
+                                $fotos->save();
                             }
                         }else{
                             $fotos = new AnuncioFotos();
                             $fotos->anuncio_id = $anuncio->id;
-                            $fotos->titulo = mb_strcut($foto->Item->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
-                            $fotos->arquivo = $foto->Item;
+                            $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
+                            $fotos->arquivo = $foto;
 
-                            if(isset($foto->Item->attributes()->primary)){
+                            if(isset($foto->attributes()->primary)){
                                 $fotos->destaque = 'S';
                             }else{
                                 $fotos->destaque = 'N';
