@@ -37,7 +37,7 @@ class AppController extends Controller
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
                             ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
                             ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
-                            ->GroupBy('cidades.id')->get();
+                            ->GroupBy('cidades.id')->orderBy('cidades.total_anuncios', 'DESC')->get();
         return view('portal.index', compact('tipos', 'destaques', 'cidades', 'anunciantes'));
     }
 

@@ -145,7 +145,8 @@ class AnuncioController extends Controller
     #CONTROLLERSPORTAL
     public function BuscaAnuncios(Request $request)
     {
-        $anuncios = Anuncio::where('situacao', 'Liberado')->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id');
+        $anuncios = Anuncio::select('anuncios.*')->where('anuncios.situacao', 'Liberado')
+                            ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id');
 
         switch($request->transacao){
             case 'Lançamentos':
@@ -173,13 +174,13 @@ class AnuncioController extends Controller
         }
 
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('anuncios.updated_at', 'DESC')->paginate(20);
+        $anuncios = $anuncios->GroupBy('anuncios.id')->orderBy('anuncios.valor_venda', 'ASC')->paginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
                             ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
                             ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
-                            ->GroupBy('cidades.id')->get();
+                            ->GroupBy('cidades.id')->orderBy('cidades.total_anuncios', 'DESC')->get();
         return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques', 'cidades', 'request'));
     }
 
@@ -200,7 +201,7 @@ class AnuncioController extends Controller
         }
         $request = new Request();
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->paginate(20);
+        $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
@@ -216,7 +217,7 @@ class AnuncioController extends Controller
 
         $request = new Request();
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('updated_at', 'DESC')->paginate(20);
+        $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
