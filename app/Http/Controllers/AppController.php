@@ -46,7 +46,8 @@ class AppController extends Controller
     }
 
     public function RedeImoveis(){
-        return view('portal.arede');
+        $anunciantes = Anunciante::whereNull('deleted_at')->orderByRaw('RAND()')->get();
+        return view('portal.arede', compact('anunciantes'));
     }
 
     public function ComoAnunciar(){
