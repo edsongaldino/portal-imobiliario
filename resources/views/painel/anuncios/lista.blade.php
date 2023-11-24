@@ -97,7 +97,7 @@
 										    		<td>
 										    			<ul class="view_edit_delete_list mb0">
                                                             <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar"><a href="#"><span class="flaticon-view"></span></a></li>
-										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="#"><span class="flaticon-edit"></span></a></li>
+										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="/painel/anuncios/{{ $anuncio->id }}/editar"><span class="flaticon-edit"></span></a></li>
 										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a href="#"><span class="flaticon-garbage"></span></a></li>
 										    			</ul>
 										    		</td>

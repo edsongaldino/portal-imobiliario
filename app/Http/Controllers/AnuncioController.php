@@ -94,9 +94,13 @@ class AnuncioController extends Controller
      * @param  \App\Models\Anuncio  $anuncio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Anuncio $anuncio)
+    public function edit($id)
     {
-        //
+        $anuncio = Anuncio::find($id);
+        $estados = Estado::all();
+        $cidades = Cidade::all();
+        $tipos = AnuncioTipo::all();
+        return view('painel.anuncios.editar', compact('anuncio', 'tipos', 'estados', 'cidades'));
     }
 
     /**

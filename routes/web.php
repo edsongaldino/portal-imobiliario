@@ -56,6 +56,7 @@ Route::post('/senha/alterar', 'App\Http\Controllers\AuthController@AlterarSenha'
 Route::get('/logout-painel', 'App\Http\Controllers\AuthController@Logout')->name('logout-painel')->middleware('auth');
 Route::get('/painel/anuncios', 'App\Http\Controllers\AnuncioController@index')->name('painel.anuncios')->middleware('auth');
 Route::get('/painel/anuncios/incluir', 'App\Http\Controllers\AnuncioController@create')->name('painel.anuncios.incluir')->middleware('auth');
+Route::get('/painel/anuncios/{id}/editar', 'App\Http\Controllers\AnuncioController@edit')->name('painel.anuncios.editar')->middleware('auth');
 Route::get('/anunciante/{id}/logo', 'App\Http\Controllers\AnuncianteController@getLogo');
 Route::get('/anunciante/{id}/confirmar-cadastro/{email}', 'App\Http\Controllers\AnuncianteController@ValidarCadastro');
 
