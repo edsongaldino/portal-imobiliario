@@ -40,13 +40,13 @@
 </header>
 
 <!-- Main Header Nav For Mobile -->
-<div id="page" class="stylehome1 h0">
+<div id="page" class="stylehome1 h0 menu-mobile">
     <div class="mobile-menu">
         <div class="header stylehome1">
             <div class="d-flex justify-content-between">
                 <a class="mobile-menu-trigger" href="#menu"><img src="{{ asset('assets/portal/images/icon-menu.png') }}" alt=""></a>
                 <a class="nav_logo_img" href="{{url("/")}}"><img class="img-fluid mt20" src="{{ asset('assets/portal/images/header-logo2.png') }}" alt="header-logo2.png"></a>
-                <a class="mobile-menu-reg-link" href="page-register.html"><span class="flaticon-user"></span></a>
+                
             </div>
         </div>
     </div><!-- /.mobile-menu -->

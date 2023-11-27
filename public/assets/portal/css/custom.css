@@ -69,3 +69,20 @@
 .logo-anunciante{
     height: auto !important;
 }
+
+/*CSS MOBILE*/
+.mobile{
+    padding: 10px 0 !important;
+}
+.titulo-mobile{
+    font-size: 18px !important;
+}
+.grid_list_search_result.mobile{
+    margin: 45px 0 10px 0px !important;
+    width: 100% !important;
+}
+
+#main2 .filter_open_btn.style2.mobile-btn {
+    right: 15px;
+    top: 10px;
+}

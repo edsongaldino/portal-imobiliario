@@ -13,9 +13,20 @@ use App\Models\Estado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Jenssegers\Agent\Agent;
 
 class AnuncioController extends Controller
 {
+
+    private $viewLista;
+    private $viewDetalhes;
+
+    public function __construct()
+    {
+        $agent = new Agent();
+        $this->viewLista = $agent->isMobile() ? 'portal.mobile.lista' : 'portal.lista';
+        $this->viewDetalhes = $agent->isMobile() ? 'portal.mobile.detalhes' : 'portal.detalhes';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -185,7 +196,7 @@ class AnuncioController extends Controller
                             ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
                             ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
                             ->GroupBy('cidades.id')->orderBy('cidades.total_anuncios', 'DESC')->get();
-        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques', 'cidades', 'request'));
+        return view($this->viewLista, compact('anuncios', 'tipos', 'total', 'destaques', 'cidades', 'request'));
     }
 
     public function ListaAnuncios($transacao)
@@ -212,7 +223,7 @@ class AnuncioController extends Controller
                             ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
                             ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
                             ->GroupBy('cidades.id')->get();
-        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
+        return view($this->viewLista, compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
     }
 
     public function ListaAnunciosByAnunciante($id)
@@ -228,7 +239,7 @@ class AnuncioController extends Controller
                             ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
                             ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
                             ->GroupBy('cidades.id')->get();
-        return view('portal.lista', compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
+        return view($this->viewLista, compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
     }
 
 
@@ -238,7 +249,7 @@ class AnuncioController extends Controller
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $latLong = Helper::get_lat_long($anuncio->endereco->logradouro_endereco.','.$anuncio->endereco->bairro_endereco.','.$anuncio->endereco->cidade->nome_cidade.','.$anuncio->endereco->cidade->estado->uf_estado);
 
-        return view('portal.detalhes', compact('anuncio', 'destaques', 'latLong'));
+        return view($this->viewDetalhes, compact('anuncio', 'destaques', 'latLong'));
     }
 
     #ENDCONTROLLERSPORTAL

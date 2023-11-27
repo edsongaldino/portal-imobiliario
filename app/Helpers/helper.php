@@ -55,12 +55,12 @@ class Helper{
 		return $valor;
 	}
 
-	/*
+	
 	public static function isMobile(){
 		$agent = new Agent();
 		return $agent->isMobile();
 	}
-	*/
+	
 
 	public static function data_br($data,$retorno = "00/00/0000") {
 		if($data) {
@@ -453,6 +453,8 @@ class Helper{
 
 
     }
+
+	
 
 
 
