@@ -59,8 +59,19 @@ class IntegracaoController extends Controller
         $anunciantes = Anunciante::all();
 
         foreach($anunciantes as $anunciante){
-            $integracoes = LogIntegracao::select('created_at')->where('anunciante_id',$anunciante->id)->orderBy('id', 'DESC')->limit(1);
-            
+            $integracoes = LogIntegracao::where('anunciante_id',$anunciante->id)->orderBy('id', 'DESC')->get();
+            if($integracoes->count() > 0){
+                echo $integracoes->created_at;
+            }else{
+                $request = new Request();
+                $request->merge(['id' => $anunciante->id]);
+                $integracao = $this->ProcessarXML($request);
+
+                if($integracao){
+                    echo "Integração Realizada!";
+                }
+            }
+
         }
 
     }

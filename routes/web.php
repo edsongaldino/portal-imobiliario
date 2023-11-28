@@ -70,7 +70,7 @@ Route::post('/painel/integracao-salvar', 'App\Http\Controllers\IntegracaoControl
 Route::get('/painel/integracoes/relatorio-geral', 'App\Http\Controllers\IntegracaoController@RelatorioGeral')->name('painel.integracoes.relatorio-geral')->middleware('auth');
 Route::get('/painel/integracoes/{id}/relatorio-importacao', 'App\Http\Controllers\IntegracaoController@RelatorioIndividual')->name('painel.integracoes.relatorio-importacao')->middleware('auth');
 Route::post('/painel/integracao/processar-xml', 'App\Http\Controllers\IntegracaoController@ProcessarXML')->name('integracao.processar-xml')->middleware('auth');
-
+Route::get('/painel/integracao/cron/atualizar-anuncios', 'App\Http\Controllers\IntegracaoController@CronAtualizarAnuncios')->name('integracao.cron.atualizar-anuncios');
 //Rotas Portal
 Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@BuscaAnuncios')->name('imoveis.buscar');
 Route::get('/imoveis/{id}/{cidade}/{titulo}', 'App\Http\Controllers\AnuncioController@DetalhesAnuncio')->name('imoveis.detalhes');
