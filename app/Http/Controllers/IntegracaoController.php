@@ -54,6 +54,17 @@ class IntegracaoController extends Controller
         return view('painel.integracao.relatorio_geral', compact('usuario', 'logs'));
     }
 
+    public function CronAtualizarAnuncios(){
+
+        $anunciantes = Anunciante::all();
+
+        foreach($anunciantes as $anunciante){
+            $integracoes = LogIntegracao::select('created_at')->where('anunciante_id',$anunciante->id)->orderBy('id', 'DESC')->limit(1);
+            
+        }
+
+    }
+
     public function RelatorioIndividual($id)
     {
         $usuario = Auth::user();
