@@ -67,7 +67,7 @@
 										</div>
 									</div>
 									@endif
-			
+
 									@if($anuncio->transacao == 'Locação' || $anuncio->transacao == 'Locação/Venda')
 									<div class="item-valor">
 										<div class="label-price">Aluguel (R$):</div>
@@ -76,14 +76,14 @@
 										</div>
 									</div>
 									@endif
-			
+
 									<div class="item-valor cond">
 										<div class="label-condominio">Condomínio (R$):</div>
 										<div class="text-right condominio">
 											{{ Helper::converte_valor_real($anuncio->valor_condominio) }}
 										</div>
 									</div>
-			
+
 									<div class="item-valor cond">
 										<div class="label-condominio">IPTU (R$):</div>
 										<div class="text-right condominio">
@@ -314,7 +314,7 @@
 		<a href="#form-contato"><div class="btn-contato"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contato</div></a>
 	</div>
 
-	@include('includes.portal.footer')  
+	@include('includes.portal.footer')
 
 	@include('includes.portal.modals.modal-contato')
 
@@ -341,6 +341,9 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/pricing-slider.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLZYFMbNKXu2gyC_yxbdEDGxA6G0LSNu8&callback=initMap"type="text/javascript"></script>
+
+<script type="text/javascript" src="{{ asset('vendor/sweetalert/dist/sweetalert.min.js') }}" ></script>
+@include('sweetalert::alert')
 
 <!-- Custom script for all pages -->
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
