@@ -269,7 +269,7 @@
 								</li>
 								<li>
 									<div class="search_option_button">
-									    <button type="submit" class="btn btn-block btn-thm btn-enviar enviarContato">Enviar</button>
+									    <button type="button" class="btn btn-block btn-thm btn-enviar enviarFormulario">Enviar</button>
 									</div>
 								</li>
 							</ul>
@@ -340,6 +340,7 @@
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/custom.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/portal/js/contato.js') }}"></script>
 
 <script>
     var MY_MAPTYPE_ID = 'style_KINESB';

@@ -60,7 +60,7 @@ class AnuncioController extends Controller
      */
     public function store(Request $request)
     {
-        if((New Anuncio())->verificaDuplicidade('id_externo', $request->id_externo)){
+        if((New Anuncio())->verificaDuplicidade('id_externo', $request->id_externo, $request->anunciante_id)){
             return redirect()->back()->with('warning', 'Este anúncio já consta em nosso banco de dados! Verifique.');
         }
 
@@ -248,6 +248,9 @@ class AnuncioController extends Controller
         $anuncio = Anuncio::find($id);
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $latLong = Helper::get_lat_long($anuncio->endereco->logradouro_endereco.','.$anuncio->endereco->bairro_endereco.','.$anuncio->endereco->cidade->nome_cidade.','.$anuncio->endereco->cidade->estado->uf_estado);
+
+        //Grava relatório
+        (new RelatorioAnuncioController())->store($id, 'ViewDetalhes');
 
         return view($this->viewDetalhes, compact('anuncio', 'destaques', 'latLong'));
     }

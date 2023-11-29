@@ -363,10 +363,10 @@ ul.social li{
 						<td>
 							<div class="text" style="padding: 0 2.5em; text-align: center;">
 
-								<h2>Olá {{ $lead->name ?? '' }}, </h2>
+								<h2>Olá {{ $lead->nome ?? '' }}, </h2>
 								<h2>Recebemos seu interesse no anúncio abaixo, em breve um corretor entrará em contato.</h2>
-                                <h3>Anúncio ID: {{ $lead->anuncio->id ?? '' }}</h3>
-                                <h3>Título: {{ $lead->anuncio->titulo ?? '' }}</h3>
+                                <p>Anúncio ID: {{ $lead->anuncio->id ?? '' }}</p>
+                                <p>Título: {{ $lead->anuncio->titulo ?? '' }}</p>
                                 <a href="https://redeimoveismt.com.br/imoveis/{{ $lead->anuncio->id }}/{{ Helper::url_amigavel($lead->anuncio->tipo->nome .'-'. $lead->anuncio->transacao) }}/{{ Helper::url_amigavel($lead->anuncio->endereco->cidade->nome_cidade .'-'. $lead->anuncio->endereco->cidade->estado->uf_estado)}}"><div class="botao">VER ANÚNCIO</div></a>
 
 							</div>

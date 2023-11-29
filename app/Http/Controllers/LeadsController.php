@@ -50,9 +50,9 @@ class LeadsController extends Controller
         if($lead->save()){
             $destinatario = 'edsongaldino@outlook.com';
             Mail::to($destinatario)->send(new EnviaLead($lead));
-            return 'Sucesso';
+            response()->json(['success' => 'success'], 200);
         }else{
-            return 'Erro';
+            response()->json(['error' => 'invalid'], 401);
         }
 
     }
