@@ -364,8 +364,10 @@ ul.social li{
 							<div class="text" style="padding: 0 2.5em; text-align: center;">
 
 								<h2>Olá {{ $lead->name ?? '' }}, </h2>
-								<h2>Clique abaixo para criar uma nova senha</h2>
-								<a href="{{ $lead->link }}"><div class="botao">NOVA SENHA</div></a>
+								<h2>Recebemos seu interesse no anúncio abaixo, em breve um corretor entrará em contato.</h2>
+                                <h3>Anúncio ID: {{ $lead->anuncio->id ?? '' }}</h3>
+                                <h3>Título: {{ $lead->anuncio->titulo ?? '' }}</h3>
+                                <a href="https://redeimoveismt.com.br/imoveis/{{ $lead->anuncio->id }}/{{ Helper::url_amigavel($lead->anuncio->tipo->nome .'-'. $lead->anuncio->transacao) }}/{{ Helper::url_amigavel($lead->anuncio->endereco->cidade->nome_cidade .'-'. $lead->anuncio->endereco->cidade->estado->uf_estado)}}"><div class="botao">VER ANÚNCIO</div></a>
 
 							</div>
 						</td>

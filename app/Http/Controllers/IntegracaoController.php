@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Integracao;
 use App\Http\Controllers\Controller;
+use App\Mail\EnviaRelatorio;
 use App\Models\Anunciante;
 use App\Models\AnuncianteIntegracao;
 use App\Models\Anuncio;
@@ -17,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class IntegracaoController extends Controller
@@ -64,8 +66,12 @@ class IntegracaoController extends Controller
         $Processaintegracao = $this->ProcessarXML($request);
 
         if($Processaintegracao){
+            $destinatario = 'edsongaldino@outlook.com';
+            Mail::to($destinatario)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
             echo "Integração Realizada!";
         }else{
+            $destinatario = 'edsongaldino@outlook.com';
+            Mail::to($destinatario)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
             echo "Integração Não Realizada!";
         }
 
@@ -87,7 +93,7 @@ class IntegracaoController extends Controller
 
     public function ProcessarXML(Request $request){
 
-        ini_set('max_execution_time', 240);
+        ini_set('max_execution_time', 360);
 
         $anunciante = Anunciante::find($request->id);
         $xml = $anunciante->integracao->first()->url;
@@ -188,13 +194,13 @@ class IntegracaoController extends Controller
                                     $fotos->anuncio_id = $anuncio->id;
                                     $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
                                     $fotos->arquivo = $foto;
-    
+
                                     if(isset($foto->attributes()->primary)){
                                         $fotos->destaque = 'S';
                                     }else{
                                         $fotos->destaque = 'N';
                                     }
-    
+
                                     $fotos->save();
                                 }
                             }else{
@@ -202,13 +208,13 @@ class IntegracaoController extends Controller
                                 $fotos->anuncio_id = $anuncio->id;
                                 $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
                                 $fotos->arquivo = $foto;
-    
+
                                 if(isset($foto->attributes()->primary)){
                                     $fotos->destaque = 'S';
                                 }else{
                                     $fotos->destaque = 'N';
                                 }
-    
+
                                 $fotos->save();
                             }
                         }
@@ -352,7 +358,7 @@ class IntegracaoController extends Controller
         if($logUpdate){
             $anunciante->ultima_atualizacao = Carbon::now();
             $anunciante->save();
-            return true;
+            return $logUpdate;
         }else{
             return false;
         }

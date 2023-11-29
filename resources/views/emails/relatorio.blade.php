@@ -363,11 +363,22 @@
 						<td>
 							<div class="text" style="padding: 0 2.5em; text-align: center;">
 
-								<h2>Olá {{ $anunciante->nome ?? '' }}, </h2>
-								<h2>Informamos que recebemos corretamente seus dados.</h2>
-								<h3>Para confirmar seu cadastro, clique no link abaixo:</h3>
+                                @if(isset($relatorio->created_at))
 
-                                <a href="https://redeimoveismt.com.br/anunciante/{{ $anunciante->id }}/confirmar-cadastro/{{ $anunciante->email }}"><div class="botao">CONFIRMAR CADASTRO</div></a>
+								<h2>Olá {{ $relatorio->anunciante->nome ?? '' }}, </h2>
+								<h2>Seus anúncios foram importados com sucesso</h2>
+                                <h3>Data/Hora: {{ $relatorio->created_at ?? '' }}</h3>
+								<h3>Para visualizar o relatório da importação, clique no link abaixo:</h3>
+
+                                <a href="https://redeimoveismt.com.br/anunciante/{{ $relatorio->id }}/relatorio-importacao"><div class="botao">RELATÓRIO DE IMPORTAÇÃO</div></a>
+
+                                @else
+
+                                <h2>Olá Edson, </h2>
+								<h2>Houve erro em uma das integrações no portal, verifique no painel.</h2>
+                                <h2>Anunciante: {{ $anunciante->nome }}</h2>
+
+                                @endif
 
 							</div>
 						</td>
