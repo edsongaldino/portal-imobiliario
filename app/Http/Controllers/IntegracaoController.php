@@ -12,6 +12,7 @@ use App\Models\AnuncioFotos;
 use App\Models\AnuncioInformacoes;
 use App\Models\Endereco;
 use App\Models\LogIntegracao;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -56,26 +57,16 @@ class IntegracaoController extends Controller
 
     public function CronAtualizarAnuncios(){
 
-        $anunciantes = Anunciante::all();
+        $anunciante = Anunciante::whereNotNull('ultima_atualizacao')->orderBy('ultima_atualizacao', 'ASC')->limit(1)->first();
 
-        foreach($anunciantes as $anunciante){
-            $integracoes = LogIntegracao::where('anunciante_id',$anunciante->id)->orderBy('id', 'DESC')->get();
-            if($integracoes->count() > 0){
-                
-                $request = new Request();
-                $request->merge(['id' => $anunciante->id]);
-                $integracao = $this->ProcessarXML($request);
+        $request = new Request();
+        $request->merge(['id' => $anunciante->id]);
+        $Processaintegracao = $this->ProcessarXML($request);
 
-            }else{
-                $request = new Request();
-                $request->merge(['id' => $anunciante->id]);
-                $integracao = $this->ProcessarXML($request);
-
-                if($integracao){
-                    echo "Integração Realizada!";
-                }
-            }
-
+        if($Processaintegracao){
+            echo "Integração Realizada!";
+        }else{
+            echo "Integração Não Realizada!";
         }
 
     }
@@ -349,7 +340,7 @@ class IntegracaoController extends Controller
 
         }
 
-        $logoUpdate = (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
+        $logUpdate = (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
 
         foreach($anunciante->anuncios as $anuncio){
             if (!in_array($anuncio->id_externo, $ArrayImportacaoAnuncios)) {
@@ -358,7 +349,9 @@ class IntegracaoController extends Controller
         }
 
 
-        if($logoUpdate){
+        if($logUpdate){
+            $anunciante->ultima_atualizacao = Carbon::now();
+            $anunciante->save();
             return true;
         }else{
             return false;

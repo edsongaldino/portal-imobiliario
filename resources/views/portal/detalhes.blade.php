@@ -117,7 +117,7 @@
 							</div>
 						</div>
 
-						<div class="col-lg-12">
+						<div class="col-lg-12" style="display: none">
 							<div class="application_statics mt30">
 								<div class="row">
 									<div class="col-lg-12">

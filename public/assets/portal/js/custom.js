@@ -31,3 +31,9 @@ $(document).on('click', '.btnTransacao', function (e) {
     var transacao = $(this).data('transacao');
     $('#transacao').val(transacao);
 });
+
+$(document).on('click', '.ImovelIntegrado', function (e) {
+    swal({title: "Ops", text: "Não é possível editar ou excluir anúncios integrados via api!", type: "info"});
+});
+
+

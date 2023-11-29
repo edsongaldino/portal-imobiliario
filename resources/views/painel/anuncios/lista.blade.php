@@ -96,10 +96,16 @@
 										    		<td>2.345</td>
 										    		<td>
 										    			<ul class="view_edit_delete_list mb0">
-                                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar"><a href="#"><span class="flaticon-view"></span></a></li>
-										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="/painel/anuncios/{{ $anuncio->id }}/editar"><span class="flaticon-edit"></span></a></li>
+                                                            <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar"><a href="/imoveis/{{ $anuncio->id }}/{{ Helper::url_amigavel($anuncio->tipo->nome .'-'. $anuncio->transacao) }}/{{ Helper::url_amigavel($anuncio->endereco->cidade->nome_cidade .'-'. $anuncio->endereco->cidade->estado->uf_estado)}}" target="_blank"><span class="flaticon-view"></span></a></li>
+										    				
+															@if($anuncio->origem_publicacao == 'Integracao')
+															<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="#" class="ImovelIntegrado"><span class="flaticon-edit"></span></a></li>
+										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a href="#" class="ImovelIntegrado"><span class="flaticon-garbage"></span></a></li>
+															@else
+															<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="/painel/anuncios/{{ $anuncio->id }}/editar"><span class="flaticon-edit"></span></a></li>
 										    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a href="#"><span class="flaticon-garbage"></span></a></li>
-										    			</ul>
+															@endif
+														</ul>
 										    		</td>
 										    	</tr>
 
@@ -170,7 +176,11 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/wow.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/dashboard-script.js') }}"></script>
+<script src="{{ asset('assets/painel/js/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
 <!-- Custom script for all pages -->
+<script type="text/javascript" src="{{ asset('vendor/sweetalert/dist/sweetalert.min.js') }}" ></script>
+@include('sweetalert::alert')
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/portal/js/custom.js') }}"></script>
 </body>
 </html>
