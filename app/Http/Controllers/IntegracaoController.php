@@ -61,7 +61,11 @@ class IntegracaoController extends Controller
         foreach($anunciantes as $anunciante){
             $integracoes = LogIntegracao::where('anunciante_id',$anunciante->id)->orderBy('id', 'DESC')->get();
             if($integracoes->count() > 0){
-                echo $integracoes->created_at;
+                
+                $request = new Request();
+                $request->merge(['id' => $anunciante->id]);
+                $integracao = $this->ProcessarXML($request);
+
             }else{
                 $request = new Request();
                 $request->merge(['id' => $anunciante->id]);
@@ -97,6 +101,9 @@ class IntegracaoController extends Controller
         $anunciante = Anunciante::find($request->id);
         $xml = $anunciante->integracao->first()->url;
 
+        if($xml == null){
+            return false;
+        }
         //se o caminho esteja hospedado noutro servidor
         $url = $xml;
 
@@ -179,45 +186,52 @@ class IntegracaoController extends Controller
                         AnuncioFotos::where('anuncio_id', $anuncio->id)->delete();
                     }
 
-                    foreach($imovel->Media->Item as $foto){
+                    if($imovel->Media->Item->count() > 0){
+                        foreach($imovel->Media->Item as $foto){
 
-                        if(isset($foto->attributes()->medium)){
-                            if($foto->attributes()->medium == "video"){
-                                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto);
+                            if(isset($foto->attributes()->medium)){
+                                if($foto->attributes()->medium == "video"){
+                                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto);
+                                }else{
+                                    $fotos = new AnuncioFotos();
+                                    $fotos->anuncio_id = $anuncio->id;
+                                    $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
+                                    $fotos->arquivo = $foto;
+    
+                                    if(isset($foto->attributes()->primary)){
+                                        $fotos->destaque = 'S';
+                                    }else{
+                                        $fotos->destaque = 'N';
+                                    }
+    
+                                    $fotos->save();
+                                }
                             }else{
                                 $fotos = new AnuncioFotos();
                                 $fotos->anuncio_id = $anuncio->id;
                                 $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
                                 $fotos->arquivo = $foto;
-
+    
                                 if(isset($foto->attributes()->primary)){
                                     $fotos->destaque = 'S';
                                 }else{
                                     $fotos->destaque = 'N';
                                 }
-
+    
                                 $fotos->save();
                             }
-                        }else{
-                            $fotos = new AnuncioFotos();
-                            $fotos->anuncio_id = $anuncio->id;
-                            $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
-                            $fotos->arquivo = $foto;
-
-                            if(isset($foto->attributes()->primary)){
-                                $fotos->destaque = 'S';
-                            }else{
-                                $fotos->destaque = 'N';
-                            }
-
-                            $fotos->save();
                         }
-                    }
 
-                    $tipo_log = "Sucesso";
-                    $subtipo_log = "Atualização";
-                    $titulo = "Imóvel atualizado com sucesso";
-                    $descricao_log = "Imóvel atualizado com sucesso";
+                        $tipo_log = "Sucesso";
+                        $subtipo_log = "Atualização";
+                        $titulo = "Imóvel atualizado com sucesso";
+                        $descricao_log = "Imóvel atualizado com sucesso";
+                    }else{
+                        $tipo_log = "Erro";
+                        $subtipo_log = "Atualização";
+                        $titulo = "O Imóvel não foi atualizado totalmente";
+                        $descricao_log = "O imóvel não possui imagens";
+                    }
 
                 }else{
                     $tipo_log = "Erro";

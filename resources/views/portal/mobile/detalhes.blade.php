@@ -3,7 +3,7 @@
 <head>
     @include('includes.portal.head')
 </head>
-<body>
+<body class="mobile">
 <div class="wrapper">
 	<div class="preloader"></div>
     @php $menu = "style2"; $logo = "logo2"; @endphp
@@ -27,7 +27,7 @@
 	</section>
 
     <!-- Agent Single Grid View -->
-	<section class="our-agent-single pb30-991">
+	<section class="our-agent-single pb30-991 detalhes-mobile">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-lg-8">
@@ -55,6 +55,43 @@
 										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Área Útil') }}m²</span></li>
 									</ul>
 								</div>
+
+
+								<div class="sidebar_listing_list detalhes-valor">
+
+									@if($anuncio->transacao == 'Venda' || $anuncio->transacao == 'Locação/Venda')
+									<div class="item-valor">
+										<div class="label-price">Venda (R$):</div>
+										<div class="price text-right">
+											{{ Helper::converte_valor_real($anuncio->valor_venda) }}
+										</div>
+									</div>
+									@endif
+			
+									@if($anuncio->transacao == 'Locação' || $anuncio->transacao == 'Locação/Venda')
+									<div class="item-valor">
+										<div class="label-price">Aluguel (R$):</div>
+										<div class="price text-right">
+											{{ Helper::converte_valor_real($anuncio->valor_locacao) }}
+										</div>
+									</div>
+									@endif
+			
+									<div class="item-valor cond">
+										<div class="label-condominio">Condomínio (R$):</div>
+										<div class="text-right condominio">
+											{{ Helper::converte_valor_real($anuncio->valor_condominio) }}
+										</div>
+									</div>
+			
+									<div class="item-valor cond">
+										<div class="label-condominio">IPTU (R$):</div>
+										<div class="text-right condominio">
+											-
+										</div>
+									</div>
+								</div>
+
 								<h4 class="mb30">Descrição</h4>
 						    	<p class="mb25">{{ $anuncio->descricao_resumida ?? '' }}</p>
 								<div class="collapse" id="collapseExample">
@@ -191,43 +228,7 @@
 				</div>
 				<div class="col-lg-4 col-xl-4">
 
-
-					<div class="sidebar_listing_list detalhes-valor">
-
-                        @if($anuncio->transacao == 'Venda' || $anuncio->transacao == 'Locação/Venda')
-						<div class="item-valor">
-							<div class="label-price">Venda (R$):</div>
-							<div class="price text-right">
-								{{ Helper::converte_valor_real($anuncio->valor_venda) }}
-							</div>
-						</div>
-                        @endif
-
-                        @if($anuncio->transacao == 'Locação' || $anuncio->transacao == 'Locação/Venda')
-						<div class="item-valor">
-							<div class="label-price">Aluguel (R$):</div>
-							<div class="price text-right">
-								{{ Helper::converte_valor_real($anuncio->valor_locacao) }}
-							</div>
-						</div>
-                        @endif
-
-						<div class="item-valor cond">
-							<div class="label-condominio">Condomínio (R$):</div>
-							<div class="text-right condominio">
-								{{ Helper::converte_valor_real($anuncio->valor_condominio) }}
-							</div>
-						</div>
-
-						<div class="item-valor cond">
-							<div class="label-condominio">IPTU (R$):</div>
-							<div class="text-right condominio">
-								-
-							</div>
-						</div>
-					</div>
-
-					<div class="sidebar_listing_list form-contato">
+					<div class="sidebar_listing_list form-contato" id="form-contato">
 						<div class="sidebar_advanced_search_widget">
 							<div class="sl_creator">
 								<h4 class="mb25">Anunciante</h4>
@@ -235,12 +236,12 @@
 									<img class="mr-3" src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="lc1.png" width="100">
 									<div class="media-body">
 								    	<h5 class="mt-0 mb0">{{ $anuncio->anunciante->nome }}</h5>
-								    	<a class="text-thm" href="#">{{ $anuncio->anunciante->telefone_comercial }}</a>
+								    	<a class="text-thm telefone-anunciante" href="#">{{ Helper::Phone($anuncio->anunciante->telefone_comercial) }}</a>
 								  	</div>
 								</div>
 							</div>
 
-                            <div class="btn-whatsapp" data-toggle="modal" data-target="#ModalContato"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
+                            <div class="btn-whatsapp" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
                             <div class="btn-visita" data-toggle="modal" data-target="#ModalAgendar"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
 
                             <form method="POST" id="ContatoAnuncio" action="{{ url('/contato-anuncio') }}">
@@ -308,7 +309,14 @@
 		</div>
 	</section>
 
+	<div class="rodape-detalhes">
+		<div class="btn-whatsapp" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa-brands fa-whatsapp"></i> Whatsapp</div>
+		<a href="#form-contato"><div class="btn-contato"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contato</div></a>
+	</div>
+
 	@include('includes.portal.footer')  
+
+	@include('includes.portal.modals.modal-contato')
 
 </div>
 
