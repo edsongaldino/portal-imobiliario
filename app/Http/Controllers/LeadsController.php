@@ -40,6 +40,7 @@ class LeadsController extends Controller
      */
     public function store(Request $request)
     {
+
         $lead = new Leads();
         $lead->anuncio_id = $request->anuncio_id;
         $lead->nome = $request->nome;
@@ -50,9 +51,11 @@ class LeadsController extends Controller
         if($lead->save()){
             $destinatario = 'edsongaldino@outlook.com';
             Mail::to($destinatario)->send(new EnviaLead($lead));
-            response()->json(['success' => 'success'], 200);
+            $response_array['status'] = 'success';
+            echo json_encode($response_array);
         }else{
-            response()->json(['error' => 'invalid'], 401);
+            $response_array['status'] = 'error';
+            echo json_encode($response_array);
         }
 
     }

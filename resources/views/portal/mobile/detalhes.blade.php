@@ -63,7 +63,11 @@
 									<div class="item-valor">
 										<div class="label-price">Venda (R$):</div>
 										<div class="price text-right">
+											@if($anuncio->valor_venda == '0.00')
+											Consulte
+											@else
 											{{ Helper::converte_valor_real($anuncio->valor_venda) }}
+											@endif
 										</div>
 									</div>
 									@endif
@@ -72,7 +76,11 @@
 									<div class="item-valor">
 										<div class="label-price">Aluguel (R$):</div>
 										<div class="price text-right">
+											@if($anuncio->valor_locacao == '0.00')
+											Consulte
+											@else
 											{{ Helper::converte_valor_real($anuncio->valor_locacao) }}
+											@endif
 										</div>
 									</div>
 									@endif
@@ -80,7 +88,11 @@
 									<div class="item-valor cond">
 										<div class="label-condominio">Condomínio (R$):</div>
 										<div class="text-right condominio">
+											@if($anuncio->valor_condominio == '0.00')
+											Consulte
+											@else
 											{{ Helper::converte_valor_real($anuncio->valor_condominio) }}
+											@endif
 										</div>
 									</div>
 
@@ -255,7 +267,7 @@
 								</li>
 								<li class="search_area">
 								    <div class="form-group">
-								    	<input type="number" class="form-control" name="telefone" id="telefone" placeholder="Telefone" required>
+								    	<input type="text" class="form-control telefone" name="telefone" id="telefone" placeholder="Telefone" maxlength="15" required>
 								    </div>
 								</li>
 								<li class="search_area">
@@ -270,7 +282,7 @@
 								</li>
 								<li>
 									<div class="search_option_button">
-									    <button type="submit" class="btn btn-block btn-thm btn-enviar enviarContato">Enviar</button>
+									    <button type="button" class="btn btn-block btn-thm btn-enviar enviarFormulario">Enviar</button>
 									</div>
 								</li>
 							</ul>
@@ -341,6 +353,8 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/pricing-slider.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLZYFMbNKXu2gyC_yxbdEDGxA6G0LSNu8&callback=initMap"type="text/javascript"></script>
+<script type="text/javascript" src="{{ asset('assets/global/js/jquery.maskedinput.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/global/js/jquery.maskMoney.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('vendor/sweetalert/dist/sweetalert.min.js') }}" ></script>
 @include('sweetalert::alert')
@@ -349,9 +363,12 @@
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/custom.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/portal/js/contato.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/global/js/mascaras.js') }}"></script>
 
 <script>
-    var MY_MAPTYPE_ID = 'style_KINESB';
+
+var MY_MAPTYPE_ID = 'style_KINESB';
 
 function initialize() {
   var featureOpts = [
