@@ -37,7 +37,7 @@
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active text-thm" aria-current="page">Rede de Imóveis do Mato Grosso</li>
 						</ol>
-						<h2 class="breadcrumb_title">358 anunciantes ativos</h2>
+						<h2 class="breadcrumb_title">{{ $anunciantes->count() }} anunciantes ativos</h2>
 					</div>
 				</div>
 
