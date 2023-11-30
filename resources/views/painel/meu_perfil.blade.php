@@ -242,6 +242,7 @@
 	<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
 </div>
 <!-- Wrapper End -->
+<script type="text/javascript" src="{{ asset('assets/portal/js/jquery-3.3.1.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/jquery-migrate-3.0.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/bootstrap.min.js') }}"></script>
