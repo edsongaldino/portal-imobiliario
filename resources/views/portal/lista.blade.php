@@ -490,11 +490,26 @@
 												</ul>
 
                                                 @if($destaque->transacao == 'Venda' || $destaque->transacao == 'Locação/Venda')
-                                                <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_venda) }}</span>
+                                                <span class="fp_price">R$ 
+
+													@if($destaque->valor_venda == '0.00')
+													Consulte
+													@else
+													{{ Helper::converte_valor_real($destaque->valor_venda) }}
+													@endif
+												
+												</span>
                                                 @endif
 
                                                 @if($destaque->transacao == 'Locação')
-                                                <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_locacao) }}</span>
+                                                <span class="fp_price">R$ 
+
+													@if($destaque->valor_locacao == '0.00')
+													Consulte
+													@else
+													{{ Helper::converte_valor_real($destaque->valor_locacao) }}
+													@endif
+
                                                 @endif
 
 												<h4 class="posr color-white">{{ $destaque->tipo->nome }}</h4>
@@ -562,11 +577,25 @@
                                                 @endif
 											</ul>
 											@if($anuncio->transacao == 'Venda' || $anuncio->transacao == 'Locação/Venda')
-                                            <a class="fp_price">R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</a>
+                                            <a class="fp_price">R$ 
+												@if($anuncio->valor_venda == '0.00')
+												Consulte
+												@else
+												{{ Helper::converte_valor_real($anuncio->valor_venda) }}
+												@endif
+											</a>
                                             @endif
 
                                             @if($anuncio->transacao == 'Locação')
-                                            <a class="fp_price">R$ {{ Helper::converte_valor_real($anuncio->valor_locacao) }}</a>
+                                            <a class="fp_price">R$ 
+												
+												@if($anuncio->valor_locacao == '0.00')
+												Consulte
+												@else
+												{{ Helper::converte_valor_real($anuncio->valor_locacao) }}
+												@endif
+											
+											</a>
                                             @endif
 										</div>
 										<p class="text-thm">{{ $anuncio->tipo->nome }}</p>
