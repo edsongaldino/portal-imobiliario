@@ -254,7 +254,7 @@
 							</div>
 
                             <div class="btn-whatsapp" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa-brands fa-whatsapp"></i> Contato por Whatsapp</div>
-                            <div class="btn-visita" data-toggle="modal" data-target="#ModalAgendar"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
+                            <div class="btn-visita" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa-solid fa-calendar"></i> Agendar uma visita</div>
 
                             <form method="POST" id="ContatoAnuncio" action="{{ url('/contato-anuncio') }}">
                             @csrf
