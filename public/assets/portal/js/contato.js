@@ -25,11 +25,12 @@ $(document).on('click', '.enviarFormulario', function (e) {
         url: "/contato-anuncio",
         data: formData,
         dataType: "json",
-        success: function(data) {
-            swal({title: "OK", text: "O formulário foi enviado com sucesso!", type: "success"});
-        },
-        error: function() {
-            swal({title: "Ops", text: "Erro ao enviar formulário!", type: "error"});
+        success: function(result) {
+            if(result == 'success'){
+                swal({title: "OK", text: "O formulário foi enviado com sucesso!", type: "success"});
+            }else{
+                swal({title: "Ops", text: "O formulário não foi enviado!", type: "warning"});
+            } 
         }
     });
 
