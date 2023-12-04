@@ -49,7 +49,7 @@
 											<div class="col-lg-4 col-xl-4">
 												<div class="my_profile_setting_input form-group">
 											    	<label for="formGroupExampleInput1">CNPJ</label>
-											    	<input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="alitfn" value="{{ $anunciante->cnpj ?? '' }}">
+											    	<input type="text" class="form-control cnpj" id="cnpj" name="cnpj" placeholder="alitfn" value="{{ $anunciante->cnpj ?? '' }}">
 												</div>
 											</div>
 											<div class="col-lg-8 col-xl-8">
@@ -91,18 +91,18 @@
 											<div class="col-lg-3 col-xl-3">
 												<div class="my_profile_setting_input form-group">
 											    	<label for="telefone_comercial">Telefone Comercial</label>
-											    	<input type="text" class="form-control" name="telefone_comercial" id="telefone_comercial" value="{{ $anunciante->telefone_comercial ?? '' }}">
+											    	<input type="text" class="form-control phone" name="telefone_comercial" id="telefone_comercial" value="{{ $anunciante->telefone_comercial ?? '' }}">
 												</div>
 											</div>
 											<div class="col-lg-3 col-xl-3">
 												<div class="my_profile_setting_input form-group">
-											    	<label for="whatsapp">Whatsapp</label>
-											    	<input type="text" class="form-control" name="whatsapp" id="whatsapp" value="{{ $anunciante->whatsapp ?? '' }}">
+											    	<label for="whatsapp">Whatsapp Comercial</label>
+											    	<input type="text" class="form-control phone" name="whatsapp" id="whatsapp" value="{{ $anunciante->whatsapp ?? '' }}">
 												</div>
 											</div>
 											<div class="col-lg-6 col-xl-6">
 												<div class="my_profile_setting_input form-group">
-											    	<label for="email">E-mail</label>
+											    	<label for="email">E-mail Comercial (Recebimento de Leads)</label>
 											    	<input type="text" class="form-control" name="email" id="email" value="{{ $anunciante->email ?? '' }}">
 												</div>
 											</div>
@@ -110,7 +110,7 @@
 											<div class="col-lg-3 col-xl-3">
 												<div class="my_profile_setting_input form-group">
 											    	<label for="cep">CEP</label>
-											    	<input type="text" class="form-control" name="cep_endereco" id="cep_endereco" value="{{ $anunciante->endereco->cep_endereco ?? '' }}">
+											    	<input type="text" class="form-control cep" name="cep_endereco" id="cep_endereco" value="{{ $anunciante->endereco->cep_endereco ?? '' }}">
 												</div>
 											</div>
 											<div class="col-lg-6 col-xl-6">
@@ -263,6 +263,8 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/wow.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/dashboard-script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/painel/js/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/global/js/jquery.maskMoney.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('vendor/sweetalert/dist/sweetalert.min.js') }}" ></script>
 @include('sweetalert::alert')
