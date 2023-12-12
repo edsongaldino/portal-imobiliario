@@ -179,13 +179,17 @@ class AnuncioController extends Controller
             $anuncios = $anuncios->where('enderecos.cidade_id',$request->localizacao);
         }
 
-        if($request->tipo_imovel){
-            $itens = DB::table('tipos')->select('id')->whereIn('id', $request->tipo_imovel)->get();
+        $itens = DB::table('tipos')->select('id')->whereIn('id', $request->tipo_imovel ?? [0])->get();
+
+        if($itens->count() > 0){
             foreach($itens as $item){
                 $tiposArray[] = $item->id;
             }
-
             $anuncios = $anuncios->whereIn('tipo_id',$tiposArray);
+        }
+
+        if($request->palavra_chave){
+            $anuncios = $anuncios->where('anuncios.titulo', 'like', '%' . $request->palavra_chave . '%');
         }
 
         $total =  $anuncios->count();

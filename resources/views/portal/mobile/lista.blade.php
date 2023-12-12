@@ -5,7 +5,7 @@
 </head>
 <body>
 <div class="wrapper">
-	<div class="preloader"></div>
+	<!--<div class="preloader"></div>-->
     @php $menu = "style2"; $logo = "logo2"; @endphp
 	@include('includes.portal.menu')
 

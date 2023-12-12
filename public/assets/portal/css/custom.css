@@ -166,3 +166,9 @@ section.detalhes-mobile .listing_single_description .single_property_title{
     width: 100%;
     height: 300px;
 }
+
+.busca-rapida{
+    background: #feebc5 !important;
+    border: 1px solid #fdb10f !important;
+    border-radius: 10px !important;
+}

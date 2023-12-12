@@ -2,6 +2,7 @@
 <html dir="ltr" lang="pt-br">
 <head>
     @include('includes.portal.head')
+	<link rel="stylesheet" href="{{ asset('assets/portal/css/detalhes/detalhes.css') }}">
 </head>
 <body>
 <div class="wrapper">
@@ -10,227 +11,8 @@
 	@include('includes.portal.menu')
 
     <!-- Listing Grid View -->
-	<section class="our-listing bgc-f7 pb30-991 busca-lista">
+	<section class="our-listing bgc-f7 pb30-991">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="listing_sidebar dn db-991">
-						<div class="sidebar_content_details style3">
-							<!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-							<div class="sidebar_listing_list style2 mobile_sytle_sidebar mb0">
-								<div class="sidebar_advanced_search_widget">
-									<h4 class="mb25">Busca avançada <a class="filter_closed_btn float-right" href="#"><small>Fechar filtro</small> <span class="flaticon-close"></span></a></h4>
-									<ul class="sasw_list style2 mb0">
-										<li class="search_area">
-										    <div class="form-group">
-										    	<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
-                                                    @foreach ($cidades as $cidade)
-                                                        @if($request->localizacao)
-                                                        <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}" @if($request->localizacao == $cidade->id) selected @endif>{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
-                                                        @else
-                                                        <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-										    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
-										    </div>
-										</li>
-										<li>
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select name="tipo_imovel[]" class="selectpicker w100 show-tick" multiple>
-														<option>Tipo do Imóvel</option>
-														@foreach ($tipos as $tipo)
-                                                        <option value="{{ $tipo->id }}">{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
-                                                        @endforeach
-													</select>
-												</div>
-											</div>
-										</li>
-										<li class="min_area style2 list-inline-item">
-                                            <div class="form-group">
-                                                <input type="text" name="valor_minimo" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
-                                            </div>
-                                        </li>
-                                        <li class="max_area list-inline-item">
-                                            <div class="form-group">
-                                                <input type="text" name="valor_maximo" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
-                                            </div>
-                                        </li>
-										<li>
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select name="quartos[]" class="selectpicker w100 show-tick" multiple>
-														<option>Quartos</option>
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-														<option>6</option>
-													</select>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select name="banheiros[]" class="selectpicker w100 show-tick" multiple>
-														<option>Banheiros</option>
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-														<option>6</option>
-													</select>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select name="garagem[]" class="selectpicker w100 show-tick" multiple>
-														<option>Garagens (Vagas)</option>
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-														<option>6</option>
-													</select>
-												</div>
-											</div>
-										</li>
-
-										<li class="min_area style2 list-inline-item">
-										    <div class="form-group">
-										    	<input type="text" name="area_minima" class="form-control moeda" id="exampleInputName2" placeholder="Área Min">
-										    </div>
-										</li>
-										<li class="max_area list-inline-item">
-										    <div class="form-group">
-										    	<input type="text" name="area_maxima" class="form-control moeda" id="exampleInputName3" placeholder="Área Max">
-										    </div>
-										</li>
-										<li>
-										  	<div id="accordion" class="panel-group">
-											    <div class="panel">
-											      	<div class="panel-heading">
-												      	<h4 class="panel-title">
-												        	<a href="#panelBodyRating" class="accordion-toggle link" data-toggle="collapse" data-parent="#accordion"><i class="flaticon-more"></i> Características</a>
-												        </h4>
-											      	</div>
-												    <div id="panelBodyRating" class="panel-collapse collapse">
-												        <div class="panel-body row">
-                                                            <div class="col-lg-12">
-                                                                <ul class="ui_kit_checkbox selectable-list float-left fn-400">
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck16">
-                                                                            <label class="custom-control-label" for="customCheck16">Mobiliado</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck17">
-                                                                            <label class="custom-control-label" for="customCheck17">Piscina</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck18">
-                                                                            <label class="custom-control-label" for="customCheck18">Sacada</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck19">
-                                                                            <label class="custom-control-label" for="customCheck19">Andar alto</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck20">
-                                                                            <label class="custom-control-label" for="customCheck20">Sol/Manhã</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck21">
-                                                                            <label class="custom-control-label" for="customCheck21">Sol/Tarde</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck22">
-                                                                            <label class="custom-control-label" for="customCheck22">Academia</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck23">
-                                                                            <label class="custom-control-label" for="customCheck23">Churrasqueira</label>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                                <ul class="ui_kit_checkbox selectable-list float-right fn-400">
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck24">
-                                                                            <label class="custom-control-label" for="customCheck24">Piscina</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck25">
-                                                                            <label class="custom-control-label" for="customCheck25">Playground</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck26">
-                                                                            <label class="custom-control-label" for="customCheck26">Quadra de tênis</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck27">
-                                                                            <label class="custom-control-label" for="customCheck27">Aceita animais</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck28">
-                                                                            <label class="custom-control-label" for="customCheck28">Salão de festas</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="customCheck29">
-                                                                            <label class="custom-control-label" for="customCheck29">Sala de jogos</label>
-                                                                        </div>
-                                                                    </li>
-
-                                                                </ul>
-                                                            </div>
-												        </div>
-												    </div>
-											    </div>
-											</div>
-										</li>
-										<li>
-											<div class="search_option_button">
-											    <button type="submit" class="btn btn-block btn-thm">Filtrar</button>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="breadcrumb_content style2 mb0-991">
@@ -257,12 +39,20 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-xl-4">
+
 					<div class="sidebar_listing_grid1 dn-991">
-						<div class="sidebar_listing_list">
+						<div class="sidebar_listing_list busca-rapida">
 							<div class="sidebar_advanced_search_widget">
+								<h4 class="title"><span class="flaticon-magnifying-glass"></span> Busca rápida</h4>
                                 <form action="{{ url('imoveis-buscar') }}" method="POST" name="FormBusca" id="FormBusca">
                                 @csrf
 								<ul class="sasw_list mb0">
+									<li class="search_area">
+									    <div class="form-group">
+									    	<input type="text" name="palavra_chave" class="form-control" placeholder="Palavra chave">
+									    </div>
+									</li>
+
 									<li class="search_area">
 									    <div class="form-group">
 									    	<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
@@ -274,21 +64,45 @@
                                                     @endif
                                                 @endforeach
                                             </select>
-									    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 									    </div>
 									</li>
+
 									<li>
 										<div class="search_option_two">
-											<div class="candidate_revew_select">
-												<select name="tipo_imovel[]" class="selectpicker w100 show-tick" multiple>
+											<div class="ui_kit_select_search">
+
+												<select name="tipo_imovel[]" id="tipo_imovel" class="selectpicker" multiple data-live-search="true">
 													<option>Tipo do Imóvel</option>
 													@foreach ($tipos as $tipo)
-                                                    <option value="{{ $tipo->id }}">{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
-                                                    @endforeach
+													<option value="{{ $tipo->id }}">{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
+													@endforeach
 												</select>
+
 											</div>
 										</div>
 									</li>
+									
+									<li>
+										<div class="search_option_button">
+										    <button type="submit" class="btn btn-block btn-thm">Filtrar</button>
+										</div>
+									</li>
+								</ul>
+                                </form>
+							</div>
+						</div>
+
+
+
+					</div>
+					
+					<div class="sidebar_listing_grid1 dn-991">
+						<div class="sidebar_listing_list">
+							<div class="sidebar_advanced_search_widget">
+								<h4 class="title"><span class="flaticon-magnifying-glass"></span> Filtros adicionais</h4>
+                                <form action="{{ url('imoveis-buscar') }}" method="POST" name="FormBusca" id="FormBusca">
+                                @csrf
+								<ul class="sasw_list mb0">
 									<li class="min_area style2 list-inline-item">
 										<div class="form-group">
 											<input type="text" name="valor_minimo" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
@@ -470,6 +284,7 @@
                                 </form>
 							</div>
 						</div>
+						<!--
 						<div class="terms_condition_widget">
 							<h4 class="title">Imóveis destacados</h4>
 							<div class="sidebar_feature_property_slider">
@@ -519,9 +334,11 @@
 									</div>
 								</div>
                                 @endforeach
+							
 
 							</div>
 						</div>
+						-->
 
 
 					</div>
@@ -619,7 +436,7 @@
 						</div>
                         @endforeach
 
-                        {{ $anuncios->links() }}
+						{{ $anuncios->appends(Request::except('page'))->links() }}
 
 					</div>
 				</div>
@@ -656,5 +473,9 @@
 <!-- Custom script for all pages -->
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
+
+<script>
+	$('select').selectpicker();
+</script>
 </body>
 </html>
