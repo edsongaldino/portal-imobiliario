@@ -134,6 +134,7 @@
 					<div class="feature_property_slider">
 
 
+						
                         @foreach ($destaques as $destaque)
                         <div class="item">
                             <div class="feat_property">
@@ -185,6 +186,7 @@
                             </div>
                         </div>
                         @endforeach
+					
 
 
 
@@ -243,8 +245,8 @@
 		</div>
 	</section>
 
-
-	<section id="our-partners" class="our-partners">
+	<!-- Nossos Parceiros -->
+	<section class="our-team bgc-f7">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 offset-lg-3">
@@ -255,13 +257,28 @@
 				</div>
 			</div>
 			<div class="row">
-                @foreach ($anunciantes as $anunciante)
-                <div class="col-sm-6 col-md-4 col-lg">
-					<div class="our_partner">
-						<a href="/lista-imoveis/{{ $anunciante->id }}/{{ Helper::url_amigavel($anunciante->nome) }}" target="_blank"><img class="logo-parceiro" src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" alt="{{ $anunciante->nome }}"></a>
+				<div class="col-lg-12">
+					<div class="team_slider">
+						@foreach ($anunciantes as $anunciante)
+						<div class="item">
+							<div class="team_member">
+								<div class="thumb">
+									<img class="img-fluid parceiro-logo" src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" alt="{{ $anunciante->nome }}">
+									<div class="overylay">
+										<ul class="social_icon">
+											<li class="list-inline-item"><a href="/lista-imoveis/{{ $anunciante->id }}/{{ Helper::url_amigavel($anunciante->nome) }}" target="_blank"><i class="fa fa-link"></i> Ver anúncios</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="details">
+									<h4>{{ $anunciante->nome }}</h4>
+									<p>{{ $anunciante->tipo }}</p>
+								</div>
+							</div>
+						</div>
+						@endforeach
 					</div>
 				</div>
-                @endforeach
 			</div>
 		</div>
 	</section>

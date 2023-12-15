@@ -2462,6 +2462,17 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   transform: translate(-50%, -50%);
 }
 
+.parceiro-logo {
+  display: block;
+  width: auto !important;
+  height: 80px;
+  max-height: 80px;
+  margin: auto;
+  max-width: 80%;
+}
+
+
+
 .home1-advnc-search ul li .search_option_button button{
   border-radius: 8px;
   background-color: #ff5a5f;
@@ -7799,6 +7810,7 @@ ul.ab_counting li:last-child{
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  height: 150px;
 }
 .team_member:hover{
   cursor: pointer;
