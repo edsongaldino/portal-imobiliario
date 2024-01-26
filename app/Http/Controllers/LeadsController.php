@@ -6,6 +6,8 @@ use App\Helpers\Helper;
 use App\Models\Leads;
 use App\Http\Controllers\Controller;
 use App\Mail\EnviaLead;
+use App\Mail\EnviaLeadParceiro;
+use App\Models\Anuncio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -48,9 +50,11 @@ class LeadsController extends Controller
         $lead->telefone = Helper::limpa_campo($request->telefone);
         $lead->mensagem = $request->mensagem;
 
+        $anuncio = Anuncio::find($request->anuncio_id);
+
         if($lead->save()){
-            $destinatario = 'edsongaldino@outlook.com';
-            Mail::to($destinatario)->send(new EnviaLead($lead));
+            Mail::to($request->email)->send(new EnviaLead($lead));
+            Mail::to($anuncio->anunciante->email)->send(new EnviaLeadParceiro($lead, $anuncio));
             $response_array['status'] = 'success';
             echo json_encode($response_array);
         }else{
