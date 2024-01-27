@@ -2,6 +2,8 @@
 <html dir="ltr" lang="pt-br">
 <head>
     @include('includes.portal.head')
+	<link rel="stylesheet" href="{{ asset('assets/portal/css/detalhes/detalhes.css') }}">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 <div class="wrapper">
@@ -247,7 +249,7 @@
 									<img class="mr-3" src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="lc1.png" width="100">
 									<div class="media-body">
 								    	<h5 class="mt-0 mb0">{{ $anuncio->anunciante->nome }}</h5>
-								    	<a class="text-thm" href="#">{{ $anuncio->anunciante->telefone_comercial }}</a>
+								    	<a class="text-thm fone-anunciante" href="#">{{ Helper::Phone($anuncio->anunciante->telefone_comercial) }}</a>
 								  	</div>
 								</div>
 							</div>
@@ -278,6 +280,9 @@
 		                            <div class="form-group">
 		                                <textarea id="mensagem" name="mensagem" class="form-control required" rows="5" required="required" placeholder="">Olá, tenho interesse neste imóvel: {{ $anuncio->tipo->nome }}, {{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}, {{ $anuncio->transacao }} - ID: {{ $anuncio->id_externo }}. Aguardo o contato. Obrigado.</textarea>
 		                            </div>
+								</li>
+								<li class="search_area" id="g-recaptcha">
+									<div class="g-recaptcha" data-sitekey="6LfVO14pAAAAAPv-l4wDs1E6Xc9Pv5m1w7dQC3Mu"></div>
 								</li>
 								<li>
 									<div class="search_option_button">

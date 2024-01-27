@@ -35,7 +35,7 @@
 							<div class="ff_one style2">
 								<div class="icon"><span class="flaticon-view"></span></div>
 								<div class="detais">
-									<div class="timer">2458</div>
+									<div class="timer">{{ Helper::GetTotalViewsByAnunciante($usuario->anunciante->id) }}</div>
 									<p>Visualizações</p>
 								</div>
 							</div>
@@ -89,7 +89,7 @@
 					<div class="row mt50">
 						<div class="col-lg-6 offset-lg-3">
 							<div class="copyright-widget text-center">
-								<p>© 2023 - Painel Administrativo.</p>
+								<p>© @php echo date('Y'); @endphp. Rede Imóveis MT</p>
 							</div>
 						</div>
 					</div>

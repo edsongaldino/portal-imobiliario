@@ -71,3 +71,12 @@
                 50% 50%
                 no-repeat;
 }
+
+.leads .msg{
+    font-size: 12px;
+    color: rgb(126, 126, 126);
+}
+
+.leads td{
+    line-height: 1.5 !important;
+}

@@ -20,7 +20,7 @@ class LeadsController extends Controller
      */
     public function index()
     {
-        $leads = Leads::where('deleted_at','<>',null)->paginate(10);
+        $leads = Leads::where('deleted_at',null)->paginate(10);
         return view('painel.leads.lista', compact('leads'));
     }
 

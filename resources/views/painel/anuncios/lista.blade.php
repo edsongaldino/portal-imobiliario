@@ -91,9 +91,9 @@
 															</div>
 														</div>
 										    		</th>
-										    		<td>{{ $anuncio->updated_at }}</td>
+										    		<td>{{ $anuncio->updated_at->format('d/m/Y') }}</td>
 										    		<td><span class="status_tag badge">{{ $anuncio->situacao }}</span></td>
-										    		<td>2.345</td>
+										    		<td>{{ Helper::GetTotalViewsByAnuncio($anuncio->id, null) }}</td>
 										    		<td>
 										    			<ul class="view_edit_delete_list mb0">
                                                             <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar"><a href="/imoveis/{{ $anuncio->id }}/{{ Helper::url_amigavel($anuncio->tipo->nome .'-'. $anuncio->transacao) }}/{{ Helper::url_amigavel($anuncio->endereco->cidade->nome_cidade .'-'. $anuncio->endereco->cidade->estado->uf_estado)}}" target="_blank"><span class="flaticon-view"></span></a></li>
@@ -143,7 +143,7 @@
 					<div class="row mt10">
 						<div class="col-lg-12">
 							<div class="copyright-widget text-center">
-								<p>© 2020 Find House. Made with love.</p>
+								<p>© @php echo date('Y'); @endphp. Rede Imóveis MT</p>
 							</div>
 						</div>
 					</div>

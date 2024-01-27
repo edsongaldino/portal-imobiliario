@@ -10,6 +10,7 @@ use App\FaturamentoContrato;
 use App\Models\Anuncio;
 use App\Models\AnuncioInformacoes;
 use App\Models\Leads;
+use App\Models\RelatorioAnuncio;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Carbon;
 
@@ -209,44 +210,6 @@ class Helper{
 
 	}
 
-    public static function getCalendarioMes($contrato, $aluno, $data_inicial, $data_final){
-        return CalendarioAluno::where('contrato_id', $contrato)->where('aluno_id', $aluno)->whereBetween('data', [$data_inicial, $data_final])->get();
-    }
-
-    public static function getAtualizacaoContrato($data_inicial, $data_final, $contrato, $tipo){
-
-        $data_inicial = Carbon::parse($data_inicial)->subMonths(1);
-        $data_final = Carbon::parse($data_final)->subMonths(1);
-
-        $atualizacoes = AtualizacoesContrato::where('contrato_id',$contrato)->where('tipo', $tipo)->whereBetween('data', [$data_inicial, $data_final])->get();
-
-        $contrato = Contrato::find($contrato);
-
-        switch($tipo){
-
-            case "Falta Trabalho":
-                return $atualizacoes->count()*($contrato->valor_bolsa/Helper::getDiasEntreDatas($data_inicial, $data_final));
-            break;
-
-            case "Entrega de Uniforme":
-                return $atualizacoes->sum('valor');
-            break;
-
-            case "Exame Admissional" || "Exame Demissional":
-                return $atualizacoes->sum('valor');
-            break;
-
-            case "Qtde Falta Trabalho":
-                return $atualizacoes->count();
-            break;
-
-            case "Benefícios":
-                return $atualizacoes->count();
-            break;
-        }
-
-    }
-
     public static function getDiasEntreDatas($data_inicial, $data_final){
 
         $diferenca = strtotime($data_final) - strtotime($data_inicial);
@@ -317,13 +280,6 @@ class Helper{
         return $valor;
     }
 
-    public static function getFaturamentoContrato($faturamento, $contrato){
-        return FaturamentoContrato::where('contrato_id', $contrato)->where('faturamento_id', $faturamento)->whereNull('deleted_at')->first();
-    }
-
-    public static function getFaturamentoConvenio($convenio, $data_inicial, $data_final){
-        return Faturamento::where('convenio_id', $convenio)->whereDate('data_inicial', $data_inicial)->whereDate('data_final', $data_final)->whereNull('deleted_at')->get();
-    }
 
 	public static function Phone($number){
 		$number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);
@@ -451,6 +407,27 @@ class Helper{
                                 ->where('enderecos.cidade_id', $CidadeID)->get();
         return $totalAnuncios->count();
 
+
+    }
+
+	public static function GetTotalViewsByAnuncio($anuncio_id, $tipoView) {
+
+		if($tipoView <> null){
+			$total = RelatorioAnuncio::where('anuncio_id',$anuncio_id)->where('tipo',$tipoView)->count();	
+		}else{
+			$total = RelatorioAnuncio::where('anuncio_id',$anuncio_id)->where('tipo','<>', 'Lead')->count();
+		}
+        return $total;
+
+    }
+
+	public static function GetTotalViewsByAnunciante($anunciante_id) {
+
+		$total = RelatorioAnuncio::select('relatorio_anuncios.id')
+		->join('anuncios', 'anuncios.id', '=', 'relatorio_anuncios.anuncio_id')
+		->where('relatorio_anuncios.tipo','<>', 'Lead')
+		->where('anuncios.anunciante_id',$anunciante_id)->get();
+        return $total->count();
 
     }
 

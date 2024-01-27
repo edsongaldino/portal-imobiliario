@@ -46,37 +46,35 @@
 												<thead class="thead-light">
 											    	<tr>
 											    		<th scope="col">Nome</th>
-											    		<th class="dn-lg" scope="col"></th>
 											    		<th class="dn-lg" scope="col">E-mail</th>
 											    		<th scope="col">Telefone</th>
-											    		<th scope="col"></th>
 											    		<th scope="col">Data</th>
 											    		<th scope="col">Ações</th>
 											    	</tr>
 												</thead>
-												<tbody>
+												<tbody class="leads">
 
                                                     @foreach ($leads as $lead)
 											    	<tr>
-											    		<th class="title" scope="row"><b>{{ $lead->nome }}</b>{{ $lead->nome }}<br/>{{ $lead->anuncio->id_externo }} - {{ $lead->anuncio->titulo }}</th>
-											    		<td class="dn-lg"></td>
-											    		<td class="dn-lg">{{ $lead->email }}</td>
-											    		<td></td>
-											    		<td>{{ $lead->telefone }}</td>
-											    		<td class="para">{{ $lead->created_at }}</td>
+											    		<td><b>{{ $lead->nome }}</b><br/><span class="msg">{{ $lead->mensagem }}</span></td>
+														<td>{{ $lead->email }}<br/>{{ Helper::Phone($lead->telefone) }}</td>
+											    		<td class="dn-lg">{{ $lead->anuncio->id_externo }}<br/><span class="msg">{{ $lead->anuncio->titulo }}</span></td>
+											    		<td class="para">{{ $lead->created_at->format('d/m/Y') }}</td>
 											    		<td>
 											    			<ul class="view_edit_delete_list mb0">
-											    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="View"><a href="#"><span class="flaticon-view"></span></a></li>
-											    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"><a href="#"><span class="flaticon-edit"></span></a></li>
-											    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a href="#"><span class="flaticon-garbage"></span></a></li>
+											    				<li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Visualizar Detalhes do Lead"><a href="#"><span class="flaticon-view"></span></a></li>
 											    			</ul>
 											    		</td>
 											    	</tr>
                                                     @endforeach
 
 												</tbody>
+
 											</table>
 										</div>
+
+										{{ $leads->links() }}
+										
 									</div>
 								</div>
 							</div>
@@ -85,7 +83,7 @@
 					<div class="row mt10">
 						<div class="col-lg-12">
 							<div class="copyright-widget text-center">
-								<p>© 2020 Find House. Made with love.</p>
+								<p>&copy; @php echo date('Y'); @endphp. Rede Imóveis MT</p>
 							</div>
 						</div>
 					</div>
