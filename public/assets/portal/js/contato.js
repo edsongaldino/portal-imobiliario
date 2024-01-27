@@ -46,6 +46,13 @@ $(document).on('click', '.contatoWhatsapp', function (e) {
     e.preventDefault();
     var formData = $("#ContatoWhatsapp").serialize();
 
+    var response = grecaptcha.getResponse();
+    if(response.length == 0) {
+        swal({title: "Ops", text: "A sua resposta do recaptcha não é válida!", type: "warning"});
+        $("#g-recaptcha").focus();
+        return false;
+    }
+
     if ($("#Modalnome").val() == "") {
         swal({title: "Ops", text: "O campo nome deve ser preenchido!", type: "warning"});
         $("#nome").focus();

@@ -281,7 +281,7 @@
 		                                <textarea id="mensagem" name="mensagem" class="form-control required" rows="5" required="required" placeholder="">Olá, tenho interesse neste imóvel: {{ $anuncio->tipo->nome }}, {{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}, {{ $anuncio->transacao }} - ID: {{ $anuncio->id_externo }}. Aguardo o contato. Obrigado.</textarea>
 		                            </div>
 								</li>
-								<li class="search_area" id="g-recaptcha">
+								<li class="search_area box-g-recaptcha">
 									<div class="g-recaptcha" data-sitekey="6LfVO14pAAAAAPv-l4wDs1E6Xc9Pv5m1w7dQC3Mu"></div>
 								</li>
 								<li>
@@ -494,6 +494,36 @@ var image = "{{ asset('assets/portal/images/resource/mapmarker.png') }}";
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
+
+
+function scaleCaptcha(elementWidth) {
+  // Width of the reCAPTCHA element, in pixels
+  var reCaptchaWidth = 300;
+  // Get the containing element's width
+	var containerWidth = $('.box-g-recaptcha').width();
+  
+  // Only scale the reCAPTCHA if it won't fit
+  // inside the container
+  if(reCaptchaWidth > containerWidth) {
+    // Calculate the scale
+    var captchaScale = containerWidth / reCaptchaWidth;
+    // Apply the transformation
+    $('.g-recaptcha').css({
+      'transform':'scale('+captchaScale+')'
+    });
+  }
+}
+
+$(function() { 
+ 
+  // Initialize scaling
+  scaleCaptcha();
+  
+  // Update scaling on window resize
+  // Uses jQuery throttle plugin to limit strain on the browser
+  $(window).resize( $.throttle( 100, scaleCaptcha ) );
+  
+});
 </script>
 
 
