@@ -52,7 +52,7 @@
 		      	</div>
 		      	<div class="modal-body container pb20">
 
-                    <div class="tab-content container" id="myTabContent" style="display: none">
+                    <div class="tab-content container" id="myTabContent" style="display: block">
 
                         <h3><i class="fa fa-user" aria-hidden="true"></i> Meus dados de contato</h3>
 
@@ -90,7 +90,7 @@
 					  	</div>
 					</div>
 
-                    <div class="contato-anuncio" id="ContatoAnuncio" style="display: block">
+                    <div class="contato-anuncio" id="ContatoAnuncio" style="display: none">
                         <div class="sl_creator">
                             <div class="media">
                                 <img class="mr-3" src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="lc1.png" width="100">
