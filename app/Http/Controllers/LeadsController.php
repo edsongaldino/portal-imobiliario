@@ -9,6 +9,7 @@ use App\Mail\EnviaLead;
 use App\Mail\EnviaLeadParceiro;
 use App\Models\Anuncio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class LeadsController extends Controller
@@ -20,7 +21,9 @@ class LeadsController extends Controller
      */
     public function index()
     {
-        $leads = Leads::where('deleted_at',null)->paginate(10);
+        $leads = Leads::where('leads.deleted_at',null)
+		->join('anuncios', 'anuncios.id', '=', 'leads.anuncio_id')
+		->where('anuncios.anunciante_id',Auth::user()->anunciante->id)->paginate(10);
         return view('painel.leads.lista', compact('leads'));
     }
 

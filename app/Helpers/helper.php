@@ -354,7 +354,9 @@ class Helper{
 
     public static function GetTotalLeadsAnunciante($anunciante_id) {
 
-        $leads = Leads::where('deleted_at','<>',null)->count();
+		$leads = Leads::where('leads.deleted_at',null)
+		->join('anuncios', 'anuncios.id', '=', 'leads.anuncio_id')
+		->where('anuncios.anunciante_id',$anunciante_id)->count();
 
         return $leads;
 
