@@ -188,8 +188,8 @@
 										<div class="row">
                                             <div class="col-lg-6 col-xl-6">
 												<div class="my_profile_setting_input form-group">
-											    	<label for="email">E-mail</label>
-											    	<input type="text" class="form-control" name="email" id="email" value="{{ $usuario->email ?? '' }}" readonly>
+											    	<label for="email">E-mail de Login (Painel)</label>
+											    	<input type="text" class="form-control" name="email" id="email" value="{{ $usuario->email ?? '' }}">
 												</div>
 											</div>
 											<div class="col-xl-6">
