@@ -157,7 +157,7 @@
 											<div class="col-xl-12">
 												<div class="my_profile_setting_textarea">
 												    <label for="exampleFormControlTextarea1">Descrição</label>
-												    <textarea class="form-control" name="descricao" id="exampleFormControlTextarea1" rows="7"></textarea>
+												    <textarea class="form-control" name="descricao" id="exampleFormControlTextarea1" rows="7">{{ $anunciante->descricao ?? '' }}</textarea>
 												</div>
 											</div>
 
