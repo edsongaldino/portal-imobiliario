@@ -34,12 +34,12 @@
 									<div class="col-xl-10">
 										<div class="row">
 											<div class="col-lg-12">
+												<input type="hidden" name="logo_old" id="logo_old" value="{{ $anunciante->logo ?? '' }}" />
                                                 <div class="logo-atual">
                                                     <img src="{{ url('anunciante/'.$anunciante->id.'/logo') }}" alt="">
                                                 </div>
 												<div class="wrap-custom-file" style="background-image: url(/assets/painel/images/logo-anunciante.jpg) !important;">
 												    <input type="file" name="logo" id="logo" accept=".gif, .jpg, .png"/>
-                                                    <input type="hidden" name="logo_old" value="{{ $anunciante->logo ?? '' }}" />
 												    <label for="logo">
 												      	<span><i class="flaticon-download"></i> Upload Logo</span>
 												    </label>
@@ -157,7 +157,7 @@
 											<div class="col-xl-12">
 												<div class="my_profile_setting_textarea">
 												    <label for="exampleFormControlTextarea1">Descrição</label>
-												    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+												    <textarea class="form-control" name="descricao" id="exampleFormControlTextarea1" rows="7"></textarea>
 												</div>
 											</div>
 

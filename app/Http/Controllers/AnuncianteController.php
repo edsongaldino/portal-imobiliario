@@ -137,7 +137,7 @@ class AnuncianteController extends Controller
             $fileNameBD = $request->file('logo')->storeAs('public/uploads/anunciantes/'.$request->anunciante_id.'/logo', $fileNameToStore);
 
         } else {
-            $fileNameBD = $request->foto_old;
+            $fileNameBD = $request->logo_old;
         }
 
         $anunciante = Anunciante::findOrFail($request->id);
