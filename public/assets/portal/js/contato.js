@@ -2,12 +2,14 @@ $(document).on('click', '.enviarFormulario', function (e) {
     e.preventDefault();
     var formData = $("#ContatoAnuncio").serialize();
 
+    
     var response = grecaptcha.getResponse();
     if(response.length == 0) {
         swal({title: "Ops", text: "A sua resposta do recaptcha não é válida!", type: "warning"});
         $("#g-recaptcha").focus();
         return false;
     }
+    
 
     if ($("#nome").val() == "") {
         swal({title: "Ops", text: "O campo nome deve ser preenchido!", type: "warning"});
@@ -27,6 +29,9 @@ $(document).on('click', '.enviarFormulario', function (e) {
         return false;
     }
 
+    $("#enviarFormulario").css("display", "none");
+    $("#aguardeEnvio").css("display", "block");
+
     $.ajax({
         type: "POST",
         url: "/contato-anuncio",
@@ -34,9 +39,13 @@ $(document).on('click', '.enviarFormulario', function (e) {
         dataType: "json",
         success: function() {
             swal({title: "OK", text: "O formulário foi enviado com sucesso!", type: "success"});
+            $("#aguardeEnvio").css("display", "none");
+            $("#enviarFormulario").css("display", "block");
         },
         error: function() {
             swal({title: "OPS", text: "Erro ao enviar formulário!", type: "warning"});
+            $("#aguardeEnvio").css("display", "none");
+            $("#enviarFormulario").css("display", "block");
         }
     });
 
@@ -71,6 +80,9 @@ $(document).on('click', '.contatoWhatsapp', function (e) {
         return false;
     }
 
+    $("#BTNcontatoWhatsapp").css("display", "none");
+    $("#aguardeEnvioWhatsapp").css("display", "block");
+
     $.ajax({
         type: "POST",
         url: "/contato-anuncio",
@@ -81,10 +93,14 @@ $(document).on('click', '.contatoWhatsapp', function (e) {
             $("#myTabContent").css("display", "none");
             $("#ContatoAnuncio").css("display", "block");
             swal({title: "OK", text: "O formulário foi enviado com sucesso!", type: "success"});
+            $("#BTNcontatoWhatsapp").css("display", "block");
+            $("#aguardeEnvioWhatsapp").css("display", "none");
 
         },
         error: function() {
             swal({title: "OPS", text: "Erro ao enviar formulário!", type: "warning"});
+            $("#BTNcontatoWhatsapp").css("display", "block");
+            $("#aguardeEnvioWhatsapp").css("display", "none");
         }
     });
 

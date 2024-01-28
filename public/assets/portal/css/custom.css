@@ -154,6 +154,19 @@ section.detalhes-mobile .listing_single_description .single_property_title{
     cursor: pointer;
 }
 
+.aguarde-whatsapp{
+    width: 150px;
+    height: 50px;
+    float: right;
+    background: #6c757d !important;
+    border: 0px;
+}
+
+.aguarde-whatsapp:hover{
+    background: #596269 !important;
+    cursor: pointer;
+}
+
 .modal-contato .modal-header{
     background-color: #ff5a5f;
     border-radius: 0% !important;

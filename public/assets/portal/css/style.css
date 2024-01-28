@@ -11652,6 +11652,16 @@ a.btn.btn_error{
     cursor: pointer;
 }
 
+.sidebar_listing_list .btn-aguarde{
+  background: #6c757d !important;
+  border: 1px solid #333 !important;
+}
+
+.sidebar_listing_list .btn-aguarde:hover{
+  background: #6c757d !important;
+  color:#FFF !important;
+}
+
 
 .sidebar_listing_list .btn-whatsapp{
     width: 100%;

@@ -286,7 +286,13 @@
 								</li>
 								<li>
 									<div class="search_option_button">
-									    <button type="button" class="btn btn-block btn-thm btn-enviar enviarFormulario">Enviar</button>
+									    <button type="button" id="enviarFormulario" class="btn btn-block btn-thm btn-enviar enviarFormulario" style="display: block">Enviar</button>
+										
+										<button id="aguardeEnvio" class="btn btn-block btn-thm btn-aguarde" type="button" style="display: none">
+											<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+											Enviando, aguarde!
+										</button>
+										
 									</div>
 								</li>
 							</ul>

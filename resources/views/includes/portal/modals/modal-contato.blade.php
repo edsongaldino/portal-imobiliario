@@ -83,7 +83,13 @@
 
                                     <input type="hidden" name="mensagem" value="Olá, tenho interesse neste imóvel: {{ $anuncio->tipo->nome }}, {{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}, {{ $anuncio->transacao }} - ID: {{ $anuncio->id_externo }}. Aguardo o contato. Obrigado.">
 									<div class="col-lg-12">
-										<button class="btn-success enviar-form-whatsapp contatoWhatsapp">Enviar</button>
+
+										<button id="BTNcontatoWhatsapp" class="btn-success enviar-form-whatsapp contatoWhatsapp" style="display: block">Enviar</button>
+
+                                        <button id="aguardeEnvioWhatsapp" class="btn-success aguarde-whatsapp" type="button" style="display: none">
+											<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+											Enviando
+										</button>
 									</div>
 								</div>
                             </form>
