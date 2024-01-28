@@ -62,17 +62,7 @@
                         <li class="list-inline-item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
                     </ul>
-                    <h4>Cadastre-se</h4>
-                    <form class="footer_mailchimp_form" method="POST">
-                         <div class="form-row align-items-center">
-                            <div class="col-auto">
-                                <input type="email" class="form-control mb-2" id="inlineFormInput" placeholder="Seu e-mail">
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-angle-right"></i></button>
-                            </div>
-                          </div>
-                    </form>
+                    
                 </div>
             </div>
         </div>

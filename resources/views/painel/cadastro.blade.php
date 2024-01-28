@@ -150,10 +150,12 @@
 					<!--end::Wrapper-->
 				</div>
 				<!--begin::Aside-->
-                <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" method="POST" action="{{ route('finalizar-cadastro') }}">
-                @csrf
+                
 				<!--begin::Body-->
 				<div class="d-flex flex-column flex-lg-row-fluid py-10">
+
+					<form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" method="POST" action="{{ route('finalizar-cadastro') }}">
+					@csrf
 					<!--begin::Content-->
 					<div class="d-flex flex-center flex-column flex-column-fluid">
 						<!--begin::Wrapper-->
@@ -593,13 +595,13 @@
 						</div>
 						<!--end::Wrapper-->
 					</div>
-					<!--end::Content-->
+				</form>
+				<!--end::Content-->
 
-                    @include('includes/login/footer')
+                @include('includes/login/footer')
 
 				</div>
 				<!--end::Body-->
-            </form>
 			</div>
 			<!--end::Authentication - Multi-steps-->
 		</div>
