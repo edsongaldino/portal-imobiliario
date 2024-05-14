@@ -355,7 +355,6 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/jquery.counterup.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/wow.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/slider.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/portal/js/pricing-slider.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLZYFMbNKXu2gyC_yxbdEDGxA6G0LSNu8&callback=initMap"type="text/javascript"></script>
 <script type="text/javascript" src="{{ asset('assets/global/js/jquery.maskedinput.js') }}"></script>

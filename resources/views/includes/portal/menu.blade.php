@@ -63,7 +63,7 @@
             </li>
 
             <li class="last">
-                <a href="#"><span class="title">Financiamento</span></a>
+                <a href="#"><span class="title">Financiamentos</span></a>
             </li>
             <!--<li><a href="page-login.html"><span class="flaticon-user"></span> Login/Cadastro</a></li>-->
             <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="{{ url("/login") }}"><span class="flaticon-plus"></span> Anunciar</a></li>

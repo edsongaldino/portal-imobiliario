@@ -144,33 +144,33 @@ $(document).on('ready', function() {
         shadow : false,
         percentage : false,
         animation : true,
-        barColor : "#ff5a5f",
+        barColor : "#006d3c",
     });
     $('.progressbar2').progressBar({
         shadow : false,
         percentage : false,
         animation : true,
-        barColor : "#ff5a5f",
+        barColor : "#006d3c",
     });
     $('.progressbar3').progressBar({
         shadow : false,
         percentage : false,
         animation : true,
         animateTarget : true,
-        barColor : "#ff5a5f",
+        barColor : "#006d3c",
     });
     $('.progressbar4').progressBar({
         shadow : false,
         percentage : false,
         animation : true,
         animateTarget : true,
-        barColor : "#ff5a5f",
+        barColor : "#006d3c",
     });
     $('.progressbar5').progressBar({
         shadow : false,
         percentage : false,
         animation : true,
         animateTarget : true,
-        barColor : "#ff5a5f",
+        barColor : "#006d3c",
     });
 });

@@ -36,7 +36,7 @@
     width: 60%;
     text-align: right;
     font-family: 'Nunito', sans-serif;
-    color: #ff5a5f;
+    color: #006d3c;
     font-size: 30px !important;
     font-weight: bold;
 }
@@ -145,7 +145,7 @@ section.detalhes-mobile .listing_single_description .single_property_title{
     width: 150px;
     height: 50px;
     float: right;
-    background-color: #ff5a5f;
+    background-color: #006d3c;
     border: 0px;
 }
 
@@ -168,7 +168,7 @@ section.detalhes-mobile .listing_single_description .single_property_title{
 }
 
 .modal-contato .modal-header{
-    background-color: #ff5a5f;
+    background-color: #006d3c;
     border-radius: 0% !important;
     border: none;
     height: 50px;

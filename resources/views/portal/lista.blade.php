@@ -2,7 +2,6 @@
 <html dir="ltr" lang="pt-br">
 <head>
     @include('includes.portal.head')
-	<link rel="stylesheet" href="{{ asset('assets/portal/css/detalhes/detalhes.css') }}">
 </head>
 <body>
 <div class="wrapper">
@@ -44,7 +43,7 @@
 						<div class="sidebar_listing_list busca-rapida">
 							<div class="sidebar_advanced_search_widget">
 								<h4 class="title"><span class="flaticon-magnifying-glass"></span> Busca rápida</h4>
-                                <form action="{{ url('imoveis-buscar') }}" method="POST" name="FormBusca" id="FormBusca">
+                                <form action="{{ url('imoveis-buscar') }}" method="POST" name="FormBusca" id="FormBusca1">
                                 @csrf
 								<ul class="sasw_list mb0">
 									<li class="search_area">
@@ -100,7 +99,7 @@
 						<div class="sidebar_listing_list">
 							<div class="sidebar_advanced_search_widget">
 								<h4 class="title"><span class="flaticon-magnifying-glass"></span> Filtros adicionais</h4>
-                                <form action="{{ url('imoveis-buscar') }}" method="POST" name="FormBusca" id="FormBusca">
+                                <form action="{{ url('imoveis-buscar') }}" method="POST" name="FormBusca" id="FormBusca2">
                                 @csrf
 								<ul class="sasw_list mb0">
 									<li class="min_area style2 list-inline-item">
@@ -110,7 +109,7 @@
 									</li>
 									<li class="max_area list-inline-item">
 										<div class="form-group">
-											<input type="text" name="valor_maximo" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
+											<input type="text" name="valor_maximo" class="form-control moeda" id="exampleInputName33" placeholder="Valor Max">
 										</div>
 									</li>
 									<li>
@@ -161,7 +160,7 @@
 
 									<li class="min_area list-inline-item">
 									    <div class="form-group">
-									    	<input type="text" name="area_minima" class="form-control moeda" id="exampleInputName2" placeholder="Min Area">
+									    	<input type="text" name="area_minima" class="form-control moeda" id="exampleInputName22" placeholder="Min Area">
 									    </div>
 									</li>
 									<li class="max_area list-inline-item">
@@ -468,7 +467,6 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/jquery.counterup.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/wow.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/slider.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/portal/js/pricing-slider.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/timepicker.js') }}"></script>
 <!-- Custom script for all pages -->
 <script src="https://kit.fontawesome.com/952ef81d56.js" crossorigin="anonymous"></script>
