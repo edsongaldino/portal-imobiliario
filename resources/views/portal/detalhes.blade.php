@@ -300,32 +300,9 @@
 						</div>
 					</div>
 
-					<div class="terms_condition_widget">
-					<h4 class="title">Imóveis destacados</h4>
-						<div class="sidebar_feature_property_slider">
-
-
-                            @foreach ($destaques as $destaque)
-                            <div class="item">
-                                <div class="feat_property home7">
-                                    <a href="/imoveis/{{ $destaque->id }}/{{ Helper::url_amigavel($destaque->tipo->nome .'-'. $destaque->transacao) }}/{{ Helper::url_amigavel($destaque->endereco->cidade->nome_cidade .'-'. $destaque->endereco->cidade->estado->uf_estado)}}">
-                                    <div class="thumb">
-                                        <img class="img-whp" src="{{ $destaque->fotos->first()->arquivo ?? '' }}" alt="fp1.jpg">
-                                        <div class="thmb_cntnt">
-                                            <ul class="tag mb0">
-                                                <li class="list-inline-item"><span>{{ $destaque->transacao }}</span></li>
-                                            </ul>
-                                            <span class="fp_price">R$ {{ Helper::converte_valor_real($destaque->valor_venda) }}</span>
-                                            <h4 class="posr color-white">{{ $destaque->tipo->nome }}</h4>
-                                        </div>
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            @endforeach
-
-						</div>
-					</div>
+					<div class="banner-lateral"><img src="{{ asset('assets/portal/images/publicidade/banner-lateral-500x600.jpg') }}" width="100%" alt=""></div>
+					<div class="banner-lateral"><img src="{{ asset('assets/portal/images/publicidade/banner-lateral-500x250.jpg') }}" width="100%" alt=""></div>
+					
 				</div>
 			</div>
 		</div>

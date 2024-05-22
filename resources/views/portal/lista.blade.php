@@ -66,7 +66,7 @@
 									    </div>
 									</li>
 
-									<li>
+									<li class="select-tipo">
 										<div class="search_option_two">
 											<div class="ui_kit_select_search">
 
@@ -339,6 +339,9 @@
 						</div>
 						-->
 
+						<div class="banner-lateral"><img src="{{ asset('assets/portal/images/publicidade/banner-lateral-500x600.jpg') }}" width="100%" alt=""></div>
+
+						<div class="banner-lateral"><img src="{{ asset('assets/portal/images/publicidade/banner-lateral-500x250.jpg') }}" width="100%" alt=""></div>
 
 					</div>
 				</div>
@@ -366,6 +369,9 @@
 					</div>
 
 					<div class="row">
+
+						<div class="banner-busca"><img src="{{ asset('assets/portal/images/publicidade/banner-960x140.jpg') }}" width="100%" alt=""></div>
+
                         @foreach ($anuncios as $anuncio)
                         <div class="col-lg-12">
 							<div class="feat_property list">

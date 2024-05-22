@@ -220,7 +220,7 @@ class AnuncioController extends Controller
         }
         $request = new Request();
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(20);
+        $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(50);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
@@ -236,7 +236,7 @@ class AnuncioController extends Controller
 
         $request = new Request();
         $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(20);
+        $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(50);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
