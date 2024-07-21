@@ -11,6 +11,24 @@ use App\Models\Anuncio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use OpenApi\Annotations as OA;
+
+/**
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="Company - Service",
+ *      description="Service documentation",
+ *
+ *      @OA\Contact(
+ *          email="admin@admin.com"
+ *      ),
+ *
+ *      @OA\License(
+ *          name="Apache 2.0",
+ *          url="https://www.apache.org/licenses/LICENSE-2.0.html"
+ *      )
+ * )
+ */
 
 class LeadsController extends Controller
 {
@@ -111,4 +129,49 @@ class LeadsController extends Controller
     {
         //
     }
+
+
+    /**
+    *  @OA\GET(
+    *      path="/api/leads",
+    *      summary="Get all leads",
+    *      description="Get all leads",
+    *      tags={"Leads"},
+    *      @OA\Parameter(
+    *         name="name",
+    *         in="query",
+    *         description="name",
+    *         required=false,
+    *      ),
+    *     @OA\Parameter(
+    *         name="email",
+    *         in="query",
+    *         description="email",
+    *         required=false,
+    *      ),
+    *     @OA\Parameter(
+    *         name="page",
+    *         in="query",
+    *         description="Page Number",
+    *         required=false,
+    *      ),
+    *      @OA\Response(
+    *          response=200,
+    *          description="OK",
+    *          @OA\MediaType(
+    *              mediaType="application/json",
+    *          )
+    *      ),
+    *
+    *  )
+    */
+    public static function Getleads()
+    {
+        $leads = Leads::all();
+        return response()->json([
+            'status' => true,
+            'leads' => $leads
+        ]);
+    }
+
 }

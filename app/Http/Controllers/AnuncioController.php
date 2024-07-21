@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Anuncio;
 use App\Http\Controllers\Controller;
+use App\Models\Anunciante;
 use App\Models\AnuncioFinalidade;
 use App\Models\AnuncioTipo;
 use App\Models\Caracteristica;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Agent\Agent;
+use OpenApi\Annotations as OA;
 
 class AnuncioController extends Controller
 {
@@ -260,4 +262,48 @@ class AnuncioController extends Controller
     }
 
     #ENDCONTROLLERSPORTAL
+
+    /**
+    *  @OA\GET(
+    *      path="/api/anuncios",
+    *      summary="Get all anúncios",
+    *      description="Get all anúncios",
+    *      tags={"Anúncios"},
+    *      @OA\Parameter(
+    *         name="name",
+    *         in="query",
+    *         description="name",
+    *         required=false,
+    *      ),
+    *     @OA\Parameter(
+    *         name="email",
+    *         in="query",
+    *         description="email",
+    *         required=false,
+    *      ),
+    *     @OA\Parameter(
+    *         name="page",
+    *         in="query",
+    *         description="Page Number",
+    *         required=false,
+    *      ),
+    *      @OA\Response(
+    *          response=200,
+    *          description="OK",
+    *          @OA\MediaType(
+    *              mediaType="application/json",
+    *          )
+    *      ),
+    *
+    *  )
+    */
+    public function GetAnuncios()
+    {
+        $anuncios = Anuncio::where('anunciante_id', 1)->get();
+        return response()->json([
+            'status' => true,
+            'anuncios' => $anuncios
+        ]);
+    }
+
 }

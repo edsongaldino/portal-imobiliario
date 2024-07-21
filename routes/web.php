@@ -64,6 +64,7 @@ Route::get('/painel/{id}/perfil', 'App\Http\Controllers\UserController@edit')->n
 Route::post('/painel/perfil-salvar', 'App\Http\Controllers\AnuncianteController@update')->name('painel.perfil.salvar')->middleware('auth');
 Route::post('/painel/dados-acesso-salvar', 'App\Http\Controllers\UserController@update')->name('dados-acesso.salvar')->middleware('auth');
 
+Route::get('/leads', 'App\Http\Controllers\LeadsController@GetLeads')->name('leads');
 Route::get('/painel/leads', 'App\Http\Controllers\LeadsController@index')->name('painel.leads')->middleware('auth');
 Route::get('/painel/integracoes/configuracao', 'App\Http\Controllers\IntegracaoController@Configuracao')->name('painel.integracoes.configuracao')->middleware('auth');
 Route::post('/painel/integracao-salvar', 'App\Http\Controllers\IntegracaoController@salvarDados')->name('integracao.salvar')->middleware('auth');
@@ -86,4 +87,3 @@ Route::get('/mapa-do-site', 'App\Http\Controllers\AppController@MapaDoSite')->na
 Route::get('/imoveis-favoritos', 'App\Http\Controllers\AppController@ImoveisFavoritos')->name('imoveis-favoritos');
 
 Route::match(['get', 'post'],'/lista-imoveis/{id}/{anunciante}', 'App\Http\Controllers\AnuncioController@ListaAnunciosByAnunciante')->name('lista-imoveis-anunciante');
-?>
