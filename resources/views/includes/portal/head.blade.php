@@ -11,7 +11,7 @@
 <!-- Responsive stylesheet -->
 <link rel="stylesheet" href="{{ asset('assets/portal/css/responsive.css') }}">
 <!-- Title -->
-<title>Rede Imóveis - Rede de Negócios Imobiliários</title>
+<title>Rede Imóveis MT - Rede de Negócios Imobiliários de Mato Grosso</title>
 
 <meta name="twitter:image" content="https://www.redeimoveismt.com.br/assets/portal/images/logo-portal.jpg">
 <meta property="og:url" content="https://www.redeimoveismt.com.br" />

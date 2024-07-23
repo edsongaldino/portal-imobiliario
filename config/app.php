@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
 
 
         /*
