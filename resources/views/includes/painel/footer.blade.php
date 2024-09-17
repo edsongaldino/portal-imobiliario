@@ -21,7 +21,7 @@
 <script type="text/javascript" src="{{ asset('assets/portal/js/wow.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/dashboard-script.js') }}"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAz77U5XQuEME6TpftaMdX0bBelQxXRlM&callback=initMap" type="text/javascript"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWIRR9TX-z91rVndOmY51aJbaiS1mRfd4&callback=initMap" type="text/javascript"></script>
 
 <!-- Custom script for all pages -->
 <script type="text/javascript" src="{{ asset('assets/portal/js/script.js') }}"></script>
