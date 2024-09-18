@@ -392,7 +392,7 @@ class Helper{
         $geo = json_decode($geo, true);
 
         // If everything is cool
-        if ($geo['status'] = 'OK') {
+        if ($geo['status'] == 'OK') {
         $latitude = $geo['results'][0]['geometry']['location']['lat'];
         $longitude = $geo['results'][0]['geometry']['location']['lng'];
         $array = array('lat'=> $latitude ,'lng'=>$longitude);
