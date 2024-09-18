@@ -393,11 +393,13 @@ class Helper{
 
         // If everything is cool
         if ($geo['status'] == 'OK') {
-        $latitude = $geo['results'][0]['geometry']['location']['lat'];
-        $longitude = $geo['results'][0]['geometry']['location']['lng'];
-        $array = array('lat'=> $latitude ,'lng'=>$longitude);
-        }
-
+        	$latitude = $geo['results'][0]['geometry']['location']['lat'];
+        	$longitude = $geo['results'][0]['geometry']['location']['lng'];
+        }else{
+			$latitude = '-15.6012468';
+        	$longitude = '-56.1018929';
+		}
+		$array = array('lat'=> $latitude ,'lng'=>$longitude);
         return $array;
     }
 
