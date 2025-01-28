@@ -410,8 +410,6 @@ class Helper{
                                 ->where('anuncios.tipo_id', $tipoAnuncio)
                                 ->where('enderecos.cidade_id', $CidadeID)->get();
         return $totalAnuncios->count();
-
-
     }
 
 	public static function GetTotalViewsByAnuncio($anuncio_id, $tipoView) {

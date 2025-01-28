@@ -96,13 +96,13 @@ class IntegracaoController extends Controller
         ini_set('max_execution_time', 360);
 
         $anunciante = Anunciante::find($request->id);
-        $xml = $anunciante->integracao->first()->url;
 
-        if($xml == null){
+        if($anunciante->integracao->first() == null){
             return false;
         }
+        
         //se o caminho esteja hospedado noutro servidor
-        $url = $xml;
+        $url = $anunciante->integracao->first()->url;
 
         //caso o caminho esteja hospedado no próprio servidor
         //coloque o ficheiro no caminho: 'public/assets/xml/file.xml'
