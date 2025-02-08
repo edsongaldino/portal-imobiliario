@@ -162,8 +162,9 @@ class AnuncioController extends Controller
     #CONTROLLERSPORTAL
     public function BuscaAnuncios(Request $request)
     {
-        $anuncios = Anuncio::select('anuncios.*')->where('anuncios.situacao', 'Liberado')
-                            ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id');
+        $anuncios = Anuncio::select('anuncios.*')->where('anuncios.situacao', 'Liberado')->where('anunciantes.situacao_cadastro', 'Ativo')
+                            ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
+                            ->join('anunciantes', 'anuncios.anunciante_id', '=', 'anunciantes.id');
 
         switch($request->transacao){
             case 'Lançamentos':
