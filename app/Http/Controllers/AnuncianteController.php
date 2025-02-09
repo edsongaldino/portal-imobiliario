@@ -7,7 +7,9 @@ use App\Models\Anunciante;
 use App\Http\Controllers\Controller;
 use App\Mail\SendMailUser;
 use App\Models\User;
+use App\Rules\ReCaptcha;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -43,11 +45,22 @@ class AnuncianteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function CadastrarAnunciante(Request $request)
+    public function CadastrarAnunciante(Request $request) : RedirectResponse
     {
         if((New Anunciante())->verificaDuplicidade('cnpj', $request->cnpj)){
             return redirect()->back()->with('warning', 'Este CNPJ já consta em nosso banco de dados! Verifique.');
         }
+
+        $request->validate([
+
+            'nome' => 'required',
+            'creci' => 'required',
+            'cnpj' => 'required',
+            'site' => 'required',
+            'telefone_comercial' => 'required',
+            'g-recaptcha-response' => ['required', new ReCaptcha]
+
+        ]);
 
         $endereco = (new EnderecoController())->salvarEndereco($request);
 

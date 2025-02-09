@@ -20,6 +20,7 @@
 		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('vendor/sweetalert/dist/sweetalert.css') }}" rel="stylesheet" type="text/css" />
+		<script src="https://www.google.com/recaptcha/api.js?render={{ env('GOOGLE_RECAPTCHA_KEY') }}"></script>
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->
@@ -607,6 +608,28 @@
 		</div>
 		<!--end::Main-->
 		<!--begin::Javascript-->
+
+		<script type="text/javascript">
+
+			$('#kt_create_account_form').submit(function(event) {
+		
+				event.preventDefault();
+		
+				grecaptcha.ready(function() {
+		
+					grecaptcha.execute("{{ env('GOOGLE_RECAPTCHA_KEY') }}", {action: 'finaliza_cadastro'}).then(function(token) {
+		
+						$('#kt_create_account_form').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+		
+						$('#kt_create_account_form').unbind('submit').submit();
+		
+					});;
+		
+				});
+		
+			});
+		
+		</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
