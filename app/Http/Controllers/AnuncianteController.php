@@ -47,6 +47,11 @@ class AnuncianteController extends Controller
      */
     public function CadastrarAnunciante(Request $request) : RedirectResponse
     {
+
+        
+        return redirect()->back()->with('warning', 'Este CNPJ já consta em nosso banco de dados! Verifique.');
+
+        
         if((New Anunciante())->verificaDuplicidade('cnpj', $request->cnpj)){
             return redirect()->back()->with('warning', 'Este CNPJ já consta em nosso banco de dados! Verifique.');
         }
