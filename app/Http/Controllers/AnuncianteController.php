@@ -51,7 +51,7 @@ class AnuncianteController extends Controller
         
         return redirect()->back()->with('warning', 'Este CNPJ já consta em nosso banco de dados! Verifique.');
 
-        
+        /*
         if((New Anunciante())->verificaDuplicidade('cnpj', $request->cnpj)){
             return redirect()->back()->with('warning', 'Este CNPJ já consta em nosso banco de dados! Verifique.');
         }
@@ -98,7 +98,7 @@ class AnuncianteController extends Controller
             $User->password = Hash::make($request->password);
 
             if($User->save()){
-                Mail::to($request->email)->send(new SendMailUser($anunciante))->cc('contato@redeimoveismt.com.br');
+                //Mail::to($request->email)->send(new SendMailUser($anunciante))->cc('contato@redeimoveismt.com.br');
                 return 'Sucesso';
             }else{
                 return 'Erro';
@@ -107,6 +107,7 @@ class AnuncianteController extends Controller
         }else{
             return 'Erro';
         }
+        */
 
     }
 
