@@ -59,7 +59,7 @@ class IntegracaoController extends Controller
 
     public function CronAtualizarAnuncios(){
 
-        $anunciante = Anunciante::whereNotNull('ultima_atualizacao')->orderBy('ultima_atualizacao', 'ASC')->limit(1)->first();
+        $anunciante = Anunciante::whereNotNull('ultima_atualizacao')->inRandomOrder()->limit(1)->first();
 
         $request = new Request();
         $request->merge(['id' => $anunciante->id]);
