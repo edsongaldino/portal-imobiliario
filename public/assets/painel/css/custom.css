@@ -80,3 +80,11 @@
 .leads td{
     line-height: 1.5 !important;
 }
+
+.pesquisa{
+    background-color: #006d3c !important;
+}
+
+.sidebar-menu.painel li a {
+    color: rgb(239 239 239) !important;
+}

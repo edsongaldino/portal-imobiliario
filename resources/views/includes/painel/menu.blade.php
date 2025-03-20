@@ -45,12 +45,13 @@
             <li><a href="/painel/{{ Auth::user()->id }}/perfil"><i class="flaticon-user"></i> <span>Meu Perfil</span></a></li>
             <li><a href="{{ url("/logout-painel") }}"><i class="flaticon-logout"></i> <span>Sair</span></a></li>
             <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="{{ url("/painel/anuncios/incluir") }}"><span class="flaticon-plus"></span> Incluir Anúncio</a></li>
+            <li class="treeview pesquisa"><a href="https://www.redesecovimt.com.br/Usuario/LoginAssociado?hash={{ Auth::user()->anunciante_id }}" target="_blank"><i class="flaticon-view"></i><span> Painel Pesquisa</span></a></li>
         </ul>
     </nav>
 </div>
 
 <div class="dashboard_sidebar_menu dn-992">
-    <ul class="sidebar-menu">
+    <ul class="sidebar-menu painel">
         <li class="header"><img src="{{ asset('assets/painel/images/header-logo.png') }}" alt="header-logo2.png"></li>
         <li class="title"><span>Painel Administrativo</span></li>
         <li class="treeview active"><a href="{{ url("/dashboard") }}"><i class="flaticon-layers"></i><span> Dashboard</span></a></li>
@@ -71,6 +72,10 @@
                 <li><a href="{{ url("/painel/integracoes/relatorio-geral") }}"><i class="fa fa-circle"></i> Relatório Geral</a></li>
             </ul>
         </li>
+
+        <li class="title"><span>Pesquisa de Mercado</span></li>
+        <li class="treeview pesquisa"><a href="https://www.redesecovimt.com.br/Usuario/LoginAssociado?hash={{ Auth::user()->anunciante_id }}" target="_blank"><i class="flaticon-view"></i><span> Acessar Painel</span></a></li>
+
         <li class="title"><span>Gerenciar Conta</span></li>
         <li><a href="/painel/{{ Auth::user()->id }}/perfil"><i class="flaticon-user"></i> <span>Meu Perfil</span></a></li>
         <li><a href="{{ url("/logout-painel") }}"><i class="flaticon-logout"></i> <span>Sair</span></a></li>
