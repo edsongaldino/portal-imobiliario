@@ -162,7 +162,10 @@ class AnuncioController extends Controller
     #CONTROLLERSPORTAL
     public function BuscaAnuncios(Request $request)
     {
-        $anuncios = Anuncio::select('anuncios.*')->where('anuncios.situacao', 'Liberado')->where('anunciantes.situacao_cadastro', 'Ativo')
+        $anuncios = Anuncio::select('anuncios.*')
+                            ->where('anuncios.situacao', 'Liberado')
+                            ->where('anunciantes.situacao_cadastro', 'Ativo')
+                            ->where(function ($query) {$query->where('anuncios.valor_venda', '<>', 0)->orWhere('anuncios.valor_locacao', '<>', 0); })
                             ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
                             ->join('anunciantes', 'anuncios.anunciante_id', '=', 'anunciantes.id');
 
@@ -208,7 +211,7 @@ class AnuncioController extends Controller
 
     public function ListaAnuncios($transacao)
     {
-        $anuncios = Anuncio::where('situacao', 'Liberado');
+        $anuncios = Anuncio::where('situacao', 'Liberado')->where(function ($query) {$query->where('anuncios.valor_venda', '<>', 0)->orWhere('anuncios.valor_locacao', '<>', 0); });
 
         switch($transacao){
             case 'novos':
@@ -221,6 +224,7 @@ class AnuncioController extends Controller
                 $anuncios = $anuncios->where('transacao','Venda');
                 break;
         }
+        
         $request = new Request();
         $total =  $anuncios->count();
         $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(50);
