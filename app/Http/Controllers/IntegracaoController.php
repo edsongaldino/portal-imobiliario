@@ -59,20 +59,28 @@ class IntegracaoController extends Controller
 
     public function CronAtualizarAnuncios(){
 
-        $anunciante = Anunciante::whereNotNull('ultima_atualizacao')->inRandomOrder()->limit(1)->first();
+        $tz    = 'America/Cuiaba';
+        $now   = Carbon::now($tz);
+        $start = (clone $now)->startOfDay();
 
-        $request = new Request();
-        $request->merge(['id' => $anunciante->id]);
-        $Processaintegracao = $this->ProcessarXML($request);
+        $anunciante = Anunciante::whereNotNull('ultima_atualizacao')->Where('ultima_atualizacao', '<', $start)->inRandomOrder()->limit(1)->first();
 
-        if($Processaintegracao){
-            $destinatario = 'edsongaldino@outlook.com';
-            Mail::to($destinatario)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
-            echo "Integração Realizada!";
-        }else{
-            $destinatario = 'edsongaldino@outlook.com';
-            Mail::to($destinatario)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
-            echo "Integração Não Realizada!";
+        if(isset($anunciante->id)){
+
+            $request = new Request();
+            $request->merge(['id' => $anunciante->id]);
+            $Processaintegracao = $this->ProcessarXML($request);
+
+            if($Processaintegracao){
+                $destinatario = 'edsongaldino@outlook.com';
+                Mail::to($destinatario)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
+                echo "Integração Realizada!";
+            }else{
+                $destinatario = 'edsongaldino@outlook.com';
+                Mail::to($destinatario)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
+                echo "Integração Não Realizada!";
+            }
+            
         }
 
     }
