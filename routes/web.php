@@ -85,5 +85,6 @@ Route::get('/rede-imoveis-mt/como-anunciar', 'App\Http\Controllers\AppController
 Route::get('/rede-imoveis-mt/termos-de-uso', 'App\Http\Controllers\AppController@TermosDeUso')->name('rede-imoveis-mt/termos-de-uso');
 Route::get('/mapa-do-site', 'App\Http\Controllers\AppController@MapaDoSite')->name('mapa-do-site');
 Route::get('/imoveis-favoritos', 'App\Http\Controllers\AppController@ImoveisFavoritos')->name('imoveis-favoritos');
+Route::get('/indicativos-imobiliarios', 'App\Http\Controllers\AppController@IndicativosImobiliarios')->name('indicativos-imobiliarios');
 
 Route::match(['get', 'post'],'/lista-imoveis/{id}/{anunciante}', 'App\Http\Controllers\AnuncioController@ListaAnunciosByAnunciante')->name('lista-imoveis-anunciante');

@@ -76,6 +76,9 @@
         <li class="title"><span>Pesquisa de Mercado</span></li>
         <li class="treeview pesquisa"><a href="https://www.redesecovimt.com.br/Usuario/LoginAssociado?hash={{ Auth::user()->anunciante_id }}" target="_blank"><i class="flaticon-view"></i><span> Acessar Painel</span></a></li>
 
+        <li class="title"><span>Indicativos Imobiliários</span></li>
+        <li class="treeview indicativos"><a href="{{ url("/painel/integracoes/configuracao") }}"><i class="fa fa-cog"></i> Indicativos</a></li>
+
         <li class="title"><span>Gerenciar Conta</span></li>
         <li><a href="/painel/{{ Auth::user()->id }}/perfil"><i class="flaticon-user"></i> <span>Meu Perfil</span></a></li>
         <li><a href="{{ url("/logout-painel") }}"><i class="flaticon-logout"></i> <span>Sair</span></a></li>

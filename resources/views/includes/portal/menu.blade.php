@@ -29,6 +29,10 @@
                     <a href="{{url("/lista-imoveis/novos")}}"><span class="title">Lançamentos</span></a>
                 </li>
 
+                <li>
+                    <a href="{{ url('/indicativos-imobiliarios') }}"><span class="title">Indicativos Imobiliários</span></a>
+                </li>
+
                 <li class="last">
                     <a href="{{ url('/simular-financiamento-de-imoveis') }}"><span class="title">Financiamento</span></a>
                 </li>

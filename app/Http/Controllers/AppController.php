@@ -45,6 +45,10 @@ class AppController extends Controller
         return view('portal.financiamento');
     }
 
+    public function IndicativosImobiliarios(){
+        return view('portal.indicativos');
+    }
+
     public function RedeImoveis(){
         $anunciantes = Anunciante::whereNull('deleted_at')->where('situacao_cadastro', 'Ativo')->orderByRaw('RAND()')->get();
         return view('portal.arede', compact('anunciantes'));
