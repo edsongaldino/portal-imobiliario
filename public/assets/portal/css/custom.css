@@ -217,3 +217,13 @@ section.detalhes-mobile .listing_single_description .single_property_title{
 .banner-busca img{
     border-radius: 10px;
 }
+
+.titulo-lista{
+    background-color: #006d3c;
+    color: #FFF !important;
+}
+
+.lista{
+    background-color: #f8f8f8;
+    margin-bottom: 15px;
+}

@@ -31,7 +31,36 @@
 		<div class="container">
 			<div class="row">
 
+			<div class="row">
+				<div class="col-3">
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<button class="nav-link" id="v-pills-home-tab" data-toggle="pill" data-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">2026</button>
+					<button class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" data-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">2025</button>
+					</div>
+				</div>
+				<div class="col-9">
+					<div class="tab-content" id="v-pills-tabContent">
+						<div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"></div>
+							<div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+								<div class="row titulo-lista">
+									<div class="col-3">Data de Publicação</div>
+									<div class="col-2">Ano</div>
+									<div class="col-2">Mês</div>
+									<div class="col-3">Tipo</div>
+									<div class="col-2">Ações</div>
+								</div>
 
+								<div class="row lista">
+									<div class="col-3">21/10/2025</div>
+									<div class="col-2">2025</div>
+									<div class="col-2">Novembro</div>
+									<div class="col-3">Residencial</div>
+									<div class="col-2"><div class="btn-download"><i class="bi bi-box-arrow-down"></i> Download</div></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
