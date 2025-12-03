@@ -226,4 +226,5 @@ section.detalhes-mobile .listing_single_description .single_property_title{
 .lista{
     background-color: #f8f8f8;
     margin-bottom: 15px;
+    border-bottom: 1px solid #f9f9f9;
 }
