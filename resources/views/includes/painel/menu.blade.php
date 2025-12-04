@@ -45,6 +45,7 @@
             <li><a href="/painel/{{ Auth::user()->id }}/perfil"><i class="flaticon-user"></i> <span>Meu Perfil</span></a></li>
             <li><a href="{{ url("/logout-painel") }}"><i class="flaticon-logout"></i> <span>Sair</span></a></li>
             <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="{{ url("/painel/anuncios/incluir") }}"><span class="flaticon-plus"></span> Incluir Anúncio</a></li>
+            <li class="treeview indicativos"><a href="{{ url('/indicativos-imobiliarios') }}" target="_blank"><i class="fa fa-cog"></i> Indicativos</a></li>
             <li class="treeview pesquisa"><a href="https://www.redesecovimt.com.br/Usuario/LoginAssociado?hash={{ Auth::user()->anunciante_id }}" target="_blank"><i class="flaticon-view"></i><span> Painel Pesquisa</span></a></li>
         </ul>
     </nav>
