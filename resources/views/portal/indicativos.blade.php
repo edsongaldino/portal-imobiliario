@@ -118,8 +118,8 @@
 														</tr>
 
 														<tr>
-															<td>25/11/2025</td>
-															<td>Novembro</td>
+															<td>30/08/2025</td>
+															<td>Agosto</td>
 															<td>2025</td>
 															<td><div class="comercial"><i class="bi bi-bag"></i> Comercial</div></td>
 															<td><a href="uploads/indicativos/08 2025 Secovi-MT_-_IND_MOB_COMERCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
