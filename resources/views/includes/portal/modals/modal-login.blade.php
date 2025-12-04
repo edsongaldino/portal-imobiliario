@@ -33,21 +33,18 @@
                                     </div>
                                     <div class="row mt25">
                                         <div class="col-lg-12">
-                                            <button type="button" class="btn btn-fb btn-block"><i class="fa fa-facebook float-left mt5"></i> Login com Facebook</button>
-                                        </div>
-                                        <div class="col-lg-12">
                                             <button type="button" class="btn btn-googl btn-block"><i class="fa fa-google float-left mt5"></i> Login com Google</button>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="input-group mb-2 mr-sm-2">
-                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="E-mail">
+                                        <input type="text" class="form-control" id="emailLogin" placeholder="E-mail">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-user"></i></div>
                                         </div>
                                     </div>
                                     <div class="input-group form-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+                                        <input type="password" class="form-control" id="senhaLogin" placeholder="Senha">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-password"></i></div>
                                         </div>
@@ -77,33 +74,30 @@
                                 <form action="#">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <button type="button" class="btn btn-block btn-fb"><i class="fa fa-facebook float-left mt5"></i> Registrar com Facebook</button>
-                                        </div>
-                                        <div class="col-lg-12">
                                             <button type="button" class="btn btn-block btn-googl"><i class="fa fa-google float-left mt5"></i> Registrar com Google</button>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="form-group input-group">
-                                        <input type="text" class="form-control" id="exampleInputName" placeholder="Nome completo">
+                                        <input type="text" class="form-control" id="nome" placeholder="Nome completo">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-user"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group input-group">
-                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email">
+                                        <input type="email" class="form-control" id="email" placeholder="Email">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group input-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Senha">
+                                        <input type="password" class="form-control" id="senha" placeholder="Senha">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-password"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group input-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Repita a senha">
+                                        <input type="password" class="form-control" id="senha2" placeholder="Repita a senha">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="flaticon-password"></i></div>
                                         </div>

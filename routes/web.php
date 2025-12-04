@@ -47,6 +47,7 @@ Route::get('detalhes-imovel', function () {
 
 //Rotas Admin / Painel
 Route::get('/login', 'App\Http\Controllers\AppController@login')->name('login');
+Route::get('/login-portal', 'App\Http\Controllers\AppController@loginPortal')->name('login.portal');
 Route::get('/dashboard', 'App\Http\Controllers\AppController@index')->name('dashboard')->middleware('auth');
 Route::post('/finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@CadastrarAnunciante')->name('finalizar-cadastro');
 Route::post('/login-painel', 'App\Http\Controllers\AuthController@Login')->name('login-painel');
@@ -59,6 +60,9 @@ Route::get('/painel/anuncios/incluir', 'App\Http\Controllers\AnuncioController@c
 Route::get('/painel/anuncios/{id}/editar', 'App\Http\Controllers\AnuncioController@edit')->name('painel.anuncios.editar')->middleware('auth');
 Route::get('/anunciante/{id}/logo', 'App\Http\Controllers\AnuncianteController@getLogo');
 Route::get('/anunciante/{id}/confirmar-cadastro/{email}', 'App\Http\Controllers\AnuncianteController@ValidarCadastro');
+
+Route::get('/cadastro-portal', 'App\Http\Controllers\AppController@loginPortal')->name('cadastro.portal');
+Route::get('/resetar-senha-portal', 'App\Http\Controllers\AppController@loginPortal')->name('resetar.senha.portal');
 
 Route::get('/painel/{id}/perfil', 'App\Http\Controllers\UserController@edit')->name('painel.perfil')->middleware('auth');
 Route::post('/painel/perfil-salvar', 'App\Http\Controllers\AnuncianteController@update')->name('painel.perfil.salvar')->middleware('auth');

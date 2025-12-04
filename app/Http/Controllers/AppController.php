@@ -18,6 +18,10 @@ class AppController extends Controller
         return view('painel.login');
     }
 
+    public function loginPortal(){
+        return view('portal.login');
+    }
+
     public function index(){
         $usuario = Auth::user();
         $logintegracao = LogIntegracao::where('anunciante_id', $usuario->anunciante_id)->first();

@@ -285,8 +285,6 @@
 
 	@include('includes.portal.footer')
 
-    @include('includes.portal.modals.modal-login')
-
 </div>
 
 <link rel="stylesheet" href="{{ asset('assets/portal/css/responsive.css') }}">

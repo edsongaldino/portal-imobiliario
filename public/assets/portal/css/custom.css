@@ -228,3 +228,31 @@ section.detalhes-mobile .listing_single_description .single_property_title{
     margin-bottom: 15px;
     border-bottom: 1px solid #f9f9f9;
 }
+
+.btn-download{
+    height: 30px !important;
+    line-height: 30px !important;
+    font-size: 14px;
+    padding: 0px 15px;
+}
+
+.residencial{
+    background-color: #fdb10f;
+    border-radius: 15px;
+    line-height: 30px;
+    line-height: 30px;
+    text-align:center;
+    padding: 0px 15px;
+    font-weight: bold;
+    color: #6d4700;
+}
+
+.comercial{
+    background-color: #bce5e0c7;
+    border-radius: 15px;
+    line-height: 30px;
+    text-align:center;
+    padding: 0px 15px;
+    font-weight: bold;
+    color: #006d3c;
+}

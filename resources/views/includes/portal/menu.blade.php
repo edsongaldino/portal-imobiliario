@@ -36,7 +36,7 @@
                 <li class="last">
                     <a href="{{ url('/simular-financiamento-de-imoveis') }}"><span class="title">Financiamento</span></a>
                 </li>
-                <li class="list-inline-item list_s"><a href="#" class="btn flaticon-user" data-toggle="modal" data-target=".bd-example-modal-lg"> <span class="dn-lg">Entrar</span></a></li>
+                <li class="list-inline-item list_s"><a href="{{ url('/login-portal') }}" class="btn flaticon-user"> <span class="dn-lg">Entrar</span></a></li>
                 <li class="list-inline-item add_listing"><a href="{{url("/login")}}"><span class="flaticon-plus"></span><span class="dn-lg"> Anunciar</span></a></li>
             </ul>
         </nav>

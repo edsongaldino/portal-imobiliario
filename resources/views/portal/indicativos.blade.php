@@ -26,37 +26,113 @@
 		</div>
 	</section>
 
-    <!-- Our Terms & Conditions -->
-	<section class="our-terms bgc-f7">
+    <section class="our-faq bgc-f7">
 		<div class="container">
 			<div class="row">
-
-			<div class="row">
-				<div class="col-3">
-					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-					<button class="nav-link" id="v-pills-home-tab" data-toggle="pill" data-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">2026</button>
-					<button class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" data-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">2025</button>
+				<div class="col-lg-6 offset-lg-3">
+					<div class="main-title text-center">
+						<h2 class="mt0">Indicativos Imobiliários</h2>
 					</div>
 				</div>
-				<div class="col-9">
-					<div class="tab-content" id="v-pills-tabContent">
-						<div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"></div>
-							<div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-								<div class="row titulo-lista">
-									<div class="col-3">Data de Publicação</div>
-									<div class="col-2">Ano</div>
-									<div class="col-2">Mês</div>
-									<div class="col-3">Tipo</div>
-									<div class="col-2">Ações</div>
-								</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1">
+					<div class="faq_content">
+						<div class="faq_according">
+							<div class="accordion" id="accordionExample">
+							  	<div class="card">
+								    <div class="card-header" id="headingOne">
+								    	<h2 class="mb-0">
+								        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">2026</button>
+								   		</h2>
+								    </div>
+								    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
+									    <div class="card-body">
+							        		
+											<div class="ui_kit_table">
+												<table class="table">
+													<thead class="thead-light">
+														<tr>
+															<th scope="col">Data de Publicação</th>
+															<th scope="col">Mês</th>
+															<th scope="col">Ano</th>
+															<th scope="col">Tipo</th>
+															<th scope="col">Arquivo</th>
+														</tr>
+													</thead>
+													<tbody>
+														
 
-								<div class="row lista">
-									<div class="col-3">21/10/2025</div>
-									<div class="col-2">2025</div>
-									<div class="col-2">Novembro</div>
-									<div class="col-3">Residencial</div>
-									<div class="col-2"><div class="btn-download"><i class="bi bi-box-arrow-down"></i> Download</div></div>
-								</div>
+													</tbody>
+												</table>
+											</div>
+
+
+									    </div>
+								    </div>
+							    </div>
+
+								<div class="card">
+								    <div class="card-header active" id="headingOne">
+								    	<h2 class="mb-0">
+								        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">2025</button>
+								   		</h2>
+								    </div>
+								    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
+									    <div class="card-body">
+							        		
+											<div class="ui_kit_table">
+												<table class="table">
+													<thead class="thead-light">
+														<tr>
+															<th scope="col">Data de Publicação</th>
+															<th scope="col">Mês</th>
+															<th scope="col">Ano</th>
+															<th scope="col">Tipo</th>
+															<th scope="col">Arquivo</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>30/10/2025</td>
+															<td>Outubro</td>
+															<td>2025</td>
+															<td><div class="residencial"><i class="bi bi-house-door"></i> Residencial</div></td>
+															<td><a href="uploads/indicativos/Secovi-MT_-_IND_MOB_RESIDENCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
+														</tr>
+
+														<tr>
+															<td>30/10/2025</td>
+															<td>Outubro</td>
+															<td>2025</td>
+															<td><div class="comercial"><i class="bi bi-bag"></i> Comercial</div></td>
+															<td><a href="uploads/indicativos/Secovi-MT_-_IND_MOB_COMERCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
+														</tr>
+
+														<tr>
+															<td>30/08/2025</td>
+															<td>Agosto</td>
+															<td>2025</td>
+															<td><div class="residencial"><i class="bi bi-house-door"></i> Residencial</div></td>
+															<td><a href="uploads/indicativos/08 2025 Secovi-MT_-_IND_MOB_RESIDENCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
+														</tr>
+
+														<tr>
+															<td>25/11/2025</td>
+															<td>Novembro</td>
+															<td>2025</td>
+															<td><div class="comercial"><i class="bi bi-bag"></i> Comercial</div></td>
+															<td><a href="uploads/indicativos/08 2025 Secovi-MT_-_IND_MOB_COMERCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+
+
+									    </div>
+								    </div>
+							    </div>
 							</div>
 						</div>
 					</div>
