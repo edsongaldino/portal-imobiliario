@@ -6,6 +6,10 @@
     font-size: 20px !important;
 }
 
+.creci{
+    font-weight: lighter !important;
+}
+
 .g-recaptcha div:first-child{
     width: 100% !important;
 }

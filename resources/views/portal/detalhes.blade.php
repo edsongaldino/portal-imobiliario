@@ -248,7 +248,7 @@
 								<div class="media">
 									<img class="mr-3" src="{{ url('anunciante/'.$anuncio->anunciante->id.'/logo') }}" alt="lc1.png" width="100">
 									<div class="media-body">
-								    	<h5 class="mt-0 mb0">{{ $anuncio->anunciante->nome }}</h5>
+								    	<h5 class="mt-0 mb0">{{ $anuncio->anunciante->nome }}<br/> <span class="creci">CRECI: {{ $anuncio->anunciante->creci }}</span> </h5>
 								    	<a class="text-thm fone-anunciante" href="#">{{ Helper::Phone($anuncio->anunciante->telefone_comercial) }}</a>
 								  	</div>
 								</div>
