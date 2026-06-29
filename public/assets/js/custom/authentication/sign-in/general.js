@@ -28,6 +28,14 @@ var KTSigninGeneral = (function () {
                                                 success: function(result) {
                                                     if(result == 'Sucesso'){
                                                         window.location='/dashboard'
+                                                    }else if(result == 'NaoPermitido'){
+                                                        Swal.fire({
+                                                            text: "Acesso restrito ao Painel Administrativo. Apenas anunciantes têm permissão.",
+                                                            icon: "warning",
+                                                            buttonsStyling: !1,
+                                                            confirmButtonText: "OK, entendi!",
+                                                            customClass: { confirmButton: "btn btn-primary" },
+                                                        });
                                                     }else{
                                                         Swal.fire({
                                                             text: "Ops, não foi possível logar com essas informações!",

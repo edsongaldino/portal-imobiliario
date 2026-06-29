@@ -4,6 +4,20 @@
     @include('includes.portal.head')
 	<link rel="stylesheet" href="{{ asset('assets/portal/css/detalhes/detalhes.css') }}">
 	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<style>
+		.spss {
+			position: relative !important;
+			z-index: 10 !important;
+		}
+		.spss ul li a {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+		.spss ul li a span.text-danger {
+			color: #ff385c !important;
+		}
+	</style>
 </head>
 <body>
 <div class="wrapper">
@@ -44,17 +58,17 @@
 
 								<div class="spss float-right fn-400">
 									<ul class="mb0">
-										<li class="list-inline-item"><a href="#"><span class="flaticon-heart"></span></a></li>
-										<li class="list-inline-item"><a href="#"><span class="flaticon-share"></span></a></li>
+										<li class="list-inline-item"><a href="#" id="btn-favorito" class="btn-favorito" data-id="{{ $anuncio->id }}"><span class="flaticon-heart {{ Auth::check() && \App\Models\Favorito::where('user_id', Auth::id())->where('anuncio_id', $anuncio->id)->exists() ? 'text-danger' : '' }}"></span></a></li>
+										<li class="list-inline-item"><a href="#" class="btn-compartilhar"><span class="flaticon-share"></span></a></li>
 									</ul>
 								</div>
 
 								<div class="lsd_list">
 									<ul class="mb0">
 										<li class="list-inline-item"><span><i class="fa-solid fa-building"></i> {{ $anuncio->tipo->nome }}</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Quartos') }}</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Banheiros') }}</span></li>
-										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Área Útil') }}m²</span></li>
+										<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> {{ Helper::GetInformacaoByChave($anuncio,'Quartos') }}</span></li>
+										<li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> {{ Helper::GetInformacaoByChave($anuncio,'Banheiros') }}</span></li>
+										<li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> {{ Helper::GetInformacaoByChave($anuncio,'Área Útil') }}m²</span></li>
 									</ul>
 								</div>
 								<h4 class="mb30">Descrição</h4>
@@ -88,7 +102,7 @@
 											<li><p><span>{{ $anuncio->id_externo }}</span></p></li>
 											<li><p><span>R$ {{ Helper::converte_valor_real($anuncio->valor_venda) }}</span></p></li>
 											<li><p><span>R$ {{ Helper::converte_valor_real($anuncio->valor_condominio) }}</span></p></li>
-											<li><p><span>R$ {{ Helper::converte_valor_real(Helper::GetInformacaoByChave($anuncio->id,'IPTU')) }}</span></p></li>
+											<li><p><span>R$ {{ Helper::converte_valor_real(Helper::GetInformacaoByChave($anuncio,'IPTU')) }}</span></p></li>
 										</ul>
 									</div>
 									<div class="col-md-6 col-lg-6 col-xl-4">
@@ -99,10 +113,10 @@
 											<li><p>Vagas de Garagem :</p></li>
 										</ul>
 										<ul class="list-inline-item">
-											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio->id,'Quartos') }}</span></p></li>
-											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio->id,'Banheiros') }}</span></p></li>
-											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio->id,'Suites') }}</span></p></li>
-											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio->id,'Vagas') }}</span></p></li>
+											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio,'Quartos') }}</span></p></li>
+											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio,'Banheiros') }}</span></p></li>
+											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio,'Suites') }}</span></p></li>
+											<li><p><span>{{ Helper::GetInformacaoByChave($anuncio,'Vagas') }}</span></p></li>
 										</ul>
 									</div>
 									<div class="col-md-6 col-lg-6 col-xl-4">
@@ -166,7 +180,7 @@
 							</div>
 						</div>
 
-                        @if (Helper::GetInformacaoByChave($anuncio->id, 'Vídeo'))
+                        @if (Helper::GetInformacaoByChave($anuncio, 'Vídeo'))
                             <div class="col-lg-12">
                                 <div class="shop_single_tab_content style2 bdr1 mt30">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -179,7 +193,7 @@
                                             <div class="property_video">
                                                 <div class="thumb">
                                                     <div class="embed-responsive embed-responsive-16by9">
-                                                        <iframe class="embed-responsive-item" src="{{ Helper::GetInformacaoByChave($anuncio->id,'Vídeo') }}" allowfullscreen></iframe>
+                                                        <iframe class="embed-responsive-item" src="{{ Helper::GetInformacaoByChave($anuncio,'Vídeo') }}" allowfullscreen></iframe>
                                                     </div>
                                                 </div>
                                             </div>
@@ -501,6 +515,71 @@ $(function() {
   // Initialize scaling
   scaleCaptcha();
   
+  // Toggling Favorites via AJAX
+  $('.btn-favorito, #btn-favorito').on('click', function(e) {
+      e.preventDefault();
+      var anuncioId = $(this).data('id');
+      var $span = $(this).find('span');
+
+      $.ajax({
+          url: '{{ route("favoritos.toggle") }}',
+          type: 'POST',
+          data: {
+              _token: '{{ csrf_token() }}',
+              anuncio_id: anuncioId
+          },
+          success: function(response) {
+              if (response.status === 'success') {
+                  if (response.action === 'added') {
+                      $span.addClass('text-danger');
+                      swal("Sucesso!", response.message, "success");
+                  } else {
+                      $span.removeClass('text-danger');
+                      swal("Removido!", response.message, "info");
+                  }
+              }
+          },
+          error: function(xhr) {
+              if (xhr.status === 401) {
+                  swal({
+                      title: "Atenção!",
+                      text: "Você precisa fazer login para favoritar imóveis.",
+                      icon: "warning",
+                      buttons: ["Cancelar", "Fazer Login"],
+                  }).then((willLogin) => {
+                      if (willLogin) {
+                          window.location.href = "{{ route('login.portal') }}";
+                      }
+                  });
+              } else {
+                  swal("Ops!", "Ocorreu um erro ao processar sua solicitação.", "error");
+              }
+          }
+      });
+  });
+
+  // Sharing functionality via Web Share API or Clipboard Copy
+  $('.btn-compartilhar').on('click', function(e) {
+      e.preventDefault();
+      if (navigator.share) {
+          navigator.share({
+              title: document.title,
+              url: window.location.href
+          }).then(() => {
+              console.log('Compartilhado com sucesso!');
+          }).catch(console.error);
+      } else {
+          var dummy = document.createElement('input'),
+              text = window.location.href;
+          document.body.appendChild(dummy);
+          dummy.value = text;
+          dummy.select();
+          document.execCommand('copy');
+          document.body.removeChild(dummy);
+          swal("Sucesso!", "Link do imóvel copiado para a área de transferência!", "success");
+      }
+  });
+
   // Update scaling on window resize
   // Uses jQuery throttle plugin to limit strain on the browser
   $(window).resize( $.throttle( 100, scaleCaptcha ) );

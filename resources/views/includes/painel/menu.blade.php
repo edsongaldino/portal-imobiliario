@@ -1,5 +1,5 @@
 <!-- Main Header Nav -->
-<header class="header-nav menu_style_home_one style2 menu-fixed main-menu">
+<header class="header-nav menu_style_home_one style2 menu-fixed main-menu d-lg-none">
     <div class="container-fluid p0">
         <!-- Ace Responsive Menu -->
         <nav>
@@ -19,14 +19,13 @@
             <!-- Responsive Menu Structure-->
             <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
             <ul id="respMenu" class="ace-responsive-menu text-right" data-menu-style="horizontal">
-                <li class="list-inline-item add_listing painel"><a href="{{ url("/painel/anuncios/incluir") }}"><span class="flaticon-plus"></span><span class="dn-lg"> Incluir Anúncio</span></a></li>
             </ul>
         </nav>
     </div>
 </header>
 
 <!-- Main Header Nav For Mobile -->
-<div id="page" class="stylehome1 h0">
+<div id="page" class="stylehome1 h0 d-lg-none">
     <div class="mobile-menu">
         <div class="header stylehome1">
             <div class="d-flex justify-content-between">
@@ -39,14 +38,23 @@
     <nav id="menu" class="stylehome1">
         <ul>
             <li class="treeview active"><a href="{{ url("/dashboard") }}"><i class="flaticon-layers"></i><span> Dashboard</span></a></li>
+            @if(Auth::user()->perfil_id == 1)
+            <li class="treeview"><a href="{{ url("/painel/parceiros") }}"><i class="fa fa-users"></i><span> Gestão de Parceiros</span></a></li>
+            <li class="treeview"><a href="{{ url("/painel/usuarios") }}"><i class="fa fa-user-circle-o"></i><span> Gestão de Usuários</span></a></li>
+            @endif
             <li class="treeview"><a href="{{ url("/painel/leads") }}"><i class="flaticon-envelope"></i><span> Contatos (Leads)</span></a></li>
+            @if(Auth::user()->perfil_id != 1)
             <li class="treeview"><a href="{{ url("/painel/anuncios") }}"><i class="flaticon-home"></i> <span>Gerenciar Anúncios</span></a></li>
             <li class="treeview"><a href="{{ url("/painel/integracoes/relatorio-geral") }}"><i class="flaticon-share"></i><span> Integrações</span></a></li>
+            @endif
+            @if(Auth::user()->perfil_id != 1)
             <li><a href="/painel/{{ Auth::user()->id }}/perfil"><i class="flaticon-user"></i> <span>Meu Perfil</span></a></li>
+            @endif
             <li><a href="{{ url("/logout-painel") }}"><i class="flaticon-logout"></i> <span>Sair</span></a></li>
-            <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="{{ url("/painel/anuncios/incluir") }}"><span class="flaticon-plus"></span> Incluir Anúncio</a></li>
             <li class="treeview indicativos"><a href="{{ url('/indicativos-imobiliarios') }}" target="_blank"><i class="fa fa-cog"></i> Indicativos</a></li>
+            @if(Auth::user()->perfil_id != 1)
             <li class="treeview pesquisa"><a href="https://www.redesecovimt.com.br/Usuario/LoginAssociado?hash={{ Auth::user()->anunciante_id }}" target="_blank"><i class="flaticon-view"></i><span> Painel Pesquisa</span></a></li>
+            @endif
         </ul>
     </nav>
 </div>
@@ -55,33 +63,28 @@
     <ul class="sidebar-menu painel">
         <li class="header"><img src="{{ asset('assets/painel/images/header-logo.png') }}" alt="header-logo2.png"></li>
         <li class="title"><span>Painel Administrativo</span></li>
-        <li class="treeview active"><a href="{{ url("/dashboard") }}"><i class="flaticon-layers"></i><span> Dashboard</span></a></li>
-        <li class="treeview"><a href="{{ url("/painel/leads") }}"><i class="flaticon-envelope"></i><span> Contatos (Leads)</span></a></li>
+        <li class="treeview {{ request()->is('dashboard*') ? 'active' : '' }}"><a href="{{ url("/dashboard") }}"><i class="flaticon-layers"></i><span> Dashboard</span></a></li>
+        @if(Auth::user()->perfil_id == 1)
+        <li class="treeview {{ request()->is('painel/parceiros*') ? 'active' : '' }}"><a href="{{ url("/painel/parceiros") }}"><i class="fa fa-users"></i><span> Gestão de Parceiros</span></a></li>
+        <li class="treeview {{ request()->is('painel/usuarios*') ? 'active' : '' }}"><a href="{{ url("/painel/usuarios") }}"><i class="fa fa-user-circle-o"></i><span> Gestão de Usuários</span></a></li>
+        @endif
+        <li class="treeview {{ request()->is('painel/leads*') ? 'active' : '' }}"><a href="{{ url("/painel/leads") }}"><i class="flaticon-envelope"></i><span> Contatos (Leads)</span></a></li>
+        @if(Auth::user()->perfil_id != 1)
         <li class="title"><span>Gerenciar Anúncios</span></li>
-        <li class="treeview">
-            <a href="#"><i class="flaticon-home"></i> <span>Meus anúncios</span><i class="fa fa-angle-down pull-right"></i></a>
-            <ul class="treeview-menu">
-                <li><a href="{{ url("/painel/anuncios") }}"><i class="fa fa-circle"></i> Venda</a></li>
-                <li><a href="{{ url("/painel/anuncios") }}"><i class="fa fa-circle"></i> Locação</a></li>
-                <li><a href="{{ url("/painel/anuncios") }}"><i class="fa fa-circle"></i> Lançamentos</a></li>
-            </ul>
-        </li>
-        <li class="treeview">
-            <a href="#"><i class="flaticon-share"></i><span> Integrações</span><i class="fa fa-angle-down pull-right"></i></a>
-            <ul class="treeview-menu">
-                <li><a href="{{ url("/painel/integracoes/configuracao") }}"><i class="fa fa-cog"></i> Configuração</a></li>
-                <li><a href="{{ url("/painel/integracoes/relatorio-geral") }}"><i class="fa fa-circle"></i> Relatório Geral</a></li>
-            </ul>
-        </li>
+        <li class="treeview {{ request()->is('painel/anuncios*') ? 'active' : '' }}"><a href="{{ url('/painel/anuncios') }}"><i class="flaticon-home"></i> <span>Meus anúncios</span></a></li>
+        <li class="treeview {{ request()->is('painel/integracoes*') ? 'active' : '' }}"><a href="{{ url('/painel/integracoes/relatorio-geral') }}"><i class="flaticon-share"></i><span> Integrações</span></a></li>
 
         <li class="title"><span>Pesquisa de Mercado</span></li>
         <li class="treeview pesquisa"><a href="https://www.redesecovimt.com.br/Usuario/LoginAssociado?hash={{ Auth::user()->anunciante_id }}" target="_blank"><i class="flaticon-view"></i><span> Acessar Painel</span></a></li>
+        @endif
 
         <li class="title"><span>Indicativos Imobiliários</span></li>
         <li class="treeview indicativos"><a href="{{ url('/indicativos-imobiliarios') }}" target="_blank"><i class="fa fa-cog"></i> Indicativos</a></li>
 
+        @if(Auth::user()->perfil_id != 1)
         <li class="title"><span>Gerenciar Conta</span></li>
         <li><a href="/painel/{{ Auth::user()->id }}/perfil"><i class="flaticon-user"></i> <span>Meu Perfil</span></a></li>
+        @endif
         <li><a href="{{ url("/logout-painel") }}"><i class="flaticon-logout"></i> <span>Sair</span></a></li>
     </ul>
 </div>

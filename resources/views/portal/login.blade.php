@@ -48,23 +48,25 @@
                             </div>
 
                             {{-- erros de login --}}
-                            @if ($errors->has('email') || $errors->has('password'))
-                                <div class="alert alert-danger">
-                                    Verifique seus dados de login e tente novamente.
+                            @if ($errors->login->any())
+                                <div class="alert alert-danger" style="background-color: #fdf7f7; color: #b94a48; border-color: #ebccd1; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                                    @foreach ($errors->login->all() as $error)
+                                        <p class="mb-0" style="margin-bottom: 0;">{{ $error }}</p>
+                                    @endforeach
                                 </div>
                             @endif
 
                             <div class="form-group">
                                 <input
                                     type="email"
-                                    class="form-control @error('email') is-invalid @enderror"
+                                    class="form-control @error('email', 'login') is-invalid @enderror"
                                     id="emailLogin"
                                     name="email"
                                     value="{{ old('email') }}"
                                     placeholder="Email"
                                     required
                                 >
-                                @error('email')
+                                @error('email', 'login')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -74,13 +76,13 @@
                             <div class="form-group">
                                 <input
                                     type="password"
-                                    class="form-control @error('password') is-invalid @enderror"
+                                    class="form-control @error('password', 'login') is-invalid @enderror"
                                     id="senhaLogin"
                                     name="password"
                                     placeholder="Senha"
                                     required
                                 >
-                                @error('password')
+                                @error('password', 'login')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -106,9 +108,9 @@
                             </div>
                             <div class="row mt40">
                                 <div class="col-lg">
-                                    <button type="button" class="btn btn2 btn-block color-white bgc-gogle mb0">
+                                    <a href="{{ route('login.google') }}" class="btn btn2 btn-block color-white bgc-gogle mb0" style="line-height: 2.5;">
                                         <i class="fa fa-google float-left mt5"></i> Google
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </form>
@@ -129,23 +131,25 @@
                             </div>
 
                             {{-- erros de cadastro --}}
-                            @if ($errors->has('name') || $errors->has('password'))
-                                <div class="alert alert-danger">
-                                    Verifique os dados de cadastro e tente novamente.
+                            @if ($errors->register->any())
+                                <div class="alert alert-danger" style="background-color: #fdf7f7; color: #b94a48; border-color: #ebccd1; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                                    @foreach ($errors->register->all() as $error)
+                                        <p class="mb-0" style="margin-bottom: 0;">{{ $error }}</p>
+                                    @endforeach
                                 </div>
                             @endif
 
                             <div class="form-group">
                                 <input
                                     type="text"
-                                    class="form-control @error('name') is-invalid @enderror"
+                                    class="form-control @error('name', 'register') is-invalid @enderror"
                                     id="nome"
                                     name="name"
                                     value="{{ old('name') }}"
                                     placeholder="Nome completo"
                                     required
                                 >
-                                @error('name')
+                                @error('name', 'register')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -155,14 +159,14 @@
                             <div class="form-group">
                                 <input
                                     type="email"
-                                    class="form-control @error('email') is-invalid @enderror"
+                                    class="form-control @error('email', 'register') is-invalid @enderror"
                                     id="emailCadastro"
                                     name="email"
                                     value="{{ old('email') }}"
                                     placeholder="Email"
                                     required
                                 >
-                                @error('email')
+                                @error('email', 'register')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -172,13 +176,13 @@
                             <div class="form-group">
                                 <input
                                     type="password"
-                                    class="form-control @error('password') is-invalid @enderror"
+                                    class="form-control @error('password', 'register') is-invalid @enderror"
                                     id="senhaCadastro"
                                     name="password"
                                     placeholder="Senha"
                                     required
                                 >
-                                @error('password')
+                                @error('password', 'register')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -312,7 +316,7 @@
         });
 
         // lógica para abrir o form certo se vier com erro do backend
-        @if ($errors->has('name') || $errors->has('password') && url()->current() === route('register'))
+        @if ($errors->register->any())
             showAuthForm('register');
         @elseif (session('status'))
             showAuthForm('reset');

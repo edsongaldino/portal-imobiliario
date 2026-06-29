@@ -362,15 +362,14 @@ class Helper{
 
     }
 
-    public static function GetInformacaoByChave($anuncio_id, $chave){
-
+    public static function GetInformacaoByChave($anuncio, $chave){
+        $anuncio_id = is_object($anuncio) ? $anuncio->id : $anuncio;
         $anuncioInformacao = AnuncioInformacoes::where('anuncio_id', $anuncio_id)->where('chave', $chave)->first();
         if($anuncioInformacao){
             return $anuncioInformacao->valor;
         }else{
             return false;
         }
-
     }
 
     public static function GetInformacoesByTipo($anuncio_id, $tipo){
@@ -403,14 +402,36 @@ class Helper{
         return $array;
     }
 
-    public static function GetTotalAnunciosByCidade($CidadeID, $tipoAnuncio){
-        $totalAnuncios = Anuncio::select('anuncios.id')
-                                ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
-                                ->groupBy('anuncios.id')
-                                ->where('anuncios.tipo_id', $tipoAnuncio)
-                                ->where('enderecos.cidade_id', $CidadeID)->get();
-        return $totalAnuncios->count();
+    public static function GetTotalAnunciosByCidade($CidadeID, $tipoAnuncio = null, $transacao = 'Venda'){
+        $query = Anuncio::select('anuncios.id')
+                        ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
+                        ->join('anunciantes', 'anuncios.anunciante_id', '=', 'anunciantes.id')
+                        ->where('anuncios.situacao', 'Liberado')
+                        ->where('anunciantes.situacao_cadastro', 'Ativo')
+                        ->where('enderecos.cidade_id', $CidadeID);
+        if ($transacao == 'Venda' || $transacao == 'COMPRA' || $transacao == 'Comprar') {
+            $query->where('anuncios.transacao', 'Venda');
+        } elseif ($transacao == 'Locação' || $transacao == 'LOCAÇÃO' || $transacao == 'Alugar') {
+            $query->where('anuncios.transacao', 'Locação');
+        } elseif ($transacao == 'Lançamentos' || $transacao == 'Novos' || $transacao == 'Novo') {
+            $query->where('anuncios.lancamento', 'S');
+        }
+        if ($tipoAnuncio && $tipoAnuncio != 1 && !is_array($tipoAnuncio)) {
+            $query->where('anuncios.tipo_id', $tipoAnuncio);
+        }
+        return $query->groupBy('anuncios.id')->get()->count();
     }
+
+    public static function GetTotalAnunciosByTipoNome($tipoNome){
+        $query = Anuncio::select('anuncios.id')
+                        ->join('tipos', 'anuncios.tipo_id', '=', 'tipos.id')
+                        ->join('anunciantes', 'anuncios.anunciante_id', '=', 'anunciantes.id')
+                        ->where('anuncios.situacao', 'Liberado')
+                        ->where('anunciantes.situacao_cadastro', 'Ativo')
+                        ->where('tipos.nome', 'LIKE', '%' . $tipoNome . '%');
+        return $query->groupBy('anuncios.id')->get()->count();
+    }
+
 
 	public static function GetTotalViewsByAnuncio($anuncio_id, $tipoView) {
 

@@ -44,6 +44,11 @@ class AuthController extends Controller
 
         if(Auth::attempt($credencials)){
             $usuario = Auth::user();
+            if ($usuario->perfil_id == 4) {
+                Auth::logout();
+                Session::forget('usuario');
+                return "NaoPermitido";
+            }
             Session::put('usuario', $usuario);
             return "Sucesso";
         }

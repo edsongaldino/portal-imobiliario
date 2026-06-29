@@ -13,6 +13,16 @@
 	<div class="col-lg-12">
 		<div class="my_dashboard_review">
 			<div class="row">
+				@if(isset($integracao) && $integracao->bloqueado)
+				<div class="col-lg-12">
+					<div class="alert alert-danger" role="alert" style="border-left: 5px solid #d9534f; background-color: #fdf7f7; color: #b94a48; padding: 20px; margin-bottom: 25px; border-radius: 4px;">
+						<h4 class="alert-heading" style="color: #d9534f; font-weight: bold; margin-bottom: 10px;"><i class="fa fa-warning"></i> Integração Bloqueada!</h4>
+						<p style="margin-bottom: 10px;">A importação automática de seus anúncios foi suspensa temporariamente porque ocorreu um erro no processamento do seu arquivo XML (ex: link inacessível ou formato inválido). Você pode verificar os detalhes nos relatórios de integração.</p>
+						<hr style="border-top: 1px solid #ebccd1; margin: 15px 0;">
+						<p class="mb0" style="margin-bottom: 0;"><strong>Como reativar:</strong> Corrija o link XML abaixo ou certifique-se de que ele está funcionando, e clique em <strong>Salvar Configurações</strong> para reativar as atualizações automáticas.</p>
+					</div>
+				</div>
+				@endif
 				<div class="col-lg-12">
 					<h4 class="mb30">Captação dos empreendimentos</h4>
 				</div>

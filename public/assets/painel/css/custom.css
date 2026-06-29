@@ -88,3 +88,52 @@
 .sidebar-menu.painel li a {
     color: rgb(239 239 239) !important;
 }
+
+/* ===== Dashboard Layout Fixes ===== */
+
+/* Hide top header bar and mobile menu container on desktop specifically for admin panel */
+@media (min-width: 992px) {
+    header.header-nav.menu_style_home_one.style2,
+    #page.stylehome1 {
+        display: none !important;
+    }
+}
+
+/* Remove excess top padding on dashboard pages */
+.our-dashbord.dashbord {
+    padding-top: 20px !important;
+    margin-top: 0 !important;
+}
+
+/* Clean table styling - remove card borders */
+.my_dashboard_review.clean-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.clean-table {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+}
+
+.clean-table thead th {
+    background-color: #24324a !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 14px 20px !important;
+    font-weight: 600 !important;
+}
+
+.clean-table tbody td {
+    padding: 14px 20px !important;
+    border-top: 1px solid #f1f5f9 !important;
+    vertical-align: middle !important;
+}
+
+.clean-table tbody tr:last-child td {
+    border-bottom: none !important;
+}

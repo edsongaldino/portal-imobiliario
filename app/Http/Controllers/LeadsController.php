@@ -37,12 +37,152 @@ class LeadsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $leads = Leads::where('leads.deleted_at',null)
-		->join('anuncios', 'anuncios.id', '=', 'leads.anuncio_id')
-		->where('anuncios.anunciante_id',Auth::user()->anunciante->id)->paginate(10);
-        return view('painel.leads.lista', compact('leads'));
+        $query = Leads::whereNull('leads.deleted_at')
+            ->join('anuncios', 'anuncios.id', '=', 'leads.anuncio_id')
+            ->with(['anuncio.endereco.cidade', 'anuncio.tipo', 'anuncio.anunciante'])
+            ->select('leads.*');
+
+        if (Auth::user()->perfil_id != 1) {
+            $anuncianteId = Auth::user()->anunciante_id ?? (Auth::user()->anunciante->id ?? null);
+            $query->where('anuncios.anunciante_id', $anuncianteId);
+        }
+
+        if ($request->filled('busca')) {
+            $busca = $request->busca;
+            $query->where(function($q) use ($busca) {
+                $q->where('leads.nome', 'like', "%{$busca}%")
+                  ->orWhere('leads.email', 'like', "%{$busca}%")
+                  ->orWhere('leads.telefone', 'like', "%{$busca}%")
+                  ->orWhere('leads.mensagem', 'like', "%{$busca}%")
+                  ->orWhere('anuncios.titulo', 'like', "%{$busca}%")
+                  ->orWhere('anuncios.id_externo', 'like', "%{$busca}%");
+            });
+        }
+
+        if ($request->filled('tipo_imovel')) {
+            $query->where('anuncios.tipo_id', $request->tipo_imovel);
+        }
+
+        if ($request->filled('cidade_id')) {
+            $query->whereHas('anuncio.endereco', function($q) use ($request) {
+                $q->where('cidade_id', $request->cidade_id);
+            });
+        }
+
+        if ($request->filled('situacao')) {
+            $query->where('leads.situacao', $request->situacao);
+        }
+
+        if ($request->filled('origem')) {
+            $query->where('leads.origem', $request->origem);
+        }
+
+        if ($request->filled('data_inicio') && $request->filled('data_fim')) {
+            $query->whereBetween('leads.created_at', [$request->data_inicio . ' 00:00:00', $request->data_fim . ' 23:59:59']);
+        }
+
+        $perPage = $request->input('per_page', 10);
+        $leads = $query->orderBy('leads.created_at', 'desc')->paginate($perPage);
+
+        $cidades = \App\Models\Cidade::orderBy('nome_cidade', 'asc')->get();
+        $tipos = \App\Models\AnuncioTipo::orderBy('nome', 'asc')->get();
+
+        $filtrosAtivos = 0;
+        $campos = ['tipo_imovel', 'cidade_id', 'situacao', 'origem', 'data_inicio', 'data_fim', 'valor_min', 'valor_max'];
+        foreach ($campos as $campo) {
+            if ($request->filled($campo)) $filtrosAtivos++;
+        }
+
+        return view('painel.leads.lista', compact('leads', 'cidades', 'tipos', 'filtrosAtivos', 'request'));
+    }
+
+    /**
+     * Exporta os leads filtrados para arquivo CSV compatível com Excel.
+     */
+    public function exportarExcel(Request $request)
+    {
+        $query = Leads::whereNull('leads.deleted_at')
+            ->join('anuncios', 'anuncios.id', '=', 'leads.anuncio_id')
+            ->with(['anuncio.endereco.cidade', 'anuncio.tipo', 'anuncio.anunciante'])
+            ->select('leads.*');
+
+        if (Auth::user()->perfil_id != 1) {
+            $anuncianteId = Auth::user()->anunciante_id ?? (Auth::user()->anunciante->id ?? null);
+            $query->where('anuncios.anunciante_id', $anuncianteId);
+        }
+
+        if ($request->filled('busca')) {
+            $busca = $request->busca;
+            $query->where(function($q) use ($busca) {
+                $q->where('leads.nome', 'like', "%{$busca}%")
+                  ->orWhere('leads.email', 'like', "%{$busca}%")
+                  ->orWhere('leads.telefone', 'like', "%{$busca}%")
+                  ->orWhere('leads.mensagem', 'like', "%{$busca}%")
+                  ->orWhere('anuncios.titulo', 'like', "%{$busca}%")
+                  ->orWhere('anuncios.id_externo', 'like', "%{$busca}%");
+            });
+        }
+
+        if ($request->filled('tipo_imovel')) {
+            $query->where('anuncios.tipo_id', $request->tipo_imovel);
+        }
+
+        if ($request->filled('cidade_id')) {
+            $query->whereHas('anuncio.endereco', function($q) use ($request) {
+                $q->where('cidade_id', $request->cidade_id);
+            });
+        }
+
+        if ($request->filled('situacao')) {
+            $query->where('leads.situacao', $request->situacao);
+        }
+
+        if ($request->filled('origem')) {
+            $query->where('leads.origem', $request->origem);
+        }
+
+        if ($request->filled('data_inicio') && $request->filled('data_fim')) {
+            $query->whereBetween('leads.created_at', [$request->data_inicio . ' 00:00:00', $request->data_fim . ' 23:59:59']);
+        }
+
+        $leads = $query->orderBy('leads.created_at', 'desc')->get();
+
+        $filename = "leads_exportados_" . date('Y-m-d_H-i') . ".csv";
+
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0'
+        ];
+
+        $callback = function() use ($leads) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, ['ID', 'Nome', 'E-mail', 'Telefone', 'Imóvel / Interesse', 'Imobiliária / Anunciante', 'Origem', 'Situação', 'Mensagem', 'Data de Criação'], ';');
+
+            foreach ($leads as $lead) {
+                fputcsv($file, [
+                    $lead->id,
+                    $lead->nome,
+                    $lead->email,
+                    Helper::Phone($lead->telefone),
+                    $lead->anuncio->titulo ?? 'N/A',
+                    $lead->anuncio->anunciante->nome ?? 'N/A',
+                    $lead->origem ?? 'Site',
+                    $lead->situacao ?? 'Novo',
+                    $lead->mensagem ?? '',
+                    $lead->created_at ? $lead->created_at->format('d/m/Y H:i') : ''
+                ], ';');
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
     /**

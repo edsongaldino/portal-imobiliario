@@ -18,260 +18,88 @@
 						<div class="sidebar_content_details style3">
 							<!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
 							<div class="sidebar_listing_list style2 mobile_sytle_sidebar mb0">
-								<div class="sidebar_advanced_search_widget">
-									<h4 class="mb25">Busca avançada <a class="filter_closed_btn float-right" href="#"><small>Ocultar filtro</small> <span class="flaticon-close"></span></a></h4>
-									<ul class="sasw_list style2 mb0">
-										<li class="search_area">
-										    <div class="form-group">
-												<select class="selectpicker" name="localizacao" id="localizacao" data-live-search="true" data-width="100%">
-                                                    @foreach ($cidades as $cidade)
-                                                        @if($request->localizacao)
-                                                        <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}" @if($request->localizacao == $cidade->id) selected @endif>{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
-                                                        @else
-                                                        <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}">{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-										    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
-										    </div>
-										</li>
-										<li class="search_area" style="display:none;">
-										    <div class="form-group">
-										    	<input type="text" class="form-control" id="exampleInputEmail" placeholder="Location">
-										    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
-										    </div>
-										</li>
-										<li>
-											<div class="search_option_two">
-												<select name="tipo_imovel[]" class="selectpicker w100 show-tick" multiple>
-													<option>Tipo do Imóvel</option>
-													@foreach ($tipos as $tipo)
-													<option value="{{ $tipo->id }}">{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
-													@endforeach
-												</select>
-											</div>
-										</li>
-										<li style="display:none;">
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select class="selectpicker w100 show-tick">
-														<option>Property Type</option>
-														<option>Apartment</option>
-														<option>Bungalow</option>
-														<option>Condo</option>
-														<option>House</option>
-														<option>Land</option>
-														<option>Single Family</option>
-													</select>
-												</div>
-											</div>
-										</li>
-										<li style="display:none;">
-											<div class="small_dropdown2">
-											    <div id="prncgs" class="btn dd_btn">
-											    	<span>Price</span>
-											    	<label for="exampleInputEmail2"><span class="fa fa-angle-down"></span></label>
+								<form action="{{ url('imoveis-buscar') }}" method="GET">
+									<input type="hidden" name="transacao" value="{{ $request->transacao }}">
+									<input type="hidden" name="ordenacao" value="{{ $request->ordenacao ?? 'relevantes' }}">
+									<div class="sidebar_advanced_search_widget">
+										<h4 class="mb25">Busca avançada <a class="filter_closed_btn float-right" href="#"><small>Ocultar filtro</small> <span class="flaticon-close"></span></a></h4>
+										<ul class="sasw_list style2 mb0">
+											<li class="search_area">
+											    <div class="form-group">
+											    	<input type="text" name="palavra_chave" class="form-control" placeholder="Palavra chave" value="{{ $request->palavra_chave }}">
 											    </div>
-											  	<div class="dd_content2">
-												    <div class="pricing_acontent">
-												    	<span id="slider-range-value1"></span>
-														<span class="mt0" id="slider-range-value2"></span>
-													    <div id="slider"></div>
-														<!-- <input type="text" class="amount" placeholder="$52,239"> 
-														<input type="text" class="amount2" placeholder="$985,14">
-														<div class="slider-range"></div> -->
-												    </div>
-											  	</div>
-											</div>
-										</li>
-										<li style="display:none;">
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select class="selectpicker w100 show-tick">
-														<option>Bathrooms</option>
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-														<option>6</option>
-													</select>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select name="quartos[]" class="selectpicker w100 show-tick" multiple>
-														<option>Quartos</option>
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-														<option>6</option>
-													</select>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select name="banheiros[]" class="selectpicker w100 show-tick" multiple>
-														<option>Banheiros</option>
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-														<option>6</option>
-													</select>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="search_option_two">
-												<div class="candidate_revew_select">
-													<select name="garagem[]" class="selectpicker w100 show-tick" multiple>
-														<option>Garagens (Vagas)</option>
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-														<option>6</option>
-													</select>
-												</div>
-											</div>
-										</li>
-										<li class="min_area style2 list-inline-item">
-                                            <div class="form-group">
-                                                <input type="text" name="valor_minimo" class="form-control moeda" id="exampleInputName2" placeholder="Valor Min">
-                                            </div>
-                                        </li>
-                                        <li class="max_area list-inline-item">
-                                            <div class="form-group">
-                                                <input type="text" name="valor_maximo" class="form-control moeda" id="exampleInputName3" placeholder="Valor Max">
-                                            </div>
-                                        </li>
-										<li>
-										  	<div id="accordion" class="panel-group">
-											    <div class="panel">
-											      	<div class="panel-heading">
-												      	<h4 class="panel-title">
-												        	<a href="#panelBodyRating" class="accordion-toggle link" data-toggle="collapse" data-parent="#accordion"><i class="flaticon-more"></i> Características</a>
-												        </h4>
-											      	</div>
-												    <div id="panelBodyRating" class="panel-collapse collapse">
-												        <div class="panel-body row">
-												      		<div class="col-lg-12">
-												                <ul class="ui_kit_checkbox selectable-list float-left fn-400">
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck1">
-																			<label class="custom-control-label" for="customCheck1">Air Conditioning</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck4">
-																			<label class="custom-control-label" for="customCheck4">Barbeque</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck10">
-																			<label class="custom-control-label" for="customCheck10">Gym</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck5">
-																			<label class="custom-control-label" for="customCheck5">Microwave</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck6">
-																			<label class="custom-control-label" for="customCheck6">TV Cable</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck2">
-																			<label class="custom-control-label" for="customCheck2">Lawn</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck11">
-																			<label class="custom-control-label" for="customCheck11">Refrigerator</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck3">
-																			<label class="custom-control-label" for="customCheck3">Swimming Pool</label>
-																		</div>
-												                	</li>
-												                </ul>
-												                <ul class="ui_kit_checkbox selectable-list float-right fn-400">
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck12">
-																			<label class="custom-control-label" for="customCheck12">WiFi</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck14">
-																			<label class="custom-control-label" for="customCheck14">Sauna</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck7">
-																			<label class="custom-control-label" for="customCheck7">Dryer</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck9">
-																			<label class="custom-control-label" for="customCheck9">Washer</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck13">
-																			<label class="custom-control-label" for="customCheck13">Laundry</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck8">
-																			<label class="custom-control-label" for="customCheck8">Outdoor Shower</label>
-																		</div>
-												                	</li>
-												                	<li>
-																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" id="customCheck15">
-																			<label class="custom-control-label" for="customCheck15">Window Coverings</label>
-																		</div>
-												                	</li>
-												                </ul>
-													        </div>
-												        </div>
-												    </div>
+											</li>
+											<li class="search_area">
+											    <div class="form-group">
+													<select class="selectpicker" name="localizacao" id="localizacao_mobile" data-live-search="true" data-width="100%">
+                                                        <option value="">Todas as Cidades</option>
+                                                        @foreach ($cidades as $cidade)
+                                                            <option data-tokens="{{ $cidade->nome_cidade }}" value="{{ $cidade->id }}" @if($request->localizacao == $cidade->id) selected @endif>{{ $cidade->nome_cidade }} ({{ $cidade->estado->uf_estado }})</option>
+                                                        @endforeach
+                                                    </select>
+											    	<label for="exampleInputEmail"><span class="flaticon-maps-and-flags"></span></label>
 											    </div>
-											</div>
-										</li>
-										<li>
-											<div class="search_option_button">
-											    <button type="submit" class="btn btn-block btn-thm">Filtrar</button>
-											</div>
-										</li>
-									</ul>
-								</div>
+											</li>
+											<li>
+												<div class="search_option_two">
+													<select name="tipo_imovel[]" class="selectpicker w100 show-tick" multiple title="Tipo do Imóvel">
+														@foreach ($tipos as $tipo)
+														<option value="{{ $tipo->id }}" @if(is_array($request->tipo_imovel) && in_array($tipo->id, $request->tipo_imovel)) selected @endif>{{ $tipo->nome }} ({{ $tipo->finalidade }})</option>
+														@endforeach
+													</select>
+												</div>
+											</li>
+											<li>
+												<div class="search_option_two">
+													<div class="candidate_revew_select">
+														<select name="quartos[]" class="selectpicker w100 show-tick" multiple title="Quartos">
+															@for($i=1; $i<=6; $i++)
+															<option value="{{ $i }}" @if(is_array($request->quartos) && in_array($i, $request->quartos)) selected @endif>{{ $i }} @if($i==6)+ @endif Quartos</option>
+															@endfor
+														</select>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="search_option_two">
+													<div class="candidate_revew_select">
+														<select name="banheiros[]" class="selectpicker w100 show-tick" multiple title="Banheiros">
+															@for($i=1; $i<=6; $i++)
+															<option value="{{ $i }}" @if(is_array($request->banheiros) && in_array($i, $request->banheiros)) selected @endif>{{ $i }} @if($i==6)+ @endif Banheiros</option>
+															@endfor
+														</select>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="search_option_two">
+													<div class="candidate_revew_select">
+														<select name="garagem[]" class="selectpicker w100 show-tick" multiple title="Garagem (Vagas)">
+															@for($i=1; $i<=6; $i++)
+															<option value="{{ $i }}" @if(is_array($request->garagem) && in_array($i, $request->garagem)) selected @endif>{{ $i }} @if($i==6)+ @endif Vagas</option>
+															@endfor
+														</select>
+													</div>
+												</div>
+											</li>
+											<li class="min_area style2 list-inline-item">
+	                                            <div class="form-group">
+	                                                <input type="text" name="valor_minimo" class="form-control moeda" placeholder="Valor Min" value="{{ $request->valor_minimo }}">
+	                                            </div>
+	                                        </li>
+	                                        <li class="max_area list-inline-item">
+	                                            <div class="form-group">
+	                                                <input type="text" name="valor_maximo" class="form-control moeda" placeholder="Valor Max" value="{{ $request->valor_maximo }}">
+	                                            </div>
+	                                        </li>
+											<li>
+												<div class="search_option_button">
+												    <button type="submit" class="btn btn-block btn-thm">Filtrar</button>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -585,9 +413,12 @@
 									<div class="right_area text-right tac-xsd">
 										<ul>
 											<li class="list-inline-item"><span class="shrtby">Ordenar por:</span>
-												<select class="selectpicker show-tick">
-													<option>Menor valor</option>
-													<option>+ Preço</option>
+												<select id="selectOrdenacaoMobile" class="selectpicker show-tick" onchange="window.location.href='{{ url('imoveis-buscar') }}?transacao={{ $request->transacao }}&localizacao={{ $request->localizacao }}&palavra_chave={{ $request->palavra_chave }}&ordenacao=' + this.value;">
+													<option value="relevantes" @if($request->ordenacao == 'relevantes' || !$request->ordenacao) selected @endif>Mais relevantes</option>
+													<option value="recentes" @if($request->ordenacao == 'recentes' || $request->ordenacao == 'Mais recente') selected @endif>Mais recente</option>
+													<option value="menor_preco" @if($request->ordenacao == 'menor_preco' || $request->ordenacao == 'Menor valor' || $request->ordenacao == 'Menor preço') selected @endif>Menor preço</option>
+													<option value="maior_preco" @if($request->ordenacao == 'maior_preco' || $request->ordenacao == '+ Preço' || $request->ordenacao == 'Maior preço') selected @endif>Maior preço</option>
+													<option value="maior_area" @if($request->ordenacao == 'maior_area' || $request->ordenacao == 'Maior área') selected @endif>Maior área</option>
 												</select>
 											</li>
 										</ul>
@@ -650,9 +481,9 @@
 										<h4>{{ $anuncio->titulo }}</h4>
 										<p><span class="flaticon-placeholder"></span>{{ $anuncio->endereco->logradouro_endereco }} - {{ $anuncio->endereco->bairro_endereco }}, {{ $anuncio->endereco->cidade->nome_cidade }} - {{ $anuncio->endereco->cidade->estado->uf_estado }}</p>
 										<ul class="prop_details mb0">
-											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Quartos') }}</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Banheiros') }}</span></li>
-										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> {{ Helper::GetInformacaoByChave($anuncio->id,'Área Útil') }}m²</span></li>
+											<li class="list-inline-item"><span><i class="fa-solid fa-bed"></i> {{ Helper::GetInformacaoByChave($anuncio,'Quartos') }}</span></li>
+										    <li class="list-inline-item"><span><i class="fa-solid fa-shower"></i> {{ Helper::GetInformacaoByChave($anuncio,'Banheiros') }}</span></li>
+										    <li class="list-inline-item"><span><i class="fa-solid fa-ruler-combined"></i> {{ Helper::GetInformacaoByChave($anuncio,'Área Útil') }}m²</span></li>
 										</ul>
 									</div>
 									<div class="fp_footer">

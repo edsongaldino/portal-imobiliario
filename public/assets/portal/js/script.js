@@ -5,12 +5,21 @@
     /* ----- Preloader ----- */
     function preloaderLoad() {
         if($('.preloader').length){
-            $('.preloader').delay(200).fadeOut(300);
+            $('.preloader').stop(true, true).fadeOut(300);
         }
         $(".preloader_disabler").on('click', function() {
-            $("#preloader").hide();
+            $(".preloader, #preloader").hide();
         });
     }
+
+    $(document).ready(function() {
+        preloaderLoad();
+        setTimeout(function() {
+            if($('.preloader').is(':visible')){
+                $('.preloader').fadeOut(200);
+            }
+        }, 500);
+    });
 
     /* ----- Navbar Scroll To Fixed ----- */
     function navbarScrollfixed() {
@@ -36,7 +45,7 @@
     }
 
     /** Main Menu Custom Script Start **/
-    $(document).on('ready', function() {
+    $(document).ready(function() {
         $("#respMenu").aceResponsiveMenu({
             resizeWidth: '768', // Set the same in Media query
             animationSpeed: 'fast', //slow, medium, fast
@@ -76,7 +85,7 @@
             }
         };
         if ($('.stricky').length) {
-            var headerScrollPos = $('.header-navigation').next().offset().top;
+            var headerScrollPos = ($('.header-navigation').length && $('.header-navigation').next().length) ? $('.header-navigation').next().offset().top : 120;
             var stricky = $('.stricky');
             if ($(window).scrollTop() > headerScrollPos) {
                 stricky.removeClass('slideIn animated');
@@ -779,7 +788,7 @@
             rtl:false,
             autoplayHoverPause:false,
             autoplay: false,
-            smartSpeed: 2000,
+            smartSpeed: 300,
             singleItem: true,
             navText: [
               '<i class="flaticon-left-arrow-1"></i>',
@@ -821,7 +830,7 @@
             rtl:false,
             autoplayHoverPause:false,
             autoplay: false,
-            smartSpeed: 2000,
+            smartSpeed: 250,
             singleItem: true,
             navText: [
               '<i class="flaticon-left-arrow-1"></i>',

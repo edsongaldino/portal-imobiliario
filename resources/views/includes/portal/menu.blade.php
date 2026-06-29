@@ -36,7 +36,20 @@
                 <li class="last">
                     <a href="{{ url('/simular-financiamento-de-imoveis') }}"><span class="title">Financiamento</span></a>
                 </li>
+                @if(Auth::check())
+                <li class="user-menu-item">
+                    <a href="#"><span class="title"><i class="flaticon-user mr5"></i> {{ Auth::user()->name }} <i class="fa-solid fa-chevron-down ml5" style="font-size: 11px; opacity: 0.8;"></i></span></a>
+                    <ul class="sub-menu text-left">
+                        <li><a href="{{ route('imoveis-favoritos') }}"><i class="flaticon-heart"></i> Minha Conta / Favoritos</a></li>
+                        @if(Auth::user()->perfil_id != 4)
+                        <li><a href="{{ url('/dashboard') }}"><i class="flaticon-layers"></i> Painel Administrativo</a></li>
+                        @endif
+                        <li><a href="{{ route('logout.portal') }}"><i class="flaticon-logout"></i> Sair</a></li>
+                    </ul>
+                </li>
+                @else
                 <li class="list-inline-item list_s"><a href="{{ url('/login-portal') }}" class="btn flaticon-user"> <span class="dn-lg">Entrar</span></a></li>
+                @endif
                 <li class="list-inline-item add_listing"><a href="{{url("/login")}}"><span class="flaticon-plus"></span><span class="dn-lg"> Anunciar</span></a></li>
             </ul>
         </nav>
@@ -67,9 +80,22 @@
             </li>
 
             <li class="last">
-                <a href="#"><span class="title">Financiamentos</span></a>
+                <a href="{{ url('/simular-financiamento-de-imoveis') }}"><span class="title">Financiamento</span></a>
             </li>
-            <li><a href="#" class="btn flaticon-user" data-toggle="modal" data-target=".bd-example-modal-lg"><span class="flaticon-user"></span> Entrar</a></li>
+            @if(Auth::check())
+            <li>
+                <span><span class="flaticon-user"></span> {{ Auth::user()->name }}</span>
+                <ul>
+                    <li><a href="{{ route('imoveis-favoritos') }}">Minha Conta / Favoritos</a></li>
+                    @if(Auth::user()->perfil_id != 4)
+                    <li><a href="{{ url('/dashboard') }}">Painel Administrativo</a></li>
+                    @endif
+                    <li><a href="{{ route('logout.portal') }}">Sair</a></li>
+                </ul>
+            </li>
+            @else
+            <li><a href="{{ url('/login-portal') }}"><span class="flaticon-user"></span> Entrar</a></li>
+            @endif
             <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="{{ url("/login") }}"><span class="flaticon-plus"></span> Anunciar</a></li>
         </ul>
     </nav>

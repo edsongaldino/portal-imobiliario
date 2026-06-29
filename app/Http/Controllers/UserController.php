@@ -9,6 +9,7 @@ use App\Models\Cidade;
 use App\Models\Estado;
 use App\Models\User;
 use App\Models\Perfil;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -233,4 +234,129 @@ class UserController extends Controller
         return view('sistema.usuarios.index', compact('usuarios', 'perfis'));
     }
 
+    /**
+     * Lista usuários do sistema no painel administrativo.
+     */
+    public function gestaoUsuarios(Request $request)
+    {
+        if (!Auth::check() || Auth::user()->perfil_id != 1) {
+            return redirect('/dashboard')->with('error', 'Acesso negado.');
+        }
+
+        $query = User::with(['perfil', 'anunciante']);
+
+        if ($request->filled('busca')) {
+            $busca = $request->busca;
+            $query->where(function($q) use ($busca) {
+                $q->where('name', 'like', "%{$busca}%")
+                  ->orWhere('email', 'like', "%{$busca}%");
+            });
+        }
+
+        if ($request->filled('perfil_id')) {
+            $query->where('perfil_id', $request->perfil_id);
+        }
+
+        if ($request->filled('anunciante_id')) {
+            $query->where('anunciante_id', $request->anunciante_id);
+        }
+
+        $perPage = $request->input('per_page', 10);
+        $usuarios = $query->orderBy('id', 'desc')->paginate($perPage);
+
+        $perfis = Perfil::all();
+        $anunciantes = Anunciante::whereNull('deleted_at')->orderBy('nome', 'asc')->get();
+
+        $filtrosAtivos = 0;
+        if ($request->filled('busca')) $filtrosAtivos++;
+        if ($request->filled('perfil_id')) $filtrosAtivos++;
+        if ($request->filled('anunciante_id')) $filtrosAtivos++;
+
+        return view('painel.usuarios.index', compact('usuarios', 'perfis', 'anunciantes', 'filtrosAtivos', 'request'));
+    }
+
+    /**
+     * Salva ou atualiza um usuário (admin/anunciante) no painel.
+     */
+    public function gestaoSalvarUsuario(Request $request)
+    {
+        if (!Auth::check() || Auth::user()->perfil_id != 1) {
+            return redirect('/dashboard')->with('error', 'Acesso negado.');
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'perfil_id' => 'required',
+        ]);
+
+        if ($request->perfil_id != 1 && !$request->filled('anunciante_id')) {
+            return redirect()->back()->with('warning', 'Ao selecionar o perfil de Imobiliária, é obrigatório selecionar a Imobiliária vinculada!');
+        }
+
+        if ($request->filled('id')) {
+            $user = User::findOrFail($request->id);
+            if ($user->email != $request->email && User::where('email', $request->email)->exists()) {
+                return redirect()->back()->with('warning', 'Este e-mail já está em uso por outro usuário.');
+            }
+        } else {
+            if (User::where('email', $request->email)->exists()) {
+                return redirect()->back()->with('warning', 'Este e-mail já está em uso.');
+            }
+            $request->validate(['password' => 'required|min:6']);
+            $user = new User();
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->perfil_id = $request->perfil_id;
+        $user->anunciante_id = $request->anunciante_id ?: null;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Usuário gravado com sucesso!');
+    }
+
+    /**
+     * Altera a senha de qualquer usuário diretamente pelo admin.
+     */
+    public function gestaoAlterarSenha(Request $request, $id)
+    {
+        if (!Auth::check() || Auth::user()->perfil_id != 1) {
+            return redirect('/dashboard')->with('error', 'Acesso negado.');
+        }
+
+        $request->validate([
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('success', "Senha do usuário {$user->name} alterada com sucesso!");
+    }
+
+    /**
+     * Exclui um usuário.
+     */
+    public function gestaoExcluirUsuario($id)
+    {
+        if (!Auth::check() || Auth::user()->perfil_id != 1) {
+            return redirect('/dashboard')->with('error', 'Acesso negado.');
+        }
+
+        $user = User::findOrFail($id);
+        if ($user->id == Auth::id()) {
+            return redirect()->back()->with('warning', 'Você não pode excluir a sua própria conta de administrador.');
+        }
+
+        $user->delete();
+
+        return redirect()->back()->with('success', 'Usuário excluído com sucesso!');
+    }
 }

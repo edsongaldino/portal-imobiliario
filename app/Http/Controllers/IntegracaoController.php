@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Integracao;
 use App\Http\Controllers\Controller;
 use App\Mail\EnviaRelatorio;
+use App\Mail\ErroIntegracao;
 use App\Models\Anunciante;
 use App\Models\AnuncianteIntegracao;
 use App\Models\Anuncio;
@@ -25,9 +26,7 @@ class IntegracaoController extends Controller
 {
     public function Configuracao()
     {
-        $usuario = Auth::user();
-        $integracao = AnuncianteIntegracao::where('anunciante_id',$usuario->anunciante_id)->first();
-        return view('painel.integracao.configuracao', compact('usuario','integracao'));
+        return redirect()->route('painel.integracoes.relatorio-geral');
     }
 
     public function salvarDados(Request $request){
@@ -44,17 +43,31 @@ class IntegracaoController extends Controller
         $anunciante_integracao->url = $request->url;
         $anunciante_integracao->periodicidade_atualizacao = $request->periodicidade_atualizacao;
         $anunciante_integracao->notificar = $request->notificar;
+        $anunciante_integracao->bloqueado = false; // Reset block status on save
         $anunciante_integracao->save();
 
         return redirect()->back()->with('success', 'Dados Gravados!');
     }
 
-    public function RelatorioGeral()
+    public function RelatorioGeral(Request $request)
     {
         $usuario = Auth::user();
-        $logs = LogIntegracao::where('anunciante_id',Auth::user()->anunciante->id)->orderBy('id', 'DESC')->paginate(15);
+        $anuncianteId = $usuario->anunciante_id ?? ($usuario->anunciante->id ?? null);
 
-        return view('painel.integracao.relatorio_geral', compact('usuario', 'logs'));
+        $integracao = AnuncianteIntegracao::where('anunciante_id', $anuncianteId)->first();
+
+        $query = LogIntegracao::where('anunciante_id', $anuncianteId);
+
+        if ($request->filled('data_inicio') && $request->filled('data_fim')) {
+            $query->whereBetween('created_at', [$request->data_inicio . ' 00:00:00', $request->data_fim . ' 23:59:59']);
+        }
+
+        $perPage = $request->input('per_page', 10);
+        $logs = $query->orderBy('id', 'DESC')->paginate($perPage);
+
+        $ultimoLog = LogIntegracao::where('anunciante_id', $anuncianteId)->orderBy('id', 'DESC')->first();
+
+        return view('painel.integracao.relatorio_geral', compact('usuario', 'integracao', 'logs', 'ultimoLog', 'request'));
     }
 
     public function CronAtualizarAnuncios(){
@@ -63,7 +76,17 @@ class IntegracaoController extends Controller
         $now   = Carbon::now($tz);
         $start = (clone $now)->startOfDay();
 
-        $anunciante = Anunciante::whereNotNull('ultima_atualizacao')->Where('ultima_atualizacao', '<', $start)->inRandomOrder()->limit(1)->first();
+        // Enforce once-per-day update (ultima_atualizacao < start of today, or null) and ensure the integration is not blocked
+        $anunciante = Anunciante::where(function($query) use ($start) {
+            $query->whereNull('ultima_atualizacao')
+                  ->orWhere('ultima_atualizacao', '<', $start);
+        })
+        ->whereHas('integracao', function($query) {
+            $query->where('bloqueado', 0);
+        })
+        ->inRandomOrder()
+        ->limit(1)
+        ->first();
 
         if(isset($anunciante->id)){
 
@@ -72,13 +95,13 @@ class IntegracaoController extends Controller
             $Processaintegracao = $this->ProcessarXML($request);
 
             if($Processaintegracao){
-                $destinatario = 'edsongaldino@outlook.com';
-                Mail::to($destinatario)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
-                echo "Integração Realizada!";
+                // Send success email only to the client
+                if (!empty($anunciante->email)) {
+                    Mail::to($anunciante->email)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
+                }
+                echo "Integração Realizada com Sucesso!";
             }else{
-                $destinatario = 'edsongaldino@outlook.com';
-                Mail::to($destinatario)->send(new EnviaRelatorio($Processaintegracao, $anunciante));
-                echo "Integração Não Realizada!";
+                echo "Integração Não Realizada ou Falhou!";
             }
             
         }
@@ -98,6 +121,97 @@ class IntegracaoController extends Controller
         return view('painel.integracao.relatorio_individual', compact('usuario', 'logs', 'RelatorioGeral'));
     }
 
+    public function detalhesAjax($id, Request $request)
+    {
+        try {
+            $logGeral = LogIntegracao::findOrFail($id);
+
+            $query = DB::table('log_integracao_anuncios')
+                ->leftJoin('anuncios', function($join) use ($logGeral) {
+                    $join->on('anuncios.id_externo', '=', 'log_integracao_anuncios.id_externo')
+                         ->where('anuncios.anunciante_id', '=', $logGeral->anunciante_id);
+                })
+                ->leftJoin('enderecos', 'enderecos.id', '=', 'anuncios.endereco_id')
+                ->leftJoin('cidades', 'cidades.id', '=', 'enderecos.cidade_id')
+                ->leftJoin('tipos', 'tipos.id', '=', 'anuncios.tipo_id')
+                ->where('log_integracao_anuncios.log_integracao_id', $id)
+                ->select(
+                    'log_integracao_anuncios.*',
+                    'anuncios.id as anuncio_id',
+                    'anuncios.titulo as titulo_anuncio',
+                    DB::raw('(SELECT valor FROM anuncio_informacoes WHERE anuncio_id = anuncios.id AND (chave = "Área Útil" OR chave = "LivingArea") LIMIT 1) as area_util'),
+                    'anuncios.transacao',
+                    'cidades.nome_cidade',
+                    'enderecos.bairro_endereco',
+                    'tipos.nome as tipo_nome'
+                );
+
+            if ($request->filled('busca')) {
+                $busca = $request->busca;
+                $query->where(function($q) use ($busca) {
+                    $q->where('log_integracao_anuncios.id_externo', 'like', "%{$busca}%")
+                      ->orWhere('anuncios.titulo', 'like', "%{$busca}%")
+                      ->orWhere('cidades.nome_cidade', 'like', "%{$busca}%")
+                      ->orWhere('enderecos.bairro_endereco', 'like', "%{$busca}%");
+                });
+            }
+
+            if ($request->filled('tipo_log') && $request->tipo_log != 'Todos') {
+                $query->where('log_integracao_anuncios.tipo', $request->tipo_log);
+            }
+
+            $perPage = $request->input('per_page', 10);
+            $itens = $query->orderBy('log_integracao_anuncios.id', 'DESC')->paginate($perPage);
+
+            $anuncioIds = collect($itens->items())->pluck('anuncio_id')->filter()->unique()->toArray();
+            $fotosMap = [];
+            if (!empty($anuncioIds)) {
+                $fotosRaw = DB::table('fotos')
+                    ->whereIn('anuncio_id', $anuncioIds)
+                    ->get();
+                foreach ($fotosRaw as $f) {
+                    if (!isset($fotosMap[$f->anuncio_id])) {
+                        $fotosMap[$f->anuncio_id] = $f->arquivo;
+                    }
+                }
+            }
+
+            $itemsFormatted = collect($itens->items())->map(function($item) use ($fotosMap) {
+                $item->foto = isset($item->anuncio_id) && isset($fotosMap[$item->anuncio_id]) 
+                    ? $fotosMap[$item->anuncio_id] 
+                    : asset('assets/portal/images/property/fp1.jpg');
+                return $item;
+            });
+
+            return response()->json([
+                'status' => 'success',
+                'logGeral' => [
+                    'id' => $logGeral->id,
+                    'created_at' => $logGeral->created_at ? $logGeral->created_at->format('d/m/Y \à\s H:i:s') : '',
+                    'total_incluidos' => $logGeral->total_incluidos ?? 0,
+                    'total_alterados' => $logGeral->total_alterados ?? 0,
+                    'total_removidos' => $logGeral->total_removidos ?? 0,
+                    'total_alertas' => $logGeral->total_alertas ?? 0,
+                    'total_imoveis' => ($logGeral->total_incluidos + $logGeral->total_alterados)
+                ],
+                'pagination' => [
+                    'total' => $itens->total(),
+                    'per_page' => $itens->perPage(),
+                    'current_page' => $itens->currentPage(),
+                    'last_page' => $itens->lastPage(),
+                    'from' => $itens->firstItem() ?? 0,
+                    'to' => $itens->lastItem() ?? 0,
+                ],
+                'data' => $itemsFormatted
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 
     public function ProcessarXML(Request $request){
 
@@ -109,22 +223,8 @@ class IntegracaoController extends Controller
             return false;
         }
         
-        //se o caminho esteja hospedado noutro servidor
-        $url = $anunciante->integracao->first()->url;
-
-        //caso o caminho esteja hospedado no próprio servidor
-        //coloque o ficheiro no caminho: 'public/assets/xml/file.xml'
-        //$url = asset('assets/xml/file.xml');
-
-        $arrContextOptions=array(
-            "ssl"=>array(
-                "verify_peer"=>false,
-                "verify_peer_name"=>false,
-            ),
-        );
-
-        $data = file_get_contents($url, false, stream_context_create($arrContextOptions));
-        $xml = simplexml_load_string($data);
+        $integracao = $anunciante->integracao->first();
+        $url = $integracao->url;
         $anunciante_id = $anunciante->id;
 
         $total_alertas = 0;
@@ -132,66 +232,196 @@ class IntegracaoController extends Controller
         $total_alterados = 0;
         $total_removidos = 0;
 
-        $LogIntegracao = (New LogIntegracaoController())->gravaLog($anunciante_id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
+        $LogIntegracao = null;
 
-        foreach($xml->Listings->Listing as $imovel){
+        try {
+            $arrContextOptions=array(
+                "ssl"=>array(
+                    "verify_peer"=>false,
+                    "verify_peer_name"=>false,
+                ),
+            );
 
-            if((New Anuncio())->verificaDuplicidade('id_externo', $imovel->ListingID, $anunciante_id)){
+            $data = @file_get_contents($url, false, stream_context_create($arrContextOptions));
+            if ($data === false) {
+                throw new \Exception("Não foi possível acessar a URL do arquivo XML: " . $url);
+            }
 
-                $dadosAnuncio = Anuncio::where('id_externo',$imovel->ListingID)->first();
-                $anuncio = Anuncio::find($dadosAnuncio->id);
-                $anuncio->finalidade = (New AnuncioFinalidadeController())->GetFinalidadeByTipo($imovel->Details->PropertyType);
-                $anuncio->tipo_publicacao = $this->GetTipoByPublicationType($imovel->PublicationType);
-                $anuncio->origem_publicacao = 'Integracao';
-                $anuncio->tipo_id = (New AnuncioTipoController())->GetIDTipoByNome($imovel->Details->PropertyType);
-                $anuncio->anunciante_id = $anunciante_id;
-                $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
-                $anuncio->id_externo = $imovel->ListingID;
-                $anuncio->titulo = mb_strcut(addslashes($imovel->Title), 0, 100,"UTF-8");
-                $anuncio->descricao = addslashes($imovel->Details->Description);
-                $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
-                $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
-                $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
-                $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
-                $anuncio->situacao = 'Liberado';
-                $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
-                $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
+            $xml = @simplexml_load_string($data);
+            if ($xml === false) {
+                throw new \Exception("O arquivo XML está com formato inválido ou malformado.");
+            }
 
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LivingArea'), 'Detalhes', $imovel->Details->LivingArea ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LotArea'),'Detalhes', $imovel->Details->LotArea ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Buildings'),'Detalhes', $imovel->Details->Buildings ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Floors'),'Detalhes', $imovel->Details->Floors ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('UnitFloor'),'Detalhes', $imovel->Details->UnitFloor ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bedrooms'),'Detalhes', $imovel->Details->Bedrooms ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bathrooms'),'Detalhes', $imovel->Details->Bathrooms ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Suites'),'Detalhes', $imovel->Details->Suites ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Garage'),'Detalhes', $imovel->Details->Garage ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'),'Detalhes', $imovel->Details->PropertyAdministrationFee ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearlyTax'),'Detalhes', $imovel->Details->YearlyTax ?? '0');
-                (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearBuilt'),'Detalhes', $imovel->Details->YearBuilt ?? '0');
+            if (!isset($xml->Listings) || !isset($xml->Listings->Listing)) {
+                throw new \Exception("Formato XML incorreto. Tag principal Listings/Listing não encontrada.");
+            }
 
-                $endereco = Endereco::find($dadosAnuncio->endereco_id);
-                $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
-                $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
-                $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
-                $endereco->numero_endereco = mb_strcut($imovel->Location->StreetNumber ?? '100', 0, 10,"UTF-8");
-                $endereco->complemento_endereco = 'Complemento';
-                $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
-                $endereco->save();
+            $LogIntegracao = (New LogIntegracaoController())->gravaLog($anunciante_id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
 
-                if($anuncio->save()){
+            foreach($xml->Listings->Listing as $imovel){
 
-                    foreach($imovel->Features as $Itens){
-                        (New AnuncioInformacoes())->DeletaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature));
-                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
+                if((New Anuncio())->verificaDuplicidade('id_externo', $imovel->ListingID, $anunciante_id)){
+
+                    $dadosAnuncio = Anuncio::where('id_externo',$imovel->ListingID)->first();
+                    $anuncio = Anuncio::find($dadosAnuncio->id);
+                    $anuncio->finalidade = (New AnuncioFinalidadeController())->GetFinalidadeByTipo($imovel->Details->PropertyType);
+                    $anuncio->tipo_publicacao = $this->GetTipoByPublicationType($imovel->PublicationType);
+                    $anuncio->origem_publicacao = 'Integracao';
+                    $anuncio->tipo_id = (New AnuncioTipoController())->GetIDTipoByNome($imovel->Details->PropertyType);
+                    $anuncio->anunciante_id = $anunciante_id;
+                    $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
+                    $anuncio->id_externo = $imovel->ListingID;
+                    $anuncio->titulo = mb_strcut(addslashes($imovel->Title), 0, 100,"UTF-8");
+                    $anuncio->descricao = addslashes($imovel->Details->Description);
+                    $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
+                    $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
+                    $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
+                    $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
+                    $anuncio->situacao = 'Liberado';
+                    $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
+                    $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
+
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LivingArea'), 'Detalhes', $imovel->Details->LivingArea ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('LotArea'),'Detalhes', $imovel->Details->LotArea ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Buildings'),'Detalhes', $imovel->Details->Buildings ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Floors'),'Detalhes', $imovel->Details->Floors ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('UnitFloor'),'Detalhes', $imovel->Details->UnitFloor ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bedrooms'),'Detalhes', $imovel->Details->Bedrooms ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Bathrooms'),'Detalhes', $imovel->Details->Bathrooms ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Suites'),'Detalhes', $imovel->Details->Suites ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('Garage'),'Detalhes', $imovel->Details->Garage ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'),'Detalhes', $imovel->Details->PropertyAdministrationFee ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearlyTax'),'Detalhes', $imovel->Details->YearlyTax ?? '0');
+                    (New AnuncioInformacoes())->UpdateInformacao($dadosAnuncio->id, $this->GetInformacaoByFeature('YearBuilt'),'Detalhes', $imovel->Details->YearBuilt ?? '0');
+
+                    $endereco = Endereco::find($dadosAnuncio->endereco_id);
+                    $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
+                    $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
+                    $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
+                    $endereco->numero_endereco = mb_strcut($imovel->Location->StreetNumber ?? '100', 0, 10,"UTF-8");
+                    $endereco->complemento_endereco = 'Complemento';
+                    $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
+                    $endereco->save();
+
+                    if($anuncio->save()){
+
+                        foreach($imovel->Features as $Itens){
+                            (New AnuncioInformacoes())->DeletaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature));
+                            (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
+                        }
+
+                        $fotos_anuncio = AnuncioFotos::where('anuncio_id', $anuncio->id)->get();
+                        if($fotos_anuncio->count() > 0){
+                            AnuncioFotos::where('anuncio_id', $anuncio->id)->delete();
+                        }
+
+                        if($imovel->Media->Item->count() > 0){
+                            foreach($imovel->Media->Item as $foto){
+
+                                if(isset($foto->attributes()->medium)){
+                                    if($foto->attributes()->medium == "video"){
+                                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto);
+                                    }else{
+                                        $fotos = new AnuncioFotos();
+                                        $fotos->anuncio_id = $anuncio->id;
+                                        $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
+                                        $fotos->arquivo = $foto;
+
+                                        if(isset($foto->attributes()->primary)){
+                                            $fotos->destaque = 'S';
+                                        }else{
+                                            $fotos->destaque = 'N';
+                                        }
+
+                                        $fotos->save();
+                                    }
+                                }else{
+                                    $fotos = new AnuncioFotos();
+                                    $fotos->anuncio_id = $anuncio->id;
+                                    $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
+                                    $fotos->arquivo = $foto;
+
+                                    if(isset($foto->attributes()->primary)){
+                                        $fotos->destaque = 'S';
+                                    }else{
+                                        $fotos->destaque = 'N';
+                                    }
+
+                                    $fotos->save();
+                                }
+                            }
+
+                            $tipo_log = "Sucesso";
+                            $subtipo_log = "Atualização";
+                            $titulo = "Imóvel atualizado com sucesso";
+                            $descricao_log = "Imóvel updated com sucesso";
+                        }else{
+                            $tipo_log = "Erro";
+                            $subtipo_log = "Atualização";
+                            $titulo = "O Imóvel não foi atualizado totalmente";
+                            $descricao_log = "O imóvel não possui imagens";
+                        }
+
+                    }else{
+                        $tipo_log = "Erro";
+                        $subtipo_log = "Atualização";
+                        $titulo = "O Imóvel não foi atualizado totalmente";
+                        $descricao_log = "Informações importantes estão ausentes";
                     }
 
-                    $fotos_anuncio = AnuncioFotos::where('anuncio_id', $anuncio->id)->get();
-                    if($fotos_anuncio->count() > 0){
-                        AnuncioFotos::where('anuncio_id', $anuncio->id)->delete();
-                    }
+                    (New LogIntegracaoAnuncioController())->gravaLogAnuncio($LogIntegracao->id, $imovel->ListingID, $tipo_log, $subtipo_log, $titulo, $descricao_log);
 
-                    if($imovel->Media->Item->count() > 0){
+                    $total_alterados++;
+
+                }else{
+
+                    $endereco = new Endereco();
+                    $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
+                    $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
+                    $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
+                    $endereco->numero_endereco = mb_strcut($imovel->Location->StreetNumber ?? '100', 0, 10,"UTF-8");
+                    $endereco->complemento_endereco = 'Complemento';
+                    $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
+                    $endereco->save();
+
+                    $anuncio = new Anuncio();
+                    $anuncio->finalidade = (New AnuncioFinalidadeController())->GetFinalidadeByTipo($imovel->Details->PropertyType);
+                    $anuncio->tipo_publicacao = $this->GetTipoByPublicationType($imovel->PublicationType);
+                    $anuncio->origem_publicacao = 'Integracao';
+                    $anuncio->tipo_id = (New AnuncioTipoController())->GetIDTipoByNome($imovel->Details->PropertyType);
+                    $anuncio->anunciante_id = $anunciante_id;
+                    $anuncio->endereco_id = $endereco->id;
+                    $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
+                    $anuncio->id_externo = $imovel->ListingID;
+                    $anuncio->titulo = mb_strcut(addslashes($imovel->Title), 0, 100,"UTF-8");
+                    $anuncio->descricao = addslashes($imovel->Details->Description);
+                    $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
+                    $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
+                    $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
+                    $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
+                    $anuncio->situacao = 'Liberado';
+                    $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
+                    $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
+
+                    if($anuncio->save()){
+
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'),'Detalhes', $imovel->Details->LivingArea ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'),'Detalhes', $imovel->Details->LotArea ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'),'Detalhes', $imovel->Details->Buildings ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'),'Detalhes', $imovel->Details->Floors ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'),'Detalhes', $imovel->Details->UnitFloor ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), 'Detalhes',$imovel->Details->Bedrooms ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'),'Detalhes', $imovel->Details->Bathrooms ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'),'Detalhes', $imovel->Details->Suites ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'),'Detalhes', $imovel->Details->Garage ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'),'Detalhes', $imovel->Details->PropertyAdministrationFee ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'),'Detalhes', $imovel->Details->YearlyTax ?? '0');
+                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'),'Detalhes', $imovel->Details->YearBuilt ?? '0');
+
+                        foreach($imovel->Features as $Itens){
+                            (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
+                        }
+
                         foreach($imovel->Media->Item as $foto){
 
                             if(isset($foto->attributes()->medium)){
@@ -228,146 +458,77 @@ class IntegracaoController extends Controller
                         }
 
                         $tipo_log = "Sucesso";
-                        $subtipo_log = "Atualização";
-                        $titulo = "Imóvel atualizado com sucesso";
-                        $descricao_log = "Imóvel atualizado com sucesso";
+                        $subtipo_log = "Inclusão";
+                        $titulo = "Imóvel integrado com sucesso";
+                        $descricao_log = "Imóvel integrado com sucesso";
+
                     }else{
                         $tipo_log = "Erro";
-                        $subtipo_log = "Atualização";
-                        $titulo = "O Imóvel não foi atualizado totalmente";
-                        $descricao_log = "O imóvel não possui imagens";
+                        $subtipo_log = "Inclusão";
+                        $titulo = "O Imóvel não foi integrado totalmente";
+                        $descricao_log = "Informações importantes estão ausentes";
                     }
 
-                }else{
-                    $tipo_log = "Erro";
-                    $subtipo_log = "Atualização";
-                    $titulo = "O Imóvel não foi atualizado totalmente";
-                    $descricao_log = "Informações importantes estão ausentes";
+                    (New LogIntegracaoAnuncioController())->gravaLogAnuncio($LogIntegracao->id, $imovel->ListingID, $tipo_log, $subtipo_log, $titulo, $descricao_log);
+
+                    $total_incluidos++;
                 }
 
-                (New LogIntegracaoAnuncioController())->gravaLogAnuncio($LogIntegracao->id, $imovel->ListingID, $tipo_log, $subtipo_log, $titulo, $descricao_log);
+                $ArrayImportacaoAnuncios[] = $imovel->ListingID;
 
-                $total_alterados++;
+            }
 
+            $logUpdate = (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
+
+            foreach($anunciante->anuncios as $anuncio){
+                if (!in_array($anuncio->id_externo, $ArrayImportacaoAnuncios)) {
+                    Anuncio::where('id_externo', $anuncio->id_externo)->update(['situacao' => 'Bloqueado']);
+                }
+            }
+
+            if($logUpdate){
+                $anunciante->ultima_atualizacao = Carbon::now();
+                $anunciante->save();
+                return $logUpdate;
             }else{
+                return false;
+            }
 
-                $endereco = new Endereco();
-                $endereco->cidade_id = (New EnderecoController())->getIDCidadeByNome($imovel->Location->City) ?? '5103403';
-                $endereco->cep_endereco = Helper::limpa_campo($imovel->Location->PostalCode ?? '78000000');
-                $endereco->logradouro_endereco = $imovel->Location->Address ?? 'Av. do CPA';
-                $endereco->numero_endereco = mb_strcut($imovel->Location->StreetNumber ?? '100', 0, 10,"UTF-8");
-                $endereco->complemento_endereco = 'Complemento';
-                $endereco->bairro_endereco = $imovel->Location->Neighborhood ?? 'Centro';
-                $endereco->save();
+        } catch (\Throwable $e) {
+            // Block the integration
+            $integracao->bloqueado = true;
+            $integracao->save();
 
-                $anuncio = new Anuncio();
-                $anuncio->finalidade = (New AnuncioFinalidadeController())->GetFinalidadeByTipo($imovel->Details->PropertyType);
-                $anuncio->tipo_publicacao = $this->GetTipoByPublicationType($imovel->PublicationType);
-                $anuncio->origem_publicacao = 'Integracao';
-                $anuncio->tipo_id = (New AnuncioTipoController())->GetIDTipoByNome($imovel->Details->PropertyType);
-                $anuncio->anunciante_id = $anunciante_id;
-                $anuncio->endereco_id = $endereco->id;
-                $anuncio->transacao = $this->GetTransacaoByTransactionType($imovel->TransactionType);
-                $anuncio->id_externo = $imovel->ListingID;
-                $anuncio->titulo = mb_strcut(addslashes($imovel->Title), 0, 100,"UTF-8");
-                $anuncio->descricao = addslashes($imovel->Details->Description);
-                $anuncio->descricao_resumida = mb_strcut(addslashes($imovel->Details->Description), 0, 250,"UTF-8");
-                $anuncio->valor_venda = Helper::converte_reais_to_mysql($imovel->Details->ListPrice ?? 0.00);
-                $anuncio->valor_locacao = Helper::converte_reais_to_mysql($imovel->Details->RentalPrice ?? 0.00);
-                $anuncio->valor_condominio = Helper::converte_reais_to_mysql($imovel->Details->PropertyAdministrationFee ?? 0.00);
-                $anuncio->situacao = 'Liberado';
-                $anuncio->destaque = $imovel->Details->Destaque ?? 'N';
-                $anuncio->lancamento = $imovel->Details->Lancamento ?? 'N';
+            // Record error log
+            if (!$LogIntegracao) {
+                $LogIntegracao = (New LogIntegracaoController())->gravaLog($anunciante_id, 1, 0, 0, 0);
+            } else {
+                (New LogIntegracaoController())->updateLog($LogIntegracao->id, $LogIntegracao->total_alertas + 1, $LogIntegracao->total_incluidos, $LogIntegracao->total_alterados, $LogIntegracao->total_removidos);
+            }
 
-                if($anuncio->save()){
+            (New LogIntegracaoAnuncioController())->gravaLogAnuncio(
+                $LogIntegracao->id,
+                'XML',
+                'Erro',
+                'Atualização',
+                'Erro Geral de Processamento',
+                $e->getMessage()
+            );
 
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LivingArea'),'Detalhes', $imovel->Details->LivingArea ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('LotArea'),'Detalhes', $imovel->Details->LotArea ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Buildings'),'Detalhes', $imovel->Details->Buildings ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Floors'),'Detalhes', $imovel->Details->Floors ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('UnitFloor'),'Detalhes', $imovel->Details->UnitFloor ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bedrooms'), 'Detalhes',$imovel->Details->Bedrooms ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Bathrooms'),'Detalhes', $imovel->Details->Bathrooms ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Suites'),'Detalhes', $imovel->Details->Suites ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('Garage'),'Detalhes', $imovel->Details->Garage ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('PropertyAdministrationFee'),'Detalhes', $imovel->Details->PropertyAdministrationFee ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearlyTax'),'Detalhes', $imovel->Details->YearlyTax ?? '0');
-                    (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature('YearBuilt'),'Detalhes', $imovel->Details->YearBuilt ?? '0');
+            // Log details to storage
+            \Illuminate\Support\Facades\Log::error("Erro no processamento da integração do anunciante ID {$anunciante->id}: " . $e->getMessage(), [
+                'exception' => $e
+            ]);
 
-                    foreach($imovel->Features as $Itens){
-                        (New AnuncioInformacoes())->GravaInformacao($anuncio->id, $this->GetInformacaoByFeature($Itens->Feature), 'Características', 'Sim');
-                    }
-
-                    foreach($imovel->Media->Item as $foto){
-
-                        if(isset($foto->attributes()->medium)){
-                            if($foto->attributes()->medium == "video"){
-                                (New AnuncioInformacoes())->GravaInformacao($anuncio->id, 'Vídeo','Detalhes', $foto);
-                            }else{
-                                $fotos = new AnuncioFotos();
-                                $fotos->anuncio_id = $anuncio->id;
-                                $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
-                                $fotos->arquivo = $foto;
-
-                                if(isset($foto->attributes()->primary)){
-                                    $fotos->destaque = 'S';
-                                }else{
-                                    $fotos->destaque = 'N';
-                                }
-
-                                $fotos->save();
-                            }
-                        }else{
-                            $fotos = new AnuncioFotos();
-                            $fotos->anuncio_id = $anuncio->id;
-                            $fotos->titulo = mb_strcut($foto->attributes()->caption ?? $imovel->Title, 0, 50,"UTF-8");
-                            $fotos->arquivo = $foto;
-
-                            if(isset($foto->attributes()->primary)){
-                                $fotos->destaque = 'S';
-                            }else{
-                                $fotos->destaque = 'N';
-                            }
-
-                            $fotos->save();
-                        }
-                    }
-
-                    $tipo_log = "Sucesso";
-                    $subtipo_log = "Inclusão";
-                    $titulo = "Imóvel integrado com sucesso";
-                    $descricao_log = "Imóvel integrado com sucesso";
-
-                }else{
-                    $tipo_log = "Erro";
-                    $subtipo_log = "Inclusão";
-                    $titulo = "O Imóvel não foi integrado totalmente";
-                    $descricao_log = "Informações importantes estão ausentes";
+            // Notify both client and admin via email if enabled
+            if ($integracao->notificar === 'Sim') {
+                if (!empty($anunciante->email)) {
+                    Mail::to($anunciante->email)->send(new \App\Mail\ErroIntegracao($anunciante, $e->getMessage(), 'cliente'));
                 }
-
-                (New LogIntegracaoAnuncioController())->gravaLogAnuncio($LogIntegracao->id, $imovel->ListingID, $tipo_log, $subtipo_log, $titulo, $descricao_log);
-
-                $total_incluidos++;
+                $adminEmail = 'edsongaldino@outlook.com';
+                Mail::to($adminEmail)->send(new \App\Mail\ErroIntegracao($anunciante, $e->getMessage(), 'admin'));
             }
 
-            $ArrayImportacaoAnuncios[] = $imovel->ListingID;
-
-        }
-
-        $logUpdate = (New LogIntegracaoController())->updateLog($LogIntegracao->id, $total_alertas, $total_incluidos, $total_alterados, $total_removidos);
-
-        foreach($anunciante->anuncios as $anuncio){
-            if (!in_array($anuncio->id_externo, $ArrayImportacaoAnuncios)) {
-                Anuncio::where('id_externo', $anuncio->id_externo)->update(['situacao' => 'Bloqueado']);
-            }
-        }
-
-
-        if($logUpdate){
-            $anunciante->ultima_atualizacao = Carbon::now();
-            $anunciante->save();
-            return $logUpdate;
-        }else{
             return false;
         }
 

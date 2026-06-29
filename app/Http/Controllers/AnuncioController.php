@@ -34,11 +34,63 @@ class AnuncioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $anuncios = Anuncio::where('anunciante_id', Auth::user()->anunciante->id)->paginate(20);
-        $tipos = AnuncioTipo::all();
-        return view('painel.anuncios.lista', compact('anuncios', 'tipos'));
+        $user = Auth::user();
+        $anuncianteId = $user->anunciante_id ?? ($user->anunciante->id ?? null);
+
+        $query = Anuncio::with(['fotos', 'tipo', 'endereco.cidade']);
+
+        if ($user->perfil_id != 1) {
+            $query->where('anunciante_id', $anuncianteId);
+        }
+
+        if ($request->filled('busca')) {
+            $busca = $request->busca;
+            $query->where(function($q) use ($busca) {
+                $q->where('titulo', 'like', "%{$busca}%")
+                  ->orWhere('id_externo', 'like', "%{$busca}%")
+                  ->orWhere('id', '=', $busca);
+            });
+        }
+
+        if ($request->filled('tipo_negocio')) {
+            $query->where('transacao', $request->tipo_negocio);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('situacao', $request->status);
+        }
+
+        if ($request->filled('data_inicio') && $request->filled('data_fim')) {
+            $query->whereBetween('created_at', [$request->data_inicio . ' 00:00:00', $request->data_fim . ' 23:59:59']);
+        }
+
+        $perPage = $request->input('per_page', 10);
+        $anuncios = $query->orderBy('created_at', 'desc')->paginate($perPage);
+
+        // Stats calculation
+        $statsBase = Anuncio::query();
+        if ($user->perfil_id != 1) {
+            $statsBase->where('anunciante_id', $anuncianteId);
+        }
+
+        $totalAnuncios = (clone $statsBase)->count();
+        $totalLiberados = (clone $statsBase)->where(function($q) {
+            $q->where('situacao', 'Liberado')->orWhere('situacao', 'Ativo')->orWhereNull('situacao');
+        })->count();
+        $totalAguardando = (clone $statsBase)->where('situacao', 'Aguardando')->count();
+        $totalBloqueados = (clone $statsBase)->where('situacao', 'Bloqueado')->count();
+
+        $filtrosAtivos = 0;
+        foreach (['busca', 'tipo_negocio', 'status', 'data_inicio', 'data_fim'] as $f) {
+            if ($request->filled($f)) $filtrosAtivos++;
+        }
+
+        return view('painel.anuncios.lista', compact(
+            'anuncios', 'totalAnuncios', 'totalLiberados', 
+            'totalAguardando', 'totalBloqueados', 'filtrosAtivos', 'request'
+        ));
     }
 
     /**
@@ -257,6 +309,11 @@ class AnuncioController extends Controller
 
     public function DetalhesAnuncio($id){
         $anuncio = Anuncio::find($id);
+
+        if (!$anuncio || $anuncio->situacao == 'Bloqueado') {
+            return redirect()->route('pagina-inicial')->with('error', 'Este anúncio não está mais disponível.');
+        }
+
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $latLong = Helper::get_lat_long($anuncio->endereco->logradouro_endereco.','.$anuncio->endereco->bairro_endereco.','.$anuncio->endereco->cidade->nome_cidade.','.$anuncio->endereco->cidade->estado->uf_estado);
 
@@ -311,4 +368,15 @@ class AnuncioController extends Controller
         ]);
     }
 
+    public function alterarStatus(Request $request, $id)
+    {
+        $anuncio = Anuncio::findOrFail($id);
+        $anuncio->situacao = $request->input('status');
+        $anuncio->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Status do anúncio atualizado com sucesso!'
+        ]);
+    }
 }

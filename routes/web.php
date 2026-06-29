@@ -47,7 +47,6 @@ Route::get('detalhes-imovel', function () {
 
 //Rotas Admin / Painel
 Route::get('/login', 'App\Http\Controllers\AppController@login')->name('login');
-Route::get('/login-portal', 'App\Http\Controllers\AppController@loginPortal')->name('login.portal');
 Route::get('/dashboard', 'App\Http\Controllers\AppController@index')->name('dashboard')->middleware('auth');
 Route::post('/finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@CadastrarAnunciante')->name('finalizar-cadastro');
 Route::post('/login-painel', 'App\Http\Controllers\AuthController@Login')->name('login-painel');
@@ -56,28 +55,53 @@ Route::get('/nova-senha/{email}', 'App\Http\Controllers\AuthController@FormAlter
 Route::post('/senha/alterar', 'App\Http\Controllers\AuthController@AlterarSenha')->name('alterar.senha');
 Route::get('/logout-painel', 'App\Http\Controllers\AuthController@Logout')->name('logout-painel')->middleware('auth');
 Route::get('/painel/anuncios', 'App\Http\Controllers\AnuncioController@index')->name('painel.anuncios')->middleware('auth');
+Route::get('/painel/anuncios/exportar', 'App\Http\Controllers\AnuncioController@exportarExcel')->name('painel.anuncios.exportar')->middleware('auth');
 Route::get('/painel/anuncios/incluir', 'App\Http\Controllers\AnuncioController@create')->name('painel.anuncios.incluir')->middleware('auth');
 Route::get('/painel/anuncios/{id}/editar', 'App\Http\Controllers\AnuncioController@edit')->name('painel.anuncios.editar')->middleware('auth');
+Route::post('/painel/anuncios/{id}/status', 'App\Http\Controllers\AnuncioController@alterarStatus')->name('painel.anuncios.status')->middleware('auth');
 Route::get('/anunciante/{id}/logo', 'App\Http\Controllers\AnuncianteController@getLogo');
 Route::get('/anunciante/{id}/confirmar-cadastro/{email}', 'App\Http\Controllers\AnuncianteController@ValidarCadastro');
 
+//Rotas Autenticação Portal Cliente
+Route::get('/login-portal', 'App\Http\Controllers\AppController@loginPortal')->name('login.portal');
+Route::post('/login-portal', 'App\Http\Controllers\PortalAuthController@login');
+Route::get('/logout-portal', 'App\Http\Controllers\PortalAuthController@logout')->name('logout.portal');
+
+Route::get('/login/google', 'App\Http\Controllers\PortalAuthController@redirectToGoogle')->name('login.google');
+Route::get('/login/google/callback', 'App\Http\Controllers\PortalAuthController@handleGoogleCallback')->name('login.google.callback');
+
 Route::get('/cadastro-portal', 'App\Http\Controllers\AppController@loginPortal')->name('cadastro.portal');
+Route::post('/cadastro-portal', 'App\Http\Controllers\PortalAuthController@register');
 Route::get('/resetar-senha-portal', 'App\Http\Controllers\AppController@loginPortal')->name('resetar.senha.portal');
 
 Route::get('/painel/{id}/perfil', 'App\Http\Controllers\UserController@edit')->name('painel.perfil')->middleware('auth');
 Route::post('/painel/perfil-salvar', 'App\Http\Controllers\AnuncianteController@update')->name('painel.perfil.salvar')->middleware('auth');
 Route::post('/painel/dados-acesso-salvar', 'App\Http\Controllers\UserController@update')->name('dados-acesso.salvar')->middleware('auth');
 
-Route::get('/leads', 'App\Http\Controllers\LeadsController@GetLeads')->name('leads');
-Route::get('/painel/leads', 'App\Http\Controllers\LeadsController@index')->name('painel.leads')->middleware('auth');
+Route::get('/painel/leads', 'App\Http\Controllers\LeadsController@index')->name('painel.leads.index')->middleware('auth');
+Route::get('/painel/leads/exportar', 'App\Http\Controllers\LeadsController@exportarExcel')->name('painel.leads.exportar')->middleware('auth');
+
+// Rotas Administrativas - Gestão de Parceiros e Usuários
+Route::get('/painel/parceiros', 'App\Http\Controllers\ParceiroController@index')->name('painel.parceiros.index')->middleware('auth');
+Route::get('/painel/parceiros/exportar', 'App\Http\Controllers\ParceiroController@exportarExcel')->name('painel.parceiros.exportar')->middleware('auth');
+Route::post('/painel/parceiros/{id}/status', 'App\Http\Controllers\ParceiroController@alterarStatus')->name('painel.parceiros.status')->middleware('auth');
+Route::get('/painel/parceiros/{id}/integracao', 'App\Http\Controllers\ParceiroController@detalheIntegracao')->name('painel.parceiros.integracao')->middleware('auth');
+
+Route::get('/painel/usuarios', 'App\Http\Controllers\UserController@gestaoUsuarios')->name('painel.usuarios.index')->middleware('auth');
+Route::post('/painel/usuarios/salvar', 'App\Http\Controllers\UserController@gestaoSalvarUsuario')->name('painel.usuarios.salvar')->middleware('auth');
+Route::post('/painel/usuarios/{id}/senha', 'App\Http\Controllers\UserController@gestaoAlterarSenha')->name('painel.usuarios.senha')->middleware('auth');
+Route::delete('/painel/usuarios/{id}', 'App\Http\Controllers\UserController@gestaoExcluirUsuario')->name('painel.usuarios.excluir')->middleware('auth');
 Route::get('/painel/integracoes/configuracao', 'App\Http\Controllers\IntegracaoController@Configuracao')->name('painel.integracoes.configuracao')->middleware('auth');
 Route::post('/painel/integracao-salvar', 'App\Http\Controllers\IntegracaoController@salvarDados')->name('integracao.salvar')->middleware('auth');
 Route::get('/painel/integracoes/relatorio-geral', 'App\Http\Controllers\IntegracaoController@RelatorioGeral')->name('painel.integracoes.relatorio-geral')->middleware('auth');
 Route::get('/painel/integracoes/{id}/relatorio-importacao', 'App\Http\Controllers\IntegracaoController@RelatorioIndividual')->name('painel.integracoes.relatorio-importacao')->middleware('auth');
+Route::get('/painel/integracoes/{id}/detalhes-ajax', 'App\Http\Controllers\IntegracaoController@detalhesAjax')->name('painel.integracoes.detalhes-ajax')->middleware('auth');
 Route::post('/painel/integracao/processar-xml', 'App\Http\Controllers\IntegracaoController@ProcessarXML')->name('integracao.processar-xml')->middleware('auth');
 Route::get('/painel/integracao/cron/atualizar-anuncios', 'App\Http\Controllers\IntegracaoController@CronAtualizarAnuncios')->name('integracao.cron.atualizar-anuncios');
 //Rotas Portal
 Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@BuscaAnuncios')->name('imoveis.buscar');
+Route::get('/api/cidades-contagem', 'App\Http\Controllers\AnuncioController@GetCidadesContagem')->name('api.cidades.contagem');
+Route::get('/api/imoveis-contagem', 'App\Http\Controllers\AnuncioController@GetAnunciosContagem')->name('api.imoveis.contagem');
 Route::get('/imoveis/{id}/{cidade}/{titulo}', 'App\Http\Controllers\AnuncioController@DetalhesAnuncio')->name('imoveis.detalhes');
 Route::get('/', 'App\Http\Controllers\AppController@PaginaInicial')->name('pagina-inicial');
 Route::match(['get', 'post'],'/lista-imoveis/{transacao}', 'App\Http\Controllers\AnuncioController@ListaAnuncios')->name('lista-imoveis');
@@ -88,7 +112,8 @@ Route::get('/rede-imoveis-mt', 'App\Http\Controllers\AppController@RedeImoveis')
 Route::get('/rede-imoveis-mt/como-anunciar', 'App\Http\Controllers\AppController@ComoAnunciar')->name('rede-imoveis-mt/como-anunciar');
 Route::get('/rede-imoveis-mt/termos-de-uso', 'App\Http\Controllers\AppController@TermosDeUso')->name('rede-imoveis-mt/termos-de-uso');
 Route::get('/mapa-do-site', 'App\Http\Controllers\AppController@MapaDoSite')->name('mapa-do-site');
-Route::get('/imoveis-favoritos', 'App\Http\Controllers\AppController@ImoveisFavoritos')->name('imoveis-favoritos');
+Route::get('/imoveis-favoritos', 'App\Http\Controllers\FavoritoController@index')->name('imoveis-favoritos');
+Route::post('/favoritos/toggle', 'App\Http\Controllers\FavoritoController@toggle')->name('favoritos.toggle');
 Route::get('/indicativos-imobiliarios', 'App\Http\Controllers\AppController@IndicativosImobiliarios')->name('indicativos-imobiliarios');
 
 Route::match(['get', 'post'],'/lista-imoveis/{id}/{anunciante}', 'App\Http\Controllers\AnuncioController@ListaAnunciosByAnunciante')->name('lista-imoveis-anunciante');
