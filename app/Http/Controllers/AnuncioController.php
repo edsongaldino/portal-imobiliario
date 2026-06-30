@@ -212,97 +212,239 @@ class AnuncioController extends Controller
 
 
     #CONTROLLERSPORTAL
+    private function aplicarFiltrosEOrdenacao($query, Request $request, $transacaoExplicita = null)
+    {
+        $transacao = $transacaoExplicita ?? $request->transacao;
+        if ($transacao) {
+            switch($transacao){
+                case 'Lançamentos':
+                case 'novos':
+                case 'Novos':
+                    $query->where('anuncios.lancamento', 'S');
+                    break;
+                case 'Locação':
+                case 'locacao':
+                case 'Alugar':
+                    $query->where('anuncios.transacao', 'Locação');
+                    break;
+                case 'Venda':
+                case 'venda':
+                case 'Comprar':
+                    $query->where('anuncios.transacao', 'Venda');
+                    break;
+            }
+        }
+
+        if ($request->filled('localizacao')) {
+            $query->where('enderecos.cidade_id', $request->localizacao);
+        }
+
+        if ($request->filled('tipo_imovel')) {
+            $tipos = (array) $request->tipo_imovel;
+            $tipos = array_filter($tipos, function($val) { return is_numeric($val) && $val > 0; });
+            if (!empty($tipos)) {
+                $query->whereIn('anuncios.tipo_id', $tipos);
+            }
+        }
+
+        if ($request->filled('palavra_chave')) {
+            $query->where('anuncios.titulo', 'like', '%' . $request->palavra_chave . '%');
+        }
+
+        if ($request->filled('valor_minimo')) {
+            $min = Helper::converte_reais_to_mysql($request->valor_minimo);
+            if ($min > 0) {
+                $query->where(function($q) use ($min) {
+                    $q->where('anuncios.valor_venda', '>=', $min)
+                      ->orWhere('anuncios.valor_locacao', '>=', $min);
+                });
+            }
+        }
+
+        if ($request->filled('valor_maximo')) {
+            $max = Helper::converte_reais_to_mysql($request->valor_maximo);
+            if ($max > 0) {
+                $query->where(function($q) use ($max) {
+                    $q->where(function($sub) use ($max) {
+                        $sub->where('anuncios.valor_venda', '<=', $max)->where('anuncios.valor_venda', '>', 0);
+                    })->orWhere(function($sub) use ($max) {
+                        $sub->where('anuncios.valor_locacao', '<=', $max)->where('anuncios.valor_locacao', '>', 0);
+                    });
+                });
+            }
+        }
+
+        $infoFilters = [
+            'quartos' => 'Quartos',
+            'banheiros' => 'Banheiros',
+            'garagem' => 'Garagem'
+        ];
+        foreach ($infoFilters as $param => $chave) {
+            if ($request->filled($param)) {
+                $vals = (array) $request->$param;
+                $query->whereHas('informacoes', function($q) use ($chave, $vals) {
+                    $q->where('chave', $chave)->where(function($sub) use ($vals) {
+                        foreach ($vals as $val) {
+                            if ($val >= 6) {
+                                $sub->orWhereRaw('CAST(valor AS UNSIGNED) >= 6');
+                            } else {
+                                $sub->orWhere('valor', $val);
+                            }
+                        }
+                    });
+                });
+            }
+        }
+
+        if ($request->filled('area_minima')) {
+            $areaMin = Helper::converte_reais_to_mysql($request->area_minima);
+            if ($areaMin > 0) {
+                $query->whereHas('informacoes', function($q) use ($areaMin) {
+                    $q->where(function($sub) {
+                        $sub->where('chave', 'Área Útil')->orWhere('chave', 'LivingArea');
+                    })->whereRaw('CAST(valor AS DECIMAL(10,2)) >= ?', [$areaMin]);
+                });
+            }
+        }
+
+        if ($request->filled('area_maxima')) {
+            $areaMax = Helper::converte_reais_to_mysql($request->area_maxima);
+            if ($areaMax > 0) {
+                $query->whereHas('informacoes', function($q) use ($areaMax) {
+                    $q->where(function($sub) {
+                        $sub->where('chave', 'Área Útil')->orWhere('chave', 'LivingArea');
+                    })->whereRaw('CAST(valor AS DECIMAL(10,2)) <= ?', [$areaMax]);
+                });
+            }
+        }
+
+        if ($request->filled('caracteristicas')) {
+            $caracteristicas = (array) $request->caracteristicas;
+            foreach ($caracteristicas as $caract) {
+                $query->whereHas('informacoes', function($q) use ($caract) {
+                    $q->where('chave', $caract);
+                });
+            }
+        }
+
+        if ($request->filled('ordenacao')) {
+            switch ($request->ordenacao) {
+                case 'menor_valor':
+                    $query->orderByRaw("CASE WHEN anuncios.transacao = 'Locação' THEN anuncios.valor_locacao ELSE anuncios.valor_venda END ASC");
+                    break;
+                case 'maior_valor':
+                    $query->orderByRaw("CASE WHEN anuncios.transacao = 'Locação' THEN anuncios.valor_locacao ELSE anuncios.valor_venda END DESC");
+                    break;
+                case 'relevantes':
+                default:
+                    $query->orderByRaw("CASE WHEN anuncios.destaque = 'S' THEN 1 ELSE 2 END ASC")->orderBy('anuncios.id', 'DESC');
+                    break;
+            }
+        } else {
+            $query->orderByRaw("CASE WHEN anuncios.destaque = 'S' THEN 1 ELSE 2 END ASC")->orderBy('anuncios.id', 'DESC');
+        }
+
+        return $query;
+    }
+
     public function BuscaAnuncios(Request $request)
     {
-        $anuncios = Anuncio::select('anuncios.*')
+        $query = Anuncio::select('anuncios.*')
                             ->where('anuncios.situacao', 'Liberado')
                             ->where('anunciantes.situacao_cadastro', 'Ativo')
-                            ->where(function ($query) {$query->where('anuncios.valor_venda', '<>', 0)->orWhere('anuncios.valor_locacao', '<>', 0); })
+                            ->where(function ($q) {
+                                $q->where('anuncios.valor_venda', '<>', 0)
+                                  ->orWhere('anuncios.valor_locacao', '<>', 0);
+                            })
                             ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
                             ->join('anunciantes', 'anuncios.anunciante_id', '=', 'anunciantes.id');
 
-        switch($request->transacao){
-            case 'Lançamentos':
-                $anuncios = $anuncios->where('lancamento','S');
-                break;
-            case 'Locação':
-                $anuncios = $anuncios->where('transacao','Locação');
-                break;
-            case 'Venda':
-                $anuncios = $anuncios->where('transacao','Venda');
-                break;
-        }
+        $query = $this->aplicarFiltrosEOrdenacao($query, $request);
 
-        if($request->localizacao){
-            $anuncios = $anuncios->where('enderecos.cidade_id',$request->localizacao);
-        }
+        $perPage = (int) $request->input('por_pagina', 24);
+        $total = $query->distinct('anuncios.id')->count('anuncios.id');
+        $anuncios = $query->groupBy('anuncios.id')->paginate($perPage);
 
-        $itens = DB::table('tipos')->select('id')->whereIn('id', $request->tipo_imovel ?? [0])->get();
-
-        if($itens->count() > 0){
-            foreach($itens as $item){
-                $tiposArray[] = $item->id;
-            }
-            $anuncios = $anuncios->whereIn('tipo_id',$tiposArray);
-        }
-
-        if($request->palavra_chave){
-            $anuncios = $anuncios->where('anuncios.titulo', 'like', '%' . $request->palavra_chave . '%');
-        }
-
-        $total =  $anuncios->count();
-        $anuncios = $anuncios->GroupBy('anuncios.id')->orderBy('anuncios.valor_venda', 'ASC')->paginate(20);
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
                             ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
                             ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
                             ->GroupBy('cidades.id')->orderBy('cidades.total_anuncios', 'DESC')->get();
+
         return view($this->viewLista, compact('anuncios', 'tipos', 'total', 'destaques', 'cidades', 'request'));
     }
 
-    public function ListaAnuncios($transacao)
+    public function GetAnunciosContagem(Request $request)
     {
-        $anuncios = Anuncio::where('situacao', 'Liberado')->where(function ($query) {$query->where('anuncios.valor_venda', '<>', 0)->orWhere('anuncios.valor_locacao', '<>', 0); });
+        $query = Anuncio::select('anuncios.id')
+                            ->where('anuncios.situacao', 'Liberado')
+                            ->where('anunciantes.situacao_cadastro', 'Ativo')
+                            ->where(function ($q) {
+                                $q->where('anuncios.valor_venda', '<>', 0)
+                                  ->orWhere('anuncios.valor_locacao', '<>', 0);
+                            })
+                            ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
+                            ->join('anunciantes', 'anuncios.anunciante_id', '=', 'anunciantes.id');
 
-        switch($transacao){
-            case 'novos':
-                $anuncios = $anuncios->where('lancamento','S');
-                break;
-            case 'locacao':
-                $anuncios = $anuncios->where('transacao','Locação');
-                break;
-            case 'venda':
-                $anuncios = $anuncios->where('transacao','Venda');
-                break;
-        }
-        
-        $request = new Request();
-        $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(50);
-        $tipos = AnuncioTipo::all();
-        $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
-        $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
-                            ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
-                            ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
-                            ->GroupBy('cidades.id')->get();
-        return view($this->viewLista, compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
+        $query = $this->aplicarFiltrosEOrdenacao($query, $request);
+
+        $total = $query->distinct('anuncios.id')->count('anuncios.id');
+
+        return response()->json(['total' => $total]);
     }
 
-    public function ListaAnunciosByAnunciante($id)
+    public function ListaAnuncios(Request $request, $transacao = null)
     {
-        $anuncios = Anuncio::where('situacao', 'Liberado')->where('anunciante_id',$id);
+        $query = Anuncio::select('anuncios.*')
+                            ->where('anuncios.situacao', 'Liberado')
+                            ->where('anunciantes.situacao_cadastro', 'Ativo')
+                            ->where(function ($q) {
+                                $q->where('anuncios.valor_venda', '<>', 0)
+                                  ->orWhere('anuncios.valor_locacao', '<>', 0);
+                            })
+                            ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
+                            ->join('anunciantes', 'anuncios.anunciante_id', '=', 'anunciantes.id');
 
-        $request = new Request();
-        $total =  $anuncios->count();
-        $anuncios = $anuncios->orderBy('valor_venda', 'ASC')->paginate(50);
+        $query = $this->aplicarFiltrosEOrdenacao($query, $request, $transacao);
+
+        $perPage = (int) $request->input('por_pagina', 24);
+        $total = $query->distinct('anuncios.id')->count('anuncios.id');
+        $anuncios = $query->groupBy('anuncios.id')->paginate($perPage);
+
         $tipos = AnuncioTipo::all();
         $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
         $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
                             ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
                             ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
                             ->GroupBy('cidades.id')->get();
-        return view($this->viewLista, compact('anuncios', 'tipos', 'total', 'destaques', 'cidades','request'));
+
+        return view($this->viewLista, compact('anuncios', 'tipos', 'total', 'destaques', 'cidades', 'request'));
+    }
+
+    public function ListaAnunciosByAnunciante(Request $request, $id)
+    {
+        $query = Anuncio::select('anuncios.*')
+                            ->where('anuncios.situacao', 'Liberado')
+                            ->where('anunciantes.situacao_cadastro', 'Ativo')
+                            ->where('anunciante_id', $id)
+                            ->join('enderecos', 'anuncios.endereco_id', '=', 'enderecos.id')
+                            ->join('anunciantes', 'anuncios.anunciante_id', '=', 'anunciantes.id');
+
+        $query = $this->aplicarFiltrosEOrdenacao($query, $request);
+
+        $perPage = (int) $request->input('por_pagina', 24);
+        $total = $query->distinct('anuncios.id')->count('anuncios.id');
+        $anuncios = $query->groupBy('anuncios.id')->paginate($perPage);
+
+        $tipos = AnuncioTipo::all();
+        $destaques = Anuncio::where('situacao', 'Liberado')->limit(3)->get();
+        $cidades = Cidade::select('cidades.*')->where('anuncios.situacao', 'Liberado')
+                            ->join('enderecos', 'enderecos.cidade_id', '=', 'cidades.id')
+                            ->join('anuncios', 'anuncios.endereco_id', '=', 'enderecos.id')
+                            ->GroupBy('cidades.id')->get();
+
+        return view($this->viewLista, compact('anuncios', 'tipos', 'total', 'destaques', 'cidades', 'request'));
     }
 
 
