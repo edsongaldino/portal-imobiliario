@@ -63,7 +63,8 @@ class AuthController extends Controller
 
     public function ReenviarSenha(Request $request){
 
-        $User = User::where('email', $request->email)->first();
+        $email = trim($request->email);
+        $User = User::whereRaw('TRIM(LOWER(email)) = ?', [strtolower($email)])->first();
 
         if($User){
 
@@ -85,8 +86,8 @@ class AuthController extends Controller
     }
 
     public function FormAlterarSenha($email){
-        $email = base64_decode($email);
-        $user = User::where('email', $email)->first();
+        $email = trim(base64_decode($email));
+        $user = User::whereRaw('TRIM(LOWER(email)) = ?', [strtolower($email)])->first();
         return view('painel.resetar_senha')->with(compact('user'));
     }
 
