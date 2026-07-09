@@ -31,6 +31,39 @@ class IntegracaoController extends Controller
 
     public function salvarDados(Request $request){
 
+        $url = trim($request->url);
+
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            return redirect()->back()->withInput()->with('warning', 'O link informado não é uma URL válida. Certifique-se de incluir http:// ou https://.');
+        }
+
+        // Tenta acessar e validar o arquivo XML antes de salvar
+        try {
+            $arrContextOptions = [
+                "ssl" => [
+                    "verify_peer" => false,
+                    "verify_peer_name" => false,
+                ],
+            ];
+
+            $data = @file_get_contents($url, false, stream_context_create($arrContextOptions));
+            if ($data === false) {
+                return redirect()->back()->withInput()->with('warning', 'Não foi possível acessar a URL do arquivo XML. Verifique se o link está correto, ativo e acessível publicamente.');
+            }
+
+            $xml = @simplexml_load_string($data);
+            if ($xml === false) {
+                return redirect()->back()->withInput()->with('warning', 'O link informado foi acessado com sucesso, mas o conteúdo retornado não é um arquivo XML válido.');
+            }
+
+            if (!isset($xml->Listings) || !isset($xml->Listings->Listing)) {
+                return redirect()->back()->withInput()->with('warning', 'O arquivo XML foi lido, mas não está no formato de integração aceito (estrutura Listings -> Listing não encontrada).');
+            }
+
+        } catch (\Throwable $e) {
+            return redirect()->back()->withInput()->with('warning', 'Ocorreu um erro ao validar o arquivo XML: ' . $e->getMessage());
+        }
+
         if($request->id <> ''){
             $anunciante_integracao = AnuncianteIntegracao::find($request->id);
         }else{
@@ -39,14 +72,14 @@ class IntegracaoController extends Controller
 
         $anunciante_integracao->anunciante_id = Auth::user()->anunciante_id;
         $anunciante_integracao->integracao_id = 1; //XML
-        $anunciante_integracao->arquivo = $request->url;
-        $anunciante_integracao->url = $request->url;
+        $anunciante_integracao->arquivo = $url;
+        $anunciante_integracao->url = $url;
         $anunciante_integracao->periodicidade_atualizacao = $request->periodicidade_atualizacao;
         $anunciante_integracao->notificar = $request->notificar;
         $anunciante_integracao->bloqueado = false; // Reset block status on save
         $anunciante_integracao->save();
 
-        return redirect()->back()->with('success', 'Dados Gravados!');
+        return redirect()->back()->with('success', 'Dados Gravados e XML Validado com Sucesso!');
     }
 
     public function RelatorioGeral(Request $request)

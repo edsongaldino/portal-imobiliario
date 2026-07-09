@@ -256,6 +256,15 @@
 							</div>
 						@endif
 
+						@if(session('warning'))
+							<div class="col-lg-12">
+								<div class="alert alert-warning alert-dismissible fade show rounded-lg" role="alert">
+									<strong>Atenção!</strong> {{ session('warning') }}
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+								</div>
+							</div>
+						@endif
+
 						@if(isset($integracao) && $integracao->bloqueado)
 							<div class="col-lg-12">
 								<div class="alert alert-danger rounded-lg p-4 mb-4" role="alert" style="border-left: 5px solid #dc2626;">
@@ -266,7 +275,7 @@
 						@endif
 
 						<!-- SECTION 1: Configuração da integração (Oculto por padrão) -->
-						<div class="col-lg-12" id="boxConfiguracao" style="{{ (isset($integracao) && $integracao->bloqueado) || session('success') ? '' : 'display: none;' }}">
+						<div class="col-lg-12" id="boxConfiguracao" style="{{ (isset($integracao) && $integracao->bloqueado) || session('success') || session('warning') ? '' : 'display: none;' }}">
 							<div class="ui-card">
 								<div class="d-flex align-items-center justify-content-between mb-3">
 									<div class="d-flex align-items-center" style="gap: 12px;">
