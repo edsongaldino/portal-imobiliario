@@ -72,9 +72,9 @@ class AuthController extends Controller
             //ENVIA PARA O USUÁRIO
             $configuracoes->template = "emails.senha";
             $configuracoes->assunto = "Você solicitou uma nova senha! Rede Imóveis MT";
-            $configuracoes->destinatario = $User->email;
+            $configuracoes->destinatario = trim($User->email);
             $configuracoes->name = $User->name;
-            $configuracoes->link = getenv('APP_URL').'/nova-senha/'.base64_encode($User->email);
+            $configuracoes->link = config('app.url').'/nova-senha/'.base64_encode(trim($User->email));
 
             Mail::to($configuracoes->destinatario)->send(new ReenviarSenha($configuracoes));
 

@@ -32,9 +32,9 @@ var KTPasswordResetGeneral = (function () {
                                                         buttonsStyling: !1,
                                                         confirmButtonText: "OK!",
                                                         customClass: { confirmButton: "btn btn-primary" },
+                                                    }).then(function () {
+                                                        window.location='/login';
                                                     });
-
-                                                    window.location='/login'
                                                 }else{
                                                     Swal.fire({
                                                         text: "Ops, não foi possível encontrar um usuário com este e-mail!",
