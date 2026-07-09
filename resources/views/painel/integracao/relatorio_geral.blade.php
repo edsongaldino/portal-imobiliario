@@ -239,7 +239,7 @@
 									<button type="button" class="btn-outline-custom" id="btnToggleConfig">
 										<i class="fa fa-cog"></i> Configurações da integração
 									</button>
-									<button type="button" class="btn-outline-custom"><i class="fa fa-file-text-o"></i> Documentação</button>
+									<button type="button" class="btn-outline-custom" id="btnAbrirDoc"><i class="fa fa-file-text-o"></i> Documentação</button>
 									<button type="button" class="btn-green" id="ProcessarAtualizacaoXML" data-id="{{ $usuario->anunciante->id ?? '' }}" data-token="{{ csrf_token() }}">
 										<i class="fa fa-refresh"></i> Processar Atualização Manual
 									</button>
@@ -650,6 +650,262 @@
 	</div>
 </div>
 
+<!-- MODAL DOCUMENTAÇÃO XML -->
+<div class="modal fade" id="modalDocumentacaoXML" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="max-width: 1050px;">
+		<div class="modal-content modal-custom-content">
+			<!-- Header -->
+			<div class="modal-custom-header">
+				<h4 class="modal-title font-weight-bold text-dark" style="font-size: 20px;"><i class="fa fa-file-text-o mr-2 text-success"></i> Documentação de Integração XML (Padrão VivaReal/ZAP)</h4>
+				<button type="button" class="close text-muted" data-dismiss="modal" aria-label="Close" style="font-size: 24px; outline: none;">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body p-4" style="background-color: #ffffff; max-height: 75vh; overflow-y: auto;">
+				
+				<!-- Visão Geral -->
+				<div class="mb-4">
+					<h5 class="font-weight-bold text-dark mb-2">Visão Geral</h5>
+					<p class="text-muted">A integração por arquivo XML permite a importação automatizada de anúncios da imobiliária para o portal <strong>Rede Imóveis MT</strong>. O formato suportado é o padrão <strong>VivaReal VRSync XML v1.0</strong>.</p>
+					<div class="alert alert-info rounded-lg mb-0" role="alert" style="background-color: #f0fdf4; border-color: #bbf7d0; color: #166534; font-size: 14px;">
+						<i class="fa fa-info-circle mr-2"></i><strong>Funcionamento:</strong> O sistema realiza a leitura automática do XML conforme a periodicidade configurada (12h, 24h ou 48h). Atualizações manuais também podem ser feitas a qualquer momento pelo botão <strong>"Processar Atualização Manual"</strong>. Se ocorrer algum erro estrutural ou falha de acesso ao arquivo XML, a integração é temporariamente bloqueada para segurança de dados, e notificações de erro são enviadas ao administrador.
+					</div>
+				</div>
+
+				<hr class="my-4">
+
+				<!-- Mapeamento de Tags -->
+				<div class="mb-4">
+					<h5 class="font-weight-bold text-dark mb-3">Mapeamento de Campos e Tags</h5>
+					<p class="text-muted">Certifique-se de que seu arquivo XML de anúncios contém as tags descritas abaixo organizadas em um elemento principal <code>&lt;ListingDataFeed&gt;</code> que possui um <code>&lt;Header&gt;</code> e uma lista <code>&lt;Listings&gt;</code> contendo elementos <code>&lt;Listing&gt;</code>.</p>
+					
+					<div class="table-responsive rounded-lg border">
+						<table class="modal-table">
+							<thead>
+								<tr>
+									<th style="width: 25%;">Tag / Elemento</th>
+									<th style="width: 15%;">Tipo</th>
+									<th style="width: 15%;">Obrigatoriedade</th>
+									<th style="width: 45%;">Descrição / Mapeamento / Valores Aceitos</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="font-weight-600"><code>&lt;ListingID&gt;</code></td>
+									<td>Texto</td>
+									<td><span class="badge badge-danger" style="background-color: #fee2e2; color: #991b1b;">Obrigatório</span></td>
+									<td>ID de identificação do imóvel na imobiliária (único). Ex: <code>340437</code></td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Title&gt;</code></td>
+									<td>Texto</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Título curto do anúncio (máx. 100 caracteres).</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;TransactionType&gt;</code></td>
+									<td>Texto</td>
+									<td><span class="badge badge-danger" style="background-color: #fee2e2; color: #991b1b;">Obrigatório</span></td>
+									<td>Tipo de transação. Valores aceitos: <code>For Sale</code> (Venda), <code>For Rent</code> (Locação), ou <code>Sale/Rent</code> (Venda e Locação).</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;PublicationType&gt;</code></td>
+									<td>Texto</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Tipo de publicação. Valores: <code>STANDARD</code> ou <code>PREMIUM</code> / <code>SUPER_PREMIUM</code>.</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;PropertyType&gt;</code></td>
+									<td>Texto</td>
+									<td><span class="badge badge-danger" style="background-color: #fee2e2; color: #991b1b;">Obrigatório</span></td>
+									<td>Tipo do imóvel. Ex: <code>Residential / Home</code>, <code>Residential / Condo</code>, <code>Residential / Apartment</code>, <code>Commercial / Edificio Comercial</code>.</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;Description&gt;</code></td>
+									<td>Texto</td>
+									<td><span class="badge badge-danger" style="background-color: #fee2e2; color: #991b1b;">Obrigatório</span></td>
+									<td>Descrição detalhada do imóvel. Recomenda-se envelopar com <code>&lt;![CDATA[ ... ]]&gt;</code>.</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;ListPrice&gt;</code></td>
+									<td>Numérico</td>
+									<td>Condicional</td>
+									<td>Preço de venda do imóvel. Obrigatório se <code>TransactionType</code> for <code>For Sale</code> ou <code>Sale/Rent</code>. Ex: <code>340000</code></td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;RentalPrice&gt;</code></td>
+									<td>Numérico</td>
+									<td>Condicional</td>
+									<td>Preço de locação mensal do imóvel. Obrigatório se <code>TransactionType</code> for <code>For Rent</code> ou <code>Sale/Rent</code>. Ex: <code>3500</code></td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;LivingArea&gt;</code></td>
+									<td>Inteiro</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Área útil do imóvel em metros quadrados. Ex: <code>166</code></td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;LotArea&gt;</code></td>
+									<td>Inteiro</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Área do lote/terreno em metros quadrados.</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;Bedrooms&gt;</code></td>
+									<td>Inteiro</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Quantidade de quartos.</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;Bathrooms&gt;</code></td>
+									<td>Inteiro</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Quantidade de banheiros.</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;Suites&gt;</code></td>
+									<td>Inteiro</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Quantidade de suítes.</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;Garage&gt;</code></td>
+									<td>Inteiro</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Quantidade de vagas de garagem.</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;PropertyAdministrationFee&gt;</code></td>
+									<td>Numérico</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Valor mensal da taxa de condomínio. Ex: <code>359</code></td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Details&gt;&lt;YearlyTax&gt;</code></td>
+									<td>Numérico</td>
+									<td><span class="badge badge-secondary" style="background-color: #f3f4f6; color: #374151;">Opcional</span></td>
+									<td>Valor anual do IPTU. Ex: <code>1603</code></td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Location&gt;</code></td>
+									<td>Estrutura</td>
+									<td><span class="badge badge-danger" style="background-color: #fee2e2; color: #991b1b;">Obrigatório</span></td>
+									<td>Contém sub-tags: <code>&lt;Country&gt;</code> (abbreviation="BR"), <code>&lt;State&gt;</code> (abbreviation="MT"), <code>&lt;City&gt;</code> (Ex: Cuiabá), <code>&lt;Neighborhood&gt;</code> (Bairro), <code>&lt;Address&gt;</code> (Rua), <code>&lt;StreetNumber&gt;</code>, <code>&lt;PostalCode&gt;</code> (CEP numérico).</td>
+								</tr>
+								<tr>
+									<td class="font-weight-600"><code>&lt;Media&gt;&lt;Item&gt;</code></td>
+									<td>URL</td>
+									<td><span class="badge badge-danger" style="background-color: #fee2e2; color: #991b1b;">Obrigatório</span></td>
+									<td>Imagens ou vídeos do imóvel. Atributos: <code>medium="image"</code> (ou <code>"video"</code>), <code>caption="Legenda"</code>, <code>primary="true"</code> (para a foto principal de capa). É necessário ao menos 1 item de imagem para a integração ser concluída com sucesso.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<hr class="my-4">
+
+				<!-- Características (Features) -->
+				<div class="mb-4">
+					<h5 class="font-weight-bold text-dark mb-2">Mapeamento de Características (Tag <code>&lt;Feature&gt;</code>)</h5>
+					<p class="text-muted">Abaixo estão os valores aceitos na sub-tag <code>&lt;Feature&gt;</code> e a respectiva característica traduzida no painel:</p>
+					
+					<div class="row">
+						<div class="col-md-6">
+							<ul class="list-group list-group-flush border rounded-lg p-2" style="font-size: 13px;">
+								<li class="list-group-item d-flex justify-content-between"><span><code>Gym</code></span><span class="text-muted">Academia</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>BBQ</code></span><span class="text-muted">Churrasqueira</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Elevator</code></span><span class="text-muted">Elevador</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Pool</code></span><span class="text-muted">Piscina</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Playground</code></span><span class="text-muted">Playground</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Party Room</code></span><span class="text-muted">Salão de festas</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Kitchen</code></span><span class="text-muted">Cozinha</span></li>
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<ul class="list-group list-group-flush border rounded-lg p-2" style="font-size: 13px;">
+								<li class="list-group-item d-flex justify-content-between"><span><code>Edicule</code></span><span class="text-muted">Edícula</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Parking Garage</code></span><span class="text-muted">Estacionamento</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Dinner Room</code></span><span class="text-muted">Sala de jantar</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Internet Connection</code></span><span class="text-muted">Internet</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Sports Court</code></span><span class="text-muted">Quadra de esportes</span></li>
+								<li class="list-group-item d-flex justify-content-between"><span><code>Garden</code></span><span class="text-muted">Jardim</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<hr class="my-4">
+
+				<!-- Exemplo de XML Completo -->
+				<div class="mb-2">
+					<div class="d-flex align-items-center justify-content-between mb-2">
+						<h5 class="font-weight-bold text-dark mb-0">Exemplo de XML Completo (VivaReal VRSync)</h5>
+						<button type="button" class="btn btn-sm btn-outline-success btn-copiar-xml" onclick="copiarExemploXML()"><i class="fa fa-copy mr-1"></i> Copiar XML</button>
+					</div>
+					<pre class="bg-light p-3 border rounded-lg overflow-auto text-dark" style="max-height: 400px; font-size: 12px; font-family: 'Courier New', Courier, monospace;"><code id="exemploXmlContent">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;ListingDataFeed xmlns="http://www.vivareal.com/schemas/1.0/VRSync" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vivareal.com/schemas/1.0/VRSync http://xml.vivareal.com/vrsync.xsd"&gt;
+  &lt;Header&gt;
+    &lt;Provider&gt;Nome da Imobiliaria&lt;/Provider&gt;
+    &lt;Email&gt;comercial@suaimobiliaria.com.br&lt;/Email&gt;
+    &lt;ContactName&gt;Responsavel Integracao&lt;/ContactName&gt;
+    &lt;Telephone&gt;6599999999&lt;/Telephone&gt;
+    &lt;PublishDate&gt;2026-07-08T18:39:55&lt;/PublishDate&gt;
+    &lt;Logo/&gt;
+  &lt;/Header&gt;
+  &lt;Listings&gt;
+    &lt;Listing&gt;
+      &lt;ListingID&gt;340437&lt;/ListingID&gt;
+      &lt;Title&gt;&lt;![CDATA[EXCELENTE CASA RESIDENCIAL MOBILIADA LOCALIZADA NO BAIRRO PASCOAL RAMOS]]&gt;&lt;/Title&gt;
+      &lt;TransactionType&gt;For Rent&lt;/TransactionType&gt;
+      &lt;PublicationType&gt;SUPER_PREMIUM&lt;/PublicationType&gt;
+      &lt;Featured&gt;false&lt;/Featured&gt;
+      &lt;DetailViewUrl/&gt;
+      &lt;Media&gt;
+        &lt;Item medium="image" caption="Foto 1" primary="true"&gt;https://suaimobiliaria.com.br/fotos/imovel-1.jpg&lt;/Item&gt;
+        &lt;Item medium="image" caption="Foto 2" primary="false"&gt;https://suaimobiliaria.com.br/fotos/imovel-2.jpg&lt;/Item&gt;
+      &lt;/Media&gt;
+      &lt;Details&gt;
+        &lt;PropertyType&gt;Residential / Home&lt;/PropertyType&gt;
+        &lt;Description&gt;&lt;![CDATA[Excelente casa residencial mobiliada medindo aproximadamente 165,70m² com as seguintes características: Sala mobiliada, Cozinha Gourmet, 2 Quartos...]]&gt;&lt;/Description&gt;
+        &lt;RentalPrice currency="BRL"&gt;3500&lt;/RentalPrice&gt;
+        &lt;YearlyTax currency="BRL"&gt;1603&lt;/YearlyTax&gt;
+        &lt;PropertyAdministrationFee currency="BRL"&gt;359&lt;/PropertyAdministrationFee&gt;
+        &lt;LivingArea unit="square metres"&gt;166&lt;/LivingArea&gt;
+        &lt;Bedrooms&gt;2&lt;/Bedrooms&gt;
+        &lt;Bathrooms&gt;2&lt;/Bathrooms&gt;
+        &lt;Garage type="Parking Space"&gt;1&lt;/Garage&gt;
+        &lt;Features&gt;
+          &lt;Feature&gt;Parking Garage&lt;/Feature&gt;
+          &lt;Feature&gt;BBQ&lt;/Feature&gt;
+          &lt;Feature&gt;Pool&lt;/Feature&gt;
+        &lt;/Features&gt;
+      &lt;/Details&gt;
+      &lt;Location displayAddress="All"&gt;
+        &lt;Country abbreviation="BR"&gt;Brasil&lt;/Country&gt;
+        &lt;State abbreviation="MT"&gt;Mato Grosso&lt;/State&gt;
+        &lt;City&gt;Cuiabá&lt;/City&gt;
+        &lt;Neighborhood&gt;Pascoal Ramos&lt;/Neighborhood&gt;
+        &lt;Address&gt;Rua Principal&lt;/Address&gt;
+        &lt;StreetNumber&gt;123&lt;/StreetNumber&gt;
+        &lt;Complement&gt;Residencial Águas Claras&lt;/Complement&gt;
+        &lt;PostalCode&gt;78098199&lt;/PostalCode&gt;
+      &lt;/Location&gt;
+    &lt;/Listing&gt;
+  &lt;/Listings&gt;
+&lt;/ListingDataFeed&gt;</code></pre>
+				</div>
+
+			</div>
+			
+			<div class="modal-footer border-top p-3" style="background-color: #f8fafc;">
+				<button type="button" class="btn btn-secondary px-4 font-weight-600" data-dismiss="modal" style="border-radius: 8px; font-size: 13px;">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript" src="{{ asset('assets/portal/js/jquery-3.3.1.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/portal/js/bootstrap.min.js') }}"></script>
@@ -790,7 +1046,35 @@ $(document).ready(function() {
 		var page = $(this).data('page');
 		if (currentLogId) carregarDetalhesModal(currentLogId, page);
 	});
+
+	// Trigger Modal Documentação
+	$('#btnAbrirDoc').on('click', function() {
+		$('#modalDocumentacaoXML').modal({backdrop: 'static', keyboard: true});
+		$('#modalDocumentacaoXML').modal('show');
+	});
 });
+
+// Copiar XML Exemplo
+function copiarExemploXML() {
+	var copyText = document.getElementById("exemploXmlContent").innerText;
+	var tempInput = document.createElement("textarea");
+	tempInput.value = copyText;
+	document.body.appendChild(tempInput);
+	tempInput.select();
+	document.execCommand("copy");
+	document.body.removeChild(tempInput);
+	
+	var btn = document.querySelector(".btn-copiar-xml");
+	var originalHtml = btn.innerHTML;
+	btn.innerHTML = '<i class="fa fa-check mr-1"></i> Copiado!';
+	btn.classList.remove("btn-outline-success");
+	btn.classList.add("btn-success");
+	setTimeout(function() {
+		btn.innerHTML = originalHtml;
+		btn.classList.remove("btn-success");
+		btn.classList.add("btn-outline-success");
+	}, 2000);
+}
 </script>
 </body>
 </html>
