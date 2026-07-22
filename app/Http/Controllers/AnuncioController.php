@@ -327,21 +327,24 @@ class AnuncioController extends Controller
             }
         }
 
-        if ($request->filled('ordenacao')) {
-            switch ($request->ordenacao) {
-                case 'menor_valor':
-                    $query->orderByRaw("CASE WHEN anuncios.transacao = 'Locação' THEN anuncios.valor_locacao ELSE anuncios.valor_venda END ASC");
-                    break;
-                case 'maior_valor':
-                    $query->orderByRaw("CASE WHEN anuncios.transacao = 'Locação' THEN anuncios.valor_locacao ELSE anuncios.valor_venda END DESC");
-                    break;
-                case 'relevantes':
-                default:
-                    $query->orderByRaw("CASE WHEN anuncios.destaque = 'S' THEN 1 ELSE 2 END ASC")->orderBy('anuncios.id', 'DESC');
-                    break;
-            }
-        } else {
-            $query->orderByRaw("CASE WHEN anuncios.destaque = 'S' THEN 1 ELSE 2 END ASC")->orderBy('anuncios.id', 'DESC');
+        $ordenacao = $request->filled('ordenacao') ? $request->ordenacao : 'menor_preco';
+
+        switch ($ordenacao) {
+            case 'menor_preco':
+            case 'menor_valor':
+                $query->orderByRaw("CASE WHEN anuncios.transacao = 'Locação' THEN anuncios.valor_locacao ELSE anuncios.valor_venda END ASC");
+                break;
+            case 'maior_preco':
+            case 'maior_valor':
+                $query->orderByRaw("CASE WHEN anuncios.transacao = 'Locação' THEN anuncios.valor_locacao ELSE anuncios.valor_venda END DESC");
+                break;
+            case 'recentes':
+                $query->orderBy('anuncios.created_at', 'DESC');
+                break;
+            case 'relevantes':
+            default:
+                $query->orderByRaw("CASE WHEN anuncios.destaque = 'S' THEN 1 ELSE 2 END ASC")->orderBy('anuncios.id', 'DESC');
+                break;
         }
 
         return $query;

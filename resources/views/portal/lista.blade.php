@@ -40,7 +40,7 @@
 				<div class="col-lg-3 col-xl-3">
 					<form action="{{ url('imoveis-buscar') }}" method="GET" name="FormBusca" id="FormBuscaCompleta">
 						<input type="hidden" name="transacao" value="{{ $request->transacao }}">
-						<input type="hidden" name="ordenacao" id="inputOrdenacao" value="{{ $request->ordenacao ?? 'relevantes' }}">
+						<input type="hidden" name="ordenacao" id="inputOrdenacao" value="{{ $request->ordenacao ?? 'menor_preco' }}">
 						<input type="hidden" name="por_pagina" id="inputPorPagina" value="{{ $request->por_pagina ?? '24' }}">
 						<div class="sidebar_listing_grid1 dn-991">
 							<div class="sidebar_listing_list busca-rapida">
@@ -217,9 +217,9 @@
 									</li>
 									<li class="list-inline-item"><span class="shrtby">Ordenar por:</span>
 										<select id="selectOrdenacao" class="selectpicker show-tick" onchange="document.getElementById('inputOrdenacao').value=this.value; document.getElementById('FormBuscaCompleta').submit();">
-											<option value="relevantes" @if($request->ordenacao == 'relevantes' || !$request->ordenacao) selected @endif>Mais relevantes</option>
+											<option value="relevantes" @if($request->ordenacao == 'relevantes') selected @endif>Mais relevantes</option>
 											<option value="recentes" @if($request->ordenacao == 'recentes' || $request->ordenacao == 'Mais recente') selected @endif>Mais recente</option>
-											<option value="menor_preco" @if($request->ordenacao == 'menor_preco' || $request->ordenacao == 'Menor valor' || $request->ordenacao == 'Menor preço') selected @endif>Menor preço</option>
+											<option value="menor_preco" @if($request->ordenacao == 'menor_preco' || $request->ordenacao == 'Menor valor' || $request->ordenacao == 'Menor preço' || !$request->ordenacao) selected @endif>Menor preço</option>
 											<option value="maior_preco" @if($request->ordenacao == 'maior_preco' || $request->ordenacao == '+ Preço' || $request->ordenacao == 'Maior preço') selected @endif>Maior preço</option>
 											<option value="maior_area" @if($request->ordenacao == 'maior_area' || $request->ordenacao == 'Maior área') selected @endif>Maior área</option>
 										</select>

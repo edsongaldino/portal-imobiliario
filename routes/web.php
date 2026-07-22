@@ -92,6 +92,11 @@ Route::get('/painel/usuarios', 'App\Http\Controllers\UserController@gestaoUsuari
 Route::post('/painel/usuarios/salvar', 'App\Http\Controllers\UserController@gestaoSalvarUsuario')->name('painel.usuarios.salvar')->middleware('auth');
 Route::post('/painel/usuarios/{id}/senha', 'App\Http\Controllers\UserController@gestaoAlterarSenha')->name('painel.usuarios.senha')->middleware('auth');
 Route::delete('/painel/usuarios/{id}', 'App\Http\Controllers\UserController@gestaoExcluirUsuario')->name('painel.usuarios.excluir')->middleware('auth');
+
+Route::get('/painel/indicativos', 'App\Http\Controllers\IndicativoController@index')->name('painel.indicativos.index')->middleware('auth');
+Route::get('/painel/indicativos/incluir', 'App\Http\Controllers\IndicativoController@create')->name('painel.indicativos.create')->middleware('auth');
+Route::post('/painel/indicativos/store', 'App\Http\Controllers\IndicativoController@store')->name('painel.indicativos.store')->middleware('auth');
+Route::get('/painel/indicativos/{id}/excluir', 'App\Http\Controllers\IndicativoController@destroy')->name('painel.indicativos.destroy')->middleware('auth');
 Route::get('/painel/integracoes/configuracao', 'App\Http\Controllers\IntegracaoController@Configuracao')->name('painel.integracoes.configuracao')->middleware('auth');
 Route::post('/painel/integracao-salvar', 'App\Http\Controllers\IntegracaoController@salvarDados')->name('integracao.salvar')->middleware('auth');
 Route::get('/painel/integracoes/relatorio-geral', 'App\Http\Controllers\IntegracaoController@RelatorioGeral')->name('painel.integracoes.relatorio-geral')->middleware('auth');
@@ -102,6 +107,17 @@ Route::get('/painel/integracao/cron/atualizar-anuncios', 'App\Http\Controllers\I
 
 Route::get('/painel/cron/relatorio-semanal', 'App\Http\Controllers\CronController@EnviarRelatorioSemanal')->name('cron.relatorio-semanal');
 Route::get('/painel/cron/relatorio-teste/{id}', 'App\Http\Controllers\CronController@EnviarRelatorioTeste')->name('cron.relatorio-teste');
+
+// Preview Emails
+Route::get('/preview/email-sucesso', function() {
+    $anunciante = \App\Models\Anunciante::first();
+    $processa = \App\Models\LogIntegracao::first();
+    return new \App\Mail\EnviaRelatorio($processa, $anunciante);
+});
+Route::get('/preview/email-erro', function() {
+    $anunciante = \App\Models\Anunciante::first();
+    return new \App\Mail\ErroIntegracao($anunciante, 'Este é um erro simulado de falha ao processar o arquivo XML. A estrutura pode estar corrompida.', 'cliente', 1);
+});
 
 //Rotas Portal
 Route::get('/anunciante/{id}/relatorio-importacao', 'App\Http\Controllers\IntegracaoController@RelatorioPublico')->name('relatorio-importacao.publico');
@@ -117,6 +133,7 @@ Route::get('/simular-financiamento-de-imoveis', 'App\Http\Controllers\AppControl
 Route::get('/rede-imoveis-mt', 'App\Http\Controllers\AppController@RedeImoveis')->name('rede-imoveis-mt');
 Route::get('/rede-imoveis-mt/como-anunciar', 'App\Http\Controllers\AppController@ComoAnunciar')->name('rede-imoveis-mt/como-anunciar');
 Route::get('/rede-imoveis-mt/termos-de-uso', 'App\Http\Controllers\AppController@TermosDeUso')->name('rede-imoveis-mt/termos-de-uso');
+Route::get('/rede-imoveis-mt/politica-de-privacidade', 'App\Http\Controllers\AppController@PoliticaPrivacidade')->name('rede-imoveis-mt/politica-de-privacidade');
 Route::get('/mapa-do-site', 'App\Http\Controllers\AppController@MapaDoSite')->name('mapa-do-site');
 Route::get('/imoveis-favoritos', 'App\Http\Controllers\FavoritoController@index')->name('imoveis-favoritos');
 Route::post('/favoritos/toggle', 'App\Http\Controllers\FavoritoController@toggle')->name('favoritos.toggle');

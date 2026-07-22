@@ -79,7 +79,10 @@
         @endif
 
         <li class="title"><span>Indicativos Imobiliários</span></li>
-        <li class="treeview indicativos"><a href="{{ url('/indicativos-imobiliarios') }}" target="_blank"><i class="fa fa-cog"></i> Indicativos</a></li>
+        @if(Auth::user()->perfil_id == 1)
+        <li class="treeview {{ request()->is('painel/indicativos*') ? 'active' : '' }}"><a href="{{ url('/painel/indicativos') }}"><i class="fa fa-file-pdf-o"></i><span> Gestão de Indicativos</span></a></li>
+        @endif
+        <li class="treeview indicativos"><a href="{{ url('/indicativos-imobiliarios') }}" target="_blank"><i class="fa fa-cog"></i> Indicativos (Portal)</a></li>
 
         @if(Auth::user()->perfil_id != 1)
         <li class="title"><span>Gerenciar Conta</span></li>

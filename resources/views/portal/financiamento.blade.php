@@ -30,8 +30,39 @@
 	<section class="our-terms bgc-f7">
 		<div class="container">
 			<div class="row">
+				<div class="col-lg-12 col-xl-12">
+					<div class="terms_condition_grid">
+						<div class="grids mb30">
+							<h4 class="mb20">Realize o sonho da casa própria</h4>
+					    	<p class="mb20">O financiamento imobiliário é a linha de crédito mais utilizada para a compra de imóveis, permitindo que você adquira a sua casa, apartamento, terreno ou sala comercial com prazos de pagamento que cabem no seu bolso.</p>
+					        <p>Entender o seu limite de crédito e o valor das parcelas é o primeiro passo antes de fechar negócio. Faça uma simulação rápida e sem compromisso nos principais bancos do país para descobrir a melhor taxa para o seu perfil financeiro.</p>
+						</div>
 
+                        <div class="grids mb30 mt40">
+                            <h4 class="mb20 text-center">Simuladores Oficiais</h4>
+                            <p class="text-center mb30">Acesse o simulador do seu banco de preferência através dos links abaixo:</p>
+                            
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 col-md-4 col-lg-3 mb20">
+                                    <a href="https://www8.caixa.gov.br/siopiinternet-web/simulaOperacaoInternet.do?method=inicializarCasoUso" target="_blank" class="btn btn-block btn-thm" style="background-color: #005CA9; color: #fff; padding: 15px;">Simulador CAIXA</a>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3 mb20">
+                                    <a href="https://www42.bb.com.br/portalbb/imobiliario/creditoimobiliario/simular,802,2250,2250.bbx" target="_blank" class="btn btn-block btn-thm" style="background-color: #F8D117; color: #003da5; padding: 15px;">Simulador BB</a>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3 mb20">
+                                    <a href="https://banco.bradesco/html/classic/produtos-servicos/emprestimo-e-financiamento/encontre-seu-credito/simuladores-imoveis.shtm" target="_blank" class="btn btn-block btn-thm" style="background-color: #CC092F; color: #fff; padding: 15px;">Simulador Bradesco</a>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3 mb20">
+                                    <a href="https://www.itau.com.br/emprestimos-financiamentos/credito-imobiliario/simulador/" target="_blank" class="btn btn-block btn-thm" style="background-color: #EC7000; color: #fff; padding: 15px;">Simulador Itaú</a>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3 mb20">
+                                    <a href="https://www.santander.com.br/creditos-e-financiamentos/para-sua-casa/credito-imobiliario" target="_blank" class="btn btn-block btn-thm" style="background-color: #EC0000; color: #fff; padding: 15px;">Simulador Santander</a>
+                                </div>
+                            </div>
+                        </div>
 
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

@@ -30,8 +30,41 @@
 	<section class="our-terms bgc-f7">
 		<div class="container">
 			<div class="row">
-
-
+				<div class="col-lg-12 col-xl-12">
+					<div class="terms_condition_grid">
+						<div class="grids mb30">
+							<h4 class="mb20">Páginas e Sessões</h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Imóveis</h5>
+                                    <ul class="list-unstyled mt10" style="line-height: 2.5;">
+                                        <li><a href="{{ url('/lista-imoveis/venda') }}"><i class="fa fa-angle-right mr10"></i>Comprar</a></li>
+                                        <li><a href="{{ url('/lista-imoveis/locacao') }}"><i class="fa fa-angle-right mr10"></i>Alugar</a></li>
+                                        <li><a href="{{ url('/lista-imoveis/novos') }}"><i class="fa fa-angle-right mr10"></i>Lançamentos</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Institucional</h5>
+                                    <ul class="list-unstyled mt10" style="line-height: 2.5;">
+                                        <li><a href="{{ url('/rede-imoveis-mt') }}"><i class="fa fa-angle-right mr10"></i>A Rede</a></li>
+                                        <li><a href="{{ url('/rede-imoveis-mt/como-anunciar') }}"><i class="fa fa-angle-right mr10"></i>Como Anunciar</a></li>
+                                        <li><a href="{{ url('/rede-imoveis-mt/termos-de-uso') }}"><i class="fa fa-angle-right mr10"></i>Termos de Uso</a></li>
+                                        <li><a href="{{ url('/rede-imoveis-mt/politica-de-privacidade') }}"><i class="fa fa-angle-right mr10"></i>Política de Privacidade</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Ferramentas e Contato</h5>
+                                    <ul class="list-unstyled mt10" style="line-height: 2.5;">
+                                        <li><a href="{{ url('/simular-financiamento-de-imoveis') }}"><i class="fa fa-angle-right mr10"></i>Simular Financiamento</a></li>
+                                        <li><a href="{{ url('/indicativos-imobiliarios') }}"><i class="fa fa-angle-right mr10"></i>Indicativos Imobiliários</a></li>
+                                        <li><a href="{{ url('/imoveis-favoritos') }}"><i class="fa fa-angle-right mr10"></i>Imóveis Favoritos</a></li>
+                                        <li><a href="{{ url('/cadastro') }}"><i class="fa fa-angle-right mr10"></i>Seja Parceiro</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

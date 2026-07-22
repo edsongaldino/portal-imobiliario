@@ -30,8 +30,30 @@
 	<section class="our-terms bgc-f7">
 		<div class="container">
 			<div class="row">
+				<div class="col-lg-12 col-xl-12">
+					<div class="terms_condition_grid">
+						<div class="grids mb30">
+							<h4 class="mb20">Por que anunciar conosco?</h4>
+					    	<p class="mb20">A <strong>Rede Imóveis MT</strong> é o portal imobiliário que mais cresce na região, oferecendo aos proprietários e corretores parceiros uma plataforma moderna e eficiente para divulgar seus imóveis.</p>
+					        <p>Garantimos uma visibilidade diferenciada para o seu imóvel, atraindo milhares de visitantes diariamente que estão em busca de comprar ou alugar na região do Mato Grosso. Ao anunciar conosco, você coloca seu imóvel nas mãos de clientes reais e aumenta expressivamente suas chances de fechar negócio de maneira rápida e segura.</p>
+						</div>
 
+						<div class="grids mb30">
+							<h4 class="mb20">Como funciona o nosso passo a passo</h4>
+							<ol style="list-style-type: decimal; padding-left: 20px;">
+								<li class="mb15"><strong>1. Cadastro do Imóvel:</strong> Você entra em contato conosco ou faz o pré-cadastro informando os dados do imóvel, incluindo fotos de qualidade, descrição detalhada e o valor desejado.</li>
+								<li class="mb15"><strong>2. Análise da Nossa Equipe:</strong> Os dados são enviados para nossa equipe interna. Nós realizamos uma triagem rápida para validar as informações, e se tudo estiver nos conformes, o anúncio é aprovado.</li>
+								<li class="mb15"><strong>3. Publicação e Divulgação:</strong> Seu imóvel é publicado em nosso portal e ganha visibilidade instantânea. Clientes interessados enviarão mensagens que chegarão diretamente para os nossos corretores credenciados que conduzirão o fechamento com excelência.</li>
+							</ol>
+						</div>
 
+						<div class="grids mb30 text-center mt50">
+							<h4 class="mb20">Pronto para fechar negócio?</h4>
+							<p>Não perca mais tempo. Cadastre-se como parceiro ou entre em contato com nossa equipe agora mesmo.</p>
+							<a href="#footer" class="btn btn-thm mt15">Quero me Cadastrar</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

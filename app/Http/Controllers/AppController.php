@@ -9,6 +9,7 @@ use App\Models\AnuncioTipo;
 use App\Models\Cidade;
 use App\Models\LogIntegracao;
 use App\Models\LogIntegracaoAnuncio;
+use App\Models\Indicativo;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -155,7 +156,8 @@ class AppController extends Controller
     }
 
     public function IndicativosImobiliarios(){
-        return view('portal.indicativos');
+        $indicativosPorAno = Indicativo::orderBy('data_publicacao', 'desc')->get()->groupBy('ano');
+        return view('portal.indicativos', compact('indicativosPorAno'));
     }
 
     public function RedeImoveis(){
@@ -173,6 +175,10 @@ class AppController extends Controller
 
     public function TermosDeUso(){
         return view('portal.termos');
+    }
+
+    public function PoliticaPrivacidade(){
+        return view('portal.privacidade');
     }
 
     public function ImoveisFavoritos(){

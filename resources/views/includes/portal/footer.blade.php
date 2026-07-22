@@ -28,6 +28,7 @@
                         <li><a href="{{ url('/rede-imoveis-mt') }}">A Rede</a></li>
                         <li><a href="{{ url('/rede-imoveis-mt/como-anunciar') }}">Como anunciar</a></li>
                         <li><a href="{{ url('/rede-imoveis-mt/termos-de-uso') }}">Termos de Uso</a></li>
+                        <li><a href="{{ url('/rede-imoveis-mt/politica-de-privacidade') }}">Política de Privacidade</a></li>
                     </ul>
                 </div>
             </div>

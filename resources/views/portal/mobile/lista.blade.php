@@ -20,7 +20,7 @@
 							<div class="sidebar_listing_list style2 mobile_sytle_sidebar mb0">
 								<form action="{{ url('imoveis-buscar') }}" method="GET">
 									<input type="hidden" name="transacao" value="{{ $request->transacao }}">
-									<input type="hidden" name="ordenacao" value="{{ $request->ordenacao ?? 'relevantes' }}">
+									<input type="hidden" name="ordenacao" value="{{ $request->ordenacao ?? 'menor_preco' }}">
 									<div class="sidebar_advanced_search_widget">
 										<h4 class="mb25">Busca avançada <a class="filter_closed_btn float-right" href="#"><small>Ocultar filtro</small> <span class="flaticon-close"></span></a></h4>
 										<ul class="sasw_list style2 mb0">
@@ -414,9 +414,9 @@
 										<ul>
 											<li class="list-inline-item"><span class="shrtby">Ordenar por:</span>
 												<select id="selectOrdenacaoMobile" class="selectpicker show-tick" onchange="window.location.href='{{ url('imoveis-buscar') }}?transacao={{ $request->transacao }}&localizacao={{ $request->localizacao }}&palavra_chave={{ $request->palavra_chave }}&ordenacao=' + this.value;">
-													<option value="relevantes" @if($request->ordenacao == 'relevantes' || !$request->ordenacao) selected @endif>Mais relevantes</option>
+													<option value="relevantes" @if($request->ordenacao == 'relevantes') selected @endif>Mais relevantes</option>
 													<option value="recentes" @if($request->ordenacao == 'recentes' || $request->ordenacao == 'Mais recente') selected @endif>Mais recente</option>
-													<option value="menor_preco" @if($request->ordenacao == 'menor_preco' || $request->ordenacao == 'Menor valor' || $request->ordenacao == 'Menor preço') selected @endif>Menor preço</option>
+													<option value="menor_preco" @if($request->ordenacao == 'menor_preco' || $request->ordenacao == 'Menor valor' || $request->ordenacao == 'Menor preço' || !$request->ordenacao) selected @endif>Menor preço</option>
 													<option value="maior_preco" @if($request->ordenacao == 'maior_preco' || $request->ordenacao == '+ Preço' || $request->ordenacao == 'Maior preço') selected @endif>Maior preço</option>
 													<option value="maior_area" @if($request->ordenacao == 'maior_area' || $request->ordenacao == 'Maior área') selected @endif>Maior área</option>
 												</select>

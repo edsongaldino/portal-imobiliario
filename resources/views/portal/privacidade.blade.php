@@ -17,38 +17,39 @@
 					<div class="breadcrumb_content">
 						<ol class="breadcrumb">
 						    <li class="breadcrumb-item"><a href="#">Home</a></li>
-						    <li class="breadcrumb-item active" aria-current="page">Termos e Condições</li>
+						    <li class="breadcrumb-item active" aria-current="page">Política de Privacidade</li>
 						</ol>
-						<h4 class="breadcrumb_title">Termos e Condições</h4>
+						<h4 class="breadcrumb_title">Política de Privacidade</h4>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-    <!-- Our Terms & Conditions -->
+    <!-- Our Privacy Policy -->
 	<section class="our-terms bgc-f7">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-xl-12">
 					<div class="terms_condition_grid">
 						<div class="grids mb30">
-							<h4 class="mb20">1. Aceitação dos Termos</h4>
-					    	<p class="mb20">Bem-vindo à <strong>Rede Imóveis MT</strong>. Ao acessar e utilizar o nosso portal, você concorda expressamente com os Termos e Condições aqui descritos. Caso não concorde com alguma das regras estipuladas, pedimos que interrompa imediatamente o uso do nosso site.</p>
-					        <p>Estes termos podem ser atualizados periodicamente, sendo sua responsabilidade revisá-los sempre que utilizar a nossa plataforma. O uso contínuo do site após qualquer alteração constitui aceitação das novas regras.</p>
+							<h4 class="mb20">1. Coleta de Dados Pessoais</h4>
+					    	<p class="mb20">Em conformidade com a Lei Geral de Proteção de Dados (LGPD), a <strong>Rede Imóveis MT</strong> coleta e armazena apenas as informações estritamente necessárias para prestação de nossos serviços, como nome, e-mail e telefone de contato quando você preenche nossos formulários de interesse, simulação ou cadastro de parceiro.</p>
 						</div>
 						<div class="grids mb30">
-							<h4 class="mb20">2. Nossos Serviços e Responsabilidades</h4>
-					    	<p class="mb20">A Rede Imóveis MT atua primariamente como uma vitrine e plataforma de conexão entre proprietários, corretores parceiros e clientes em busca de imóveis. Nós não somos parte integrante de contratos de venda, locação ou financiamento assinados entre as partes, atuando apenas na intermediação e facilitação do contato.</p>
-					        <p>Embora nossa equipe faça o possível para manter a precisão das informações e valores, a veracidade dos dados do imóvel é de total responsabilidade do anunciante originário. Não nos responsabilizamos por mudanças súbitas de preço ou disponibilidade que não tenham sido atualizadas no sistema.</p>
+							<h4 class="mb20">2. Uso e Compartilhamento de Dados</h4>
+					    	<p class="mb20">Os seus dados serão utilizados única e exclusivamente para facilitar o contato entre você e o anunciante ou parceiro responsável pelo imóvel de seu interesse. A Rede Imóveis MT possui uma política rígida contra a venda ou compartilhamento indevido de suas informações para terceiros alheios às nossas transações comerciais.</p>
 						</div>
 						<div class="grids mb30">
-							<h4 class="mb20">3. Uso Aceitável</h4>
-					    	<p class="mb20">Ao utilizar nossos serviços, você se compromete a não utilizar a plataforma para propósitos ilegais, difamatórios ou fraudulentos. A reprodução ou cópia de anúncios, textos, fotos e marca do portal (Rede Imóveis MT) sem autorização prévia por escrito é estritamente proibida e está sujeita às sanções legais cabíveis.</p>
+							<h4 class="mb20">3. Direitos do Titular (LGPD)</h4>
+					    	<p class="mb20">Você tem o direito de solicitar a qualquer momento a visualização, alteração ou exclusão completa de seus dados de nossa base. Para isso, basta entrar em contato através dos nossos canais de atendimento oficiais.</p>
+						</div>
+						<div class="grids mb30">
+							<h4 class="mb20">4. Cookies e Tecnologias de Rastreamento</h4>
+					    	<p class="mb20">Nosso portal pode utilizar cookies para melhorar a sua experiência de navegação e coletar dados analíticos anônimos. Ao continuar navegando, você concorda com o uso de cookies para esses fins estatísticos e de melhoria contínua da plataforma.</p>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</section>

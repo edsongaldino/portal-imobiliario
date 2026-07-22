@@ -40,15 +40,15 @@
 					<div class="faq_content">
 						<div class="faq_according">
 							<div class="accordion" id="accordionExample">
+                                @forelse($indicativosPorAno as $ano => $indicativosAno)
 							  	<div class="card">
-								    <div class="card-header" id="headingOne">
+								    <div class="card-header {{ $loop->first ? 'active' : '' }}" id="heading{{ $ano }}" data-toggle="collapse" data-target="#collapse{{ $ano }}" style="cursor: pointer;">
 								    	<h2 class="mb-0">
-								        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">2026</button>
+								        	<button class="btn btn-link {{ $loop->first ? '' : 'collapsed' }}" type="button" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="collapse{{ $ano }}">{{ $ano }}</button>
 								   		</h2>
 								    </div>
-								    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
+								    <div id="collapse{{ $ano }}" class="collapse {{ $loop->first ? 'show' : '' }}" aria-labelledby="heading{{ $ano }}" data-parent="#accordionExample" style="">
 									    <div class="card-body">
-							        		
 											<div class="ui_kit_table">
 												<table class="table">
 													<thead class="thead-light">
@@ -61,78 +61,32 @@
 														</tr>
 													</thead>
 													<tbody>
-														
-
+                                                        @foreach($indicativosAno as $indicativo)
+														<tr>
+															<td>{{ date('d/m/Y', strtotime($indicativo->data_publicacao)) }}</td>
+															<td>{{ $indicativo->mes }}</td>
+															<td>{{ $indicativo->ano }}</td>
+															<td>
+                                                                @if($indicativo->tipo == 'Residencial')
+                                                                <div class="residencial"><i class="bi bi-house-door"></i> Residencial</div>
+                                                                @else
+                                                                <div class="comercial"><i class="bi bi-bag"></i> Comercial</div>
+                                                                @endif
+                                                            </td>
+															<td><a href="{{ asset($indicativo->arquivo) }}" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
+														</tr>
+                                                        @endforeach
 													</tbody>
 												</table>
 											</div>
-
-
 									    </div>
 								    </div>
 							    </div>
-
-								<div class="card">
-								    <div class="card-header active" id="headingOne">
-								    	<h2 class="mb-0">
-								        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">2025</button>
-								   		</h2>
-								    </div>
-								    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
-									    <div class="card-body">
-							        		
-											<div class="ui_kit_table">
-												<table class="table">
-													<thead class="thead-light">
-														<tr>
-															<th scope="col">Data de Publicação</th>
-															<th scope="col">Mês</th>
-															<th scope="col">Ano</th>
-															<th scope="col">Tipo</th>
-															<th scope="col">Arquivo</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>30/10/2025</td>
-															<td>Outubro</td>
-															<td>2025</td>
-															<td><div class="residencial"><i class="bi bi-house-door"></i> Residencial</div></td>
-															<td><a href="uploads/indicativos/Secovi-MT_-_IND_MOB_RESIDENCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
-														</tr>
-
-														<tr>
-															<td>30/10/2025</td>
-															<td>Outubro</td>
-															<td>2025</td>
-															<td><div class="comercial"><i class="bi bi-bag"></i> Comercial</div></td>
-															<td><a href="uploads/indicativos/Secovi-MT_-_IND_MOB_COMERCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
-														</tr>
-
-														<tr>
-															<td>30/08/2025</td>
-															<td>Agosto</td>
-															<td>2025</td>
-															<td><div class="residencial"><i class="bi bi-house-door"></i> Residencial</div></td>
-															<td><a href="uploads/indicativos/08 2025 Secovi-MT_-_IND_MOB_RESIDENCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
-														</tr>
-
-														<tr>
-															<td>30/08/2025</td>
-															<td>Agosto</td>
-															<td>2025</td>
-															<td><div class="comercial"><i class="bi bi-bag"></i> Comercial</div></td>
-															<td><a href="uploads/indicativos/08 2025 Secovi-MT_-_IND_MOB_COMERCIAL.pdf" target="_blank"><button type="button" class="btn btn-lg btn-info btn-download"><i class="bi bi-box-arrow-down"></i> Download</button></a></td>
-														</tr>
-
-													</tbody>
-												</table>
-											</div>
-
-
-									    </div>
-								    </div>
-							    </div>
+                                @empty
+                                <div class="text-center py-5 text-muted">
+                                    Nenhum indicativo cadastrado até o momento.
+                                </div>
+                                @endforelse
 							</div>
 						</div>
 					</div>
