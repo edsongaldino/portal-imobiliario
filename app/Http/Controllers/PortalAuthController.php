@@ -137,4 +137,36 @@ class PortalAuthController extends Controller
 
         return redirect('/')->with('success', 'Você saiu com sucesso.');
     }
+
+    /**
+     * Handle portal password reset.
+     */
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'reset')
+                ->withInput();
+        }
+
+        $email = trim($request->email);
+        $user = User::whereRaw('TRIM(LOWER(email)) = ?', [strtolower($email)])->first();
+
+        if ($user) {
+            try {
+                $link = url('/nova-senha/'.base64_encode(trim($user->email)));
+                \Illuminate\Support\Facades\Mail::to(trim($user->email))->send(new \App\Mail\ReenviarSenha($user, $link));
+                
+                return redirect()->back()->with('status', 'Email de redefinição enviado com sucesso! Verifique sua caixa de entrada.');
+            } catch (\Exception $e) {
+                return redirect()->back()->withErrors(['email' => 'Erro ao enviar o e-mail: ' . $e->getMessage()], 'reset')->withInput();
+            }
+        }
+
+        return redirect()->back()->withErrors(['email' => 'Ops, não foi possível encontrar um usuário com este e-mail!'], 'reset')->withInput();
+    }
 }

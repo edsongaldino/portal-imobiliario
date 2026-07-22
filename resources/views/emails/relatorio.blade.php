@@ -371,6 +371,8 @@
 								<h3>Para visualizar o relatório da importação, clique no link abaixo:</h3>
 
                                 <a href="https://redeimoveismt.com.br/anunciante/{{ $relatorio->id }}/relatorio-importacao"><div class="botao">RELATÓRIO DE IMPORTAÇÃO</div></a>
+                                <br><br>
+                                <a href="https://redeimoveismt.com.br/login?email={{ urlencode($relatorio->anunciante->email ?? '') }}"><div class="botao" style="background-color: #035b96;">ACESSAR PAINEL</div></a>
 
                                 @else
 

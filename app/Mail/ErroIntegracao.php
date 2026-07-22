@@ -13,6 +13,7 @@ class ErroIntegracao extends Mailable
     public $anunciante;
     public $mensagemErro;
     public $destinatarioTipo; // 'cliente' ou 'admin'
+    public $logId;
 
     /**
      * Create a new message instance.
@@ -20,12 +21,14 @@ class ErroIntegracao extends Mailable
      * @param mixed $anunciante
      * @param string $mensagemErro
      * @param string $destinatarioTipo
+     * @param int $logId
      */
-    public function __construct($anunciante, $mensagemErro, $destinatarioTipo)
+    public function __construct($anunciante, $mensagemErro, $destinatarioTipo, $logId)
     {
         $this->anunciante = $anunciante;
         $this->mensagemErro = $mensagemErro;
         $this->destinatarioTipo = $destinatarioTipo;
+        $this->logId = $logId;
     }
 
     /**

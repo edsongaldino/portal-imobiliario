@@ -77,6 +77,7 @@ class IntegracaoController extends Controller
         $anunciante_integracao->periodicidade_atualizacao = $request->periodicidade_atualizacao;
         $anunciante_integracao->notificar = $request->notificar;
         $anunciante_integracao->bloqueado = false; // Reset block status on save
+        $anunciante_integracao->tentativas_falhas = 0;
         $anunciante_integracao->save();
 
         return redirect()->back()->with('success', 'Dados Gravados e XML Validado com Sucesso!');
@@ -152,6 +153,18 @@ class IntegracaoController extends Controller
                 ->orderBy('log_integracao_anuncios.id', 'DESC')->paginate(15);
 
         return view('painel.integracao.relatorio_individual', compact('usuario', 'logs', 'RelatorioGeral'));
+    }
+
+    public function RelatorioPublico($id)
+    {
+        $RelatorioGeral = LogIntegracao::findOrFail($id);
+        $logs = DB::table('log_integracao_anuncios')
+                ->leftJoin('anuncios', 'anuncios.id_externo', '=', 'log_integracao_anuncios.id_externo')
+                ->where('log_integracao_anuncios.log_integracao_id', $id)
+                ->select('log_integracao_anuncios.*', 'anuncios.titulo as tituloAnuncio')
+                ->orderBy('log_integracao_anuncios.id', 'DESC')->paginate(15);
+
+        return view('portal.relatorio_importacao', compact('logs', 'RelatorioGeral'));
     }
 
     public function detalhesAjax($id, Request $request)
@@ -522,14 +535,21 @@ class IntegracaoController extends Controller
             if($logUpdate){
                 $anunciante->ultima_atualizacao = Carbon::now();
                 $anunciante->save();
+
+                $integracao->tentativas_falhas = 0;
+                $integracao->save();
+
                 return $logUpdate;
             }else{
                 return false;
             }
 
         } catch (\Throwable $e) {
-            // Block the integration
-            $integracao->bloqueado = true;
+            $integracao->tentativas_falhas = ($integracao->tentativas_falhas ?? 0) + 1;
+            
+            if ($integracao->tentativas_falhas >= 3) {
+                $integracao->bloqueado = true;
+            }
             $integracao->save();
 
             // Record error log
@@ -549,17 +569,17 @@ class IntegracaoController extends Controller
             );
 
             // Log details to storage
-            \Illuminate\Support\Facades\Log::error("Erro no processamento da integração do anunciante ID {$anunciante->id}: " . $e->getMessage(), [
+            \Illuminate\Support\Facades\Log::error("Erro no processamento da integração do anunciante ID {$anunciante->id} (Tentativa {$integracao->tentativas_falhas}): " . $e->getMessage(), [
                 'exception' => $e
             ]);
 
-            // Notify both client and admin via email if enabled
-            if ($integracao->notificar === 'Sim') {
+            // Notify both client and admin via email if enabled and integration is now blocked
+            if ($integracao->bloqueado && $integracao->notificar === 'Sim') {
                 if (!empty($anunciante->email)) {
-                    Mail::to($anunciante->email)->send(new \App\Mail\ErroIntegracao($anunciante, $e->getMessage(), 'cliente'));
+                    Mail::to($anunciante->email)->send(new \App\Mail\ErroIntegracao($anunciante, $e->getMessage(), 'cliente', $LogIntegracao->id));
                 }
                 $adminEmail = 'edsongaldino@outlook.com';
-                Mail::to($adminEmail)->send(new \App\Mail\ErroIntegracao($anunciante, $e->getMessage(), 'admin'));
+                Mail::to($adminEmail)->send(new \App\Mail\ErroIntegracao($anunciante, $e->getMessage(), 'admin', $LogIntegracao->id));
             }
 
             return false;

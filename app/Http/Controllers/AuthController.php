@@ -67,18 +67,14 @@ class AuthController extends Controller
         $User = User::whereRaw('TRIM(LOWER(email)) = ?', [strtolower($email)])->first();
 
         if($User){
-
-            $configuracoes = new stdClass;
-            //ENVIA PARA O USUÁRIO
-            $configuracoes->template = "emails.senha";
-            $configuracoes->assunto = "Você solicitou uma nova senha! Rede Imóveis MT";
-            $configuracoes->destinatario = trim($User->email);
-            $configuracoes->name = $User->name;
-            $configuracoes->link = config('app.url').'/nova-senha/'.base64_encode(trim($User->email));
-
-            Mail::to($configuracoes->destinatario)->send(new ReenviarSenha($configuracoes));
-
-            return 'Sucesso';
+            try {
+                $link = url('/nova-senha/'.base64_encode(trim($User->email)));
+                Mail::to(trim($User->email))->send(new ReenviarSenha($User, $link));
+                return 'Sucesso';
+            } catch (\Exception $e) {
+                // Returns the error string instead of failing with HTTP 500
+                return 'ErroEmail: ' . $e->getMessage();
+            }
         }
 
         return "Erro";

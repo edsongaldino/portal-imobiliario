@@ -73,6 +73,7 @@ Route::get('/login/google/callback', 'App\Http\Controllers\PortalAuthController@
 Route::get('/cadastro-portal', 'App\Http\Controllers\AppController@loginPortal')->name('cadastro.portal');
 Route::post('/cadastro-portal', 'App\Http\Controllers\PortalAuthController@register');
 Route::get('/resetar-senha-portal', 'App\Http\Controllers\AppController@loginPortal')->name('resetar.senha.portal');
+Route::post('/resetar-senha-portal', 'App\Http\Controllers\PortalAuthController@resetPassword');
 
 Route::get('/painel/{id}/perfil', 'App\Http\Controllers\UserController@edit')->name('painel.perfil')->middleware('auth');
 Route::post('/painel/perfil-salvar', 'App\Http\Controllers\AnuncianteController@update')->name('painel.perfil.salvar')->middleware('auth');
@@ -98,7 +99,12 @@ Route::get('/painel/integracoes/{id}/relatorio-importacao', 'App\Http\Controller
 Route::get('/painel/integracoes/{id}/detalhes-ajax', 'App\Http\Controllers\IntegracaoController@detalhesAjax')->name('painel.integracoes.detalhes-ajax')->middleware('auth');
 Route::post('/painel/integracao/processar-xml', 'App\Http\Controllers\IntegracaoController@ProcessarXML')->name('integracao.processar-xml')->middleware('auth');
 Route::get('/painel/integracao/cron/atualizar-anuncios', 'App\Http\Controllers\IntegracaoController@CronAtualizarAnuncios')->name('integracao.cron.atualizar-anuncios');
+
+Route::get('/painel/cron/relatorio-semanal', 'App\Http\Controllers\CronController@EnviarRelatorioSemanal')->name('cron.relatorio-semanal');
+Route::get('/painel/cron/relatorio-teste/{id}', 'App\Http\Controllers\CronController@EnviarRelatorioTeste')->name('cron.relatorio-teste');
+
 //Rotas Portal
+Route::get('/anunciante/{id}/relatorio-importacao', 'App\Http\Controllers\IntegracaoController@RelatorioPublico')->name('relatorio-importacao.publico');
 Route::match(['get', 'post'],'/imoveis-buscar', 'App\Http\Controllers\AnuncioController@BuscaAnuncios')->name('imoveis.buscar');
 Route::get('/api/cidades-contagem', 'App\Http\Controllers\AnuncioController@GetCidadesContagem')->name('api.cidades.contagem');
 Route::get('/api/imoveis-contagem', 'App\Http\Controllers\AnuncioController@GetAnunciosContagem')->name('api.imoveis.contagem');

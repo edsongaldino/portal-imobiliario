@@ -102,6 +102,11 @@
                     <div class="alert-box"><strong>Detalhes do Erro:</strong><br>{{ $mensagemErro }}</div>
                     
                     <p>Para desbloquear e reprocessar, ajuste a URL ou as configurações no painel administrativo.</p>
+                    
+                    <div class="text-center" style="margin-top: 30px;">
+                        <a href="https://redeimoveismt.com.br/anunciante/{{ $logId }}/relatorio-importacao" class="btn" style="margin-bottom: 10px;">Ver Relatório de Erros</a><br><br>
+                        <a href="https://redeimoveismt.com.br/login" class="btn" style="background-color: #035b96;">Acessar Painel</a>
+                    </div>
                 @else
                     <h2>Atenção: Falha na Integração de Anúncios</h2>
                     <p>Olá <strong>{{ $anunciante->nome }}</strong>,</p>
@@ -116,7 +121,8 @@
                        3. Acesse o seu painel de controle e salve as configurações de integração novamente para reativar as atualizações automáticas.</p>
                     
                     <div class="text-center" style="margin-top: 30px;">
-                        <a href="https://redeimoveismt.com.br/painel/integracao/configuracao" class="btn">Acessar Configurações</a>
+                        <a href="https://redeimoveismt.com.br/anunciante/{{ $logId }}/relatorio-importacao" class="btn" style="margin-bottom: 10px;">Ver Relatório de Erros</a><br><br>
+                        <a href="https://redeimoveismt.com.br/login?email={{ urlencode($anunciante->email ?? '') }}" class="btn" style="background-color: #035b96;">Acessar Painel</a>
                     </div>
                 @endif
             </div>
