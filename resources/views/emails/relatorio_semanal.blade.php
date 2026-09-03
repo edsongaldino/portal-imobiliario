@@ -5,62 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório Semanal</title>
     <style>
-        body { margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif; }
+        body { margin: 0; padding: 0; background-color: #f4f7f6; font-family: 'Segoe UI', Arial, sans-serif; }
         table { border-collapse: collapse; }
-        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
-        .header { background-color: #035b96; color: #ffffff; padding: 30px 20px; }
-        .header h1 { margin: 0; font-size: 24px; font-weight: normal; text-align: right; }
-        .header p { margin: 5px 0 0; font-size: 14px; text-align: right; }
-        .header .date { font-size: 12px; text-align: right; margin-top: 10px; }
-        .content { padding: 30px 20px; }
-        .greeting { color: #035b96; font-size: 18px; font-weight: bold; margin-bottom: 10px; }
-        .intro-text { color: #333333; font-size: 14px; line-height: 1.5; margin-bottom: 30px; }
+        .container { max-width: 700px; margin: 0 auto; background-color: #ffffff; }
         
-        .stats-table { width: 100%; margin-bottom: 30px; }
-        .stat-card { background-color: #f9f9f9; border-radius: 8px; text-align: center; padding: 20px 10px; border-bottom: 4px solid #035b96; }
-        .stat-icon { background-color: #035b96; color: #ffffff; width: 40px; height: 40px; border-radius: 50%; display: inline-block; line-height: 40px; font-size: 20px; margin-bottom: 10px; }
-        .stat-title { color: #035b96; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
-        .stat-value { color: #035b96; font-size: 32px; font-weight: bold; margin: 0; }
-        .stat-desc { color: #666666; font-size: 11px; margin-top: 5px; }
+        .header { padding: 30px 40px; border-bottom: 1px solid #eeeeee; }
+        .header h1 { margin: 0; font-size: 26px; font-weight: bold; color: #026a42; text-align: right; }
+        .header p { margin: 5px 0 0; font-size: 14px; color: #666666; text-align: right; }
+        .header .date { font-size: 12px; color: #888888; text-align: right; margin-top: 5px; font-weight: bold; }
         
-        .top-section-title { text-align: center; color: #333333; font-size: 16px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; }
+        .content { padding: 30px 40px; }
         
-        .property-card { border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 15px; width: 100%; padding: 10px; box-sizing: border-box; }
-        .property-rank { background-color: #035b96; color: #ffffff; width: 30px; height: 30px; text-align: center; line-height: 30px; border-radius: 4px; font-weight: bold; font-size: 14px; }
-        .property-img { width: 120px; height: 80px; object-fit: cover; border-radius: 4px; }
+        .greeting-table { width: 100%; margin-bottom: 30px; }
+        .greeting-icon-box { width: 60px; height: 60px; border: 2px solid #c2e2cb; border-radius: 50%; text-align: center; }
+        .greeting-title { color: #026a42; font-size: 22px; font-weight: bold; margin: 0 0 5px 0; }
+        .greeting-text { color: #555555; font-size: 14px; margin: 0; line-height: 1.5; }
+        
+        .stats-table { width: 100%; margin-bottom: 40px; }
+        .stat-card { border: 1px solid #eeeeee; border-radius: 8px; text-align: center; padding: 20px 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .stat-icon { width: 40px; height: 40px; border-radius: 50%; background-color: #eaf5ec; display: inline-block; margin-bottom: 10px; }
+        .stat-title { color: #026a42; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
+        .stat-value { color: #222222; font-size: 34px; font-weight: bold; margin: 0; }
+        .stat-desc { color: #888888; font-size: 12px; margin-top: 10px; border-top: 1px solid #eeeeee; padding-top: 10px; }
+        
+        .top-section-title { text-align: center; color: #026a42; font-size: 16px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; border-top: 1px solid #026a42; padding-top: 15px; }
+        
+        .property-card { border: 1px solid #eeeeee; border-radius: 8px; margin-bottom: 15px; width: 100%; padding: 15px; box-sizing: border-box; background-color: #ffffff; }
+        .property-rank { background-color: #026a42; color: #ffffff; width: 30px; height: 30px; text-align: center; line-height: 30px; border-radius: 4px; font-weight: bold; font-size: 14px; }
+        .property-img { width: 130px; height: 90px; object-fit: cover; border-radius: 6px; }
         .property-info { padding-left: 15px; }
-        .property-title { font-weight: bold; font-size: 14px; color: #333333; margin: 0 0 5px 0; }
+        .property-title { font-weight: bold; font-size: 14px; color: #222222; margin: 0 0 8px 0; }
         .property-location { font-size: 12px; color: #666666; margin: 0 0 5px 0; }
-        .property-details { font-size: 11px; color: #888888; margin: 0; }
+        .property-details { font-size: 12px; color: #888888; margin: 0; }
         
-        .property-views-box { background-color: #f0f7f4; padding: 15px 10px; border-radius: 8px; text-align: center; }
-        .property-views-label { font-size: 10px; color: #035b96; font-weight: bold; text-transform: uppercase; }
-        .property-views-val { font-size: 22px; color: #035b96; font-weight: bold; margin-top: 5px; }
+        .property-views-box { background-color: #eaf5ec; padding: 15px 5px; border-radius: 8px; text-align: center; min-width: 90px; }
+        .property-views-label { font-size: 10px; color: #026a42; font-weight: bold; text-transform: uppercase; }
+        .property-views-val { font-size: 24px; color: #026a42; font-weight: bold; margin-top: 5px; }
         
-        .tip-box { background-color: #f0f7f4; border-radius: 8px; padding: 20px; margin-top: 30px; }
-        .tip-icon { background-color: #035b96; color: #ffffff; width: 40px; height: 40px; border-radius: 4px; display: inline-block; text-align: center; line-height: 40px; }
-        .tip-content { padding-left: 15px; }
-        .tip-title { color: #035b96; font-size: 14px; font-weight: bold; margin: 0 0 5px 0; }
-        .tip-text { color: #333333; font-size: 12px; margin: 0; }
-        .btn-green { background-color: #035b96; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; font-size: 12px; display: inline-block; }
+        .tip-box { background-color: #eaf5ec; border-radius: 8px; padding: 20px; margin-top: 30px; }
+        .tip-icon { background-color: #026a42; color: #ffffff; width: 50px; height: 50px; border-radius: 8px; display: inline-block; text-align: center; line-height: 50px; font-size: 24px; }
+        .tip-content { padding-left: 20px; }
+        .tip-title { color: #026a42; font-size: 16px; font-weight: bold; margin: 0 0 5px 0; }
+        .tip-text { color: #444444; font-size: 12px; margin: 0; line-height: 1.5; }
+        .btn-green { background-color: #026a42; color: #ffffff; text-decoration: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; display: inline-block; }
         
-        .footer-text { text-align: center; color: #333333; font-size: 13px; margin: 30px 0; }
-        .footer { background-color: #035b96; color: #ffffff; padding: 20px; text-align: center; font-size: 12px; }
-        .footer a { color: #ffffff; text-decoration: none; }
+        .footer-top { background-color: #fafafa; padding: 30px 40px; border-top: 1px solid #eeeeee; }
+        .social-icon { display: inline-block; width: 30px; height: 30px; background-color: #026a42; border-radius: 50%; color: #ffffff; text-align: center; line-height: 30px; margin-right: 5px; text-decoration: none; font-size: 14px; font-weight: bold; }
+        .contact-title { font-size: 14px; font-weight: bold; color: #222222; margin: 0 0 5px 0; }
+        .contact-text { font-size: 12px; color: #666666; margin: 0 0 10px 0; }
+        .btn-light-green { background-color: #eaf5ec; color: #026a42; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 12px; display: inline-block; border: 1px solid #c2e2cb; }
+        
+        .footer-bottom { background-color: #026a42; color: #ffffff; padding: 15px 40px; font-size: 11px; }
     </style>
 </head>
 <body>
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f7f6;">
         <tr>
             <td align="center" style="padding: 20px 0;">
-                <table class="container" width="600" cellpadding="0" cellspacing="0" border="0">
+                <table class="container" width="700" cellpadding="0" cellspacing="0" border="0">
                     <!-- Header -->
                     <tr>
                         <td class="header">
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td width="30%" valign="middle">
-                                        <img src="https://redeimoveismt.com.br/assets/portal/images/header-logo2.png" alt="Rede Imóveis MT" style="max-width: 150px; filter: brightness(0) invert(1);">
+                                        <img src="https://redeimoveismt.com.br/assets/portal/images/header-logo2.png" alt="Rede Imóveis MT" style="max-width: 150px;">
                                     </td>
                                     <td width="70%" valign="middle" align="right">
                                         <h1>Relatório Semanal</h1>
@@ -75,11 +84,23 @@
                     <!-- Content -->
                     <tr>
                         <td class="content">
-                            <div class="greeting">Olá, {{ $anunciante->nome ?? 'Parceiro' }}!</div>
-                            <div class="intro-text">
-                                Confira o desempenho dos seus imóveis no Portal Rede Imóveis na última semana.<br>
-                                Acompanhe suas principais métricas e veja quais imóveis estão se destacando!
-                            </div>
+                            <!-- Greeting -->
+                            <table class="greeting-table" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td width="80" valign="top">
+                                        <div class="greeting-icon-box">
+                                            <span style="font-size: 30px; color: #026a42; line-height: 60px;">&#127968;</span>
+                                        </div>
+                                    </td>
+                                    <td valign="middle">
+                                        <div class="greeting-title">Olá, {{ mb_strtoupper($anunciante->nome ?? 'PARCEIRO') }}!</div>
+                                        <div class="greeting-text">
+                                            Confira o desempenho dos seus imóveis no Portal Rede Imóveis na última semana.<br>
+                                            Acompanhe suas principais métricas e veja quais imóveis estão se destacando!
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                             
                             <!-- Stats Cards -->
                             <table class="stats-table" width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -87,6 +108,9 @@
                                     <!-- Imoveis Ativos -->
                                     <td width="31%" valign="top">
                                         <div class="stat-card">
+                                            <div class="stat-icon">
+                                                <span style="font-size: 20px; color: #026a42; line-height: 40px;">&#127968;</span>
+                                            </div>
                                             <div class="stat-title">IMÓVEIS ATIVOS</div>
                                             <div class="stat-value">{{ number_format($dadosRelatorio['imoveis_ativos'], 0, ',', '.') }}</div>
                                             <div class="stat-desc">Total de imóveis publicados</div>
@@ -96,6 +120,9 @@
                                     <!-- Visualizacoes -->
                                     <td width="31%" valign="top">
                                         <div class="stat-card">
+                                            <div class="stat-icon">
+                                                <span style="font-size: 20px; color: #026a42; line-height: 40px;">&#128065;</span>
+                                            </div>
                                             <div class="stat-title">VISUALIZAÇÕES NA SEMANA</div>
                                             <div class="stat-value">{{ number_format($dadosRelatorio['visualizacoes'], 0, ',', '.') }}</div>
                                             <div class="stat-desc">Total de visualizações</div>
@@ -105,6 +132,9 @@
                                     <!-- Leads -->
                                     <td width="31%" valign="top">
                                         <div class="stat-card">
+                                            <div class="stat-icon">
+                                                <span style="font-size: 20px; color: #026a42; line-height: 40px;">&#128100;</span>
+                                            </div>
                                             <div class="stat-title">LEADS NA SEMANA</div>
                                             <div class="stat-value">{{ number_format($dadosRelatorio['leads'], 0, ',', '.') }}</div>
                                             <div class="stat-desc">Total de leads recebidos</div>
@@ -115,15 +145,15 @@
                             
                             <!-- Top Imoveis -->
                             @if(count($topImoveis) > 0)
-                            <div class="top-section-title">&#127942; TOP 3 IMÓVEIS MAIS ACESSADOS<br><span style="font-size: 12px; font-weight: normal; color: #666666;">na última semana</span></div>
+                            <div class="top-section-title">&#127942; TOP 3 IMÓVEIS MAIS ACESSADOS<br><span style="font-size: 12px; font-weight: normal; color: #666666; text-transform: none;">na última semana</span></div>
                             
                             @foreach($topImoveis as $index => $imovel)
                             <table class="property-card" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td width="40" align="center" valign="middle">
+                                    <td width="45" align="center" valign="middle">
                                         <div class="property-rank">{{ $index + 1 }}º</div>
                                     </td>
-                                    <td width="130" align="center" valign="middle">
+                                    <td width="145" align="center" valign="middle">
                                         @php
                                             $foto = $imovel->fotos->first() ? asset($imovel->fotos->first()->arquivo) : asset('assets/portal/images/property/fp1.jpg');
                                             // Handle external XML images
@@ -138,7 +168,7 @@
                                         <p class="property-location">&#128205; {{ $imovel->endereco->bairro_endereco ?? '' }}, {{ $imovel->endereco->cidade->nome_cidade ?? '' }} - {{ $imovel->endereco->cidade->estado->uf_estado ?? '' }}</p>
                                         <p class="property-details">Código: {{ $imovel->id_externo ?? $imovel->id }} | {{ $imovel->transacao }} | {{ $imovel->tipo->nome ?? '' }}</p>
                                     </td>
-                                    <td width="120" valign="middle" align="center">
+                                    <td width="110" valign="middle" align="center">
                                         <div class="property-views-box">
                                             <div class="property-views-label">VISUALIZAÇÕES</div>
                                             <div class="property-views-val">{{ number_format($imovel->acessos_semana, 0, ',', '.') }}</div>
@@ -152,8 +182,8 @@
                             <!-- Tip Box -->
                             <table class="tip-box" width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td width="50" valign="middle" align="center">
-                                        <div class="tip-icon">&#128200;</div>
+                                    <td width="60" valign="middle" align="center">
+                                        <div class="tip-icon">&#128227;</div>
                                     </td>
                                     <td valign="middle" class="tip-content">
                                         <h4 class="tip-title">Dica para aumentar seus resultados</h4>
@@ -165,27 +195,34 @@
                                 </tr>
                             </table>
                             
-                            <div class="footer-text">
-                                Estamos juntos para gerar mais oportunidades para o seu negócio!<br>
-                                <strong style="color: #035b96;">Equipe Rede Imóveis MT</strong>
-                            </div>
                         </td>
                     </tr>
                     
-                    <!-- Footer -->
+                    <!-- Footer Top -->
                     <tr>
-                        <td class="footer">
+                        <td class="footer-top">
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td width="50%" align="left">
-                                        Dúvidas? Fale com nosso time!<br>
-                                        (65) 99999-9999 | parceiros@redeimoveismt.com.br
+                                    <td width="50%" align="left" valign="middle">
+                                        <img src="https://redeimoveismt.com.br/assets/portal/images/header-logo2.png" alt="Rede Imóveis MT" style="max-width: 130px; margin-bottom: 15px;"><br>
+                                        <a href="#" class="social-icon">f</a>
+                                        <a href="#" class="social-icon">ig</a>
+                                        <a href="#" class="social-icon">w</a>
                                     </td>
-                                    <td width="50%" align="right">
-                                        <a href="https://www.redeimoveismt.com.br">www.redeimoveismt.com.br</a>
+                                    <td width="50%" align="right" valign="middle" style="border-left: 1px solid #dddddd; padding-left: 20px;">
+                                        <div class="contact-title">Dúvidas ou sugestões?</div>
+                                        <div class="contact-text">Entre em contato com nossa equipe.</div>
+                                        <a href="https://wa.me/5565999999999" class="btn-light-green">&#128172; Fale conosco</a>
                                     </td>
                                 </tr>
                             </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer Bottom -->
+                    <tr>
+                        <td class="footer-bottom">
+                            &copy; {{ date('Y') }} Rede Imóveis MT. Todos os direitos reservados.
                         </td>
                     </tr>
                 </table>

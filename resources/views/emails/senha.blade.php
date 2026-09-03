@@ -365,7 +365,9 @@ ul.social li{
 
 								<h2>Olá {{ $user->name ?? '' }}, </h2>
 								<h2>Clique abaixo para criar uma nova senha</h2>
-								<a href="{{ $link }}"><div class="botao">NOVA SENHA</div></a>
+								<br>
+								<a href="{{ $link }}" style="display: inline-block; width: 150px; height: 50px; background-color: #0a5296; color: #ffffff; text-align: center; line-height: 50px; text-decoration: none; border-radius: 5px; font-weight: bold;">NOVA SENHA</a>
+								<br><br>
 
 							</div>
 						</td>
