@@ -24,16 +24,16 @@ var KTPasswordResetGeneral = (function () {
                                             type: 'POST',
                                             data : $('#kt_password_reset_form').serialize(),
                                             success: function(result) {
-                                                if(result == 'Sucesso'){
+                                                if(result == 'Sucesso' || result == 'CodigoEnviado'){
 
                                                     Swal.fire({
-                                                        text: "Enviamos um e-mail com as instruções para redefinir sua senha!",
+                                                        text: "Enviamos um código de confirmação para o seu e-mail!",
                                                         icon: "success",
                                                         buttonsStyling: !1,
                                                         confirmButtonText: "OK!",
                                                         customClass: { confirmButton: "btn btn-primary" },
                                                     }).then(function () {
-                                                        window.location='/login';
+                                                        window.location = '/validar-codigo/' + btoa($('#email').val());
                                                     });
                                                 }else{
                                                     Swal.fire({

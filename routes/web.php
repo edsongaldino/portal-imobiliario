@@ -51,6 +51,8 @@ Route::get('/dashboard', 'App\Http\Controllers\AppController@index')->name('dash
 Route::post('/finalizar-cadastro', 'App\Http\Controllers\AnuncianteController@CadastrarAnunciante')->name('finalizar-cadastro');
 Route::post('/login-painel', 'App\Http\Controllers\AuthController@Login')->name('login-painel');
 Route::post('/reenviar-senha', 'App\Http\Controllers\AuthController@ReenviarSenha')->name('lembrar-senha');
+Route::get('/validar-codigo/{email}', 'App\Http\Controllers\AuthController@FormValidarCodigo')->name('validar.codigo');
+Route::post('/validar-codigo', 'App\Http\Controllers\AuthController@ValidarCodigo')->name('validar.codigo.submit');
 Route::get('/nova-senha/{email}', 'App\Http\Controllers\AuthController@FormAlterarSenha')->name('nova.senha');
 Route::post('/senha/alterar', 'App\Http\Controllers\AuthController@AlterarSenha')->name('alterar.senha');
 Route::get('/logout-painel', 'App\Http\Controllers\AuthController@Logout')->name('logout-painel')->middleware('auth');

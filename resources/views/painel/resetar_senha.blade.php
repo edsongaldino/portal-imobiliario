@@ -7,9 +7,10 @@
 		<!--begin::Wrapper-->
 		<div class="w-lg-550px p-10 p-lg-15 mx-auto">
 			<!--begin::Form-->
-			<form class="form w-100" novalidate="novalidate" id="kt_new_password_form" method="POST" action="{{ url('/alterar-senha') }}">
+			<form class="form w-100" novalidate="novalidate" id="kt_new_password_form" method="POST" action="{{ route('alterar.senha') }}">
                 @csrf
                 <input type="hidden" name="id" id="id" value="{{ base64_encode($user->id) }}">
+                <input type="hidden" name="email" id="email" value="{{ $email }}">
 				<!--begin::Heading-->
 				<div class="text-center mb-10">
 					<!--begin::Title-->

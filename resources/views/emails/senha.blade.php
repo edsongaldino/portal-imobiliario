@@ -364,10 +364,13 @@ ul.social li{
 							<div class="text" style="padding: 0 2.5em; text-align: center;">
 
 								<h2>Olá {{ $user->name ?? '' }}, </h2>
-								<h2>Clique abaixo para criar uma nova senha</h2>
+								<h2>Use o código abaixo para redefinir sua senha:</h2>
 								<br>
-								<a href="{{ $link }}" style="display: inline-block; width: 150px; height: 50px; background-color: #0a5296; color: #ffffff; text-align: center; line-height: 50px; text-decoration: none; border-radius: 5px; font-weight: bold;">NOVA SENHA</a>
+								<div style="display: inline-block; padding: 15px 30px; background-color: #f4f7f6; color: #026a42; font-size: 32px; font-weight: bold; letter-spacing: 5px; border-radius: 8px; border: 2px dashed #026a42;">
+									{{ $codigo }}
+								</div>
 								<br><br>
+								<p>Se você não solicitou a redefinição, apenas ignore este e-mail.</p>
 
 							</div>
 						</td>
