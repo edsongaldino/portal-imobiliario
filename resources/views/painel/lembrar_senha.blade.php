@@ -55,7 +55,7 @@
 <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Page Custom Javascript(used by this page)-->
-<script src="{{ asset('assets/js/custom/authentication/password-reset/password-reset.js') }}"></script>
+<script src="{{ asset('assets/js/custom/authentication/password-reset/password-reset.js?v=2') }}"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 </body>
