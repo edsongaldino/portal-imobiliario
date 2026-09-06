@@ -370,9 +370,9 @@
                                 <h3>Data/Hora: {{ $relatorio->created_at ?? '' }}</h3>
 								<h3>Para visualizar o relatório da importação, clique no link abaixo:</h3>
 
-                                <a href="https://redeimoveismt.com.br/anunciante/{{ $relatorio->id }}/relatorio-importacao"><div class="botao">RELATÓRIO DE IMPORTAÇÃO</div></a>
+                                <a href="https://redeimoveismt.com.br/anunciante/{{ $relatorio->id }}/relatorio-importacao" style="display: inline-block; width: 250px; height: 50px; background-color: #0a9678; color: #ffffff; text-align: center; line-height: 50px; text-decoration: none; font-weight: bold; border-radius: 5px;">RELATÓRIO DE IMPORTAÇÃO</a>
                                 <br><br>
-                                <a href="https://redeimoveismt.com.br/login?email={{ urlencode($relatorio->anunciante->email ?? '') }}"><div class="botao" style="background-color: #035b96;">ACESSAR PAINEL</div></a>
+                                <a href="https://redeimoveismt.com.br/login?email={{ urlencode($relatorio->anunciante->email ?? '') }}" style="display: inline-block; width: 250px; height: 50px; background-color: #035b96; color: #ffffff; text-align: center; line-height: 50px; text-decoration: none; font-weight: bold; border-radius: 5px;">ACESSAR PAINEL</a>
 
                                 @else
 

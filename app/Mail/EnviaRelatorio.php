@@ -27,7 +27,7 @@ class EnviaRelatorio extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.relatorio')->from('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->replyTo('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->subject('Relatório de Integração! Rede Imóveis MT');
+        return $this->view('emails.relatorio')->from('contato@redeimoveismt.com.br', 'Rede Imóveis MT')->subject('Relatório de Integração! Rede Imóveis MT');
     }
 
 }
