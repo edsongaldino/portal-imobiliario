@@ -50,7 +50,7 @@
 					</div>
 					<!--end::Wrapper-->
 					<!--begin::Hint-->
-					<div class="text-muted">Até 8 caracteres com letras, números &amp; símbolos.</div>
+					<div class="text-muted">Mínimo de 8 caracteres. Deve conter letras maiúsculas, minúsculas, números e símbolos.</div>
 					<!--end::Hint-->
 				</div>
 				<!--end::Input group=-->

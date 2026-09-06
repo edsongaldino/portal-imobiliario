@@ -129,11 +129,13 @@ class AuthController extends Controller
             return "Acesso Negado: Código não validado.";
         }
 
-        if($request->senha == $request->confirmar_senha){
-            $user->password = Hash::make($request->senha);
+        if($request->password == $request->input('confirm-password')){
+            $user->password = Hash::make($request->password);
             if($user->save()){
                 session()->forget('verified_reset_'.$user->email);
                 \Illuminate\Support\Facades\DB::table('password_resets')->where('email', $user->email)->delete();
+                Auth::login($user);
+                Session::put('usuario', $user);
                 return 'Sucesso';
             }else{
                 return "Erro";
