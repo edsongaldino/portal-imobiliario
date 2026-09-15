@@ -19,13 +19,17 @@ class CronController extends Controller
     {
         ini_set('max_execution_time', 1200); // Allow enough time to process all advertisers
 
+        $hoje = Carbon::now();
+        $seteDiasAtras = Carbon::now()->subDays(7);
+
         $anunciantes = Anunciante::whereNull('deleted_at')
                                 ->where('situacao_cadastro', 'Ativo')
                                 ->whereNotNull('email')
+                                ->where(function($query) use ($seteDiasAtras) {
+                                    $query->whereNull('data_ultimo_relatorio')
+                                          ->orWhere('data_ultimo_relatorio', '<=', $seteDiasAtras);
+                                })
                                 ->get();
-
-        $hoje = Carbon::now();
-        $seteDiasAtras = Carbon::now()->subDays(7);
 
         $enviados = 0;
 
@@ -86,6 +90,10 @@ class CronController extends Controller
 
                 // Send email
                 Mail::to(trim($anunciante->email))->send(new RelatorioSemanal($anunciante, $dadosRelatorio, $topImoveis));
+                
+                $anunciante->data_ultimo_relatorio = $hoje;
+                $anunciante->save();
+
                 $enviados++;
 
             } catch (\Throwable $e) {
